@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECM Plus Website Templates — ECM+ Business Suite</title>
+  <meta name="description" content="Three HTML/CSS website templates for ECM Plus (ECM+), the Canadian enterprise content management suite, each in English and Arabic with dark and light modes.">
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="light">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("ecmplus-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { /* storage blocked: follow the system */ }
+    })();
+  </script>
+  <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Zilla+Slab:wght@600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&family=Zilla+Slab:wght@600;700&display=swap"></noscript>
+  <style>
+    :root {
+      --bg: #f5f3ee;
+      --surface: #ffffff;
+      --ink: #161b26;
+      --muted: #4a5565;
+      --line: #dad5ca;
+      --gold: #d9a21b;
+      --gold-text: #894b00;
+      --navy: #0b1220;
+      --radius: 10px;
+      --shadow: 0 1px 0 rgba(22, 27, 38, .04), 0 18px 40px -24px rgba(22, 27, 38, .35);
+      --swatch-line: rgba(0, 0, 0, .14);
+      color-scheme: light;
+    }
+    /* Light is the default; dark only when the visitor chooses it. */
+    :root[data-theme="dark"] {
+      --bg: #0b1220; --surface: #121b2d; --ink: #eef1f6; --muted: #a3adbd; --line: #26324a;
+      --gold-text: #e8b84a; --shadow: 0 18px 40px -24px rgba(0, 0, 0, .7); --swatch-line: rgba(255, 255, 255, .28); color-scheme: dark;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font: 400 16px/1.6 "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    }
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--gold-text); outline-offset: 3px; border-radius: 4px; }
+    .skip { position: absolute; inset-inline-start: 16px; top: -48px; padding: 10px 14px; background: var(--ink); color: var(--bg); border-radius: 6px; z-index: 10; }
+    .skip:focus { top: 12px; }
+    .wrap { width: min(1200px, 100% - 32px); margin-inline: auto; }
+
+    /* Lockup */
+    .brand { position: relative; display: inline-grid; place-items: center; inline-size: var(--brand-w, 88px); aspect-ratio: 200 / 116; color: inherit; text-decoration: none; direction: ltr; flex: none; }
+    .brand__ring { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; }
+    .brand__word { position: relative; font-family: "Zilla Slab", Rockwell, Georgia, serif; font-weight: 700; font-size: calc(var(--brand-w, 88px) * .205); line-height: 1; letter-spacing: .01em; transform: translateY(-6%); }
+    .brand__plus { margin-left: .08em; }
+    .brand__suite { position: absolute; top: 62%; right: 20%; font-family: "Zilla Slab", Georgia, serif; font-weight: 700; font-size: calc(var(--brand-w, 88px) * .068); color: var(--brand-suite, #894b00); }
+    .ring-light { display: block; }
+    .ring-dark { display: none; }
+    :root[data-theme="dark"] .ring-light { display: none; }
+    :root[data-theme="dark"] .ring-dark { display: block; }
+
+    /* Header */
+    .top { border-bottom: 1px solid var(--line); }
+    .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 76px; }
+    .top nav ul { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0; padding: 0; list-style: none; font-size: 15px; }
+    .top nav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; color: var(--muted); }
+    .top nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+    .top nav { margin-inline-start: auto; }
+    .theme-toggle { flex: none; display: inline-grid; place-items: center; inline-size: 44px; block-size: 44px; padding: 0; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); cursor: pointer; }
+    .theme-toggle:hover { border-color: var(--ink); }
+    .theme-toggle svg { inline-size: 20px; block-size: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-toggle .i-sun, .theme-toggle[aria-pressed="true"] .i-moon { display: none; }
+    .theme-toggle[aria-pressed="true"] .i-sun { display: block; }
+
+    /* Intro */
+    .intro { padding-block: clamp(48px, 8vw, 96px) clamp(32px, 5vw, 56px); display: grid; gap: 24px; grid-template-columns: 1fr; }
+    .eyebrow { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-text); }
+    h1, h2, h3 { font-family: "Zilla Slab", Georgia, serif; font-weight: 700; line-height: 1.12; margin: 0; }
+    h1 { font-size: clamp(34px, 5.4vw, 56px); max-width: 18ch; }
+    .intro p.lead { margin: 0; max-width: 62ch; color: var(--muted); font-size: 18px; }
+    .intro .meta { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 8px 0 0; padding: 0; list-style: none; font-size: 14px; color: var(--muted); }
+    .intro .meta li::before { content: ""; display: inline-block; width: 18px; height: 1px; background: var(--gold); vertical-align: middle; margin-inline-end: 8px; }
+
+    /* Template cards */
+    .templates { display: grid; gap: clamp(24px, 4vw, 40px); padding-block-end: clamp(56px, 8vw, 96px); }
+    .tpl { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(16px, 2.4vw, 28px); box-shadow: var(--shadow); }
+    .tpl:nth-child(even) .shot { order: 2; }
+    .shot { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--line); background: #e9e6df; }
+    .shot iframe { position: absolute; top: 0; left: 0; width: 1440px; height: 900px; border: 0; transform-origin: 0 0; transform: scale(var(--s, .4)); pointer-events: none; }
+    .shot::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04); border-radius: inherit; }
+    .tpl__num { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 13px; color: var(--muted); }
+    .tpl h2 { font-size: clamp(26px, 3vw, 34px); margin-block: 4px 10px; }
+    .tpl p { margin: 0 0 14px; color: var(--muted); }
+    .ref { font-size: 14px; }
+    .ref strong { color: var(--ink); font-weight: 600; }
+    .swatches { display: flex; gap: 6px; margin: 16px 0 6px; padding: 0; list-style: none; }
+    .swatches li { inline-size: 28px; block-size: 28px; border-radius: 50%; background: var(--c); border: 1px solid var(--swatch-line); }
+    .fonts { font-size: 14px; color: var(--muted); margin-bottom: 18px !important; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--line); background: transparent; color: var(--ink); }
+    .btn--primary { background: var(--gold); border-color: var(--gold); color: #161b26; }
+    .btn--primary:hover { background: #c8920f; border-color: #c8920f; }
+    .btn:not(.btn--primary):hover { border-color: var(--ink); }
+
+    /* Foundations */
+    .foundations { border-top: 1px solid var(--line); padding-block: clamp(48px, 7vw, 88px); }
+    .foundations > .wrap > h2 { font-size: clamp(26px, 3.4vw, 36px); margin-bottom: 8px; }
+    .foundations > .wrap > p { color: var(--muted); max-width: 62ch; margin: 0 0 32px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-top: 2px solid var(--gold); border-radius: var(--radius); padding: 22px; }
+    .card h3 { font-size: 21px; margin-bottom: 10px; }
+    .card p, .card li { color: var(--muted); font-size: 15px; }
+    .card p { margin: 0 0 12px; }
+    .card ul { margin: 0; padding-inline-start: 18px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: start; padding: 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-weight: 600; color: var(--ink); }
+    td { color: var(--muted); }
+    code { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 13px; color: var(--ink); }
+    .plates { display: flex; gap: 12px; margin-top: 4px; }
+    .plate { flex: 1; display: grid; place-items: center; padding: 18px 8px; border-radius: 8px; }
+    .plate--light { background: #f6f1e7; color: #3a3f47; }
+    .plate--dark { background: #0b1220; color: #f3f4f6; --brand-suite: #d9a21b; }
+
+    footer { border-top: 1px solid var(--line); padding-block: 28px; color: var(--muted); font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+    @media (max-width: 900px) {
+      .tpl { grid-template-columns: 1fr; }
+      .tpl:nth-child(even) .shot { order: 0; }
+      .grid3 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .top nav { display: none; }
+      .theme-toggle { margin-inline-start: auto; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .btn { transition: background-color .15s, border-color .15s; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="./" aria-label="ECM+ website templates, home">
+        <img class="brand__ring ring-light" src="assets/brand/ring.svg" alt="" width="200" height="116">
+        <img class="brand__ring ring-dark" src="assets/brand/ring-dark.svg" alt="" width="200" height="116">
+        <span class="brand__word" aria-hidden="true">ECM<span class="brand__plus">+</span></span>
+      </a>
+      <nav aria-label="Gallery">
+        <ul>
+          <li><a href="#templates">Templates</a></li>
+          <li><a href="#foundations">Foundations</a></li>
+          <li><a href="https://github.com/MostafaAllam-start/ecmplus-website-templates" rel="noopener">Source on GitHub</a></li>
+        </ul>
+      </nav>
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Dark mode" title="Dark mode">
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap intro" aria-labelledby="intro-title">
+      <p class="eyebrow">ECM+ Business Suite · brand website</p>
+      <h1 id="intro-title">Three ways to tell the ECM+ story</h1>
+      <p class="lead">Each template is static HTML and CSS built from the same verified copy deck, the same logo lockup and the same support hand-off. Pick a direction, or mix sections between them.</p>
+      <ul class="meta">
+        <li>Structure modelled on OpenText and Everteam</li>
+        <li>English &amp; Arabic page for every template</li>
+        <li>Dark &amp; light modes</li>
+        <li>WCAG 2.2 AA targets</li>
+        <li>Support links go through <code>/support</code></li>
+      </ul>
+    </section>
+
+    <section class="wrap templates" id="templates" aria-label="Templates">
+      <article class="tpl" aria-labelledby="t1">
+        <a class="shot" href="templates/ink-ledger/" tabindex="-1" aria-hidden="true" inert>
+          <iframe src="templates/ink-ledger/" title="Ink Ledger preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div>
+          <span class="tpl__num">01 · Enterprise</span>
+          <h2 id="t1">Ink Ledger</h2>
+          <p>A registry console, in daylight or ink-navy dark: gold as a hairline, not a glow. A mega-menu, a "My account" menu with support, an integrations ticker and a forensic-watermark showcase that traces a leaked page.</p>
+          <p class="ref"><strong>Reference:</strong> OpenText's structure: product mega-menu, stat band, sector scenarios, support as its own menu.</p>
+          <ul class="swatches" aria-label="Palette: ink navy, surface navy, gold, silver, paper">
+            <li style="--c:#0b1220"></li><li style="--c:#141e31"></li><li style="--c:#d9a21b"></li><li style="--c:#a3adbd"></li><li style="--c:#f6f7f9"></li>
+          </ul>
+          <p class="fonts">Zilla Slab · IBM Plex Sans · IBM Plex Sans Arabic</p>
+          <div class="actions">
+            <a class="btn btn--primary" href="templates/ink-ledger/">Open in English</a>
+            <a class="btn" href="templates/ink-ledger/ar/" hreflang="ar">Open in Arabic</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="tpl" aria-labelledby="t2">
+        <a class="shot" href="templates/paper-register/" tabindex="-1" aria-hidden="true" inert>
+          <iframe src="templates/paper-register/" title="Paper Register preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div>
+          <span class="tpl__num">02 · Light editorial</span>
+          <h2 id="t2">Paper Register</h2>
+          <p>A records register: numbered sections, ruled lines, folder-tab index cards, and a gold bookmark that runs down the document lifecycle ledger.</p>
+          <p class="ref"><strong>Reference:</strong> Everteam's structure: a one-line hero, the suite as four verbs, resources by format and a "have a project?" close.</p>
+          <ul class="swatches" aria-label="Palette: paper, manila, graphite ink, gold, deep gold text">
+            <li style="--c:#f6f1e7"></li><li style="--c:#efe8da"></li><li style="--c:#1f2328"></li><li style="--c:#d9a21b"></li><li style="--c:#894b00"></li>
+          </ul>
+          <p class="fonts">Newsreader · Source Sans 3 · Amiri · Noto Naskh Arabic</p>
+          <div class="actions">
+            <a class="btn btn--primary" href="templates/paper-register/">Open in English</a>
+            <a class="btn" href="templates/paper-register/ar/" hreflang="ar">Open in Arabic</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="tpl" aria-labelledby="t3">
+        <a class="shot" href="templates/majlis-grid/" tabindex="-1" aria-hidden="true" inert>
+          <iframe src="templates/majlis-grid/" title="Majlis Grid preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div>
+          <span class="tpl__num">03 · Arabic-first bilingual</span>
+          <h2 id="t3">Majlis Grid</h2>
+          <p>A bento layout of light cards with circuit-trace patterns, around a dark ECM+ network tile where the four modules signal the core. Arabic by default with an English mirror; switching language animates the layout flip. Hijri dates, Nafath, WhatsApp access codes.</p>
+          <p class="ref"><strong>Reference:</strong> built for MENA institutions, with two real pages (not a JavaScript toggle) so both languages are indexable.</p>
+          <ul class="swatches" aria-label="Palette: mist, white, gold, deep gold text, navy">
+            <li style="--c:#f4f6f8"></li><li style="--c:#ffffff"></li><li style="--c:#d9a21b"></li><li style="--c:#894b00"></li><li style="--c:#0e1b2b"></li>
+          </ul>
+          <p class="fonts">Alexandria · Vazirmatn (Arabic + Latin in both)</p>
+          <div class="actions">
+            <a class="btn btn--primary" href="templates/majlis-grid/" hreflang="ar">Open in Arabic</a>
+            <a class="btn" href="templates/majlis-grid/en/" hreflang="en">Open in English</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="foundations" id="foundations" aria-labelledby="f-title">
+      <div class="wrap">
+        <h2 id="f-title">Shared foundations</h2>
+        <p>What every template has in common, so switching direction later doesn't mean starting over.</p>
+        <div class="grid3">
+          <div class="card">
+            <h3>Support hand-off</h3>
+            <p>Support links never point at the portal directly. They hit <code>/support/*</code>, and a controller redirects to the ticketing portal.</p>
+            <table>
+              <thead><tr><th scope="col">Link</th><th scope="col">Portal</th></tr></thead>
+              <tbody>
+                <tr><td><a href="/support"><code>/support</code></a></td><td><code>/{lang}</code></td></tr>
+                <tr><td><a href="/support/login"><code>/support/login</code></a></td><td><code>/{lang}/login</code></td></tr>
+                <tr><td><a href="/support/tickets/new"><code>/support/tickets/new</code></a></td><td><code>/{lang}/tickets</code></td></tr>
+                <tr><td><a href="/support/tickets"><code>/support/tickets</code></a></td><td><code>/{lang}/tickets</code></td></tr>
+                <tr><td><a href="/support/suggestions"><code>/support/suggestions</code></a></td><td><code>/{lang}/suggestions</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <h3>Logo lockup</h3>
+            <p>An SVG rendition of the ECM+ swoosh ring with live text, plus a silver-lifted ring for dark backgrounds. Swap in the official vector when you have it.</p>
+            <div class="plates">
+              <div class="plate plate--light">
+                <span class="brand" style="--brand-w:132px">
+                  <img class="brand__ring" src="assets/brand/ring.svg" alt="" width="200" height="116">
+                  <span class="brand__word" aria-hidden="true">ECM<span class="brand__plus">+</span></span>
+                  <span class="brand__suite" aria-hidden="true" style="font-size:9px">Business Suite</span>
+                </span>
+              </div>
+              <div class="plate plate--dark">
+                <span class="brand" style="--brand-w:132px">
+                  <img class="brand__ring" src="assets/brand/ring-dark.svg" alt="" width="200" height="116">
+                  <span class="brand__word" aria-hidden="true">ECM<span class="brand__plus">+</span></span>
+                  <span class="brand__suite" aria-hidden="true" style="font-size:9px">Business Suite</span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Verified copy</h3>
+            <p>Every claim comes from an internal copy deck, checked against the ECM+ frontend and backend.</p>
+            <ul>
+              <li>No customer names, logos or testimonials</li>
+              <li>No certifications, uptime or customer counts</li>
+              <li>Integrations shown as text, not third-party logos</li>
+              <li>Canonical domain set to <code>ecmplus.org</code>; still to be confirmed</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 ECM Plus. ECM Plus is a Canadian company. CTC MENA is its exclusive agent and is responsible for its Arabization.</span>
+      <span>Templates for internal review</span>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle: shared "ecmplus-theme" choice; restyles the live previews too.
+    (function () {
+      var root = document.documentElement;
+      var btn = document.querySelector(".theme-toggle");
+      // Light unless the visitor chose dark.
+      function current() {
+        return root.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      }
+      function sync() {
+        btn.setAttribute("aria-pressed", String(current() === "dark"));
+      }
+      btn.addEventListener("click", function () {
+        var next = current() === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("ecmplus-theme", next); } catch (e) { /* not persisted */ }
+        document.querySelectorAll(".shot iframe").forEach(function (frame) {
+          try { frame.contentDocument.documentElement.setAttribute("data-theme", next); } catch (e) { /* not loaded yet */ }
+        });
+        sync();
+      });
+      sync();
+    })();
+
+    // Scale each live preview to fill its frame.
+    (function () {
+      var shots = document.querySelectorAll(".shot");
+      function fit() {
+        shots.forEach(function (shot) { shot.style.setProperty("--s", String(shot.clientWidth / 1440)); });
+      }
+      fit();
+      if ("ResizeObserver" in window) {
+        var ro = new ResizeObserver(fit);
+        shots.forEach(function (shot) { ro.observe(shot); });
+      } else {
+        window.addEventListener("resize", fit);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="color-scheme" content="light">
+  <title>ECM+ Client Area — Redirecting</title>
+  <meta name="description" content="Redirect preview for the ECM+ client area. In production a controller sends /support links to the support portal.">
+  <script>
+    (function () {
+      var root = document.documentElement;
+      try {
+        var t = localStorage.getItem("ecmplus-theme");
+        if (t === "light" || t === "dark") root.setAttribute("data-theme", t);
+      } catch (e) { /* storage blocked: follow the system */ }
+      if (new URLSearchParams(location.search).get("lang") === "ar") {
+        root.setAttribute("lang", "ar");
+        root.setAttribute("dir", "rtl");
+      }
+    })();
+  </script>
+  <link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f4ef;
+      --panel: #ffffff;
+      --ink: #161b26;
+      --muted: #4a5565;
+      --line: #dcd7cb;
+      --gold: #d9a21b;
+      --gold-ink: #894b00;
+    }
+    :root[data-theme="dark"] { color-scheme: dark; --bg: #0d1322; --panel: #141e31; --ink: #f2f4f8; --muted: #b8c0cf; --line: #2a3650; --gold-ink: #e8b84a; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px 16px;
+      background: var(--bg); color: var(--ink);
+      font: 16px/1.6 "Segoe UI", "Noto Sans Arabic", system-ui, sans-serif;
+    }
+    :lang(ar) body { line-height: 1.8; }
+    main {
+      width: min(640px, 100%); background: var(--panel); border: 1px solid var(--line);
+      border-top: 3px solid var(--gold); border-radius: 16px; padding: clamp(24px, 5vw, 40px);
+    }
+    .eyebrow { margin: 0 0 8px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-ink); font-weight: 600; }
+    :lang(ar) .eyebrow { letter-spacing: 0; text-transform: none; font-size: 14px; }
+    h1 { margin: 0 0 12px; font-size: clamp(24px, 4vw, 30px); line-height: 1.25; }
+    p { margin: 0 0 16px; color: var(--muted); }
+    a { color: var(--gold-ink); font-weight: 600; text-underline-offset: 3px; }
+    a:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; border-radius: 4px; }
+    .back { display: inline-flex; align-items: center; min-height: 44px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow" data-i18n-html="eyebrow">ECM+ client area</p>
+    <h1 data-i18n="title">Taking you to the support portal…</h1>
+    <p data-i18n-html="body">On the live site this address is handled by the support redirect controller, which forwards you straight to the ECM+ support portal. This page only appears in local previews, where no controller is running.</p>
+    <a class="back" href="/" data-i18n="back">← Back to the templates</a>
+  </main>
+  <script>
+    (function () {
+      if (new URLSearchParams(location.search).get("lang") !== "ar") return;
+      var ar = {
+        eyebrow: "بوابة عملاء <bdi>ECM+</bdi>",
+        title: "جارٍ نقلك إلى بوابة الدعم…",
+        body: "في الموقع الفعلي تتولى وحدة التحويل هذا العنوان وتنقلك مباشرةً إلى بوابة دعم <bdi>ECM+</bdi>. لا تظهر هذه الصفحة إلا في المعاينة المحلية، حيث لا تعمل وحدة التحويل.",
+        back: "العودة إلى القوالب →"
+      };
+      document.title = "بوابة عملاء ⁦ECM+⁩ — جارٍ التحويل";
+      document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = ar[el.getAttribute("data-i18n")]; });
+      document.querySelectorAll("[data-i18n-html]").forEach(function (el) { el.innerHTML = ar[el.getAttribute("data-i18n-html")]; });
+    })();
+  </script>
+</body>
+</html>
