@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("ecmplus-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { /* storage blocked: the page stays light */ }
+    })();
+  </script>
+  <meta name="color-scheme" content="light">
+  <title>Meeting Management (MMS) — ECM Plus</title>
+  <meta name="description" content="Schedule committee meetings in person or online, vote on agenda items, sign the minutes digitally and follow every action item.">
+  <link rel="canonical" href="https://ecmplus.org/meetings/">
+  <link rel="alternate" hreflang="en" href="https://ecmplus.org/meetings/">
+  <link rel="alternate" hreflang="ar" href="https://ecmplus.org/ar/meetings/">
+  <link rel="alternate" hreflang="x-default" href="https://ecmplus.org/meetings/">
+  <meta name="theme-color" content="#F6F1E7">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ecmplus.org/meetings/">
+  <meta property="og:site_name" content="ECM Plus">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ar_SA">
+  <meta property="og:title" content="Meeting Management (MMS) — ECM Plus">
+  <meta property="og:description" content="Schedule committee meetings in person or online, vote on agenda items, sign the minutes digitally and follow every action item.">
+  <meta property="og:image" content="https://ecmplus.org/assets/brand/ecmplus-ai-logo.png">
+  <meta property="og:image:alt" content="ECM+ Business Suite logo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Meeting Management (MMS) — ECM Plus">
+  <meta name="twitter:description" content="Schedule committee meetings in person or online, vote on agenda items, sign the minutes digitally and follow every action item.">
+  <meta name="twitter:image" content="https://ecmplus.org/assets/brand/ecmplus-ai-logo.png">
+
+  <link rel="icon" href="../../../assets/brand/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Fonts load without blocking render, so a slow or blocked fonts host never stalls the page -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&family=Source+Sans+3:wght@400;600&family=Amiri:wght@700&family=Noto+Naskh+Arabic:wght@400&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&family=Source+Sans+3:wght@400;600&family=Amiri:wght@700&family=Noto+Naskh+Arabic:wght@400&display=swap">
+  </noscript>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../../../assets/brand/ecmplus-logo.css">
+
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="../main.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://ecmplus.org/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Suite",
+        "item": "https://ecmplus.org/#suite"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Meetings",
+        "item": "https://ecmplus.org/meetings/"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ============ Header ============ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand ecmlogo" href="../" aria-label="ECM+ Business Suite, home page">
+        <img class="ecmlogo__img ecmlogo__img--light" src="../../../assets/brand/ecmplus-ai-logo-272.webp" srcset="../../../assets/brand/ecmplus-ai-logo-272.webp 272w, ../../../assets/brand/ecmplus-ai-logo-545.webp 545w" sizes="(max-width: 420px) 80px, 94px" width="545" height="302" alt="">
+        <img class="ecmlogo__img ecmlogo__img--dark" src="../../../assets/brand/ecmplus-ai-logo-dark-272.webp" srcset="../../../assets/brand/ecmplus-ai-logo-dark-272.webp 272w, ../../../assets/brand/ecmplus-ai-logo-dark-545.webp 545w" sizes="(max-width: 420px) 80px, 94px" width="545" height="302" alt="" loading="lazy">
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+        <span class="nav-toggle__label">Menu</span>
+      </button>
+
+      <div class="site-menu" id="site-menu">
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul class="site-nav__list">
+            <li><a class="u-link" href="../#suite">Suite</a></li>
+            <li><a class="u-link" href="../#platform">Security</a></li>
+            <li><a class="u-link" href="../#sectors">Sectors</a></li>
+            <li><a class="u-link" href="../#resources">Resources</a></li>
+            <li><a class="u-link" href="/support">Support</a></li>
+          </ul>
+        </nav>
+        <div class="site-utility">
+          <a class="u-link lang-switch" href="../ar/meetings/" lang="ar" hreflang="ar">العربية</a>
+          <a class="u-link site-utility__client" href="/support/login">Client portal</a>
+          <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Dark mode" title="Dark mode" hidden>
+            <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+            <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.5 14.6A7.6 7.6 0 0 1 9.4 4.5a7.9 7.9 0 1 0 10.1 10.1z"/></svg>
+          </button>
+          <a class="btn btn--outline" href="../#contact">Contact our team</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="sp sp--meetings">
+    <section class="sp-hero" aria-labelledby="page-title">
+      <div class="container sp-hero__grid">
+        <div class="sp-hero__copy">
+          <nav class="sp-crumbs" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li><a href="../#suite">Suite</a></li><li aria-current="page">Meetings</li></ol></nav>
+          <p class="sp-eyebrow"><svg class="sp-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/></svg><span><bdi>MMS</bdi> · Meeting Management</span></p>
+          <h1 id="page-title">Committee work runs from agenda to signed minutes, with every action tracked.</h1>
+          <p class="sp-lead">ECM+ schedules meetings in person or online, records votes on each agenda item, sends the minutes for digital signature and follows every action item.</p>
+          <div class="sp-actions"><a class="btn btn--gold" href="../#contact">Request a demo</a><a class="btn btn--outline" href="../#suite">Explore the suite</a></div>
+        </div>
+      <div class="sp-hero__visual sp-emblem" aria-hidden="true"><span class="sp-emblem__ring"><svg class="sp-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/></svg></span><span class="sp-emblem__code">MMS</span><span class="sp-emblem__name">Meeting Management</span><span class="sp-emblem__alt" lang="ar" dir="rtl">نظام إدارة الاجتماعات</span></div>
+      </div>
+    </section>
+
+    <section class="section sp-section" aria-labelledby="overview-title">
+      <div class="container register">
+        <div class="register__margin">
+          <span class="register__no" aria-hidden="true">01</span>
+          <span class="register__label">Overview</span>
+        </div>
+        <div class="register__body">
+          <h2 id="overview-title" class="h2">Every meeting documented from start to finish</h2>
+        <div class="sp-prose">
+          <p>Meetings are planned on a shared calendar, with rooms, clash detection and invitations in each invitee’s language.</p>
+          <p>During the meeting, attendance, notes and votes are recorded, and the minutes are prepared from the meeting itself.</p>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sp-section sp-section--alt" aria-labelledby="capabilities-title">
+      <div class="container register">
+        <div class="register__margin">
+          <span class="register__no" aria-hidden="true">02</span>
+          <span class="register__label">Capabilities</span>
+        </div>
+        <div class="register__body">
+          <h2 id="capabilities-title" class="h2">Key capabilities</h2>
+        <ul class="sp-grid">
+          <li class="sp-card"><h3 class="sp-card__title">Planning</h3><p>Month, week and day calendars, rooms and buildings with clash detection, and a warning when the organizer is double-booked.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">In person and online</h3><p>Microsoft Teams, Google Meet, Zoom, Beem or ECM+ Meet hosted by your organization, with Google Calendar synchronization.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">Bilingual invitations</h3><p>Invitations are sent in Arabic, English or both, or in each invitee’s language.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">During the session</h3><p>Attendance, agenda notes and chat are recorded during the meeting.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">Voting</h3><p>Single or multiple choice per agenda item. Results stay hidden until a member votes or the vote closes, and a closed vote is final.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">Minutes and digital signature</h3><p>Minutes are prepared from the meeting, presented to members for signature with progress tracking and reminders, then distributed and archived.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">Action items</h3><p>Each action has an assignee, a due date, a priority and reminders, with a daily digest.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">Follow-up meetings</h3><p>Follow-up meetings stay linked to the meeting they continue.</p></li>
+        </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sp-section" aria-labelledby="how-title">
+      <div class="container register">
+        <div class="register__margin">
+          <span class="register__no" aria-hidden="true">03</span>
+          <span class="register__label">How it works</span>
+        </div>
+        <div class="register__body">
+          <h2 id="how-title" class="h2">How a meeting is run</h2>
+        <ol class="sp-steps">
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">01</span><h3 class="sp-step__title">Plan</h3><p>The room is booked, clashes are checked and the invitations are sent.</p></li>
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">02</span><h3 class="sp-step__title">Meet</h3><p>The meeting is held in person or online, and attendance is recorded.</p></li>
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">03</span><h3 class="sp-step__title">Decide</h3><p>Members vote on each agenda item.</p></li>
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">04</span><h3 class="sp-step__title">Sign</h3><p>The minutes are presented to members for digital signature and tracked until every member signs.</p></li>
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">05</span><h3 class="sp-step__title">Follow up</h3><p>Action items are assigned and tracked to completion.</p></li>
+        </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sp-section sp-section--alt" aria-labelledby="works-title">
+      <div class="container register">
+        <div class="register__margin">
+          <span class="register__no" aria-hidden="true">04</span>
+          <span class="register__label">Works with</span>
+        </div>
+        <div class="register__body">
+          <h2 id="works-title" class="h2">Connected to the services your teams already use</h2>
+        <ul class="sp-chips">
+          <li class="sp-chip"><img class="sp-chip__logo" src="../../../assets/brands/microsoft-teams.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Microsoft Teams</li>
+          <li class="sp-chip"><img class="sp-chip__logo" src="../../../assets/brands/google-meet.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Google Meet</li>
+          <li class="sp-chip"><img class="sp-chip__logo" src="../../../assets/brands/zoom.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Zoom</li>
+          <li class="sp-chip"><span class="sp-chip__dot" aria-hidden="true"></span>Beem</li>
+          <li class="sp-chip"><img class="sp-chip__logo sp-chip__logo--wide ecmlogo__img--light" src="../../../assets/brand/ecmplus-ai-logo-272.webp" alt="" width="545" height="302" loading="lazy" decoding="async"><img class="sp-chip__logo sp-chip__logo--wide ecmlogo__img--dark" src="../../../assets/brand/ecmplus-ai-logo-dark-272.webp" alt="" width="545" height="302" loading="lazy" decoding="async">ECM+ Meet</li>
+          <li class="sp-chip"><img class="sp-chip__logo" src="../../../assets/brands/google-calendar.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Google Calendar</li>
+        </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sp-section" aria-labelledby="related-title">
+      <div class="container register">
+        <div class="register__margin">
+          <span class="register__no" aria-hidden="true">05</span>
+          <span class="register__label">The suite</span>
+        </div>
+        <div class="register__body">
+          <h2 id="related-title" class="h2">The other modules</h2>
+        <ul class="sp-related">
+          <li><a class="sp-related__link" href="../documents/"><svg class="sp-glyph sp-related__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h18v4H3zM5 8v12h14V8M10 12h4"/></svg><span class="sp-related__code"><bdi>DMS</bdi></span><span class="sp-related__name">Document Management</span><span class="sp-related__line">Capture, classify, version and retrieve every document.</span></a></li>
+          <li><a class="sp-related__link" href="../correspondence/"><svg class="sp-glyph sp-related__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="sp-related__code"><bdi>CMS</bdi></span><span class="sp-related__name">Correspondence Management</span><span class="sp-related__line">Register, route, approve and dispatch official correspondence.</span></a></li>
+          <li><a class="sp-related__link" href="../processes/"><svg class="sp-glyph sp-related__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8" y="2.5" width="8" height="5" rx="1.2"/><path d="M12 7.5v2M12 9.5l3 3-3 3-3-3z"/><path d="M9 12.5H5.5v4M15 12.5h3.5v4"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.2"/></svg><span class="sp-related__code"><bdi>BPM</bdi></span><span class="sp-related__name">Business Process Management</span><span class="sp-related__line">Design processes, build forms and run them with deadlines.</span></a></li>
+        </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-cta" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="sp-cta__inner">
+          <h2 id="cta-title">See ECM+ with your organization’s own scenarios.</h2>
+          <p>Our team arranges a demo in Arabic or English, focused on the modules that matter to your organization.</p>
+          <div class="sp-actions"><a class="btn btn--gold" href="../#contact">Request a demo</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <a class="brand ecmlogo brand--footer ecmlogo--lg ecmlogo--on-dark" href="../" aria-label="ECM+ Business Suite, home page">
+            <img class="ecmlogo__img ecmlogo__img--light" src="../../../assets/brand/ecmplus-ai-logo-272.webp" srcset="../../../assets/brand/ecmplus-ai-logo-272.webp 272w, ../../../assets/brand/ecmplus-ai-logo-545.webp 545w" sizes="(max-width: 420px) 145px, 174px" width="545" height="302" alt="" loading="lazy">
+            <img class="ecmlogo__img ecmlogo__img--dark" src="../../../assets/brand/ecmplus-ai-logo-dark-272.webp" srcset="../../../assets/brand/ecmplus-ai-logo-dark-272.webp 272w, ../../../assets/brand/ecmplus-ai-logo-dark-545.webp 545w" sizes="(max-width: 420px) 145px, 174px" width="545" height="302" alt="" loading="lazy">
+          </a>
+          <p class="site-footer__tagline">A unified suite for the management of documents, correspondence, processes and meetings.</p>
+        </div>
+
+        <nav class="site-footer__cols" aria-label="Footer navigation">
+          <div class="foot-col">
+            <h2 class="foot-col__title">Suite</h2>
+            <ul>
+              <li><a class="u-link" href="../documents/">Document Management</a></li>
+              <li><a class="u-link" href="../correspondence/">Correspondence Management</a></li>
+              <li><a class="u-link" href="../processes/">Business Process Management</a></li>
+              <li><a class="u-link" href="./" aria-current="page">Meeting Management</a></li>
+              <li><a class="u-link" href="../#platform">Security</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h2 class="foot-col__title">Sectors</h2>
+            <ul>
+              <li><a class="u-link" href="../#sector-government">Government &amp; municipalities</a></li>
+              <li><a class="u-link" href="../#sector-finance">Banking &amp; finance</a></li>
+              <li><a class="u-link" href="../#sector-healthcare">Healthcare</a></li>
+              <li><a class="u-link" href="../#sector-education">Education</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h2 class="foot-col__title">Resources</h2>
+            <ul>
+              <li><a class="u-link" href="../#resources">Product overview</a></li>
+              <li><a class="u-link" href="../#resources">Integration guide</a></li>
+              <li><a class="u-link" href="../#contact">Request a demo</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h2 class="foot-col__title">Client portal</h2>
+            <ul>
+              <li><a class="u-link" href="/support">Support centre</a></li>
+              <li><a class="u-link" href="/support/login">Sign in to the client portal</a></li>
+              <li><a class="u-link" href="/support/tickets/new">Submit a support ticket</a></li>
+              <li><a class="u-link" href="/support/tickets">Track your tickets</a></li>
+              <li><a class="u-link" href="/support/suggestions">Submit a suggestion or complaint</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h2 class="foot-col__title">Company</h2>
+            <ul>
+              <li><a class="u-link" href="../about/">About ECM Plus</a></li>
+              <li><a class="u-link" href="https://ctcmena.com">CTC MENA, exclusive agent</a></li>
+              <li><a class="u-link" href="../#contact">Contact our team</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="site-footer__base">
+        <p class="site-footer__ctc" id="about">
+          <img src="../../../assets/brand/ctc-logo.webp" alt="CTC MENA, exclusive agent" width="44" height="44" loading="lazy" decoding="async">
+          <span>ECM Plus is a Canadian company. CTC MENA is its exclusive agent and is responsible for its Arabization.</span>
+        </p>
+        <p class="site-footer__legal">
+          <span>© 2026 ECM Plus</span>
+          <a class="u-link" href="/privacy">Privacy</a>
+          <a class="u-link" href="/terms">Terms</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

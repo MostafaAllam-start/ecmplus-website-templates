@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("ecmplus-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { /* storage blocked: the page stays light */ }
+    })();
+  </script>
+  <meta name="color-scheme" content="light">
+  <title>نظام إدارة الوثائق (DMS) — ECM Plus</title>
+  <meta name="description" content="أرشفة الوثائق واسترجاعها مع بحث بالذكاء الاصطناعي حتى مستوى الصفحة، وتعبئة حقول الفهرسة تلقائيًا، وصلاحيات الوصول، والإصدارات، وقواعد الاحتفاظ.">
+  <link rel="canonical" href="https://ecmplus.org/ar/documents/">
+  <link rel="alternate" hreflang="en" href="https://ecmplus.org/documents/">
+  <link rel="alternate" hreflang="ar" href="https://ecmplus.org/ar/documents/">
+  <link rel="alternate" hreflang="x-default" href="https://ecmplus.org/documents/">
+  <meta name="theme-color" content="#F6F1E7">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ecmplus.org/ar/documents/">
+  <meta property="og:site_name" content="ECM Plus">
+  <meta property="og:locale" content="ar_SA">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="نظام إدارة الوثائق (DMS) — ECM Plus">
+  <meta property="og:description" content="أرشفة الوثائق واسترجاعها مع بحث بالذكاء الاصطناعي حتى مستوى الصفحة، وتعبئة حقول الفهرسة تلقائيًا، وصلاحيات الوصول، والإصدارات، وقواعد الاحتفاظ.">
+  <meta property="og:image" content="https://ecmplus.org/assets/brand/ecmplus-ai-logo.png">
+  <meta property="og:image:alt" content="شعار ECM+ Business Suite">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="نظام إدارة الوثائق (DMS) — ECM Plus">
+  <meta name="twitter:description" content="أرشفة الوثائق واسترجاعها مع بحث بالذكاء الاصطناعي حتى مستوى الصفحة، وتعبئة حقول الفهرسة تلقائيًا، وصلاحيات الوصول، والإصدارات، وقواعد الاحتفاظ.">
+  <meta name="twitter:image" content="https://ecmplus.org/assets/brand/ecmplus-ai-logo.png">
+
+  <link rel="icon" href="../../../../assets/brand/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Fonts load without blocking render, so a slow or blocked fonts host never stalls the page -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Noto+Naskh+Arabic:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&family=Source+Sans+3:wght@400;600&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Noto+Naskh+Arabic:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&family=Source+Sans+3:wght@400;600&display=swap">
+  </noscript>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../../../assets/brand/ecmplus-logo.css">
+
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="../../main.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "الرئيسية",
+        "item": "https://ecmplus.org/ar/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "المنظومة",
+        "item": "https://ecmplus.org/ar/#suite"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "الوثائق",
+        "item": "https://ecmplus.org/ar/documents/"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">الانتقال إلى المحتوى الرئيسي</a>
+
+  <!-- ============ Header ============ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand ecmlogo" href="../" aria-label="ECM+ Business Suite، الصفحة الرئيسية">
+        <img class="ecmlogo__img ecmlogo__img--light" src="../../../../assets/brand/ecmplus-ai-logo-272.webp" srcset="../../../../assets/brand/ecmplus-ai-logo-272.webp 272w, ../../../../assets/brand/ecmplus-ai-logo-545.webp 545w" sizes="(max-width: 420px) 80px, 94px" width="545" height="302" alt="">
+        <img class="ecmlogo__img ecmlogo__img--dark" src="../../../../assets/brand/ecmplus-ai-logo-dark-272.webp" srcset="../../../../assets/brand/ecmplus-ai-logo-dark-272.webp 272w, ../../../../assets/brand/ecmplus-ai-logo-dark-545.webp 545w" sizes="(max-width: 420px) 80px, 94px" width="545" height="302" alt="" loading="lazy">
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+        <span class="nav-toggle__label">القائمة</span>
+      </button>
+
+      <div class="site-menu" id="site-menu">
+        <nav class="site-nav" aria-label="التنقل الرئيسي">
+          <ul class="site-nav__list">
+            <li><a class="u-link" href="../#suite">المنظومة</a></li>
+            <li><a class="u-link" href="../#platform">الأمان</a></li>
+            <li><a class="u-link" href="../#sectors">القطاعات</a></li>
+            <li><a class="u-link" href="../#resources">الموارد</a></li>
+            <li><a class="u-link" href="/support?lang=ar">الدعم</a></li>
+          </ul>
+        </nav>
+        <div class="site-utility">
+          <a class="u-link lang-switch" href="../../documents/" lang="en" hreflang="en">English</a>
+          <a class="u-link site-utility__client" href="/support/login?lang=ar">بوابة العملاء</a>
+          <button class="theme-toggle" type="button" aria-pressed="false" aria-label="الوضع الداكن" title="الوضع الداكن" hidden>
+            <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+            <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.5 14.6A7.6 7.6 0 0 1 9.4 4.5a7.9 7.9 0 1 0 10.1 10.1z"/></svg>
+          </button>
+          <a class="btn btn--outline" href="../#contact">تواصل مع فريقنا</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="sp sp--documents">
+    <section class="sp-hero" aria-labelledby="page-title">
+      <div class="container sp-hero__grid">
+        <div class="sp-hero__copy">
+          <nav class="sp-crumbs" aria-label="مسار التنقل"><ol><li><a href="../">الرئيسية</a></li><li><a href="../#suite">المنظومة</a></li><li aria-current="page">الوثائق</li></ol></nav>
+          <p class="sp-eyebrow"><svg class="sp-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h18v4H3zM5 8v12h14V8M10 12h4"/></svg><span><bdi>DMS</bdi> · نظام إدارة الوثائق</span></p>
+          <h1 id="page-title">تُؤرشف الوثائق بتنظيم دقيق، ويعثر عليها البحث بالذكاء الاصطناعي حتى مستوى الصفحة.</h1>
+          <p class="sp-lead">تلتقط منظومة <bdi>ECM+</bdi> كل وثيقة وتصنّفها وتدير إصداراتها وتسترجعها، وفق صلاحيات الوصول وقواعد الاحتفاظ ومع سجل تدقيق كامل.</p>
+          <div class="sp-actions"><a class="btn btn--gold" href="../#contact">اطلب عرضًا تجريبيًا</a><a class="btn btn--outline" href="../#suite">استكشف المنظومة</a></div>
+        </div>
+      <div class="sp-hero__visual sp-emblem" aria-hidden="true"><span class="sp-emblem__ring"><svg class="sp-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h18v4H3zM5 8v12h14V8M10 12h4"/></svg></span><span class="sp-emblem__code">DMS</span><span class="sp-emblem__name">نظام إدارة الوثائق</span><span class="sp-emblem__alt" lang="en" dir="ltr">Document Management</span></div>
+      </div>
+    </section>
+
+    <section class="section sp-section" aria-labelledby="overview-title">
+      <div class="container register">
+        <div class="register__margin">
+          <span class="register__no" aria-hidden="true">01</span>
+          <span class="register__label">نظرة عامة</span>
+        </div>
+        <div class="register__body">
+          <h2 id="overview-title" class="h2">أرشيف واحد للمؤسسة بأكملها</h2>
+        <div class="sp-prose">
+          <p>تُحفظ كل وثيقة ضمن نوع وثيقة له حقول فهرسة خاصة به، وفي مجلدات لكل منها صلاحيات وصول مستقلة.</p>
+          <p>ويعثر الموظفون على الوثائق بحسب المعنى أو بحسب الحقول، ويفتحون الصفحة المطلوبة مباشرةً، ويعملون على الملف دون مغادرة المنظومة.</p>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sp-section sp-section--alt" aria-labelledby="capabilities-title">
+      <div class="container register">
+        <div class="register__margin">
+          <span class="register__no" aria-hidden="true">02</span>
+          <span class="register__label">القدرات</span>
+        </div>
+        <div class="register__body">
+          <h2 id="capabilities-title" class="h2">أبرز القدرات</h2>
+        <ul class="sp-grid">
+          <li class="sp-card"><h3 class="sp-card__title">البحث بالذكاء الاصطناعي</h3><p>يعثر على الوثائق بحسب المعنى إلى جانب الكلمات المطابقة، ويُبرز مواضع التطابق حتى مستوى الصفحة، مع البحث الصوتي وسجل البحث.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">تعبئة حقول الفهرسة بالذكاء الاصطناعي</h3><p>عند أرشفة الوثيقة، يقرأ الذكاء الاصطناعي الملف ويعبّئ حقول الفهرسة، نصوصًا وأرقامًا وتواريخ، ليراجعها الموظف.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">أنواع الوثائق</h3><p>لكل نوع وثيقة حقول فهرسة خاصة به: نص ورقم وتاريخ وقائمة منسدلة واختيار متعدد ومربع اختيار.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">صلاحيات الوصول إلى المجلدات</h3><p>9 أنواع من الصلاحيات لكل مجلد، من العرض والطباعة إلى «العرض دون علامة مائية».</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">سجل الإصدارات</h3><p>يحتفظ كل ملف بسجل إصداراته كاملًا، ويمكن استعادة أي إصدار أو تنزيله.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">قواعد الاحتفاظ</h3><p>تُنفَّذ عمليات الحذف أو التنبيه وفق جداول زمنية محددة، مع سجل لكل عملية تنفيذ.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">الوثائق المقفلة</h3><p>لا تُفتح الوثيقة المقفلة إلا برمز تحقق لمرة واحدة يُرسَل عبر البريد الإلكتروني أو الرسائل النصية أو واتساب، ويبقى محتواها محجوبًا في نتائج البحث.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">التقارير</h3><p>يضيف مصمم التقارير صفحة غلاف ورأسًا وتذييلًا، وتُصدَّر التقارير بصيغ <bdi>PDF</bdi> و<bdi>Word</bdi> و<bdi>Excel</bdi>.</p></li>
+        </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sp-section" aria-labelledby="how-title">
+      <div class="container register">
+        <div class="register__margin">
+          <span class="register__no" aria-hidden="true">03</span>
+          <span class="register__label">آلية العمل</span>
+        </div>
+        <div class="register__body">
+          <h2 id="how-title" class="h2">مسار الوثيقة في الأرشيف</h2>
+        <ol class="sp-steps">
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">01</span><h3 class="sp-step__title">الالتقاط</h3><p>تصل الملفات من الأجهزة والماسحات الضوئية والقوالب و<bdi>Google Drive</bdi> و<bdi>OneDrive</bdi>، أو كملاحظات صوتية ومرئية.</p></li>
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">02</span><h3 class="sp-step__title">الفهرسة</h3><p>يعبّئ الذكاء الاصطناعي حقول الفهرسة لنوع الوثيقة من الملف، ويؤكدها الموظف قبل الحفظ.</p></li>
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">03</span><h3 class="sp-step__title">الحماية</h3><p>تتحكم صلاحيات المجلدات والوثائق المقفلة فيمن يطّلع على كل صفحة، ويوثّق رمز الوصول كل عملية اطّلاع أو تنزيل.</p></li>
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">04</span><h3 class="sp-step__title">البحث</h3><p>يعثر البحث بالذكاء الاصطناعي على الوثائق بحسب المعنى، ويفتح الصفحة المطابقة.</p></li>
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">05</span><h3 class="sp-step__title">الاحتفاظ</h3><p>تحذف قواعد الاحتفاظ الوثائق أو تنبّه إليها وفق الجدول الزمني، مع توثيق كل خطوة.</p></li>
+        </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sp-section sp-section--alt" aria-labelledby="works-title">
+      <div class="container register">
+        <div class="register__margin">
+          <span class="register__no" aria-hidden="true">04</span>
+          <span class="register__label">يتكامل مع</span>
+        </div>
+        <div class="register__body">
+          <h2 id="works-title" class="h2">تكامل مع الخدمات التي تستخدمها فرقكم</h2>
+        <ul class="sp-chips">
+          <li class="sp-chip"><img class="sp-chip__logo" src="../../../../assets/brands/google-drive.svg" alt="" width="18" height="18" loading="lazy" decoding="async"><bdi>Google Drive</bdi></li>
+          <li class="sp-chip"><img class="sp-chip__logo" src="../../../../assets/brands/onedrive.svg" alt="" width="18" height="18" loading="lazy" decoding="async"><bdi>OneDrive</bdi></li>
+          <li class="sp-chip"><img class="sp-chip__logo" src="../../../../assets/brands/microsoft-word.svg" alt="" width="18" height="18" loading="lazy" decoding="async"><bdi>Microsoft Word</bdi></li>
+          <li class="sp-chip"><img class="sp-chip__logo" src="../../../../assets/brands/microsoft-excel.svg" alt="" width="18" height="18" loading="lazy" decoding="async"><bdi>Excel</bdi></li>
+          <li class="sp-chip"><img class="sp-chip__logo" src="../../../../assets/brands/microsoft-powerpoint.svg" alt="" width="18" height="18" loading="lazy" decoding="async"><bdi>PowerPoint</bdi></li>
+          <li class="sp-chip"><img class="sp-chip__logo" src="../../../../assets/brands/microsoft-outlook.svg" alt="" width="18" height="18" loading="lazy" decoding="async"><bdi>Outlook</bdi></li>
+          <li class="sp-chip"><img class="sp-chip__logo" src="../../../../assets/brands/whatsapp.svg" alt="" width="18" height="18" loading="lazy" decoding="async">واتساب</li>
+          <li class="sp-chip"><span class="sp-chip__dot" aria-hidden="true"></span>الرسائل النصية</li>
+        </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sp-section" aria-labelledby="related-title">
+      <div class="container register">
+        <div class="register__margin">
+          <span class="register__no" aria-hidden="true">05</span>
+          <span class="register__label">المنظومة</span>
+        </div>
+        <div class="register__body">
+          <h2 id="related-title" class="h2">الأنظمة الأخرى</h2>
+        <ul class="sp-related">
+          <li><a class="sp-related__link" href="../correspondence/"><svg class="sp-glyph sp-related__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="sp-related__code"><bdi>CMS</bdi></span><span class="sp-related__name">نظام إدارة المراسلات</span><span class="sp-related__line">تسجيل المراسلات الرسمية وإحالتها واعتمادها وإرسالها.</span></a></li>
+          <li><a class="sp-related__link" href="../processes/"><svg class="sp-glyph sp-related__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8" y="2.5" width="8" height="5" rx="1.2"/><path d="M12 7.5v2M12 9.5l3 3-3 3-3-3z"/><path d="M9 12.5H5.5v4M15 12.5h3.5v4"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.2"/></svg><span class="sp-related__code"><bdi>BPM</bdi></span><span class="sp-related__name">نظام إدارة سير الإجراءات</span><span class="sp-related__line">تصميم الإجراءات وبناء النماذج وتشغيلها وفق مهل زمنية.</span></a></li>
+          <li><a class="sp-related__link" href="../meetings/"><svg class="sp-glyph sp-related__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/></svg><span class="sp-related__code"><bdi>MMS</bdi></span><span class="sp-related__name">نظام إدارة الاجتماعات</span><span class="sp-related__line">إدارة أعمال اللجان من جدول الأعمال حتى المحضر الموقَّع.</span></a></li>
+        </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-cta" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="sp-cta__inner">
+          <h2 id="cta-title">شاهدوا منظومة <bdi>ECM+</bdi> وفق سيناريوهات المؤسسة الخاصة بكم.</h2>
+          <p>يرتّب فريقنا عرضًا تجريبيًا بالعربية أو الإنجليزية، يركّز على الأنظمة التي تهمّ مؤسستكم.</p>
+          <div class="sp-actions"><a class="btn btn--gold" href="../#contact">اطلب عرضًا تجريبيًا</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <a class="brand ecmlogo brand--footer ecmlogo--lg ecmlogo--on-dark" href="../" aria-label="ECM+ Business Suite، الصفحة الرئيسية">
+            <img class="ecmlogo__img ecmlogo__img--light" src="../../../../assets/brand/ecmplus-ai-logo-272.webp" srcset="../../../../assets/brand/ecmplus-ai-logo-272.webp 272w, ../../../../assets/brand/ecmplus-ai-logo-545.webp 545w" sizes="(max-width: 420px) 145px, 174px" width="545" height="302" alt="" loading="lazy">
+            <img class="ecmlogo__img ecmlogo__img--dark" src="../../../../assets/brand/ecmplus-ai-logo-dark-272.webp" srcset="../../../../assets/brand/ecmplus-ai-logo-dark-272.webp 272w, ../../../../assets/brand/ecmplus-ai-logo-dark-545.webp 545w" sizes="(max-width: 420px) 145px, 174px" width="545" height="302" alt="" loading="lazy">
+          </a>
+          <p class="site-footer__tagline">منظومة موحّدة لإدارة الوثائق والمراسلات والإجراءات والاجتماعات.</p>
+        </div>
+
+        <nav class="site-footer__cols" aria-label="روابط التذييل">
+          <div class="foot-col">
+            <h2 class="foot-col__title">المنظومة</h2>
+            <ul>
+              <li><a class="u-link" href="./" aria-current="page">نظام إدارة الوثائق</a></li>
+              <li><a class="u-link" href="../correspondence/">نظام إدارة المراسلات</a></li>
+              <li><a class="u-link" href="../processes/">نظام إدارة سير الإجراءات</a></li>
+              <li><a class="u-link" href="../meetings/">نظام إدارة الاجتماعات</a></li>
+              <li><a class="u-link" href="../#platform">الأمان</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h2 class="foot-col__title">القطاعات</h2>
+            <ul>
+              <li><a class="u-link" href="../#sector-government">الجهات الحكومية والبلديات</a></li>
+              <li><a class="u-link" href="../#sector-finance">البنوك والقطاع المالي</a></li>
+              <li><a class="u-link" href="../#sector-healthcare">الرعاية الصحية</a></li>
+              <li><a class="u-link" href="../#sector-education">التعليم</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h2 class="foot-col__title">الموارد</h2>
+            <ul>
+              <li><a class="u-link" href="../#resources">نظرة عامة على المنتج</a></li>
+              <li><a class="u-link" href="../#resources">دليل التكامل</a></li>
+              <li><a class="u-link" href="../#contact">اطلب عرضًا تجريبيًا</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h2 class="foot-col__title">بوابة العملاء</h2>
+            <ul>
+              <li><a class="u-link" href="/support?lang=ar">مركز الدعم</a></li>
+              <li><a class="u-link" href="/support/login?lang=ar">الدخول إلى بوابة العملاء</a></li>
+              <li><a class="u-link" href="/support/tickets/new?lang=ar">تقديم تذكرة دعم</a></li>
+              <li><a class="u-link" href="/support/tickets?lang=ar">متابعة التذاكر</a></li>
+              <li><a class="u-link" href="/support/suggestions?lang=ar">تقديم اقتراح أو شكوى</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h2 class="foot-col__title">الشركة</h2>
+            <ul>
+              <li><a class="u-link" href="../about/">عن <bdi>ECM Plus</bdi></a></li>
+              <li><a class="u-link" href="https://ctcmena.com"><bdi>CTC MENA</bdi>، الوكيل الحصري</a></li>
+              <li><a class="u-link" href="../#contact">تواصل مع فريقنا</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="site-footer__base">
+        <p class="site-footer__ctc" id="about">
+          <img src="../../../../assets/brand/ctc-logo.webp" alt="CTC MENA، الوكيل الحصري" width="44" height="44" loading="lazy" decoding="async">
+          <span><bdi>ECM Plus</bdi> شركة كندية، و<bdi>CTC MENA</bdi> وكيلها الحصري والمسؤولة عن تعريب المنتج.</span>
+        </p>
+        <p class="site-footer__legal">
+          <span>© 2026 <bdi>ECM Plus</bdi></span>
+          <a class="u-link" href="/privacy">الخصوصية</a>
+          <a class="u-link" href="/terms">الشروط</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("ecmplus-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { /* storage blocked: follow the system */ }
+    })();
+  </script>
+  <meta name="color-scheme" content="light">
+  <title>نظام إدارة المراسلات (CMS) — ECM Plus</title>
+  <meta name="description" content="تسجيل المراسلات الواردة والصادرة والداخلية بأرقام تسلسلية، وإحالتها واعتمادها وإرسالها، مع سجل كامل لكل خطوة.">
+  <link rel="canonical" href="https://ecmplus.org/correspondence/">
+  <link rel="alternate" hreflang="ar" href="https://ecmplus.org/correspondence/">
+  <link rel="alternate" hreflang="en" href="https://ecmplus.org/en/correspondence/">
+  <link rel="alternate" hreflang="x-default" href="https://ecmplus.org/correspondence/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ECM Plus">
+  <meta property="og:locale" content="ar_SA">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:url" content="https://ecmplus.org/correspondence/">
+  <meta property="og:title" content="نظام إدارة المراسلات (CMS) — ECM Plus">
+  <meta property="og:description" content="تسجيل المراسلات الواردة والصادرة والداخلية بأرقام تسلسلية، وإحالتها واعتمادها وإرسالها، مع سجل كامل لكل خطوة.">
+  <meta property="og:image" content="https://ecmplus.org/assets/brand/ecmplus-ai-logo.png">
+  <meta property="og:image:alt" content="شعار ECM+ Business Suite">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="نظام إدارة المراسلات (CMS) — ECM Plus">
+  <meta name="twitter:description" content="تسجيل المراسلات الواردة والصادرة والداخلية بأرقام تسلسلية، وإحالتها واعتمادها وإرسالها، مع سجل كامل لكل خطوة.">
+  <meta name="twitter:image" content="https://ecmplus.org/assets/brand/ecmplus-ai-logo.png">
+  <meta name="theme-color" content="#F4F6F8">
+  <link rel="icon" href="../../../assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@600;700&family=Vazirmatn:wght@400;500&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@700&text=ECM%2B%20BusinesSuit&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@600;700&family=Vazirmatn:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@700&text=ECM%2B%20BusinesSuit&display=swap">
+  </noscript>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../../../assets/brand/ecmplus-logo.css">
+  <script src="../main.js" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "الرئيسية",
+        "item": "https://ecmplus.org/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "المنظومة",
+        "item": "https://ecmplus.org/#solutions"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "المراسلات",
+        "item": "https://ecmplus.org/correspondence/"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">انتقل إلى المحتوى الرئيسي</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__bar">
+      <a class="brand ecmlogo" href="../" aria-label="ECM+ Business Suite، الصفحة الرئيسية">
+        <img class="ecmlogo__img ecmlogo__img--light" src="../../../assets/brand/ecmplus-ai-logo-272.webp" srcset="../../../assets/brand/ecmplus-ai-logo-272.webp 272w, ../../../assets/brand/ecmplus-ai-logo-545.webp 545w" sizes="(max-width: 420px) 80px, 94px" width="545" height="302" alt="">
+        <img class="ecmlogo__img ecmlogo__img--dark" src="../../../assets/brand/ecmplus-ai-logo-dark-272.webp" srcset="../../../assets/brand/ecmplus-ai-logo-dark-272.webp 272w, ../../../assets/brand/ecmplus-ai-logo-dark-545.webp 545w" sizes="(max-width: 420px) 80px, 94px" width="545" height="302" alt="" loading="lazy">
+      </a>
+
+      <a class="lang-link lang-link--bar" href="../en/correspondence/" lang="en" hreflang="en">English</a>
+      <button class="theme-toggle theme-toggle--bar" type="button" aria-pressed="false" aria-label="الوضع الداكن" title="الوضع الداكن" hidden><svg class="theme-toggle__sun" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 1.8v2M10 16.2v2M1.8 10h2M16.2 10h2M4.2 4.2l1.4 1.4M14.4 14.4l1.4 1.4M4.2 15.8l1.4-1.4M14.4 5.6l1.4-1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="theme-toggle__moon" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M16.6 12.4A7 7 0 0 1 7.6 3.4a7 7 0 1 0 9 9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mg-nav" hidden>
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+        <span class="nav-toggle__label">القائمة</span>
+      </button>
+
+      <div class="site-nav" id="mg-nav">
+        <nav class="primary-nav" aria-label="القائمة الرئيسية">
+          <ul class="primary-nav__list">
+            <li><a class="primary-nav__link" href="../#solutions">المنظومة</a></li>
+            <li><a class="primary-nav__link" href="../#platform">المنصة</a></li>
+            <li><a class="primary-nav__link" href="../#security">الأمان</a></li>
+            <li class="has-menu">
+              <a class="primary-nav__link menu-fallback" href="../#support">الدعم</a>
+              <button class="primary-nav__link menu-button" type="button" aria-expanded="false" aria-controls="mg-support-menu" hidden>
+                الدعم
+                <svg class="icon icon--chevron" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <ul class="menu" id="mg-support-menu" hidden>
+                <li><a href="/support?lang=ar">مركز الدعم</a></li>
+                <li><a href="/support/login?lang=ar">الدخول إلى بوابة العملاء</a></li>
+                <li><a href="/support/tickets/new?lang=ar">تقديم تذكرة دعم</a></li>
+                <li><a href="/support/tickets?lang=ar">متابعة التذاكر</a></li>
+                <li><a href="/support/suggestions?lang=ar">تقديم اقتراح أو شكوى</a></li>
+              </ul>
+            </li>
+            <li><a class="primary-nav__link" href="../about/">عن <bdi>ECM Plus</bdi></a></li>
+          </ul>
+        </nav>
+        <div class="utility">
+          <button class="theme-toggle theme-toggle--util" type="button" aria-pressed="false" aria-label="الوضع الداكن" title="الوضع الداكن" hidden><svg class="theme-toggle__sun" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 1.8v2M10 16.2v2M1.8 10h2M16.2 10h2M4.2 4.2l1.4 1.4M14.4 14.4l1.4 1.4M4.2 15.8l1.4-1.4M14.4 5.6l1.4-1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="theme-toggle__moon" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M16.6 12.4A7 7 0 0 1 7.6 3.4a7 7 0 1 0 9 9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
+          <a class="lang-link lang-link--util" href="../en/correspondence/" lang="en" hreflang="en">English</a>
+          <a class="utility__client" href="/support/login?lang=ar">بوابة العملاء</a>
+          <a class="btn btn--gold" href="../#contact">اطلب عرضًا تجريبيًا</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="sp sp--correspondence">
+    <section class="sp-hero" aria-labelledby="page-title">
+      <div class="wrap sp-hero__grid">
+        <div class="sp-hero__copy">
+          <nav class="sp-crumbs" aria-label="مسار التنقل"><ol><li><a href="../">الرئيسية</a></li><li><a href="../#solutions">المنظومة</a></li><li aria-current="page">المراسلات</li></ol></nav>
+          <p class="sp-eyebrow"><svg class="sp-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span><bdi>CMS</bdi> · نظام إدارة المراسلات</span></p>
+          <h1 id="page-title">تُسجَّل كل مراسلة وتُحال وتُعتمد، مع سجل كامل لكل خطوة.</h1>
+          <p class="sp-lead">تسجّل منظومة <bdi>ECM+</bdi> المراسلات الواردة والصادرة والداخلية بأرقام تسلسلية، وتحيلها إلى المختصين، وتوثّق كل خطوة حتى إغلاقها.</p>
+          <div class="sp-actions"><a class="btn btn--gold btn--lg" href="../#contact">اطلب عرضًا تجريبيًا</a><a class="btn btn--line btn--lg" href="../#solutions">استكشف المنظومة</a></div>
+        </div>
+      <div class="sp-hero__visual sp-emblem" aria-hidden="true"><span class="sp-emblem__ring"><svg class="sp-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span class="sp-emblem__code">CMS</span><span class="sp-emblem__name">نظام إدارة المراسلات</span><span class="sp-emblem__alt" lang="en" dir="ltr">Correspondence Management</span></div>
+      </div>
+    </section>
+
+    <section class="section sp-section" aria-labelledby="overview-title">
+      <div class="wrap">
+        <header class="section-head">
+          <div class="section-head__main">
+            <p class="eyebrow"><svg class="star" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M8 0l2.34 2.34h3.32v3.32L16 8l-2.34 2.34v3.32h-3.32L8 16l-2.34-2.34H2.34v-3.32L0 8l2.34-2.34V2.34h3.32z"/></svg><span>نظرة عامة</span></p>
+            <h2 id="overview-title">ضبط المراسلات الرسمية في جميع مراحلها</h2>
+          </div>
+        </header>
+        <div class="sp-prose">
+          <p>تحمل كل مراسلة رقمًا تسلسليًا ومراجع خارجية وأطرافًا وأولوية ودرجة سرية وتاريخ استحقاق ووسومًا.</p>
+          <p>وتجري المراجعة والاعتماد قبل خروج أي مراسلة من المؤسسة، ويعرض مخطط المراسلة المسار الذي سلكته.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sp-section sp-section--alt" aria-labelledby="capabilities-title">
+      <div class="wrap">
+        <header class="section-head">
+          <div class="section-head__main">
+            <p class="eyebrow"><svg class="star" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M8 0l2.34 2.34h3.32v3.32L16 8l-2.34 2.34v3.32h-3.32L8 16l-2.34-2.34H2.34v-3.32L0 8l2.34-2.34V2.34h3.32z"/></svg><span>القدرات</span></p>
+            <h2 id="capabilities-title">أبرز القدرات</h2>
+          </div>
+        </header>
+        <ul class="sp-grid">
+          <li class="sp-card"><h3 class="sp-card__title">3 اتجاهات</h3><p>مراسلات واردة وصادرة وداخلية، بأرقام تسلسلية ومراجع خارجية.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">الإحالة إلى أي جهة</h3><p>تُحال المراسلات إلى الموظفين أو المجموعات أو الإدارات أو الجهات الخارجية، بصفة «إلى» أو «نسخة» أو «نسخة مخفية».</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">تعليمات بأي صيغة</h3><p>تُرفق التعليمات نصًّا أو ملفًا أو ملاحظة صوتية أو مرئية.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">المراجعة والاعتماد</h3><p>تُرسَل المراسلة للمراجعة، ثم تُعتمد أو تُعاد قبل إرسالها.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">الإرسال الخارجي</h3><p>يطبع موظف الصادر المراسلة المعتمدة ويختمها ويرسلها.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">مخطط المراسلة</h3><p>يعرض مخطط مرئي المسار الذي سلكته كل مراسلة، مع سجل لكل خطوة.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">قواعد الإحالة</h3><p>تُحيل القواعد المراسلات تلقائيًا وفق المحفّز والشروط والمستلمين.</p></li>
+          <li class="sp-card"><h3 class="sp-card__title">صندوق البريد</h3><p>يُربط <bdi>Gmail</bdi> أو <bdi>Outlook</bdi> أو أي بريد مؤسسي بالمنظومة، وتُحفظ الرسائل ضمن مراسلة أو في الأرشيف.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section sp-section" aria-labelledby="how-title">
+      <div class="wrap">
+        <header class="section-head">
+          <div class="section-head__main">
+            <p class="eyebrow"><svg class="star" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M8 0l2.34 2.34h3.32v3.32L16 8l-2.34 2.34v3.32h-3.32L8 16l-2.34-2.34H2.34v-3.32L0 8l2.34-2.34V2.34h3.32z"/></svg><span>آلية العمل</span></p>
+            <h2 id="how-title">مسار المراسلة</h2>
+          </div>
+        </header>
+        <ol class="sp-steps">
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">01</span><h3 class="sp-step__title">التسجيل</h3><p>تحصل المراسلة على رقم تسلسلي، وتُحدَّد أطرافها وتاريخ استحقاقها.</p></li>
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">02</span><h3 class="sp-step__title">الإحالة</h3><p>تُحال إلى الموظفين أو الإدارات المختصة مع التعليمات.</p></li>
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">03</span><h3 class="sp-step__title">المراجعة</h3><p>تُراجَع المراسلة الصادرة، ثم تُعتمد أو تُعاد.</p></li>
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">04</span><h3 class="sp-step__title">الإرسال</h3><p>يطبع موظف الصادر المراسلة المعتمدة ويختمها ويرسلها.</p></li>
+          <li class="sp-step"><span class="sp-step__no" aria-hidden="true">05</span><h3 class="sp-step__title">الأرشفة</h3><p>تُغلق المراسلة وتُؤرشف مع سجلها الكامل.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section sp-section sp-section--alt" aria-labelledby="works-title">
+      <div class="wrap">
+        <header class="section-head">
+          <div class="section-head__main">
+            <p class="eyebrow"><svg class="star" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M8 0l2.34 2.34h3.32v3.32L16 8l-2.34 2.34v3.32h-3.32L8 16l-2.34-2.34H2.34v-3.32L0 8l2.34-2.34V2.34h3.32z"/></svg><span>يتكامل مع</span></p>
+            <h2 id="works-title">تكامل مع الخدمات التي تستخدمها فرقكم</h2>
+          </div>
+        </header>
+        <ul class="sp-chips">
+          <li class="sp-chip"><img class="sp-chip__logo" src="../../../assets/brands/gmail.svg" alt="" width="18" height="18" loading="lazy" decoding="async"><bdi>Gmail</bdi></li>
+          <li class="sp-chip"><img class="sp-chip__logo" src="../../../assets/brands/microsoft-outlook.svg" alt="" width="18" height="18" loading="lazy" decoding="async"><bdi>Outlook</bdi></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section sp-section" aria-labelledby="related-title">
+      <div class="wrap">
+        <header class="section-head">
+          <div class="section-head__main">
+            <p class="eyebrow"><svg class="star" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M8 0l2.34 2.34h3.32v3.32L16 8l-2.34 2.34v3.32h-3.32L8 16l-2.34-2.34H2.34v-3.32L0 8l2.34-2.34V2.34h3.32z"/></svg><span>المنظومة</span></p>
+            <h2 id="related-title">الأنظمة الأخرى</h2>
+          </div>
+        </header>
+        <ul class="sp-related">
+          <li><a class="sp-related__link" href="../documents/"><svg class="sp-glyph sp-related__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h18v4H3zM5 8v12h14V8M10 12h4"/></svg><span class="sp-related__code"><bdi>DMS</bdi></span><span class="sp-related__name">نظام إدارة الوثائق</span><span class="sp-related__line">التقاط الوثائق وتصنيفها وإدارة إصداراتها واسترجاعها.</span></a></li>
+          <li><a class="sp-related__link" href="../processes/"><svg class="sp-glyph sp-related__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8" y="2.5" width="8" height="5" rx="1.2"/><path d="M12 7.5v2M12 9.5l3 3-3 3-3-3z"/><path d="M9 12.5H5.5v4M15 12.5h3.5v4"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.2"/></svg><span class="sp-related__code"><bdi>BPM</bdi></span><span class="sp-related__name">نظام إدارة سير الإجراءات</span><span class="sp-related__line">تصميم الإجراءات وبناء النماذج وتشغيلها وفق مهل زمنية.</span></a></li>
+          <li><a class="sp-related__link" href="../meetings/"><svg class="sp-glyph sp-related__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/></svg><span class="sp-related__code"><bdi>MMS</bdi></span><span class="sp-related__name">نظام إدارة الاجتماعات</span><span class="sp-related__line">إدارة أعمال اللجان من جدول الأعمال حتى المحضر الموقَّع.</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sp-cta" aria-labelledby="cta-title">
+      <div class="wrap">
+        <div class="sp-cta__inner">
+          <h2 id="cta-title">شاهدوا منظومة <bdi>ECM+</bdi> وفق سيناريوهات المؤسسة الخاصة بكم.</h2>
+          <p>يرتّب فريقنا عرضًا تجريبيًا بالعربية أو الإنجليزية، يركّز على الأنظمة التي تهمّ مؤسستكم.</p>
+          <div class="sp-actions"><a class="btn btn--gold btn--lg" href="../#contact">اطلب عرضًا تجريبيًا</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="brand ecmlogo brand--footer ecmlogo--lg" href="../" aria-label="ECM+ Business Suite، الصفحة الرئيسية">
+            <img class="ecmlogo__img ecmlogo__img--light" src="../../../assets/brand/ecmplus-ai-logo-272.webp" srcset="../../../assets/brand/ecmplus-ai-logo-272.webp 272w, ../../../assets/brand/ecmplus-ai-logo-545.webp 545w" sizes="(max-width: 420px) 145px, 174px" width="545" height="302" alt="" loading="lazy">
+            <img class="ecmlogo__img ecmlogo__img--dark" src="../../../assets/brand/ecmplus-ai-logo-dark-272.webp" srcset="../../../assets/brand/ecmplus-ai-logo-dark-272.webp 272w, ../../../assets/brand/ecmplus-ai-logo-dark-545.webp 545w" sizes="(max-width: 420px) 145px, 174px" width="545" height="302" alt="" loading="lazy">
+          </a>
+          <p class="footer__tagline">منظومة موحّدة لإدارة الوثائق والمراسلات والإجراءات والاجتماعات.</p>
+        </div>
+
+        <nav class="footer__nav" aria-label="روابط التذييل">
+          <div class="footer__col">
+            <h2 class="footer__h">المنظومة</h2>
+            <ul>
+              <li><a href="../documents/">الوثائق</a></li>
+              <li><a href="./" aria-current="page">المراسلات</a></li>
+              <li><a href="../processes/">الإجراءات</a></li>
+              <li><a href="../meetings/">الاجتماعات</a></li>
+              <li><a href="../#security">الأمان</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2 class="footer__h">بوابة العملاء</h2>
+            <ul>
+              <li><a href="/support?lang=ar">مركز الدعم</a></li>
+              <li><a href="/support/login?lang=ar">الدخول إلى بوابة العملاء</a></li>
+              <li><a href="/support/tickets/new?lang=ar">تقديم تذكرة دعم</a></li>
+              <li><a href="/support/tickets?lang=ar">متابعة التذاكر</a></li>
+              <li><a href="/support/suggestions?lang=ar">تقديم اقتراح أو شكوى</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2 class="footer__h">الشركة</h2>
+            <ul>
+              <li><a href="https://ctcmena.com"><bdi>CTC MENA</bdi>، الوكيل الحصري</a></li>
+              <li><a href="../#contact">تواصل مع فريقنا</a></li>
+              <li><a href="/privacy">إشعار الخصوصية</a></li>
+              <li><a href="/terms">الشروط والأحكام</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer__about" id="about">
+        <img class="footer__ctc" src="../../../assets/brand/ctc-logo.webp" alt="CTC MENA، الوكيل الحصري" width="200" height="200" loading="lazy">
+        <p><bdi>ECM Plus</bdi> شركة كندية، و<bdi>CTC MENA</bdi> وكيلها الحصري والمسؤولة عن تعريب المنتج.</p>
+      </div>
+
+      <div class="footer__legal">
+        <p>© <bdi dir="ltr">2026</bdi> <bdi>ECM Plus</bdi>. جميع الحقوق محفوظة.</p>
+        <ul>
+          <li><a href="/privacy">إشعار الخصوصية</a></li>
+          <li><a href="/terms">الشروط والأحكام</a></li>
+          <li><a href="../en/correspondence/" lang="en" hreflang="en">English</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

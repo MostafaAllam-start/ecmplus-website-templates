@@ -1,7 +1,8 @@
 # ECM+ marketing website — templates
 
 Static HTML/CSS templates for the ECM Plus (ECM+) brand website. No framework: each template
-is one `index.html` per language, one `styles.css` and one small `main.js`.
+has a home page per language, five inner pages per language (Documents, Correspondence,
+Processes, Meetings and About), one `styles.css` and one small `main.js`.
 
 **Live preview:** https://mostafaallam-start.github.io/ecmplus-website-templates/
 
@@ -11,6 +12,8 @@ is one `index.html` per language, one `styles.css` and one small `main.js`.
 ├── 404.html                   "page not available" page for the preview
 ├── serve.mjs                  local preview server + /support redirect stand-in
 ├── scripts/build-pages.mjs    builds the GitHub Pages version (see "Publishing")
+├── scripts/subpages.mjs       generates the module and About pages (see "Inner pages")
+├── scripts/subpages-content.mjs   their English and Arabic copy
 ├── .github/workflows/pages.yml
 ├── assets/brand/              ECM+ AI Powered logo (ecmplus-ai-logo*, ecmplus-logo.css),
 │                              ECM+ logo (png/webp), ring.svg / ring-dark.svg, favicon.svg,
@@ -32,6 +35,9 @@ is one `index.html` per language, one `styles.css` and one small `main.js`.
     └── portico/               04 photographic: the three templates' motion on institutional photos
         ├── index.html         English
         └── ar/index.html      Arabic (rtl)
+
+Each language folder also holds documents/, correspondence/, processes/, meetings/ and about/,
+for example templates/portico/ar/meetings/index.html.
 ```
 
 | Template | Fonts | Light (default) → dark |
@@ -63,6 +69,29 @@ is one `index.html` per language, one `styles.css` and one small `main.js`.
   is always light).
 - All copy follows a formal enterprise register in both languages. Have a native Arabic speaker
   review the Arabic pages before launch.
+
+## Inner pages
+
+Every template has a detail page for each module (Documents, Correspondence, Processes and
+Meetings) and an About ECM Plus page, in both languages: 40 pages in all. They are generated:
+
+```bash
+node scripts/subpages.mjs
+```
+
+- The copy lives in `scripts/subpages-content.mjs`, one source for all four templates. Every claim
+  comes from the internal copy deck. Edit it there, then run the script again.
+- Each page reuses its template's own home page. The script copies the `<head>`, header and footer,
+  re-resolves relative links for the deeper folder, points in-page anchors back at the home page,
+  and sends the language switch to the same page in the other language. Canonical, `hreflang` and
+  Open Graph URLs follow the page, and a breadcrumb replaces the home page's structured data.
+  After changing a home page's header or footer, run the script again so the inner pages follow.
+- The page body uses each template's own section headings and buttons. The shared `.sp-*`
+  components are styled at the end of each `styles.css` through `--sp-*` tokens mapped to that
+  template's colours and fonts, so light and dark modes carry over.
+- On the home pages, links to a module or About anchor point at the new pages. The script updates
+  them, and running it again is harmless. The module cards (Portico), "Explore" links (Ink Ledger),
+  folder links (Paper Register) and "Module details" links (Majlis Grid) also open them.
 
 ## Logo
 
