@@ -1592,20 +1592,6 @@ h2:lang(ar) {
   color: var(--accent-text);
 }
 
-.meet__timer {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.meet__timer bdi {
-  font-family: var(--font-head);
-  font-weight: 600;
-  color: var(--ink);
-}
-
 .providers {
   display: flex;
   flex-wrap: wrap;
@@ -2844,7 +2830,7 @@ h2:lang(ar) {
   }
 
   /* Beside the title on wide screens; its own row here. */
-  .tile--nafath {
+  .tile--seal {
     grid-column: span 6;
   }
 
