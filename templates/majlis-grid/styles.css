@@ -1722,6 +1722,17 @@ h2:lang(ar) {
   color: var(--paper-muted);
 }
 
+/* AI search marker in the search field. */
+.search-mock__ai {
+  margin-inline-start: auto;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: 700 12px/1.4 var(--font-head);
+  letter-spacing: .04em;
+}
+
 .search-mock__hit {
   display: grid;
   gap: 6px;

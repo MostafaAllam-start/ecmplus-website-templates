@@ -959,7 +959,6 @@ html:not(.js) .theme-toggle { display: none; }
   color: var(--ink);
   white-space: nowrap;
 }
-.journey__time { font: 500 12px/1 var(--font-mono); color: var(--muted); }
 .journey__event {
   display: -webkit-box;
   overflow: hidden;
