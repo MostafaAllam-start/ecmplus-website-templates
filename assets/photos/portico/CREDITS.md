@@ -15,7 +15,6 @@ be replaced by commissioned or generated imagery with the same names and proport
 | `p03-correspondence` | Correspondence module | [White envelopes sealed with red wax](https://unsplash.com/photos/3d5VQF2prQ8) | Raymond Petrik ([@raymondpetrik](https://unsplash.com/@raymondpetrik)) |
 | `p04-process` | Process automation module | [Woman drawing a flowchart on a whiteboard](https://unsplash.com/photos/46G4xEr122c) | Beatriz Cattel ([@bicattel](https://unsplash.com/@bicattel)) |
 | `p05-boardroom` | Meetings module | [Modern conference room with long table and chairs](https://unsplash.com/photos/HRsi-QzS3zw) | Aakriti Raina ([@dmvallect](https://unsplash.com/@dmvallect)) |
-| `p06-folders` | Governance and security | [A stack of thick folders on a white surface](https://unsplash.com/photos/XN4T2PVUUgk) | Beatriz Pérez Moya ([@beatriz_perez](https://unsplash.com/@beatriz_perez)) |
 | `p07-headquarters` | Deployment | [A large glass building next to a body of water](https://unsplash.com/photos/n7T8p_a2aNo) | Bank OZK ([@bankozk](https://unsplash.com/@bankozk)) |
 | `p08-skyline` | Sectors band | [A city skyline with a river at sunrise](https://unsplash.com/photos/ySzmc-Hozsw) | Eddie Mark Blair ([@blaireddieau](https://unsplash.com/@blaireddieau)) |
 | `p09-support` | Support | [Headset near a laptop computer](https://unsplash.com/photos/BeVGrXEktIk) | Petr Macháček ([@machec](https://unsplash.com/@machec)) |
