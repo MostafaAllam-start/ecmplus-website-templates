@@ -8,6 +8,8 @@
 // on the site is mapped to the portal the same way the production controller
 // should do it (see README.md). Without SUPPORT_PORTAL_URL it serves
 // support/index.html, which explains that the controller takes over on the live site.
+// And it stands in for the demo form handler at /contact: it accepts every request
+// (nothing is stored) so the form's toast can be previewed.
 
 import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
@@ -92,6 +94,26 @@ createServer(async (req, res) => {
         return;
       }
       await send(res, join(ROOT, "support", "index.html"));
+      return;
+    }
+
+    if (url.pathname === "/contact" && req.method === "POST") {
+      req.resume(); // the body isn't needed: nothing is stored
+      if ((req.headers.accept || "").includes("application/json")) {
+        res.writeHead(200, { "Content-Type": TYPES[".json"], "Cache-Control": "no-store" });
+        res.end('{"ok":true}');
+      } else {
+        // Without JavaScript the browser posts the form itself: redirect back to
+        // the page it came from (same host only) with the outcome flag.
+        let back = "/";
+        try {
+          back = new URL(req.headers.referer || "/", url).pathname;
+        } catch {
+          // Malformed Referer: fall back to the gallery.
+        }
+        res.writeHead(303, { Location: `${back}?request=sent#contact`, "Cache-Control": "no-store" });
+        res.end();
+      }
       return;
     }
 

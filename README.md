@@ -45,7 +45,7 @@ for example templates/portico/ar/meetings/index.html.
 | Ink Ledger | Zilla Slab, IBM Plex Sans, IBM Plex Sans Arabic | ledger in daylight → ink navy with gold hairlines |
 | Paper Register | Newsreader, Source Sans 3, Amiri, Noto Naskh Arabic | warm paper with gold rules → night register |
 | Majlis Grid | Alexandria, Vazirmatn | light cards with an ECM content-network pattern and gold accents → deep navy |
-| Portico | Manrope, Readex Pro | limestone with frosted plates over photographs → basalt |
+| Portico | Manrope, Readex Pro | limestone with frosted plates over photographs and a frosted header → basalt |
 
 ## Languages and themes
 
@@ -183,6 +183,28 @@ SUPPORT_PORTAL_URL=http://localhost:3100 node serve.mjs
 Without the variable it serves `support/index.html`, a short page (English, or Arabic with
 `?lang=ar`) explaining that the controller takes over on the live site.
 
+## Demo form → `/contact` handler
+
+The demo-request forms post to `/contact` on the website's host. In Portico, `main.js` sends the
+form in the background, so the page doesn't reload or jump back to the form, and shows the
+outcome as a toast styled like the support portal's notifications (bottom-right, 4 seconds, in
+the page's language).
+
+The handler receives the form fields (`name`, `email`, `organization`, any number of `modules`,
+`message`, and a hidden `lang` of `en` or `ar`) and should:
+
+| Request | Answer |
+|---|---|
+| `Accept: application/json` (sent by `main.js`) | `200` `{ "ok": true }` once stored, or `{ "ok": false }` for invalid input |
+| A plain form post (no JavaScript) | `303` back to the form's page with `?request=sent` or `?request=invalid` |
+
+`main.js` also turns `?request=sent|invalid` into a toast and removes it from the address bar,
+so a redirect-only handler works too. Anything else (no handler, a server error, no network)
+shows a "couldn't send your request right now" toast. The support portal implements this
+handler.
+
+Locally, `serve.mjs` accepts every request without storing it, so the toast can be previewed.
+
 ## Publishing (GitHub Pages)
 
 Every push to `main` runs `.github/workflows/pages.yml`, which builds the site with
@@ -196,7 +218,8 @@ Every push to `main` runs `.github/workflows/pages.yml`, which builds the site w
 - leaves out `README.md`, `serve.mjs` and the build tooling.
 
 To build locally: `node scripts/build-pages.mjs _site`. The preview has no server, so the
-privacy and terms links show the 404 page, and the demo-request forms cannot be submitted.
+privacy and terms links show the 404 page, and the demo-request forms cannot be submitted
+(Portico shows its "couldn't send" toast).
 
 ## Before going live
 
@@ -206,7 +229,8 @@ privacy and terms links show the 404 page, and the demo-request forms cannot be 
   derived from it. The ring and `favicon.svg` are SVG renditions of the raster logo
   (`assets/brand/ecmplus-logo.png`). Swap in official vectors, including a reversed version for
   dark backgrounds, when design has them.
-- **Forms**: the demo-request forms post to `/contact` and need a handler.
+- **Forms**: the demo-request forms post to `/contact` and need a handler (see
+  [Demo form → `/contact` handler](#demo-form--contact-handler)).
 - **Integration logos**: `assets/brands/` holds the Microsoft Teams, Google Meet, Zoom, Gmail,
   Google Calendar, Google Drive, OneDrive and WhatsApp marks from the CC0 "SVG Logos" set, the
   current Microsoft Word, Excel, PowerPoint and Outlook icons from the MIT "theSVG" set, and the
