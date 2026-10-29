@@ -2078,8 +2078,6 @@ fieldset.field { display: block; }
   gap: 16px 24px;
   padding-block-start: 8px;
 }
-.demo-form__privacy { margin: 0; font-size: var(--fs-14); color: var(--muted); }
-.demo-form__privacy a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 3px; }
 
 /* ==========================================================================
    10. Footer

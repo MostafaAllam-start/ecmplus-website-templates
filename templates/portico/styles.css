@@ -1952,8 +1952,6 @@ html:not(.js) .theme-toggle { display: none; }
 .check { display: flex; align-items: center; gap: 10px; min-block-size: 40px; font-weight: 500; cursor: pointer; }
 .check input { inline-size: 18px; block-size: 18px; margin: 0; accent-color: var(--gold-text); }
 .demo-form__foot { grid-column: 1 / -1; display: grid; gap: 12px; justify-items: start; margin-block-start: 4px; }
-.demo-form__privacy { margin: 0; font-size: .875rem; color: var(--muted); }
-.demo-form__privacy a { color: var(--gold-text); }
 
 /* ==========================================================================
    Footer — a dark surface in both themes
