@@ -1926,9 +1926,13 @@ h3:lang(ar),
 @media (max-width: 959.98px) {
   .hero { min-block-size: 0; }
   .hero .scrim { background: rgba(14, 20, 32, var(--scrim-a)); }
-  .hero__grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
-  .hero__copy { max-inline-size: 640px; }
-  .hero__visual { max-inline-size: 620px; }
+  /* One column: the copy block's children join the grid, so the seal sits between the
+     lead and the buttons. */
+  .hero__grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .hero__copy { display: contents; }
+  .hero__copy > * { max-inline-size: 640px; }
+  .hero__visual { max-inline-size: 620px; margin-block-start: 32px; }
+  .hero__ctas { order: 1; }
 
   .lifecycle__grid { grid-template-columns: minmax(0, 1fr); }
   .lifecycle__head { position: static; }
