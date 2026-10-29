@@ -2569,18 +2569,58 @@ h2:lang(ar) { line-height: 1.35; }
 }
 .sp-card__title { margin: 0 0 8px; font-family: var(--sp-head); font-size: 1.0625rem; line-height: 1.35; color: var(--sp-ink); }
 .sp-card p, .sp-step p { margin: 0; font-size: .96875rem; line-height: 1.6; color: var(--sp-ink-2); }
+/* How it works: illustrated step cards; an arrow in each tile points to the next step. */
 .sp-steps {
+  --sp-steps-gap: 32px;   /* column gap on desktop, row gap when stacked */
+  --sp-step-arrow: 22px;  /* arrow glyph box */
+  --sp-step-tile: 200px;  /* illustration width in the tablet (row) layout */
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 20px;
+  gap: var(--sp-steps-gap);
   margin: 32px 0 0;
   padding: 0;
   list-style: none;
 }
-.sp-step { padding-block-start: 16px; border-block-start: 2px solid var(--sp-line-strong); }
+.sp-step { position: relative; padding-block-start: 16px; border-block-start: 2px solid var(--sp-line-strong); }
 .sp-step:first-child { border-block-start-color: var(--sp-accent); }
+.sp-step__art {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  margin-block-end: 16px;
+  border: 1px solid var(--sp-line);
+  border-radius: var(--sp-radius);
+  background: color-mix(in srgb, var(--sp-accent) 7%, var(--sp-surface));
+  color: var(--sp-ink);
+}
+.sp-step__svg { display: block; inline-size: 100%; block-size: 100%; fill: none; stroke: currentColor; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+.sp-step__svg .a { stroke: var(--sp-accent-text); }
+.sp-step__svg .g { fill: var(--sp-accent); stroke: none; }
+.sp-step__svg .t { fill: color-mix(in srgb, var(--sp-accent) 18%, transparent); }
+.sp-step__svg .p { fill: var(--sp-surface); }
+.sp-step__svg .i { fill: currentColor; stroke: none; }
+.sp-step__svg .k { fill: var(--sp-surface); stroke: var(--sp-surface); }
+.sp-step__svg .m { stroke: var(--sp-muted); }
+.sp-step__svg .d { stroke-dasharray: 2.4 2; }
+.sp-step__svg .w { stroke-width: 1.6; }
+.sp-step__svg .w2 { stroke-width: 2.4; }
+[dir="rtl"] .sp-step__svg--m { scale: -1 1; }
+/* The arrow lives in the tile so it centres on the illustration; it hangs into the gap. */
+.sp-step__next {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: calc(-1 * (var(--sp-steps-gap) + var(--sp-step-arrow)) / 2);
+  inline-size: var(--sp-step-arrow);
+  block-size: var(--sp-step-arrow);
+  margin-block: auto;
+  color: var(--sp-accent-text);
+}
+.sp-step__next svg { display: block; inline-size: 100%; block-size: 100%; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+[dir="rtl"] .sp-step__next { scale: -1 1; }
 .sp-step__no { font: 600 .8125rem/1 var(--sp-mono); color: var(--sp-accent-text); }
 .sp-step__title { margin: 10px 0 6px; font-family: var(--sp-head); font-size: 1.0625rem; line-height: 1.35; color: var(--sp-ink); }
+@media print {
+  .sp-step { break-inside: avoid; }
+}
 .sp-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 0; padding: 0; list-style: none; }
 .sp-chip {
   display: inline-flex;
@@ -2640,15 +2680,38 @@ h2:lang(ar) { line-height: 1.35; }
 .sp-cta__inner h2 { margin: 0; max-inline-size: 26ch; font-family: var(--sp-head); font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem); line-height: 1.2; color: inherit; }
 .sp-cta__inner p { margin: 14px 0 0; max-inline-size: 60ch; font-size: 1.0625rem; line-height: 1.6; color: var(--sp-cta-muted); }
 
+/* Tablet: one step per row, illustration beside the text, arrows point down. */
 @media (max-width: 1023.98px) {
-  .sp-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sp-steps { --sp-steps-gap: 44px; grid-template-columns: minmax(0, 1fr); }
+  .sp-step {
+    display: grid;
+    grid-template-columns: var(--sp-step-tile) minmax(0, 1fr);
+    grid-template-areas: "art no" "art title" "art text";
+    column-gap: 24px;
+    align-content: start;
+  }
+  .sp-step__art { position: static; grid-area: art; margin: 0; }
+  .sp-step__no { grid-area: no; align-self: end; }
+  .sp-step__title { grid-area: title; }
+  .sp-step > p { grid-area: text; }
+  .sp-steps .sp-step__next {
+    inset: auto;
+    inset-block-end: calc(-1 * (var(--sp-steps-gap) + var(--sp-step-arrow)) / 2);
+    inset-inline-start: calc((var(--sp-step-tile) - var(--sp-step-arrow)) / 2);
+    margin-block: 0;
+    rotate: 90deg;
+    scale: none;
+  }
 }
 @media (max-width: 899.98px) {
   .sp-hero__grid { grid-template-columns: minmax(0, 1fr); }
   .sp-emblem { min-block-size: 0; }
 }
 @media (max-width: 559.98px) {
-  .sp-steps { grid-template-columns: minmax(0, 1fr); }
+  /* Phone: illustration on top, arrow centred below the card. */
+  .sp-steps { --sp-step-tile: 100%; }
+  .sp-step { grid-template-columns: minmax(0, 1fr); grid-template-areas: "art" "no" "title" "text"; }
+  .sp-step__art { aspect-ratio: 5 / 2; margin-block-end: 16px; }
   .sp-partner { flex-direction: column; align-items: flex-start; }
 }
 @media (prefers-reduced-motion: reduce) {

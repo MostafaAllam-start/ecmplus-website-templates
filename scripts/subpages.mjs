@@ -16,6 +16,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { posix } from "node:path";
 import { fileURLToPath } from "node:url";
 import { GLYPHS, MODULES, PAGES, SERVICES, UI } from "./subpages-content.mjs";
+import { STEP_ART, MIRROR_IN_RTL } from "./steps-art.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url)).replace(/\\/g, "/");
 const SLUGS = [...MODULES, "about"];
@@ -24,6 +25,8 @@ const HERO_SIZES = "(min-width: 1180px) 560px, (min-width: 900px) 46vw, 100vw";
 const PHOTO_HEIGHT = { "p02-archive": 900, "p03-correspondence": 1067, "p04-process": 1067, "p05-boardroom": 1067, "p07-headquarters": 973 };
 
 const STAR = '<svg class="star" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M8 0l2.34 2.34h3.32v3.32L16 8l-2.34 2.34v3.32h-3.32L8 16l-2.34-2.34H2.34v-3.32L0 8l2.34-2.34V2.34h3.32z"/></svg>';
+// Next-step arrow inside each step's illustration tile (CSS points it per layout and direction).
+const NEXT = '<span class="sp-step__next" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>';
 
 const TEMPLATES = {
   "portico": {
@@ -160,7 +163,8 @@ ${body}
 
   const prose = (paras) => `        <div class="sp-prose">\n${paras.map((p) => `          <p>${p}</p>`).join("\n")}\n        </div>`;
   const grid = (items) => `        <ul class="sp-grid">\n${items.map(([h, p], i) => `          <li class="sp-card"${reveal(i)}><h3 class="sp-card__title">${h}</h3><p>${p}</p></li>`).join("\n")}\n        </ul>`;
-  const steps = (items) => `        <ol class="sp-steps">\n${items.map(([h, p], i) => `          <li class="sp-step"${reveal(i)}><span class="sp-step__no" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span><h3 class="sp-step__title">${h}</h3><p>${p}</p></li>`).join("\n")}\n        </ol>`;
+  const art = (i, last) => `<div class="sp-step__art"><svg class="sp-step__svg${MIRROR_IN_RTL[slug]?.includes(i) ? " sp-step__svg--m" : ""}" viewBox="0 0 120 80" aria-hidden="true" focusable="false">${STEP_ART[slug][i]}</svg>${last ? "" : NEXT}</div>`;
+  const steps = (items) => `        <ol class="sp-steps">\n${items.map(([h, p], i) => `          <li class="sp-step"${reveal(i)}>${art(i, i === items.length - 1)}<span class="sp-step__no" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span><h3 class="sp-step__title">${h}</h3><p>${p}</p></li>`).join("\n")}\n        </ol>`;
   const chips = (keys) => `        <ul class="sp-chips">\n${keys.map((k) => {
     const s = SERVICES[k];
     let mark = '<span class="sp-chip__dot" aria-hidden="true"></span>';

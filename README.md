@@ -85,6 +85,9 @@ node scripts/subpages.mjs
 
 - The copy lives in `scripts/subpages-content.mjs`, one source for all four templates. Every claim
   comes from the internal copy deck. Edit it there, then run the script again.
+- Each "How it works" step has a line illustration from `scripts/steps-art.mjs` (inline SVG,
+  coloured by the template's gold and ink) and an arrow to the next step: across the row on desktop,
+  pointing down when the steps stack on tablets and phones, mirrored in Arabic.
 - Each page reuses its template's own home page. The script copies the `<head>`, header and footer,
   re-resolves relative links for the deeper folder, points in-page anchors back at the home page,
   and sends the language switch to the same page in the other language. Canonical, `hreflang` and
