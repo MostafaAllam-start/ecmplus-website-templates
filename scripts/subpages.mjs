@@ -15,7 +15,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { posix } from "node:path";
 import { fileURLToPath } from "node:url";
-import { CTA_GLYPHS, GLYPHS, MODULES, PAGES, SERVICES, UI } from "./subpages-content.mjs";
+import { GLYPHS, MODULES, PAGES, SERVICES, UI } from "./subpages-content.mjs";
 import { STEP_ART, MIRROR_IN_RTL } from "./steps-art.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url)).replace(/\\/g, "/");
@@ -27,8 +27,8 @@ const PHOTO_HEIGHT = { "p02-archive": 900, "p03-correspondence": 1067, "p04-proc
 const STAR = '<svg class="star" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M8 0l2.34 2.34h3.32v3.32L16 8l-2.34 2.34v3.32h-3.32L8 16l-2.34-2.34H2.34v-3.32L0 8l2.34-2.34V2.34h3.32z"/></svg>';
 // Next-step arrow inside each step's illustration tile (CSS points it per layout and direction).
 const NEXT = '<span class="sp-step__next" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>';
-// ECM+ swoosh ring (geometry of assets/brand/ring.svg) drawn in the closing panel's own gold and ink; CSS colours the stops.
-const CTA_RING = `<svg class="sp-cta__ring" viewBox="0 0 200 116" aria-hidden="true" focusable="false"><defs><linearGradient id="sp-cta-t" x1="0" y1="0" x2="1" y2="0"><stop class="g1" offset="0"/><stop class="g2" offset=".38"/><stop class="i2" offset=".78"/><stop class="i1" offset="1"/></linearGradient><linearGradient id="sp-cta-b" x1="0" y1="0" x2="1" y2="0"><stop class="i1" offset="0"/><stop class="i2" offset=".32"/><stop class="g2" offset=".68"/><stop class="g1" offset="1"/></linearGradient><mask id="sp-cta-m" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="116"><rect width="200" height="116" fill="#000"/><ellipse cx="100" cy="58" rx="98" ry="55" fill="#fff" transform="rotate(-5 100 58)"/><ellipse cx="100" cy="58" rx="88" ry="44" fill="#000" transform="rotate(4 100 58)"/><polygon points="0,83 200,18.2 200,21.8 0,86.6" fill="#000"/></mask></defs><g mask="url(#sp-cta-m)"><polygon points="0,0 200,0 200,20 0,84.8" fill="url(#sp-cta-t)"/><polygon points="0,84.8 200,20 200,116 0,116" fill="url(#sp-cta-b)"/></g></svg>`;
+// File icon inside the closing panel's app-window mock (CSS strokes it in the window's dim ink).
+const CTA_FILE = '<svg class="sp-cta__file" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5"/></svg>';
 
 const TEMPLATES = {
   "portico": {
@@ -129,6 +129,29 @@ function svgGlyph(slug, cls = "sp-glyph") {
   return `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${GLYPHS[slug]}</svg>`;
 }
 
+// Decorative ECM+ window beside the closing panel's copy: module sidebar (first item
+// active), three stat tiles, three list rows with a status chip, and a progress stepper.
+// Labels come from UI.*.ctaApp; CSS tilts it and mirrors it for RTL.
+function ctaWindow(ui) {
+  const nav = ui.ctaApp.nav.map((n, i) => `<li${i === 0 ? ' class="is-on"' : ""}>${n}</li>`).join("");
+  const rows = ui.ctaApp.rows.map(([title, status, tone]) => `                <li>${CTA_FILE}<span class="sp-cta__row-title">${title}</span><span class="sp-cta__chip${tone ? ` sp-cta__chip--${tone}` : ""}">${status}</span></li>`).join("\n");
+  return `<div class="sp-cta__app" aria-hidden="true">
+            <div class="sp-cta__win">
+              <div class="sp-cta__bar"><span class="sp-cta__dots"><span></span><span></span><span></span></span><bdi class="sp-cta__brand">ECM+</bdi></div>
+              <div class="sp-cta__body">
+                <ul class="sp-cta__nav">${nav}</ul>
+                <div class="sp-cta__main">
+                  <div class="sp-cta__tiles"><span></span><span></span><span></span></div>
+                  <ul class="sp-cta__rows">
+${rows}
+                  </ul>
+                  <div class="sp-cta__stepper"><span class="is-done"></span><span class="is-done"></span><span class="is-now"></span><span></span></div>
+                </div>
+              </div>
+            </div>
+          </div>`;
+}
+
 function buildMain(tName, tpl, lang, slug, ctx) {
   const ui = UI[lang];
   const page = PAGES[slug];
@@ -217,23 +240,16 @@ ${visual}
   const ctaSecond = slug === "about"
     ? `<a class="${tpl.btn2} sp-cta__ghost" href="/support${lang === "ar" ? "?lang=ar" : ""}">${ui.supportCentre}</a>`
     : `<a class="${tpl.btn2} sp-cta__ghost" href="${home}#${tpl.suiteAnchor}">${ui.explore}</a>`;
-  const ctaFacts = ui.ctaFacts.map(([g, h, p]) => `            <li><svg class="sp-glyph sp-cta__glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${CTA_GLYPHS[g]}</svg><span><strong>${h}</strong>${p}</span></li>`).join("\n");
   const cta = `    <section class="sp-cta" aria-labelledby="cta-title">
       <div class="${W}">
         <div class="sp-cta__inner">
-          ${CTA_RING}
           <div class="sp-cta__copy">
             <p class="sp-cta__eyebrow"><span class="sp-cta__mark" aria-hidden="true"></span><span>${ui.ctaEyebrow}</span></p>
             <h2 id="cta-title">${ui.ctaTitle}</h2>
             <p class="sp-cta__text">${ui.ctaText}</p>
             <div class="sp-actions sp-cta__actions"><a class="${tpl.btn1}" href="${home}#contact">${ui.demo}</a>${ctaSecond}</div>
           </div>
-          <div class="sp-cta__brief">
-            <p class="sp-cta__brief-title">${ui.ctaBriefTitle}</p>
-            <ul class="sp-cta__facts">
-${ctaFacts}
-            </ul>
-          </div>
+          ${ctaWindow(ui)}
         </div>
       </div>
     </section>`;
