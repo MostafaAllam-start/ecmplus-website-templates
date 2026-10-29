@@ -2454,12 +2454,14 @@ h2:lang(ar) { line-height: 1.35; }
   --sp-body: var(--font-body);
   --sp-mono: var(--font-mono);
   --sp-chip: var(--surface);
-  /* The closing panel is dark in both themes (fixed grounds, not theme tokens). */
-  --sp-cta-bg: #111B2E;
-  --sp-cta-bg-2: #1E2C4A;
-  --sp-cta-ink: var(--band-btn-ink);
-  --sp-cta-muted: color-mix(in srgb, var(--band-btn-ink) 82%, transparent);
+  /* Closing panel: a white card in the light theme; the dark navy ground is set under
+     :root[data-theme="dark"] beside .sp-steps below. */
+  --sp-cta-bg: var(--surface);
+  --sp-cta-bg-2: color-mix(in srgb, var(--gold-fill) 9%, var(--surface));
+  --sp-cta-ink: var(--ink);
+  --sp-cta-muted: var(--ink-2);
   --sp-cta-accent: var(--gold-fill);
+  --sp-cta-accent-text: var(--accent);
   --sp-plate: var(--logo-plate);
   --sp-emblem-bg: var(--surface);
   --sp-emblem-line: var(--line);
@@ -2638,6 +2640,12 @@ h2:lang(ar) { line-height: 1.35; }
     --sp-il-sec: #3F6BAB;  --sp-il-sec-l: #9DBDEA;
     --sp-il-dev: #3A3833;  --sp-il-dev-l: #B5AFA3;
   }
+  :root[data-theme="dark"] .sp {
+    --sp-cta-bg: #111B2E;
+    --sp-cta-bg-2: #1E2C4A;
+    --sp-cta-ink: var(--band-btn-ink);
+    --sp-cta-muted: color-mix(in srgb, var(--band-btn-ink) 82%, transparent);
+  }
 }
 [dir="rtl"] .sp-step__svg--m { scale: -1 1; }
 /* The arrow lives in the tile so it centres on the illustration; it hangs into the gap. */
@@ -2706,22 +2714,32 @@ h2:lang(ar) { line-height: 1.35; }
 .sp-support { display: grid; gap: 18px; max-inline-size: 72ch; margin-block-start: 24px; }
 .sp-links { display: flex; flex-wrap: wrap; gap: 10px 24px; margin: 0; padding: 0; list-style: none; }
 .sp-links a { font-weight: 600; color: var(--sp-accent-text); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
-/* Closing panel: copy and actions beside a decorative ECM+ app window, on a deep
-   navy-to-graphite ground with a gold glow behind the window. The panel is dark in
-   every template and theme: it reads --sp-cta-bg/--sp-cta-bg-2 (the gradient's ends),
-   --sp-cta-ink/muted (light text) and --sp-cta-accent (a bright gold). The window is
-   drawn in em units and its font-size follows the column (cqi), so it scales as one
-   piece instead of reflowing. */
+/* Closing panel: copy and actions beside a decorative ECM+ app window. Light theme: a
+   white card with a warm gold glow behind the window, dark ink text and a light app
+   window. Dark theme: a deep navy-to-graphite ground, light text and a dark window.
+   Each template's .sp map supplies the palette (--sp-cta-bg/--sp-cta-bg-2 for the
+   gradient's ends, --sp-cta-ink/muted for the text, --sp-cta-accent for the bright gold
+   fills and --sp-cta-accent-text for gold that must read as text) and switches the
+   grounds under :root[data-theme="dark"]. Everything that differs only in kind between
+   the themes (shadows, the deep stop, the window's greys and chip tones) is derived here:
+   light by default, dark in the override at the end of the block. The window is drawn in
+   em units and its font-size follows the column (cqi), so it scales as one piece instead
+   of reflowing. */
 .sp-cta { padding-block: clamp(48px, 6vw, 88px); }
 .sp-cta__inner {
   --sp-cta-glow-x: 100%;
   --sp-cta-angle: 160deg;
   --sp-cta-run: to right;
   --sp-cta-tilt: -7deg;
-  /* Small gold text leans towards the ink so it clears 4.5:1 on the dark ground. */
-  --sp-cta-gold: color-mix(in srgb, var(--sp-cta-accent) 80%, var(--sp-cta-ink));
+  /* Small gold text and the focus ring use the template's text-safe gold (>= 4.5:1). */
+  --sp-cta-gold: var(--sp-cta-accent-text);
+  --sp-cta-focus: var(--sp-cta-accent-text);
   --sp-cta-hair: color-mix(in srgb, var(--sp-cta-ink) 14%, transparent);
-  --sp-cta-deep: color-mix(in srgb, var(--sp-cta-bg) 70%, #000);
+  --sp-cta-deep: color-mix(in srgb, var(--sp-cta-bg) 95%, var(--sp-cta-ink));
+  --sp-cta-edge: rgba(255, 255, 255, .8);
+  --sp-cta-shadow: 0 32px 64px -40px color-mix(in srgb, var(--sp-cta-ink) 32%, transparent);
+  --sp-cta-ghost-line: color-mix(in srgb, var(--sp-cta-ink) 55%, transparent);
+  --sp-cta-glow: 38%;
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
@@ -2735,11 +2753,11 @@ h2:lang(ar) { line-height: 1.35; }
     radial-gradient(58% 120% at var(--sp-cta-glow-x) 55%, color-mix(in srgb, var(--sp-cta-accent) 17%, transparent), transparent 70%),
     radial-gradient(45% 70% at calc(100% - var(--sp-cta-glow-x)) 0%, color-mix(in srgb, var(--sp-cta-ink) 6%, transparent), transparent 65%),
     linear-gradient(var(--sp-cta-angle), var(--sp-cta-bg-2) 0%, var(--sp-cta-bg) 50%, var(--sp-cta-deep) 100%);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--sp-cta-ink) 9%, transparent), 0 36px 72px -44px rgba(0, 0, 0, .6);
+  box-shadow: inset 0 1px 0 var(--sp-cta-edge), var(--sp-cta-shadow);
   color: var(--sp-cta-ink);
 }
 [dir="rtl"] .sp-cta__inner { --sp-cta-glow-x: 0%; --sp-cta-angle: 200deg; --sp-cta-run: to left; --sp-cta-tilt: 7deg; }
-.sp-cta__inner :focus-visible { outline-color: var(--sp-cta-accent); }
+.sp-cta__inner :focus-visible { outline-color: var(--sp-cta-focus); }
 .sp-cta__copy { position: relative; }
 .sp-cta__eyebrow {
   display: inline-flex;
@@ -2755,8 +2773,8 @@ h2:lang(ar) { line-height: 1.35; }
 .sp-cta__mark { flex: none; inline-size: 10px; block-size: 10px; border: 2px solid currentColor; border-radius: 50%; }
 .sp-cta__inner h2 { margin: 0; max-inline-size: 26ch; font-family: var(--sp-head); font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem); line-height: 1.2; color: inherit; text-wrap: balance; }
 .sp-cta__text { margin: 14px 0 0; max-inline-size: 52ch; font-size: 1.0625rem; line-height: 1.6; color: var(--sp-cta-muted); text-wrap: pretty; }
-/* The template's secondary button, recoloured for the dark ground. */
-.sp-cta .sp-cta__ghost { background: transparent; color: var(--sp-cta-ink); border-color: color-mix(in srgb, var(--sp-cta-ink) 42%, transparent); }
+/* The template's secondary button, recoloured for the panel's ground. */
+.sp-cta .sp-cta__ghost { background: transparent; color: var(--sp-cta-ink); border-color: var(--sp-cta-ghost-line); }
 .sp-cta .sp-cta__ghost:hover { color: var(--sp-cta-ink); border-color: var(--sp-cta-ink); background: color-mix(in srgb, var(--sp-cta-ink) 8%, transparent); box-shadow: none; }
 /* The app window: tilted a little towards the viewer, gold glow behind it. */
 .sp-cta__app { position: relative; container-type: inline-size; inline-size: 100%; max-inline-size: 520px; justify-self: center; }
@@ -2764,17 +2782,20 @@ h2:lang(ar) { line-height: 1.35; }
   content: "";
   position: absolute;
   inset: -14% -8%;
-  background: radial-gradient(52% 52% at 50% 54%, color-mix(in srgb, var(--sp-cta-accent) 46%, transparent), transparent 72%);
+  background: radial-gradient(52% 52% at 50% 54%, color-mix(in srgb, var(--sp-cta-accent) var(--sp-cta-glow), transparent), transparent 72%);
   pointer-events: none;
 }
 .sp-cta__win {
-  --w-bg: color-mix(in srgb, var(--sp-cta-deep) 86%, #000);
+  --w-bg: var(--sp-cta-bg);
   --w-sur: color-mix(in srgb, var(--sp-cta-ink) 8%, var(--w-bg));
   --w-sur-2: color-mix(in srgb, var(--sp-cta-ink) 15%, var(--w-bg));
   --w-line: color-mix(in srgb, var(--sp-cta-ink) 11%, transparent);
   --w-text: color-mix(in srgb, var(--sp-cta-ink) 88%, transparent);
-  --w-dim: color-mix(in srgb, var(--sp-cta-ink) 52%, transparent);
-  --w-ok: #5CD39B;
+  --w-dim: color-mix(in srgb, var(--sp-cta-ink) 66%, transparent);
+  --w-gold: var(--sp-cta-accent-text);
+  --w-ok: #0B5D35;
+  --w-shade: color-mix(in srgb, var(--sp-cta-ink) 32%, transparent);
+  --w-edge: color-mix(in srgb, var(--sp-cta-ink) 8%, transparent);
   position: relative;
   overflow: hidden;
   font: 500 12px/1.25 var(--sp-body);
@@ -2783,7 +2804,7 @@ h2:lang(ar) { line-height: 1.35; }
   border: 1px solid var(--w-line);
   border-radius: 1em;
   background: var(--w-bg);
-  box-shadow: 0 2.4em 4.8em -2em rgba(0, 0, 0, .75), 0 0 0 1px rgba(0, 0, 0, .35);
+  box-shadow: 0 2.4em 4.8em -2em var(--w-shade), 0 0 0 1px var(--w-edge);
   transform: perspective(1100px) rotateY(var(--sp-cta-tilt)) rotateX(2deg);
 }
 .sp-cta__bar { display: flex; align-items: center; gap: .9em; padding: .75em 1.1em; border-block-end: 1px solid var(--w-line); background: var(--w-sur); }
@@ -2793,7 +2814,7 @@ h2:lang(ar) { line-height: 1.35; }
 .sp-cta__body { display: grid; grid-template-columns: 9.4em minmax(0, 1fr); }
 .sp-cta__nav { display: grid; align-content: start; gap: .25em; margin: 0; padding: .9em .6em; list-style: none; border-inline-end: 1px solid var(--w-line); background: color-mix(in srgb, var(--sp-cta-ink) 3%, var(--w-bg)); }
 .sp-cta__nav li { overflow: hidden; padding: .5em .6em; border-radius: .45em; font-size: .88em; white-space: nowrap; text-overflow: ellipsis; color: var(--w-dim); }
-.sp-cta__nav li.is-on { font-weight: 600; color: var(--sp-cta-accent); background: color-mix(in srgb, var(--sp-cta-accent) 16%, transparent); }
+.sp-cta__nav li.is-on { font-weight: 600; color: var(--w-gold); background: color-mix(in srgb, var(--sp-cta-accent) 16%, transparent); }
 .sp-cta__main { display: grid; gap: .8em; min-inline-size: 0; padding: 1em; }
 .sp-cta__tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6em; }
 .sp-cta__tiles span { display: grid; gap: .55em; padding: .8em .9em; border-radius: .55em; background: var(--w-sur); }
@@ -2806,7 +2827,7 @@ h2:lang(ar) { line-height: 1.35; }
 .sp-cta__file { flex: none; inline-size: 1.25em; block-size: 1.25em; fill: none; stroke: var(--w-dim); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .sp-cta__row-title { flex: 1 1 auto; min-inline-size: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .sp-cta__chip { flex: none; padding: .3em .7em; border-radius: 999px; font-size: .84em; font-weight: 600; white-space: nowrap; color: var(--w-text); background: var(--w-sur-2); }
-.sp-cta__chip--gold { color: var(--sp-cta-accent); background: color-mix(in srgb, var(--sp-cta-accent) 18%, transparent); }
+.sp-cta__chip--gold { color: var(--w-gold); background: color-mix(in srgb, var(--sp-cta-accent) 18%, transparent); }
 .sp-cta__chip--ok { color: var(--w-ok); background: color-mix(in srgb, var(--w-ok) 16%, transparent); }
 .sp-cta__stepper { position: relative; display: flex; align-items: center; justify-content: space-between; margin-block-start: .2em; padding-inline: .3em; }
 .sp-cta__stepper::before { content: ""; position: absolute; inset-inline: .8em; inset-block-start: 50%; block-size: .15em; translate: 0 -50%; background: linear-gradient(var(--sp-cta-run), var(--sp-cta-accent) 0 66.6%, var(--w-dim) 66.6%); }
@@ -2821,6 +2842,27 @@ h2:lang(ar) { line-height: 1.35; }
 @keyframes sp-cta-pulse {
   from { box-shadow: 0 0 0 .12em color-mix(in srgb, var(--sp-cta-accent) 45%, transparent); }
   to { box-shadow: 0 0 0 .75em color-mix(in srgb, var(--sp-cta-accent) 0%, transparent); }
+}
+/* Dark theme: the ground is deep (the template's .sp map sets the navy), gold text leans
+   towards the ink to clear 4.5:1, the window turns dark with light greys and brighter chips. */
+@media screen {
+  :root[data-theme="dark"] .sp-cta__inner {
+    --sp-cta-gold: color-mix(in srgb, var(--sp-cta-accent) 80%, var(--sp-cta-ink));
+    --sp-cta-focus: var(--sp-cta-accent);
+    --sp-cta-deep: color-mix(in srgb, var(--sp-cta-bg) 70%, #000);
+    --sp-cta-edge: color-mix(in srgb, var(--sp-cta-ink) 9%, transparent);
+    --sp-cta-shadow: 0 36px 72px -44px rgba(0, 0, 0, .6);
+    --sp-cta-ghost-line: color-mix(in srgb, var(--sp-cta-ink) 42%, transparent);
+    --sp-cta-glow: 46%;
+  }
+  :root[data-theme="dark"] .sp-cta__win {
+    --w-bg: color-mix(in srgb, var(--sp-cta-deep) 86%, #000);
+    --w-dim: color-mix(in srgb, var(--sp-cta-ink) 52%, transparent);
+    --w-gold: var(--sp-cta-accent);
+    --w-ok: #5CD39B;
+    --w-shade: rgba(0, 0, 0, .75);
+    --w-edge: rgba(0, 0, 0, .35);
+  }
 }
 /* Narrow column (tablet two-up, phones): the sidebar becomes a tab strip above the list. */
 @container (max-width: 380px) {
@@ -2868,7 +2910,7 @@ h2:lang(ar) { line-height: 1.35; }
   .sp-partner { flex-direction: column; align-items: flex-start; }
   .sp-cta__inner { padding: 24px 20px 28px; }
   .sp-cta__actions > .btn { flex: 1 1 auto; }
-  .sp-cta__win { box-shadow: 0 1.2em 2.4em -1.2em rgba(0, 0, 0, .75), 0 0 0 1px rgba(0, 0, 0, .35); }
+  .sp-cta__win { box-shadow: 0 1.2em 2.4em -1.2em var(--w-shade), 0 0 0 1px var(--w-edge); }
 }
 @media (prefers-reduced-motion: reduce) {
   .sp-related__link { transition: none; }
