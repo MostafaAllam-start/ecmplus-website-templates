@@ -2030,7 +2030,7 @@ fieldset.field { display: block; }
 .field label,
 .field legend { padding: 0; font-size: var(--fs-14); font-weight: 500; color: var(--ink); }
 .field legend { margin-block-end: 8px; }
-.field__req { margin-inline-start: 4px; font-weight: 400; color: var(--muted); }
+.field__req { font-weight: 700; color: var(--accent); }
 .field input,
 .field textarea {
   inline-size: 100%;

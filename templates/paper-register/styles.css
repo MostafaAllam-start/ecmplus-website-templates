@@ -1642,6 +1642,7 @@ a.u-link:focus-visible,
   color: var(--on-dark-muted);
   font-weight: 400;
 }
+.field__req { color: var(--gold); font-weight: 700; }
 .field input,
 .field textarea {
   width: 100%;

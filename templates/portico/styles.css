@@ -1929,7 +1929,7 @@ html:not(.js) .theme-toggle { display: none; }
 .field--full { grid-column: 1 / -1; }
 .field label,
 .field legend { padding: 0; font-weight: 600; font-size: .9375rem; color: var(--ink); }
-.field__req { font-weight: 400; color: var(--muted); }
+.field__req { font-weight: 700; color: var(--gold-text); }
 .field input,
 .field textarea {
   inline-size: 100%;

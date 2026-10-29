@@ -746,19 +746,19 @@
 
           <form class="demo-form" id="demo-form" action="/contact" method="post" aria-labelledby="demo-form-title" aria-describedby="demo-form-hint">
             <h3 class="demo-form__h" id="demo-form-title">Request a demo</h3>
-            <p class="demo-form__hint" id="demo-form-hint">Fields marked “required” must be completed.</p>
+            <p class="demo-form__hint" id="demo-form-hint">Fields marked * are required.</p>
 
             <div class="field">
-              <label for="demo-name">Full name <span class="field__req">(required)</span></label>
+              <label for="demo-name">Full name <span class="field__req" aria-hidden="true">*</span></label>
               <input id="demo-name" name="name" type="text" autocomplete="name" required>
             </div>
             <div class="field">
-              <label for="demo-email">Work email <span class="field__req">(required)</span></label>
+              <label for="demo-email">Email <span class="field__req" aria-hidden="true">*</span></label>
               <input id="demo-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="demo-email-hint">
               <p class="field__hint" id="demo-email-hint">Please use your organization’s email address.</p>
             </div>
             <div class="field field--full">
-              <label for="demo-org">Organization <span class="field__req">(required)</span></label>
+              <label for="demo-org">Organization <span class="field__req" aria-hidden="true">*</span></label>
               <input id="demo-org" name="organization" type="text" autocomplete="organization" required>
             </div>
 

@@ -604,16 +604,16 @@
           <form class="form" action="/contact" method="post">
             <input type="hidden" name="lang" value="ar">
             <div class="field">
-              <label for="f-name">الاسم الكامل <span class="field__req">(مطلوب)</span></label>
+              <label for="f-name">الاسم الكامل <span class="field__req" aria-hidden="true">*</span></label>
               <input id="f-name" name="name" type="text" autocomplete="name" required>
             </div>
             <div class="field">
-              <label for="f-email">البريد الإلكتروني الرسمي <span class="field__req">(مطلوب)</span></label>
+              <label for="f-email">البريد الإلكتروني <span class="field__req" aria-hidden="true">*</span></label>
               <input id="f-email" name="email" type="email" dir="ltr" autocomplete="email" inputmode="email" required aria-describedby="f-email-hint">
               <p class="field__hint" id="f-email-hint">سيردّ فريقنا على هذا العنوان.</p>
             </div>
             <div class="field field--wide">
-              <label for="f-org">الجهة <span class="field__req">(مطلوب)</span></label>
+              <label for="f-org">الجهة <span class="field__req" aria-hidden="true">*</span></label>
               <input id="f-org" name="organization" type="text" autocomplete="organization" required>
             </div>
             <div class="field field--wide">

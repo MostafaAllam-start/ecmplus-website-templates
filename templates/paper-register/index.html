@@ -603,16 +603,16 @@
 
           <form class="form" action="/contact" method="post">
             <div class="field">
-              <label for="f-name">Full name <span class="field__req">(required)</span></label>
+              <label for="f-name">Full name <span class="field__req" aria-hidden="true">*</span></label>
               <input id="f-name" name="name" type="text" autocomplete="name" required>
             </div>
             <div class="field">
-              <label for="f-email">Work email <span class="field__req">(required)</span></label>
+              <label for="f-email">Email <span class="field__req" aria-hidden="true">*</span></label>
               <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="f-email-hint">
               <p class="field__hint" id="f-email-hint">Our team will reply to this address.</p>
             </div>
             <div class="field field--wide">
-              <label for="f-org">Organization <span class="field__req">(required)</span></label>
+              <label for="f-org">Organization <span class="field__req" aria-hidden="true">*</span></label>
               <input id="f-org" name="organization" type="text" autocomplete="organization" required>
             </div>
             <div class="field field--wide">
