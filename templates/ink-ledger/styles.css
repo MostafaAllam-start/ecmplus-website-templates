@@ -2014,7 +2014,6 @@ html:not(.js) .scenario + .scenario {
   border-block-start: 1px solid var(--accent);
 }
 .demo-form__h { grid-column: 1 / -1; font-size: var(--fs-28); line-height: 1.2; }
-.demo-form__hint { grid-column: 1 / -1; margin: -8px 0 4px; font-size: var(--fs-14); color: var(--muted); }
 
 .field { display: grid; gap: 8px; align-content: start; min-inline-size: 0; margin: 0; padding: 0; border: 0; }
 fieldset.field { display: block; }

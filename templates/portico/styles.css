@@ -1905,7 +1905,6 @@ html:not(.js) .theme-toggle { display: none; }
   border-radius: var(--r-card);
 }
 .demo-form__h { grid-column: 1 / -1; font-size: 1.375rem; }
-.demo-form__hint { grid-column: 1 / -1; margin: -10px 0 0; font-size: .875rem; color: var(--muted); }
 .field { display: grid; gap: 6px; align-content: start; min-inline-size: 0; margin: 0; padding: 0; border: 0; }
 .field--full { grid-column: 1 / -1; }
 .field label,
