@@ -78,9 +78,6 @@
   --mask-a: #C3CAD3;
   --mask-b: #D5DAE1;
   --escalate-bg: #FFF6DC;
-  --nafath-bg: #FFFFFF;
-  --nafath-border: #DDE2E8;
-  --nafath-ink: #0E1B2B;
   --nafath-muted: #4A5565;
   --nafath-focus: #894B00;
   --nafath-chip-line: #0E1B2B;
@@ -172,9 +169,6 @@
     --mask-a: #33445E;
     --mask-b: #2A3950;
     --escalate-bg: rgba(240, 177, 0, .12);
-    --nafath-bg: #16233A;
-    --nafath-border: #2A3B57;
-    --nafath-ink: #F3F4F6;
     --nafath-muted: #A3ADBD;
     --nafath-focus: #F0B100;
     --nafath-chip-line: #C9D1DC;
@@ -1051,11 +1045,9 @@ h2:lang(ar) {
   animation: mg-sweep 6s linear infinite;
 }
 
+/* Same surface as the other fact tiles, such as meetings. */
 .tile--nafath {
   --focus: var(--nafath-focus);
-  border-color: var(--nafath-border);
-  background: var(--nafath-bg);
-  color: var(--nafath-ink);
 }
 
 .tile__label {
@@ -1194,95 +1186,6 @@ h2:lang(ar) {
   color: var(--on-dark-soft);
 }
 
-/* Dual date */
-.tile--date {
-  gap: 14px;
-}
-
-.date__head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 4px 12px;
-}
-
-.date__weekday {
-  font-family: var(--font-head);
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--accent-text);
-}
-
-.date__pair {
-  display: grid;
-  flex: 1;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  gap: 16px;
-}
-
-.date__cal {
-  display: grid;
-  align-content: start;
-  gap: 6px;
-}
-
-.date__label {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--muted);
-}
-
-.date__value {
-  display: grid;
-  gap: 2px;
-}
-
-.date__day {
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: clamp(40px, 3.9vw, 54px);
-  line-height: 1.05;
-  font-variant-numeric: tabular-nums;
-}
-
-.date__month {
-  font-family: var(--font-head);
-  font-weight: 600;
-  font-size: 17px;
-  line-height: 1.45;
-}
-
-.date__year {
-  font-size: 14.5px;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-
-.date__divider {
-  position: relative;
-  display: grid;
-  place-items: center;
-  inline-size: 16px;
-}
-
-.date__divider::before {
-  content: "";
-  position: absolute;
-  inset-block: 0;
-  inset-inline-start: 7.5px;
-  border-inline-start: 1px solid var(--line);
-}
-
-.date__divider svg {
-  position: relative;
-  box-sizing: content-box;
-  padding-block: 6px;
-  background: var(--surface);
-  fill: var(--accent);
-}
-
-/* Nafath: a plain card with a gold-ringed match number */
 .tile--nafath {
   gap: 16px;
 }
@@ -2940,6 +2843,11 @@ h2:lang(ar) {
     grid-column: span 3;
   }
 
+  /* Beside the title on wide screens; its own row here. */
+  .tile--nafath {
+    grid-column: span 6;
+  }
+
   .t-6,
   .t-8,
   .t-12 {
@@ -3109,7 +3017,6 @@ h2:lang(ar) {
 
 /* The flip: shared names let the hero bento glide to its mirrored slots. */
 .tile--title { view-transition-name: mg-title; }
-.tile--date { view-transition-name: mg-date; }
 .tile--nafath { view-transition-name: mg-nafath; }
 .tile--seal { view-transition-name: mg-seal; }
 .tile--otp { view-transition-name: mg-otp; }

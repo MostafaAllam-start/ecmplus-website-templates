@@ -1,64 +1,12 @@
 /* ECM+ · Majlis Grid — shared by the Arabic and English pages.
    Everything here is an enhancement: without it the page still reads in full
-   (static date, nav as a wrapped list, Support as an in-page link). */
+   (nav as a wrapped list, Support as an in-page link). */
 (function () {
   "use strict";
 
   var root = document.documentElement;
   var isArabic = root.lang === "ar";
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* ---------- Dual date: Hijri (Umm al-Qura) + Gregorian, Western digits ---------- */
-  var HIJRI_LOCALE = isArabic ? "ar-SA-u-ca-islamic-umalqura-nu-latn" : "en-GB-u-ca-islamic-umalqura-nu-latn";
-  var GREGORIAN_LOCALE = isArabic ? "ar-SA-u-ca-gregory-nu-latn" : "en-GB-u-ca-gregory-nu-latn";
-
-  function pad(n) {
-    return (n < 10 ? "0" : "") + n;
-  }
-
-  // Returns the date parts, or null when the engine can't do this calendar.
-  function dateParts(locale, date) {
-    var format = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric" });
-    var wanted = locale.indexOf("islamic-umalqura") > -1 ? "islamic-umalqura" : "gregory";
-    return format.resolvedOptions().calendar === wanted ? format.formatToParts(date) : null;
-  }
-
-  function fillDate(el, parts, date) {
-    parts.forEach(function (part) {
-      var slot = el.querySelector('[data-part="' + part.type + '"]');
-      if (slot) slot.textContent = part.value;
-    });
-    el.setAttribute("datetime", date.getFullYear() + "-" + pad(date.getMonth() + 1) + "-" + pad(date.getDate()));
-  }
-
-  function renderDates() {
-    var hijri = document.querySelector('[data-cal="hijri"]');
-    var gregorian = document.querySelector('[data-cal="gregory"]');
-    if (!hijri || !gregorian || !window.Intl || !Intl.DateTimeFormat.prototype.formatToParts) return;
-    var now = new Date();
-    try {
-      var hijriParts = dateParts(HIJRI_LOCALE, now);
-      var gregorianParts = dateParts(GREGORIAN_LOCALE, now);
-      // Only claim "today" once both calendars formatted; otherwise the static example stays.
-      if (hijriParts && gregorianParts) {
-        fillDate(hijri, hijriParts, now);
-        fillDate(gregorian, gregorianParts, now);
-        var weekday = document.querySelector('[data-date="weekday"]');
-        var label = document.querySelector('[data-date="label"]');
-        if (weekday) {
-          weekday.textContent = new Intl.DateTimeFormat(GREGORIAN_LOCALE, { weekday: "long" }).format(now);
-          weekday.hidden = false;
-        }
-        if (label && label.getAttribute("data-today")) label.textContent = label.getAttribute("data-today");
-      }
-    } catch {
-      /* keep the static fallback in the HTML */
-    }
-    var nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 5);
-    window.setTimeout(renderDates, nextMidnight - now);
-  }
-
-  renderDates();
 
   /* ---------- Theme: light by default; dark only when the visitor chooses it ---------- */
   // The inline <head> script applies a stored choice before first paint (no flash, and the
