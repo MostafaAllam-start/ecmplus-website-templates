@@ -12,6 +12,13 @@ export const GLYPHS = {
   meetings: '<circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/>',
 };
 
+// Line icons for the closing panel's "good to know" card, in the template's gold.
+export const CTA_GLYPHS = {
+  servers: '<rect x="3" y="4" width="18" height="6.5" rx="1.6"/><rect x="3" y="13.5" width="18" height="6.5" rx="1.6"/><path d="M6.5 7.25h.01M6.5 16.75h.01" stroke-width="2.6"/>',
+  modules: '<rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/>',
+  support: '<path d="M4.5 13v-1a7.5 7.5 0 0 1 15 0v1"/><rect x="3" y="12.5" width="4.5" height="6" rx="1.5"/><rect x="16.5" y="12.5" width="4.5" height="6" rx="1.5"/><path d="M19 18.5v.5a2.5 2.5 0 0 1-2.5 2.5H13"/>',
+};
+
 // Services shown on the module pages; logo files are the approved marks in assets/brands/.
 // Services without a logo carry a line icon (glyph) drawn in the template's gold.
 export const SERVICES = {
@@ -53,6 +60,14 @@ export const UI = {
     explore: "Explore the suite",
     ctaTitle: "See ECM+ with your organization’s own scenarios.",
     ctaText: "Our team arranges a demo in Arabic or English, focused on the modules that matter to your organization.",
+    ctaEyebrow: "Next step",
+    ctaBriefTitle: "Good to know",
+    supportCentre: "Support centre",
+    ctaFacts: [
+      ["servers", "On your organization’s servers", "In your own data centre or in the cloud."],
+      ["modules", "Start with one module", "Licensed separately; one sign-in for all four."],
+      ["support", "Support in Arabic or English", "Support tickets through the client portal."],
+    ],
     details: "Module details",
   },
   ar: {
@@ -71,6 +86,14 @@ export const UI = {
     explore: "استكشف المنظومة",
     ctaTitle: "شاهدوا منظومة <bdi>ECM+</bdi> وفق سيناريوهات المؤسسة الخاصة بكم.",
     ctaText: "يرتّب فريقنا عرضًا تجريبيًا بالعربية أو الإنجليزية، يركّز على الأنظمة التي تهمّ مؤسستكم.",
+    ctaEyebrow: "الخطوة التالية",
+    ctaBriefTitle: "ما يهمّكم معرفته",
+    supportCentre: "مركز الدعم",
+    ctaFacts: [
+      ["servers", "على خوادم مؤسستكم", "في مركز البيانات الخاص بها أو على السحابة."],
+      ["modules", "البدء بنظام واحد", "يُرخَّص كل نظام ترخيصًا مستقلًا، مع تسجيل دخول موحّد."],
+      ["support", "الدعم بالعربية أو الإنجليزية", "تُتابَع تذاكر الدعم عبر بوابة العملاء حتى حلّها."],
+    ],
     details: "تفاصيل النظام",
   },
 };
