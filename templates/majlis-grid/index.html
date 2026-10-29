@@ -135,7 +135,45 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="wrap bento bento--hero">
 
-        <div class="tile tile--dark tile--title t-8" style="--i:0">
+        <div class="tile tile--dark tile--title t-12" style="--i:0">
+          <div class="seal" aria-hidden="true">
+            <svg class="seal-net" viewBox="-200 -150 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+              <defs>
+                <pattern id="seal-dots" width="14" height="14" x="-7" y="-7" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r=".8"/></pattern>
+                <radialGradient id="seal-fade" r=".6"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+                <mask id="seal-mask"><rect x="-200" y="-150" width="400" height="300" fill="url(#seal-fade)"/></mask>
+                <radialGradient id="seal-halo" r=".5"><stop offset="0" stop-color="currentColor" stop-opacity=".26"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></radialGradient>
+              </defs>
+              <g mask="url(#seal-mask)">
+                <rect class="seal-net__dots" x="-200" y="-150" width="400" height="300" fill="url(#seal-dots)"/>
+                <path class="seal-net__mesh" d="M72.1 -29.8L29.8 -72.1M29.8 -72.1L-29.8 -72.1M-29.8 -72.1L-72.1 -29.8M-72.1 -29.8L-72.1 29.8M-72.1 29.8L-29.8 72.1M-29.8 72.1L29.8 72.1M29.8 72.1L72.1 29.8M72.1 29.8L72.1 -29.8M72.1 -29.8L109.1 -63M29.8 -72.1L63 -109.1M-29.8 -72.1L-63 -109.1M-72.1 -29.8L-109.1 -63M-72.1 29.8L-109.1 63M-29.8 72.1L-63 109.1M29.8 72.1L63 109.1M72.1 29.8L109.1 63M126 0L171.9 -46.1M126 0L171.9 46.1M109.1 -63L171.9 -46.1M109.1 -63L125.9 -125.9M63 -109.1L125.9 -125.9M63 -109.1L46.1 -171.9M0 -126L46.1 -171.9M0 -126L-46.1 -171.9M-63 -109.1L-46.1 -171.9M-63 -109.1L-125.9 -125.9M-109.1 -63L-125.9 -125.9M-109.1 -63L-171.9 -46.1M-126 0L-171.9 -46.1M-126 0L-171.9 46.1M-109.1 63L-171.9 46.1M-109.1 63L-125.9 125.9M-63 109.1L-125.9 125.9M-63 109.1L-46.1 171.9M0 126L-46.1 171.9M0 126L46.1 171.9M63 109.1L46.1 171.9M63 109.1L125.9 125.9M109.1 63L125.9 125.9M109.1 63L171.9 46.1"/>
+                <path class="seal-net__traces" d="M55 55L92 92H200M-55 55L-92 92H-200M55 -55L92 -92H200M-55 -55L-92 -92H-200"/>
+                <g class="seal-net__nodes"><circle class="n n--live" cx="72.1" cy="-29.8" r="2.6"/><circle class="n" cx="29.8" cy="-72.1" r="2.6"/><circle class="n" cx="-29.8" cy="-72.1" r="2.6"/><circle class="n n--live" cx="-72.1" cy="-29.8" r="2.6"/><circle class="n" cx="-72.1" cy="29.8" r="2.6"/><circle class="n" cx="-29.8" cy="72.1" r="2.6"/><circle class="n n--live" cx="29.8" cy="72.1" r="2.6"/><circle class="n" cx="72.1" cy="29.8" r="2.6"/><circle class="n" cx="126" cy="0" r="2"/><circle class="n n--live" cx="109.1" cy="-63" r="2"/><circle class="n" cx="63" cy="-109.1" r="2"/><circle class="n" cx="0" cy="-126" r="2"/><circle class="n" cx="-63" cy="-109.1" r="2"/><circle class="n n--live" cx="-109.1" cy="-63" r="2"/><circle class="n" cx="-126" cy="0" r="2"/><circle class="n" cx="-109.1" cy="63" r="2"/><circle class="n" cx="-63" cy="109.1" r="2"/><circle class="n n--live" cx="0" cy="126" r="2"/><circle class="n" cx="63" cy="109.1" r="2"/><circle class="n" cx="109.1" cy="63" r="2"/><circle class="n" cx="171.9" cy="-46.1" r="1.6"/><circle class="n" cx="125.9" cy="-125.9" r="1.6"/><circle class="n" cx="46.1" cy="-171.9" r="1.6"/><circle class="n" cx="-46.1" cy="-171.9" r="1.6"/><circle class="n" cx="-125.9" cy="-125.9" r="1.6"/><circle class="n" cx="-171.9" cy="-46.1" r="1.6"/><circle class="n" cx="-171.9" cy="46.1" r="1.6"/><circle class="n" cx="-125.9" cy="125.9" r="1.6"/><circle class="n" cx="-46.1" cy="171.9" r="1.6"/><circle class="n" cx="46.1" cy="171.9" r="1.6"/><circle class="n" cx="125.9" cy="125.9" r="1.6"/><circle class="n" cx="171.9" cy="46.1" r="1.6"/><circle class="pad" cx="150" cy="92" r="3"/><circle class="pad" cx="-150" cy="92" r="3"/><circle class="pad" cx="150" cy="-92" r="3"/><circle class="pad" cx="-150" cy="-92" r="3"/></g>
+              </g>
+              <circle class="seal-net__halo" r="96" fill="url(#seal-halo)"/>
+              <g class="seal-net__orbit"><circle class="ring" r="92"/><circle class="sat" cx="92" cy="0" r="2.8"/><circle class="sat" cx="-65" cy="65" r="2"/></g>
+              <ellipse class="seal-net__ping" rx="70" ry="44"/>
+              <ellipse class="seal-net__plate" rx="64" ry="40"/>
+            </svg>
+            <span class="brand seal__brand" aria-hidden="true">
+              <img class="brand__ring brand__ring--light" src="../../assets/brand/ring.svg" alt="" width="200" height="116">
+              <img class="brand__ring brand__ring--dark" src="../../assets/brand/ring-dark.svg" alt="" width="200" height="116">
+              <span class="brand__word">ECM<span class="brand__plus">+</span></span>
+            </span>
+            <svg class="seal-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path class="seal-links__line" vector-effect="non-scaling-stroke" d="M18 30C18 37 45 33 45 40M50 30V40M82 30C82 37 55 33 55 40M50 72V60"/>
+              <g class="seal-links__pulses">
+                <path class="in" style="--k:0" vector-effect="non-scaling-stroke" pathLength="100" d="M18 30C18 37 45 33 45 40"/><path class="in" style="--k:1" vector-effect="non-scaling-stroke" pathLength="100" d="M50 30V40"/><path class="in" style="--k:2" vector-effect="non-scaling-stroke" pathLength="100" d="M82 30C82 37 55 33 55 40"/><path class="in" style="--k:3" vector-effect="non-scaling-stroke" pathLength="100" d="M50 72V60"/>
+                <path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M45 40C45 33 18 37 18 30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M50 40V30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M55 40C55 33 82 37 82 30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M50 60V72"/>
+              </g>
+            </svg>
+            <ul class="seal__nodes">
+              <li class="seal__node seal__node--correspond"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span class="seal__label">مراسلة</span></li>
+              <li class="seal__node seal__node--automate"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8" y="2.5" width="8" height="5" rx="1.2"/><path d="M12 7.5v2M12 9.5l3 3-3 3-3-3z"/><path d="M9 12.5H5.5v4M15 12.5h3.5v4"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.2"/></svg></span><span class="seal__label">أتمتة</span></li>
+              <li class="seal__node seal__node--convene"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/></svg></span><span class="seal__label">اجتماع</span></li>
+              <li class="seal__node seal__node--archive"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h18v4H3zM5 8v12h14V8M10 12h4"/></svg></span><span class="seal__label">أرشفة</span></li>
+            </ul>
+          </div>
           <div class="title__top">
             <p class="eyebrow eyebrow--dark">
               <svg class="star" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M8 0l2.34 2.34h3.32v3.32L16 8l-2.34 2.34v3.32h-3.32L8 16l-2.34-2.34H2.34v-3.32L0 8l2.34-2.34V2.34h3.32z"/></svg>
@@ -153,46 +191,6 @@
               <a class="btn btn--ghost-dark btn--lg" href="#solutions">استكشف المنظومة</a>
             </div>
           </div>
-        </div>
-
-        <div class="tile tile--dark tile--seal t-4" style="--i:3">
-          <svg class="seal-net" viewBox="-200 -150 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-            <defs>
-              <pattern id="seal-dots" width="14" height="14" x="-7" y="-7" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r=".8"/></pattern>
-              <radialGradient id="seal-fade" r=".6"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-              <mask id="seal-mask"><rect x="-200" y="-150" width="400" height="300" fill="url(#seal-fade)"/></mask>
-              <radialGradient id="seal-halo" r=".5"><stop offset="0" stop-color="currentColor" stop-opacity=".26"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></radialGradient>
-            </defs>
-            <g mask="url(#seal-mask)">
-              <rect class="seal-net__dots" x="-200" y="-150" width="400" height="300" fill="url(#seal-dots)"/>
-              <path class="seal-net__mesh" d="M72.1 -29.8L29.8 -72.1M29.8 -72.1L-29.8 -72.1M-29.8 -72.1L-72.1 -29.8M-72.1 -29.8L-72.1 29.8M-72.1 29.8L-29.8 72.1M-29.8 72.1L29.8 72.1M29.8 72.1L72.1 29.8M72.1 29.8L72.1 -29.8M72.1 -29.8L109.1 -63M29.8 -72.1L63 -109.1M-29.8 -72.1L-63 -109.1M-72.1 -29.8L-109.1 -63M-72.1 29.8L-109.1 63M-29.8 72.1L-63 109.1M29.8 72.1L63 109.1M72.1 29.8L109.1 63M126 0L171.9 -46.1M126 0L171.9 46.1M109.1 -63L171.9 -46.1M109.1 -63L125.9 -125.9M63 -109.1L125.9 -125.9M63 -109.1L46.1 -171.9M0 -126L46.1 -171.9M0 -126L-46.1 -171.9M-63 -109.1L-46.1 -171.9M-63 -109.1L-125.9 -125.9M-109.1 -63L-125.9 -125.9M-109.1 -63L-171.9 -46.1M-126 0L-171.9 -46.1M-126 0L-171.9 46.1M-109.1 63L-171.9 46.1M-109.1 63L-125.9 125.9M-63 109.1L-125.9 125.9M-63 109.1L-46.1 171.9M0 126L-46.1 171.9M0 126L46.1 171.9M63 109.1L46.1 171.9M63 109.1L125.9 125.9M109.1 63L125.9 125.9M109.1 63L171.9 46.1"/>
-              <path class="seal-net__traces" d="M55 55L92 92H200M-55 55L-92 92H-200M55 -55L92 -92H200M-55 -55L-92 -92H-200"/>
-              <g class="seal-net__nodes"><circle class="n n--live" cx="72.1" cy="-29.8" r="2.6"/><circle class="n" cx="29.8" cy="-72.1" r="2.6"/><circle class="n" cx="-29.8" cy="-72.1" r="2.6"/><circle class="n n--live" cx="-72.1" cy="-29.8" r="2.6"/><circle class="n" cx="-72.1" cy="29.8" r="2.6"/><circle class="n" cx="-29.8" cy="72.1" r="2.6"/><circle class="n n--live" cx="29.8" cy="72.1" r="2.6"/><circle class="n" cx="72.1" cy="29.8" r="2.6"/><circle class="n" cx="126" cy="0" r="2"/><circle class="n n--live" cx="109.1" cy="-63" r="2"/><circle class="n" cx="63" cy="-109.1" r="2"/><circle class="n" cx="0" cy="-126" r="2"/><circle class="n" cx="-63" cy="-109.1" r="2"/><circle class="n n--live" cx="-109.1" cy="-63" r="2"/><circle class="n" cx="-126" cy="0" r="2"/><circle class="n" cx="-109.1" cy="63" r="2"/><circle class="n" cx="-63" cy="109.1" r="2"/><circle class="n n--live" cx="0" cy="126" r="2"/><circle class="n" cx="63" cy="109.1" r="2"/><circle class="n" cx="109.1" cy="63" r="2"/><circle class="n" cx="171.9" cy="-46.1" r="1.6"/><circle class="n" cx="125.9" cy="-125.9" r="1.6"/><circle class="n" cx="46.1" cy="-171.9" r="1.6"/><circle class="n" cx="-46.1" cy="-171.9" r="1.6"/><circle class="n" cx="-125.9" cy="-125.9" r="1.6"/><circle class="n" cx="-171.9" cy="-46.1" r="1.6"/><circle class="n" cx="-171.9" cy="46.1" r="1.6"/><circle class="n" cx="-125.9" cy="125.9" r="1.6"/><circle class="n" cx="-46.1" cy="171.9" r="1.6"/><circle class="n" cx="46.1" cy="171.9" r="1.6"/><circle class="n" cx="125.9" cy="125.9" r="1.6"/><circle class="n" cx="171.9" cy="46.1" r="1.6"/><circle class="pad" cx="150" cy="92" r="3"/><circle class="pad" cx="-150" cy="92" r="3"/><circle class="pad" cx="150" cy="-92" r="3"/><circle class="pad" cx="-150" cy="-92" r="3"/></g>
-            </g>
-            <circle class="seal-net__halo" r="96" fill="url(#seal-halo)"/>
-            <g class="seal-net__orbit"><circle class="ring" r="92"/><circle class="sat" cx="92" cy="0" r="2.8"/><circle class="sat" cx="-65" cy="65" r="2"/></g>
-            <ellipse class="seal-net__ping" rx="70" ry="44"/>
-            <ellipse class="seal-net__plate" rx="64" ry="40"/>
-          </svg>
-          <span class="brand seal__brand" aria-hidden="true">
-            <img class="brand__ring brand__ring--light" src="../../assets/brand/ring.svg" alt="" width="200" height="116">
-            <img class="brand__ring brand__ring--dark" src="../../assets/brand/ring-dark.svg" alt="" width="200" height="116">
-            <span class="brand__word">ECM<span class="brand__plus">+</span></span>
-          </span>
-          <p class="visually-hidden">وظائف المنظومة الأربع:</p>
-          <svg class="seal-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <path class="seal-links__line" vector-effect="non-scaling-stroke" d="M18 30C18 37 45 33 45 40M50 30V40M82 30C82 37 55 33 55 40M50 72V60"/>
-            <g class="seal-links__pulses">
-              <path class="in" style="--k:0" vector-effect="non-scaling-stroke" pathLength="100" d="M18 30C18 37 45 33 45 40"/><path class="in" style="--k:1" vector-effect="non-scaling-stroke" pathLength="100" d="M50 30V40"/><path class="in" style="--k:2" vector-effect="non-scaling-stroke" pathLength="100" d="M82 30C82 37 55 33 55 40"/><path class="in" style="--k:3" vector-effect="non-scaling-stroke" pathLength="100" d="M50 72V60"/>
-              <path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M45 40C45 33 18 37 18 30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M50 40V30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M55 40C55 33 82 37 82 30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M50 60V72"/>
-            </g>
-          </svg>
-          <ul class="seal__nodes">
-            <li class="seal__node seal__node--correspond"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span class="seal__label">مراسلة</span></li>
-            <li class="seal__node seal__node--automate"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8" y="2.5" width="8" height="5" rx="1.2"/><path d="M12 7.5v2M12 9.5l3 3-3 3-3-3z"/><path d="M9 12.5H5.5v4M15 12.5h3.5v4"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.2"/></svg></span><span class="seal__label">أتمتة</span></li>
-            <li class="seal__node seal__node--convene"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/></svg></span><span class="seal__label">اجتماع</span></li>
-            <li class="seal__node seal__node--archive"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h18v4H3zM5 8v12h14V8M10 12h4"/></svg></span><span class="seal__label">أرشفة</span></li>
-          </ul>
         </div>
 
         <div class="tile tile--nafath t-3" style="--i:2">

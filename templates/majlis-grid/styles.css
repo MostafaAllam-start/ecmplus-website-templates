@@ -1281,14 +1281,12 @@ h2:lang(ar) {
 /* Seal: ECM+ at the centre of a living network. Correspond, Automate and Convene sit in a row
    above it and Archive below; each module sends a signal in to ECM+, which registers it and
    answers all four. Light card by day (deeper gold lines, a soft gold glow), navy at night. */
-.tile--seal {
+.seal {
   --cycle: 4.4s;
-  min-block-size: 300px;
-  padding: 0;
   color: var(--accent);
 }
 
-.tile--seal {
+.seal {
   --seal-line: #B98612;
   --seal-pulse: #D99A0B;
   --seal-glow: rgba(217, 162, 27, .18);
@@ -1296,7 +1294,7 @@ h2:lang(ar) {
 }
 
 @media screen {
-  :root[data-theme="dark"] .tile--seal {
+  :root[data-theme="dark"] .seal {
     --seal-line: #D9A21B;
     --seal-pulse: #F0B100;
     --seal-glow: rgba(217, 162, 27, .14);
@@ -1304,15 +1302,50 @@ h2:lang(ar) {
   }
 }
 
-.tile.tile--seal {
-  background:
-    radial-gradient(closest-side, var(--seal-glow), transparent) 50% 50% / 86% 86% no-repeat,
-    var(--tile-dark);
+.seal {
+  background: radial-gradient(closest-side, var(--seal-glow), transparent) 50% 50% / 86% 86% no-repeat;
 }
 
-.tile--seal::before,
-.tile--seal::after {
+/* The seal is the title card's background: beside the copy on wide screens, faint behind
+   it on narrower ones. It replaces the card's circuit pattern and sweep. */
+.tile--title::before,
+.tile--title::after {
   display: none;
+}
+
+.tile--title > .seal {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  z-index: 0;
+  inline-size: 44%;
+  pointer-events: none;
+}
+
+.tile--title > .title__top,
+.tile--title > .title__bottom {
+  position: relative;
+  z-index: 1;
+  max-inline-size: 54%;
+}
+
+@media (max-width: 1023.98px) {
+  /* Behind the copy, only the moving network stays: no labels, badges or wordmark. */
+  .tile--title > .seal {
+    inset-inline-start: 0;
+    inline-size: auto;
+    opacity: .32;
+  }
+
+  .tile--title .seal__brand,
+  .tile--title .seal__nodes {
+    display: none;
+  }
+
+  .tile--title > .title__top,
+  .tile--title > .title__bottom {
+    max-inline-size: none;
+  }
 }
 
 .seal-net,
@@ -2785,11 +2818,6 @@ h2:lang(ar) {
     grid-column: span 3;
   }
 
-  /* Beside the title on wide screens; its own row here. */
-  .tile--seal {
-    grid-column: span 6;
-  }
-
   .t-6,
   .t-8,
   .t-12 {
@@ -2878,10 +2906,6 @@ h2:lang(ar) {
     flex: 1 1 100%;
   }
 
-  .tile--seal {
-    min-block-size: 300px;
-  }
-
   .nafath__body {
     gap: 16px;
   }
@@ -2960,7 +2984,7 @@ h2:lang(ar) {
 /* The flip: shared names let the hero bento glide to its mirrored slots. */
 .tile--title { view-transition-name: mg-title; }
 .tile--nafath { view-transition-name: mg-nafath; }
-.tile--seal { view-transition-name: mg-seal; }
+.seal { view-transition-name: mg-seal; }
 .tile--otp { view-transition-name: mg-otp; }
 .tile--meet { view-transition-name: mg-meet; }
 
