@@ -48,6 +48,12 @@ is one `index.html` per language, one `styles.css` and one small `main.js`.
   canonical URL, and the Arabic page adds `?lang=ar` to every support link. Layouts use logical
   CSS properties, so they mirror right-to-left from one stylesheet. Codes, IDs and the logo stay
   left-to-right.
+- **Switching language animates the layout flip** in every template. Both pages opt in to
+  cross-document View Transitions (`@view-transition { navigation: auto; }`), and the header, logo,
+  navigation and hero parts carry shared `view-transition-name`s, so they glide to their mirrored
+  places. Ink Ledger and Portico flag the arrival in the `<head>` script (`pagereveal`), so the hero
+  does not replay its entrance. Browsers without support just load the other page, and
+  reduced-motion settings turn the animation off. View transitions need `http(s)`, not `file://`.
 - **Every page has light and dark modes, and light is the default.** Pages open light,
   whatever the device setting, and switch to dark only when the visitor presses the theme button
   ("Dark mode" / "الوضع الداكن", with an on/off state). The choice is saved in `localStorage` under

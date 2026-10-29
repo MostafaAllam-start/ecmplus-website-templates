@@ -16,6 +16,11 @@
         var t = localStorage.getItem("ecmplus-theme");
         if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
       } catch (e) { /* storage blocked: stay light */ }
+      // Arriving through the language flip (a cross-document view transition): show the
+      // hero at once; pagereveal fires before the first frame, ahead of main.js.
+      window.addEventListener("pagereveal", function (e) {
+        if (e.viewTransition) document.documentElement.classList.add("flip-in");
+      });
     })();
   </script>
   <meta name="color-scheme" content="light">

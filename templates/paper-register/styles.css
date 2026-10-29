@@ -4,6 +4,12 @@
    one gold bookmark. Light editorial; graphite footer.
    ===================================================================== */
 
+/* Language flip (as in Majlis Grid): the English and Arabic pages both opt in, so the
+   language link animates and the named parts below glide to their mirrored places. */
+@view-transition {
+  navigation: auto;
+}
+
 @property --row {
   syntax: "<number>";
   inherits: true;
@@ -1990,4 +1996,26 @@ body:lang(ar) { line-height: 1.8; }
   body { background: #fff; }
   .contact,
   .site-footer { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+}
+
+/* ==========================================================================
+   Language flip — shared names pair each part with its mirror on the other page
+   ========================================================================== */
+.site-header { view-transition-name: pr-header; }
+.site-header .brand { view-transition-name: pr-brand; }
+.nav-toggle { view-transition-name: pr-toggle; }
+.site-nav { view-transition-name: pr-nav; }
+.site-utility { view-transition-name: pr-utility; }
+.hero__copy { view-transition-name: pr-copy; }
+.specimen { view-transition-name: pr-specimen; }
+
+::view-transition-group(*) {
+  animation-duration: 350ms;
+  animation-timing-function: cubic-bezier(.65, 0, .25, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
 }

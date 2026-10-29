@@ -6,6 +6,13 @@
    Layout uses logical properties throughout so the page mirrors under dir="rtl".
    ========================================================================== */
 
+/* Language flip (as in Majlis Grid): the English and Arabic pages both opt in, so the
+   language link animates and the named parts below glide to their mirrored places. */
+@view-transition {
+  navigation: auto;
+}
+
+
 /* ---------- Design variables ----------
    Light is the default ("Ledger in daylight") whatever the system prefers; dark
    ("the registry at night") applies only when the visitor chooses it, which sets
@@ -2390,4 +2397,34 @@ h2:lang(ar) { line-height: 1.35; }
   .scenario[hidden] { display: grid; }
   body,
   .band-light { background: #FFFFFF; color: #000000; }
+}
+
+/* ==========================================================================
+   Language flip — shared names pair each part with its mirror on the other page
+   ========================================================================== */
+.site-header { view-transition-name: il-header; }
+.site-header .brand { view-transition-name: il-brand; }
+.header__quick { view-transition-name: il-quick; }
+.nav { view-transition-name: il-nav; }
+.header__utility { view-transition-name: il-utility; }
+.hero__copy { view-transition-name: il-copy; }
+.hero__visual { view-transition-name: il-visual; }
+
+::view-transition-group(*) {
+  animation-duration: 350ms;
+  animation-timing-function: cubic-bezier(.65, 0, .25, 1);
+}
+
+/* Arriving through the flip (flagged by the pagereveal hook in <head>): the hero is
+   already in place, so it skips its entrance instead of fading in a second time. */
+.flip-in .hero [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
 }

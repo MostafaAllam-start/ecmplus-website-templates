@@ -5,7 +5,6 @@
   "use strict";
 
   var root = document.documentElement;
-  var isArabic = root.lang === "ar";
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- Theme: light by default; dark only when the visitor chooses it ---------- */
