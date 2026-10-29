@@ -840,14 +840,6 @@ html:not(.js) .theme-toggle { display: none; }
 }
 .journey__mark img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: contain; }
 .journey__label { font: 600 .875rem/1.2 var(--font-body); color: var(--ink-2); }
-.journey__serial {
-  margin-inline-start: auto;
-  padding: 2px 8px;
-  border: 1px solid var(--line-strong);
-  border-radius: 4px;
-  font: 12.5px/1.4 var(--font-mono);
-  color: var(--ink);
-}
 .journey__title { margin: 12px 0 0; font: 700 1.25rem/1.25 var(--font-head); color: var(--ink); }
 .journey__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
 .journey__chips li {
