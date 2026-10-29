@@ -2179,6 +2179,17 @@ body:lang(ar) { line-height: 1.8; }
 }
 .sp-step { position: relative; padding-block-start: 16px; border-block-start: 2px solid var(--sp-line-strong); }
 .sp-step:first-child { border-block-start-color: var(--sp-accent); }
+/* Illustration palette: soft object fills by meaning, ink outlines. Light values here,
+   dark values at the end of this block. --sp-il-<hue> is the fill tint, --sp-il-<hue>-l
+   the matching line colour for small details inside the object. */
+.sp-steps {
+  --sp-il-doc: #DCE7F5;  --sp-il-doc-l: #2F5A8E;   /* documents, sheets, forms, cards */
+  --sp-il-mail: #FADFD3; --sp-il-mail-l: #B5522E;  /* envelopes, bells, notifications */
+  --sp-il-ppl: #E8E0F3;  --sp-il-ppl-l: #6B4C9E;   /* people */
+  --sp-il-time: #D6ECE8; --sp-il-time-l: #22736E;  /* calendars, clocks */
+  --sp-il-sec: #2E5180;  --sp-il-sec-l: #2E5180;   /* shields, locks, access (solid navy) */
+  --sp-il-dev: #E8E1D3;  --sp-il-dev-l: #6E6351;   /* devices, machines, containers, places (limestone) */
+}
 .sp-step__art {
   position: relative;
   aspect-ratio: 3 / 2;
@@ -2188,10 +2199,22 @@ body:lang(ar) { line-height: 1.8; }
   background: color-mix(in srgb, var(--sp-accent) 7%, var(--sp-surface));
   color: var(--sp-ink);
 }
-.sp-step__svg { display: block; inline-size: 100%; block-size: 100%; fill: none; stroke: currentColor; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+.sp-step__svg { --c: var(--sp-surface); --cl: var(--sp-muted); display: block; inline-size: 100%; block-size: 100%; fill: none; stroke: currentColor; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+/* Hue classes only set the pair; the role classes below apply it. */
+.sp-step__svg .doc { --c: var(--sp-il-doc); --cl: var(--sp-il-doc-l); }
+.sp-step__svg .mail { --c: var(--sp-il-mail); --cl: var(--sp-il-mail-l); }
+.sp-step__svg .ppl { --c: var(--sp-il-ppl); --cl: var(--sp-il-ppl-l); }
+.sp-step__svg .time { --c: var(--sp-il-time); --cl: var(--sp-il-time-l); }
+.sp-step__svg .sec { --c: var(--sp-il-sec); --cl: var(--sp-il-sec-l); }
+.sp-step__svg .dev { --c: var(--sp-il-dev); --cl: var(--sp-il-dev-l); }
+.sp-step__svg .f { fill: var(--c); }
+.sp-step__svg .l { stroke: var(--cl); }
+.sp-step__svg .s { fill: var(--cl); stroke: none; }
 .sp-step__svg .a { stroke: var(--sp-accent-text); }
 .sp-step__svg .g { fill: var(--sp-accent); stroke: none; }
-.sp-step__svg .t { fill: color-mix(in srgb, var(--sp-accent) 18%, transparent); }
+.sp-step__svg .t { fill: color-mix(in srgb, var(--sp-accent) 22%, var(--sp-surface)); }
+.sp-step__svg .tt { fill: color-mix(in srgb, var(--sp-accent) 18%, transparent); }
+.sp-step__svg .gs { stroke: var(--sp-accent); }
 .sp-step__svg .p { fill: var(--sp-surface); }
 .sp-step__svg .i { fill: currentColor; stroke: none; }
 .sp-step__svg .k { fill: var(--sp-surface); stroke: var(--sp-surface); }
@@ -2199,6 +2222,16 @@ body:lang(ar) { line-height: 1.8; }
 .sp-step__svg .d { stroke-dasharray: 2.4 2; }
 .sp-step__svg .w { stroke-width: 1.6; }
 .sp-step__svg .w2 { stroke-width: 2.4; }
+@media screen {
+  :root[data-theme="dark"] .sp-steps {
+    --sp-il-doc: #243A57;  --sp-il-doc-l: #93B7E4;
+    --sp-il-mail: #4E3127; --sp-il-mail-l: #F2A98A;
+    --sp-il-ppl: #3A2F55;  --sp-il-ppl-l: #C9B2F0;
+    --sp-il-time: #1F3D3E; --sp-il-time-l: #7DCAC1;
+    --sp-il-sec: #3F6BAB;  --sp-il-sec-l: #9DBDEA;
+    --sp-il-dev: #3A3833;  --sp-il-dev-l: #B5AFA3;
+  }
+}
 [dir="rtl"] .sp-step__svg--m { scale: -1 1; }
 /* The arrow lives in the tile so it centres on the illustration; it hangs into the gap. */
 .sp-step__next {
