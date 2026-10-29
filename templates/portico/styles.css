@@ -1040,6 +1040,9 @@ html:not(.js) .theme-toggle { display: none; }
 .card__tab {
   position: relative;
   z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   align-self: flex-start;
   margin: 0 0 -1px;
   margin-inline-start: 18px;
@@ -1049,6 +1052,8 @@ html:not(.js) .theme-toggle { display: none; }
   color: var(--ink);
   transition: translate .2s var(--ease), color .2s;
 }
+/* Module glyph, as on the lifecycle badges. */
+.card__tab-icon { inline-size: 15px; block-size: 15px; stroke-width: 1.8; color: var(--gold-text); }
 .card__tab::before,
 .card__tab::after {
   content: "";
