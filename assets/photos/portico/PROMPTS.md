@@ -1,6 +1,6 @@
 # Portico image briefs (for AI generation or a commissioned shoot)
 
-The current files are free Unsplash placeholders (see `CREDITS.md`). To replace one, generate
+`p01` to `p05` are AI-generated; the rest are Unsplash placeholders (see `CREDITS.md`). To replace one, generate
 a landscape image that follows its brief below and export it under the same name at 800, 1200
 and 1600 px wide as WebP (quality about 60; keep the 1600 px file near 250 KB or less). Keep the proportions close to the current file
 so the layout does not shift.
@@ -16,7 +16,7 @@ so the layout does not shift.
 
 | File | Proportion | Brief |
 |---|---|---|
-| `p01-atrium` | 3:2 | Looking straight up through a symmetrical stone-and-glass atrium of a government or headquarters building toward a bright skylight. Strong central perspective, warm limestone floors of balconies, cool daylight from above. Quiet lower-left area for the hero text plate. |
+| `p01-suite` | 16:9 | A signed formal document with a gold wax seal and a fountain pen on a dark marble desk, lit by a warm lamp, brass details in the corners. Dark and low in contrast, because the hero headline sits on one side and the ECM+ seal on the other in both languages. |
 | `p02-archive` | 16:9 | A long, orderly records room: identical white archive boxes on pale wooden or steel shelving, receding in perspective. Soft overhead light, spotless, a sense of permanence and order. |
 | `p03-correspondence` | 3:2 | Close-up of formal white envelopes closed with deep red wax seals, resting on a dark walnut desk beside a fountain pen. Shallow depth of field, warm side light. No handwriting or addresses. |
 | `p04-process` | 3:2 | A process being mapped on a large whiteboard: a hand-drawn flowchart of boxes, arrows and decision points, with a person seen from behind (out of focus, no face) drawing the next step. Bright, clean office light. The diagram should read as a workflow, but no word on it should be legible. |

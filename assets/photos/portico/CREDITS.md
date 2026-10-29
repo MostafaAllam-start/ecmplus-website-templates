@@ -1,20 +1,22 @@
 # Portico photo credits
 
-All photographs are free photos from [Unsplash](https://unsplash.com), used under the
+The hero and the four module photos (`p01` to `p05`) are AI-generated images supplied for
+this site. Record the generator and confirm its terms allow commercial use before launch. The
+other photographs are free photos from [Unsplash](https://unsplash.com), used under the
 [Unsplash License](https://unsplash.com/license) (free for commercial use; attribution is
 appreciated, not required). None are Unsplash+ images. Each file comes in three widths
-(`-800.webp`, `-1200.webp`, `-1600.webp`), exported by the Unsplash image CDN.
+(`-800.webp`, `-1200.webp`, `-1600.webp`).
 
-These are placeholders. `PROMPTS.md` holds an AI-image brief for each file, so the set can
-be replaced by commissioned or generated imagery with the same names and proportions.
+The Unsplash photos are placeholders. `PROMPTS.md` holds an image brief for each file, so the
+set can be replaced by commissioned or generated imagery with the same names and proportions.
 
 | File | Used for | Photo | Photographer |
 |---|---|---|---|
-| `p01-atrium` | Hero | [Symmetrical building atrium with a glass skylight](https://unsplash.com/photos/7xKmidpErYE) | Intricate Explorer ([@intricateexplorer](https://unsplash.com/@intricateexplorer)) |
-| `p02-archive` | Documents module | [Rows of white archive boxes on wooden shelves](https://unsplash.com/photos/5utYi64hnJ0) | Luke Caunt ([@lukec1778](https://unsplash.com/@lukec1778)) |
-| `p03-correspondence` | Correspondence module | [White envelopes sealed with red wax](https://unsplash.com/photos/3d5VQF2prQ8) | Raymond Petrik ([@raymondpetrik](https://unsplash.com/@raymondpetrik)) |
-| `p04-process` | Process automation module | [Woman drawing a flowchart on a whiteboard](https://unsplash.com/photos/46G4xEr122c) | Beatriz Cattel ([@bicattel](https://unsplash.com/@bicattel)) |
-| `p05-boardroom` | Meetings module | [Modern conference room with long table and chairs](https://unsplash.com/photos/HRsi-QzS3zw) | Aakriti Raina ([@dmvallect](https://unsplash.com/@dmvallect)) |
+| `p01-suite` | Hero | A signed document with a gold wax seal and a fountain pen on a dark marble desk | AI-generated image supplied for this site |
+| `p02-archive` | Documents module | A bright records room with white archive boxes on steel shelving | AI-generated image supplied for this site |
+| `p03-correspondence` | Correspondence module | An envelope closed with a red wax seal, a fountain pen and an inkwell | AI-generated image supplied for this site |
+| `p04-process` | Process automation module | A person, seen from behind, studying a process flowchart on a glass screen | AI-generated image supplied for this site |
+| `p05-boardroom` | Meetings module | A boardroom prepared for a meeting, with folders and water at each seat | AI-generated image supplied for this site |
 | `p07-headquarters` | Deployment | [A large glass building next to a body of water](https://unsplash.com/photos/n7T8p_a2aNo) | Bank OZK ([@bankozk](https://unsplash.com/@bankozk)) |
 | `p08-skyline` | Sectors band | [A city skyline with a river at sunrise](https://unsplash.com/photos/ySzmc-Hozsw) | Eddie Mark Blair ([@blaireddieau](https://unsplash.com/@blaireddieau)) |
 | `p09-support` | Support | [Headset near a laptop computer](https://unsplash.com/photos/BeVGrXEktIk) | Petr Macháček ([@machec](https://unsplash.com/@machec)) |
