@@ -2106,6 +2106,9 @@ body:lang(ar) { line-height: 1.8; }
   color: var(--sp-ink);
   text-wrap: balance;
 }
+/* Arabic titles take the taller leading of the home page headings. */
+.sp-hero h1:lang(ar),
+.sp-cta__inner h2:lang(ar) { line-height: 1.45; }
 .sp-lead { margin: 18px 0 0; max-inline-size: 62ch; font-size: 1.125rem; line-height: 1.65; color: var(--sp-ink-2); text-wrap: pretty; }
 .sp-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-block-start: 28px; }
 .sp-photo { margin: 0; overflow: hidden; border-radius: var(--sp-photo-radius); aspect-ratio: 4 / 3; background: var(--sp-alt); }
