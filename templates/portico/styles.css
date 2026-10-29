@@ -1987,22 +1987,17 @@ h3:lang(ar),
   .support__note { margin-block-start: 10px; font-size: .875rem; }
 
   /* 8. Contact: compact form; organization and modules share a row. */
-  .contact__plate { padding: 24px 28px; gap: 32px 40px; }
+  .contact__plate { padding: 20px 28px; gap: 32px 40px; }
   .faq { margin-block-start: 20px; }
-  .demo-form { padding: 20px; gap: 12px 16px; line-height: 1.5; }
+  .demo-form { padding: 16px 20px; gap: 10px 16px; line-height: 1.5; }
   .demo-form__h { font-size: 1.25rem; }
   .demo-form .field__hint:lang(ar) { line-height: 1.5; }
   .demo-form .field input,
   .demo-form .field textarea { min-block-size: 40px; padding-block: 8px; }
-  .demo-form .field textarea { block-size: 68px; min-block-size: 68px; }
-  /* Organization (5 of 12 columns) and the modules (7) share a row; name and email stay halves. */
-  .demo-form { grid-template-columns: repeat(12, minmax(0, 1fr)); }
-  .demo-form > .field { grid-column: span 6; }
-  .demo-form > .field--full { grid-column: 1 / -1; }
-  .demo-form .field--full:has(> input) { grid-column: span 5; }
-  .demo-form fieldset.field--full { grid-column: span 7; }
-  .checks { gap: 0 16px; }
-  .check { min-block-size: 32px; }
+  .demo-form .field textarea { block-size: 56px; min-block-size: 56px; }
+  /* Organization and the modules stack full width; the checkboxes share a line where they fit. */
+  .checks { display: flex; flex-wrap: wrap; gap: 0 12px; }
+  .check { min-block-size: 32px; gap: 8px; font-size: .875rem; }
   .check input { flex: none; }
   .demo-form__foot { margin-block-start: 0; }
 }
