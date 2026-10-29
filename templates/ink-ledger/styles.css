@@ -1174,6 +1174,9 @@ html:not(.js) .theme-toggle { display: none; }
   object-fit: contain;
 }
 .ticker__logo--glyph { stroke-width: 1.6; }
+/* Wider marks: the ECM+ logo (ECM+ Meet) and the Nafath wordmark. */
+.ticker__logo--ecm { inline-size: auto; block-size: 24px; }
+.ticker__logo--wide { inline-size: auto; block-size: 18px; }
 
 html:not(.js) .ticker__list--dup { display: none; }
 html:not(.js) .ticker__track { display: block; inline-size: auto; }
@@ -1548,15 +1551,6 @@ html:not(.js) .ticker__viewport { -webkit-mask-image: none; mask-image: none; }
 .tracecard__rows div:nth-child(4) { --r: 3; }
 .tracecard__rows div:nth-child(5) { --r: 4; }
 
-.evidence__cap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-block-start: 14px;
-  font-size: var(--fs-14);
-  color: var(--muted);
-}
-.evidence__cap::before { content: ""; inline-size: 24px; border-block-start: 1px solid var(--line-gold); }
 
 .security__aside { display: flex; flex-direction: column; gap: 28px; }
 .modes {

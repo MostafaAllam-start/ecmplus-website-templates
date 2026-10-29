@@ -127,6 +127,8 @@
     .plate { flex: 1; display: grid; place-items: center; padding: 18px 8px; border-radius: 8px; }
     .plate--light { background: #f6f1e7; color: #3a3f47; }
     .plate--dark { background: #0b1220; color: #f3f4f6; --brand-suite: #d9a21b; }
+    .plate .brand.ecmlogo { display: grid; place-items: center; inline-size: 100%; }
+    .plate .ecmlogo__img { inline-size: min(150px, 100%); block-size: auto; }
 
     footer { border-top: 1px solid var(--line); padding-block: 28px; color: var(--muted); font-size: 14px; }
     footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
@@ -144,16 +146,16 @@
       .btn { transition: background-color .15s, border-color .15s; }
     }
   </style>
-  <link rel="stylesheet" href="assets/brand/ai-logo.css">
+  <link rel="stylesheet" href="assets/brand/ecmplus-logo.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="top">
     <div class="wrap">
-      <a class="brand ailogo" href="./" aria-label="ECM+ website templates, home">
-        <span class="ailogo__word" aria-hidden="true">ECM+</span>
-        <span class="ailogo__chip" aria-hidden="true"><svg class="ailogo__icon" viewBox="0 0 24 24" focusable="false"><g class="ailogo__spin"><rect x="7" y="7" width="10" height="10" rx="2"/><circle cx="12" cy="2" r="1.5"/><circle cx="12" cy="22" r="1.5"/><circle cx="2" cy="12" r="1.5"/><circle cx="22" cy="12" r="1.5"/><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.5 6.5 8 8M17.5 6.5 16 8M6.5 17.5 8 16M17.5 17.5 16 16"/></g><text x="12" y="14.4" text-anchor="middle">AI</text></svg></span>
+      <a class="brand ecmlogo" href="./" aria-label="ECM+ website templates, home">
+        <img class="ecmlogo__img ecmlogo__img--light" src="assets/brand/ecmplus-ai-logo-272.webp" srcset="assets/brand/ecmplus-ai-logo-272.webp 272w, assets/brand/ecmplus-ai-logo-545.webp 545w" sizes="(max-width: 420px) 80px, 94px" width="545" height="302" alt="">
+        <img class="ecmlogo__img ecmlogo__img--dark" src="assets/brand/ecmplus-ai-logo-dark-272.webp" srcset="assets/brand/ecmplus-ai-logo-dark-272.webp 272w, assets/brand/ecmplus-ai-logo-dark-545.webp 545w" sizes="(max-width: 420px) 80px, 94px" width="545" height="302" alt="" loading="lazy">
       </a>
       <nav aria-label="Gallery">
         <ul>
@@ -286,19 +288,13 @@
           </div>
           <div class="card">
             <h3>Logo</h3>
-            <p>The ECM+ AI-powered logo from the product's search screen, rebuilt as live text with an inline SVG chip that stays crisp at any size. The swoosh ring remains as the in-page mark, for example at the centre of diagrams.</p>
+            <p>The ECM+ Business Suite logo, AI Powered, taken from the product itself. A dark version lightens the graphite lettering and ring for dark surfaces and keeps the gold unchanged. The swoosh ring remains as the in-page mark, for example at the centre of diagrams.</p>
             <div class="plates">
               <div class="plate plate--light">
-                <span class="brand ailogo">
-                  <span class="ailogo__word">ECM+</span>
-                  <span class="ailogo__chip" aria-hidden="true"><svg class="ailogo__icon" viewBox="0 0 24 24" focusable="false"><g class="ailogo__spin"><rect x="7" y="7" width="10" height="10" rx="2"/><circle cx="12" cy="2" r="1.5"/><circle cx="12" cy="22" r="1.5"/><circle cx="2" cy="12" r="1.5"/><circle cx="22" cy="12" r="1.5"/><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.5 6.5 8 8M17.5 6.5 16 8M6.5 17.5 8 16M17.5 17.5 16 16"/></g><text x="12" y="14.4" text-anchor="middle">AI</text></svg></span>
-                </span>
+                <span class="brand ecmlogo"><img class="ecmlogo__img" src="assets/brand/ecmplus-ai-logo-272.webp" srcset="assets/brand/ecmplus-ai-logo-272.webp 272w, assets/brand/ecmplus-ai-logo-545.webp 545w" sizes="150px" width="545" height="302" alt="" loading="lazy"></span>
               </div>
               <div class="plate plate--dark">
-                <span class="brand ailogo ailogo--on-dark">
-                  <span class="ailogo__word">ECM+</span>
-                  <span class="ailogo__chip" aria-hidden="true"><svg class="ailogo__icon" viewBox="0 0 24 24" focusable="false"><g class="ailogo__spin"><rect x="7" y="7" width="10" height="10" rx="2"/><circle cx="12" cy="2" r="1.5"/><circle cx="12" cy="22" r="1.5"/><circle cx="2" cy="12" r="1.5"/><circle cx="22" cy="12" r="1.5"/><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.5 6.5 8 8M17.5 6.5 16 8M6.5 17.5 8 16M17.5 17.5 16 16"/></g><text x="12" y="14.4" text-anchor="middle">AI</text></svg></span>
-                </span>
+                <span class="brand ecmlogo"><img class="ecmlogo__img" src="assets/brand/ecmplus-ai-logo-dark-272.webp" srcset="assets/brand/ecmplus-ai-logo-dark-272.webp 272w, assets/brand/ecmplus-ai-logo-dark-545.webp 545w" sizes="150px" width="545" height="302" alt="" loading="lazy"></span>
               </div>
             </div>
           </div>

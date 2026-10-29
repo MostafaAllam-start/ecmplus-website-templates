@@ -3176,6 +3176,8 @@ h2:lang(ar) {
 .providers li { align-items: center; gap: 8px; }
 .prov__logo { flex: none; inline-size: 18px; block-size: 18px; object-fit: contain; }
 .prov__logo--glyph { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+/* ECM+ Meet carries the ECM+ logo, which is wider than the service icons. */
+.prov__logo--ecm { inline-size: auto; block-size: 22px; }
 
 /* Accent tint: a few cards carry a low-opacity gold wash so the brand colour runs through
    the page without taking it over. */

@@ -1145,6 +1145,18 @@ a.u-link:focus-visible,
   font-weight: 600;
   letter-spacing: .06em;
 }
+/* Module chips carry the module glyph from the seal. */
+.ledger__mods .chip { gap: 6px; padding-inline-start: 9px; }
+.chip__icon {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 /* paper: the chip fills gold; night: it is gilt-edged with gold lettering */
 .ledger__row .chip {
   background: color-mix(in srgb, var(--chip-on-bg) calc(var(--near) * 100%), var(--surface));

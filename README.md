@@ -12,10 +12,11 @@ is one `index.html` per language, one `styles.css` and one small `main.js`.
 ├── serve.mjs                  local preview server + /support redirect stand-in
 ├── scripts/build-pages.mjs    builds the GitHub Pages version (see "Publishing")
 ├── .github/workflows/pages.yml
-├── assets/brand/              ai-logo.css (ECM+ AI-powered logo), ECM+ logo (png/webp),
-│                              ring.svg / ring-dark.svg, favicon.svg, CTC logo
+├── assets/brand/              ECM+ AI Powered logo (ecmplus-ai-logo*, ecmplus-logo.css),
+│                              ECM+ logo (png/webp), ring.svg / ring-dark.svg, favicon.svg,
+│                              CTC logo
 ├── assets/brands/             integration logos (Teams, Meet, Zoom, Gmail, Calendar, Drive,
-│                              OneDrive, WhatsApp)
+│                              OneDrive, WhatsApp, Word, Excel, PowerPoint, Outlook, Nafath)
 ├── assets/photos/portico/     Portico photographs + CREDITS.md + PROMPTS.md (AI image briefs)
 ├── support/index.html         support redirect preview page (local and Pages preview only)
 └── templates/
@@ -59,12 +60,14 @@ is one `index.html` per language, one `styles.css` and one small `main.js`.
 
 ## Logo
 
-The header and footer logo is the **ECM+ AI-powered logo** from the product's search screen:
-a gold-to-graphite "ECM+" with a matching underline, beside a gold chip holding the AI icon
-(it turns twice on load and again while hovered or focused; never under reduced-motion settings). It is live
-text plus an inline SVG, styled by `assets/brand/ai-logo.css`, which every page loads after its
-own stylesheet. Search for `class="brand ailogo"`. Add `ailogo--lg` for the footer size and
-`ailogo--on-dark` on a surface that stays dark in light mode.
+The header and footer logo is the product's own **ECM+ Business Suite, AI Powered** logo
+(`public/assets/images/ecm.png` in the ECM+ frontend), trimmed and exported as
+`assets/brand/ecmplus-ai-logo-{272,545}.webp`, plus `ecmplus-ai-logo.png` for social
+previews and search results. `ecmplus-ai-logo-dark-*` is a version for dark surfaces: the
+graphite lettering and ring are lightened, and the gold is unchanged. Each logo link holds both
+images and `assets/brand/ecmplus-logo.css` (loaded after each page's own stylesheet) shows the
+right one for the theme. Search for `class="brand ecmlogo`. Add `ecmlogo--lg` for the footer size
+and `ecmlogo--on-dark` on a surface that stays dark in light mode.
 
 Inside the pages (for example the centre of the Majlis seal or the Ink Ledger journey), the
 mark is the swoosh ring: HTML text over `ring.svg`, or `ring-dark.svg` on dark backgrounds.
@@ -155,16 +158,19 @@ privacy and terms links show the 404 page, and the demo-request forms cannot be 
 
 - **Domain**: canonical and Open Graph tags use `https://ecmplus.org/`. The Office add-in
   manifests use that domain, but the in-app support dialog uses `ecmpluss.com`. Confirm which is right.
-- **Logo**: the AI-powered logo is rebuilt from the product's own components; the ring and
-  `favicon.svg` are SVG renditions of the raster logo (`assets/brand/ecmplus-logo.png`). Swap in
-  official vectors when design has them.
+- **Logo**: the header and footer logo is the product's raster logo, and its dark version is
+  derived from it. The ring and `favicon.svg` are SVG renditions of the raster logo
+  (`assets/brand/ecmplus-logo.png`). Swap in official vectors, including a reversed version for
+  dark backgrounds, when design has them.
 - **Forms**: the demo-request forms post to `/contact` and need a handler.
 - **Integration logos**: `assets/brands/` holds the Microsoft Teams, Google Meet, Zoom, Gmail,
-  Google Calendar, Google Drive, OneDrive and WhatsApp marks from the CC0 "SVG Logos" set, used
-  unmodified beside each service's name. They remain their owners' trademarks, so check each
-  brand's guidelines before launch. Microsoft Office apps, Outlook, SMS and Nafath appear as text
-  or neutral glyphs. Beem has no public icon yet and shows a neutral video glyph; to use its
-  official icon, add `assets/brands/beem.svg` and replace its inline glyph with an `<img>`:
+  Google Calendar, Google Drive, OneDrive and WhatsApp marks from the CC0 "SVG Logos" set, the
+  current Microsoft Word, Excel, PowerPoint and Outlook icons from the MIT "theSVG" set, and the
+  Nafath logo used in the ECM+ product. All are used unmodified beside each service's name, and
+  ECM+ Meet carries the ECM+ logo. They remain their owners' trademarks, so check each brand's
+  guidelines before launch. SMS appears as a neutral glyph. Beem has no public icon yet and
+  shows a neutral video glyph; to use its official icon, add `assets/brands/beem.svg` and
+  replace its inline glyph with an `<img>`:
   `prov__logo--glyph` in Majlis Grid, `ticker__logo--glyph` in Ink Ledger and
   `works__logo--glyph` in Portico.
 - **Photographs** (Portico): free Unsplash photos, listed with their photographers in
