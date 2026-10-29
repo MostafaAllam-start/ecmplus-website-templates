@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECM Plus — Documents, correspondence, processes, meetings</title>
+  <meta name="description" content="ECM Plus (ECM+) unites document management, official correspondence, process automation and meetings in one bilingual suite in your data centre.">
+  <link rel="canonical" href="https://ecmplus.org/">
+  <link rel="alternate" hreflang="en" href="https://ecmplus.org/">
+  <link rel="alternate" hreflang="ar" href="https://ecmplus.org/ar/">
+  <link rel="alternate" hreflang="x-default" href="https://ecmplus.org/">
+
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("ecmplus-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { /* storage blocked: stay light */ }
+    })();
+  </script>
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#F4F2EE">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ECM Plus">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ar_SA">
+  <meta property="og:url" content="https://ecmplus.org/">
+  <meta property="og:title" content="ECM Plus — Every record, every route, every decision, governed">
+  <meta property="og:description" content="Document management, official correspondence, process automation and meetings in one bilingual suite, hosted in your organization's data centre, with every view recorded.">
+  <meta property="og:image" content="https://ecmplus.org/assets/brand/ecmplus-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ECM Plus — Every record, every route, every decision, governed">
+  <meta name="twitter:description" content="Document management, official correspondence, process automation and meetings in one bilingual suite, hosted in your organization's data centre.">
+  <meta name="twitter:image" content="https://ecmplus.org/assets/brand/ecmplus-logo.png">
+
+  <link rel="icon" href="../../assets/brand/favicon.svg" type="image/svg+xml">
+  <!-- The hero photograph is the largest paint: fetch it first, with the same candidates as the <img>. -->
+  <link rel="preload" as="image" type="image/webp" imagesrcset="../../assets/photos/portico/p01-atrium-800.webp 800w, ../../assets/photos/portico/p01-atrium-1200.webp 1200w, ../../assets/photos/portico/p01-atrium-1600.webp 1600w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Fonts load without blocking first paint; display=swap replaces the fallbacks when they arrive. -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Readex+Pro:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Readex+Pro:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../../assets/brand/ai-logo.css">
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="main.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://ecmplus.org/#organization",
+        "name": "ECM Plus",
+        "url": "https://ecmplus.org/",
+        "logo": "https://ecmplus.org/assets/brand/ecmplus-logo.png",
+        "address": { "@type": "PostalAddress", "addressCountry": "CA" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://ctcmena.com/#organization",
+        "name": "CTC MENA",
+        "url": "https://ctcmena.com",
+        "description": "Exclusive agent for ECM Plus, responsible for its Arabization."
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "ECM+ Business Suite",
+        "alternateName": "ECM Plus",
+        "url": "https://ecmplus.org/",
+        "image": "https://ecmplus.org/assets/brand/ecmplus-logo.png",
+        "description": "Document management, official correspondence, process automation and meeting management in one bilingual suite, hosted in the organization's own data centre.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "On-premises",
+        "inLanguage": ["en", "ar"],
+        "publisher": { "@id": "https://ecmplus.org/#organization" }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- Icon sprite (decorative) -->
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.6A7.5 7.5 0 0 1 9.4 4.5a7.5 7.5 0 1 0 10.1 10.1z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="1"/><path d="M4 6.5l8 6 8-6"/></symbol>
+    <symbol id="i-flow" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><path d="M12 8.5l3.5 3.5-3.5 3.5-3.5-3.5z"/><rect x="17.5" y="9.5" width="4" height="5" rx="1"/><path d="M7 12h1.5M15.5 12h2"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19c.8-3 2.9-4.5 5.5-4.5s4.7 1.5 5.5 4.5"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M15.4 14.6c.4-.1.8-.1 1.1-.1 2.2 0 3.8 1.3 4.5 3.9"/></symbol>
+    <symbol id="i-archive" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="4" rx="1"/><path d="M5 9v9.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M10 12.5h4"/></symbol>
+    <symbol id="i-audit" viewBox="0 0 24 24"><path d="M6 3.5h9l3.5 3.5v13.5H6z"/><path d="M15 3.5V7h3.5M9 11h6M9 14h6M9 17h4"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5M12 14.5V17"/></symbol>
+    <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16c.6-1.4 1.7-2 3-2s2.4.6 3 2M14 10h4M14 13h3"/></symbol>
+    <symbol id="i-sign" viewBox="0 0 24 24"><path d="M4 16.5c2.5-.3 3.6-6.5 5.5-6.5 1.6 0 .2 5 2 5 1.4 0 2-3 3.4-3 1 0 1.1 1.6 2.1 1.6.7 0 1.3-.5 3-1.6"/><path d="M4 20h16"/></symbol>
+    <symbol id="i-backup" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="2.5"/><path d="M5 6v12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3.5 7.5a1 1 0 0 1 1-1h15a1 1 0 0 1 1 1V10a2 2 0 0 0 0 4v2.5a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1V14a2 2 0 0 0 0-4z"/><path d="M7.5 10.5h5M7.5 13.5h3.5M15.5 7v10"/></symbol>
+    <symbol id="i-track" viewBox="0 0 24 24"><path d="M9.5 6.5h11M9.5 12h11M9.5 17.5h11"/><path d="M3.5 6.5l1.3 1.3 2.2-2.4M3.5 12l1.3 1.3 2.2-2.4"/><circle cx="5.2" cy="17.5" r="1.3"/></symbol>
+    <symbol id="i-idea" viewBox="0 0 24 24"><path d="M4 5.5h16V16H10l-4.5 3.5V16H4z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+    <!-- Neutral glyphs for services without a logo file; no trademark is drawn. -->
+    <symbol id="t-cam" viewBox="0 0 24 24"><rect x="3" y="6.5" width="12.5" height="11" rx="1.5"/><path d="M15.5 10.5l5-3v9l-5-3z"/></symbol>
+    <symbol id="t-sms" viewBox="0 0 24 24"><path d="M12 4.5c4.7 0 8.5 3 8.5 6.7S16.7 18 12 18c-1 0-2-.1-2.9-.4L5 19.5l1-3.5c-1.6-1.2-2.5-2.9-2.5-4.8C3.5 7.5 7.3 4.5 12 4.5z"/><path d="M8.5 11.3h.01M12 11.3h.01M15.5 11.3h.01" stroke-width="2.4"/></symbol>
+    <symbol id="t-page" viewBox="0 0 24 24"><path d="M6 3.5h8.5L18 7v13.5H6z"/><path d="M14.5 3.5V7H18M8.75 11h6.5M8.75 14h6.5M8.75 17h4"/></symbol>
+    <symbol id="t-sheet" viewBox="0 0 24 24"><rect x="4" y="4.5" width="16" height="15" rx="1"/><path d="M4 9.5h16M4 14.5h16M9.5 4.5v15M14.75 9.5v10"/></symbol>
+    <symbol id="t-slide" viewBox="0 0 24 24"><path d="M2.5 4.5h19"/><rect x="4" y="4.5" width="16" height="11" rx=".5"/><path d="M12 15.5v3M8.5 20.5l3.5-2 3.5 2M7.5 12.5l3-3 2 2 4-4"/></symbol>
+    <!-- Illustrative 14×14 trace-code pattern; not an encoded code. -->
+    <symbol id="dm" viewBox="0 0 16 16">
+      <rect x="1" y="1" width="1" height="14"/><rect x="1" y="14" width="14" height="1"/>
+      <rect x="3" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="9" y="1" width="1" height="1"/><rect x="11" y="1" width="1" height="1"/><rect x="13" y="1" width="1" height="1"/>
+      <rect x="14" y="2" width="1" height="1"/><rect x="14" y="4" width="1" height="1"/><rect x="14" y="6" width="1" height="1"/><rect x="14" y="8" width="1" height="1"/><rect x="14" y="10" width="1" height="1"/><rect x="14" y="12" width="1" height="1"/>
+      <rect x="2" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="8" y="2" width="1" height="1"/><rect x="10" y="2" width="1" height="1"/><rect x="13" y="2" width="1" height="1"/>
+      <rect x="2" y="3" width="2" height="1"/><rect x="5" y="3" width="2" height="1"/><rect x="10" y="3" width="3" height="1"/>
+      <rect x="3" y="4" width="2" height="1"/><rect x="7" y="4" width="3" height="1"/><rect x="11" y="4" width="2" height="1"/>
+      <rect x="4" y="5" width="2" height="1"/><rect x="8" y="5" width="3" height="1"/><rect x="13" y="5" width="1" height="1"/>
+      <rect x="2" y="6" width="3" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="10" y="6" width="2" height="1"/>
+      <rect x="3" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="8" y="7" width="2" height="1"/><rect x="11" y="7" width="2" height="1"/>
+      <rect x="2" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="6" y="8" width="2" height="1"/><rect x="11" y="8" width="3" height="1"/>
+      <rect x="2" y="9" width="1" height="1"/><rect x="5" y="9" width="2" height="1"/><rect x="10" y="9" width="1" height="1"/><rect x="12" y="9" width="2" height="1"/>
+      <rect x="2" y="10" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="7" y="10" width="4" height="1"/><rect x="12" y="10" width="1" height="1"/>
+      <rect x="5" y="11" width="1" height="1"/><rect x="7" y="11" width="1" height="1"/><rect x="10" y="11" width="4" height="1"/>
+      <rect x="3" y="12" width="1" height="1"/><rect x="6" y="12" width="3" height="1"/><rect x="11" y="12" width="1" height="1"/><rect x="13" y="12" width="1" height="1"/>
+      <rect x="3" y="13" width="3" height="1"/><rect x="8" y="13" width="2" height="1"/>
+    </symbol>
+  </svg>
+
+  <!-- ============ Header ============ -->
+  <header class="site-header">
+    <div class="wrap header__bar">
+      <a class="brand ailogo" href="./" aria-label="ECM+ Business Suite, home page">
+        <span class="ailogo__word" aria-hidden="true">ECM+</span>
+        <span class="ailogo__chip" aria-hidden="true"><svg class="ailogo__icon" viewBox="0 0 24 24" focusable="false"><g class="ailogo__spin"><rect x="7" y="7" width="10" height="10" rx="2"/><circle cx="12" cy="2" r="1.5"/><circle cx="12" cy="22" r="1.5"/><circle cx="2" cy="12" r="1.5"/><circle cx="22" cy="12" r="1.5"/><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.5 6.5 8 8M17.5 6.5 16 8M6.5 17.5 8 16M17.5 17.5 16 16"/></g><text x="12" y="14.4" text-anchor="middle">AI</text></svg></span>
+      </a>
+
+      <div class="header__quick">
+        <a class="lang-switch" href="ar/" lang="ar" hreflang="ar">العربية</a>
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Dark mode" title="Dark mode">
+          <svg class="icon theme-toggle__sun" aria-hidden="true" focusable="false"><use href="#i-sun"/></svg>
+          <svg class="icon theme-toggle__moon" aria-hidden="true" focusable="false"><use href="#i-moon"/></svg>
+        </button>
+      </div>
+
+      <button class="nav-toggle js-only" type="button" aria-expanded="false" aria-controls="site-panel">
+        <span class="nav-toggle__bars" aria-hidden="true"><span></span></span>
+        <span>Menu</span>
+      </button>
+
+      <div class="header__panel" id="site-panel">
+        <nav class="nav" aria-label="Main navigation">
+          <ul class="nav__list">
+            <li class="nav__item"><a class="nav__link" href="#suite">Suite</a></li>
+            <li class="nav__item"><a class="nav__link" href="#security">Governance</a></li>
+            <li class="nav__item"><a class="nav__link" href="#platform">Deployment</a></li>
+            <li class="nav__item"><a class="nav__link" href="#sectors">Sectors</a></li>
+            <li class="nav__item" data-menu>
+              <a class="nav__link nojs-only" href="/support">Support</a>
+              <button class="nav__link nav__trigger js-only" type="button" aria-expanded="false" aria-controls="menu-support">
+                Support<svg class="icon nav__chev" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg>
+              </button>
+              <div class="menu-panel dropdown" id="menu-support">
+                <p class="dropdown__h">Client portal</p>
+                <ul class="dropdown__list">
+                  <li><a href="/support"><span class="dropdown__t">Support centre</span><span class="dropdown__d">The starting point for ECM+ support</span></a></li>
+                  <li><a href="/support/login"><span class="dropdown__t">Sign in to the client portal</span><span class="dropdown__d">Your organization’s support tickets in one place</span></a></li>
+                  <li><a href="/support/tickets/new"><span class="dropdown__t">Submit a support ticket</span><span class="dropdown__d">Contact the ECM+ support team</span></a></li>
+                  <li><a href="/support/tickets"><span class="dropdown__t">Track your tickets</span><span class="dropdown__d">Follow each reply until resolution</span></a></li>
+                  <li><a href="/support/suggestions"><span class="dropdown__t">Submit a suggestion or complaint</span><span class="dropdown__d">Recorded and tracked like support tickets</span></a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="header__utility">
+          <a class="lang-switch" href="ar/" lang="ar" hreflang="ar">العربية</a>
+          <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Dark mode" title="Dark mode">
+            <svg class="icon theme-toggle__sun" aria-hidden="true" focusable="false"><use href="#i-sun"/></svg>
+            <svg class="icon theme-toggle__moon" aria-hidden="true" focusable="false"><use href="#i-moon"/></svg>
+          </button>
+          <a class="btn btn--gold" href="#contact">Request a demo</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- ============ 1. Hero ============ -->
+    <section class="hero on-photo" aria-labelledby="hero-title">
+      <div class="ph ph--bleed hero__ph">
+        <img srcset="../../assets/photos/portico/p01-atrium-800.webp 800w, ../../assets/photos/portico/p01-atrium-1200.webp 1200w, ../../assets/photos/portico/p01-atrium-1600.webp 1600w" sizes="100vw" src="../../assets/photos/portico/p01-atrium-1600.webp" width="1600" height="1067" alt="" decoding="async" fetchpriority="high">
+      </div>
+      <div class="scrim" aria-hidden="true"></div>
+
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow" data-reveal><span class="eyebrow__no"><bdi>ECM+</bdi></span>Enterprise content management</p>
+          <h1 id="hero-title" data-reveal>Every record, every route, every decision — governed in one suite.</h1>
+          <p class="hero__lead" data-reveal>One suite for your organization’s documents, correspondence, processes and meetings — in Arabic and English, inside your own data centre.</p>
+          <div class="hero__ctas" data-reveal>
+            <a class="btn btn--gold btn--lg" href="#contact">Request a demo</a>
+            <a class="btn btn--ghost-light btn--lg" href="#suite">Explore the suite</a>
+          </div>
+        </div>
+
+        <div class="hero__visual plate" data-reveal>
+          <figure class="journey" role="img" aria-label="Illustration of one transaction across ECM+: a supply contract approval request is registered and routed as incoming correspondence, approved through a process, decided by a committee and recorded in the minutes, then archived in Documents with access permissions and retention rules. Every view is recorded under an access trace code.">
+            <figcaption class="journey__caption">One transaction across <bdi>ECM+</bdi></figcaption>
+            <div class="journey__stage" aria-hidden="true">
+              <svg class="journey__routes journey__routes--top" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false">
+                <path class="journey__route" d="M44 62 H45 Q46.5 62 46.5 80 V100"/>
+                <path class="journey__route" d="M56 62 H55 Q53.5 62 53.5 80 V100"/>
+                <path class="journey__pulse" style="--k:0" pathLength="100" d="M44 62 H45 Q46.5 62 46.5 80 V100"/>
+                <path class="journey__pulse" style="--k:1" pathLength="100" d="M56 62 H55 Q53.5 62 53.5 80 V100"/>
+              </svg>
+              <svg class="journey__routes journey__routes--bottom" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false">
+                <path class="journey__route" d="M56 38 H55 Q53.5 38 53.5 20 V0"/>
+                <path class="journey__route" d="M44 38 H45 Q46.5 38 46.5 20 V0"/>
+                <path class="journey__pulse" style="--k:2" pathLength="100" d="M56 38 H55 Q53.5 38 53.5 20 V0"/>
+                <path class="journey__pulse" style="--k:3" pathLength="100" d="M44 38 H45 Q46.5 38 46.5 20 V0"/>
+              </svg>
+
+              <div class="journey__card">
+                <div class="journey__head">
+                  <span class="journey__mark">
+                    <img class="ring--light" src="../../assets/brand/ring.svg" alt="" width="200" height="116">
+                    <img class="ring--dark" src="../../assets/brand/ring-dark.svg" alt="" width="200" height="116">
+                  </span>
+                  <span class="journey__label">Transaction record</span>
+                  <bdi class="journey__serial">IN/2026/00418</bdi>
+                </div>
+                <p class="journey__title">Supply contract approval request</p>
+                <ul class="journey__chips">
+                  <li>Incoming</li>
+                  <li>Confidential</li>
+                  <li>Contract</li>
+                </ul>
+                <ol class="journey__steps">
+                  <li>Registered</li>
+                  <li>Approved</li>
+                  <li>Committee decision</li>
+                  <li>Archived</li>
+                </ol>
+                <div class="journey__foot">
+                  <svg class="dm journey__dm" viewBox="0 0 16 16" focusable="false"><use href="#dm"/></svg>
+                  <span>Access trace code <bdi>TR-7F3A-21C9</bdi> · every view is recorded</span>
+                </div>
+              </div>
+
+              <div class="journey__node journey__node--ts" style="--k:0">
+                <span class="journey__icon"><svg class="icon" focusable="false"><use href="#i-mail"/></svg></span>
+                <span class="journey__module">Correspondence <bdi class="journey__time" dir="ltr">09:12</bdi></span>
+                <span class="journey__event">Request registered and routed</span>
+              </div>
+              <div class="journey__node journey__node--te" style="--k:1">
+                <span class="journey__icon"><svg class="icon" focusable="false"><use href="#i-flow"/></svg></span>
+                <span class="journey__module">Processes <bdi class="journey__time" dir="ltr">11:40</bdi></span>
+                <span class="journey__event">Approval completed through the process</span>
+              </div>
+              <div class="journey__node journey__node--be" style="--k:2">
+                <span class="journey__icon"><svg class="icon" focusable="false"><use href="#i-people"/></svg></span>
+                <span class="journey__module">Meetings <bdi class="journey__time" dir="ltr">13:05</bdi></span>
+                <span class="journey__event">Committee decision recorded in the minutes</span>
+              </div>
+              <div class="journey__node journey__node--bs" style="--k:3">
+                <span class="journey__icon"><svg class="icon" focusable="false"><use href="#i-archive"/></svg></span>
+                <span class="journey__module">Documents <bdi class="journey__time" dir="ltr">14:20</bdi></span>
+                <span class="journey__event">Contract archived with permissions and retention rules</span>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. Four modules ============ -->
+    <section class="section suite" id="suite" aria-labelledby="suite-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__no">01</span>The suite</p>
+          <h2 id="suite-title">4 integrated modules with a single sign-in.</h2>
+          <p class="section-lead">ECM+ provides one governed environment for documents, correspondence, processes and meetings. Each module is licensed separately; unlicensed modules remain visible but inactive until your organization requires them.</p>
+        </div>
+
+        <ul class="cards">
+          <li class="card" id="documents" data-reveal>
+            <p class="card__tab"><bdi>DMS</bdi></p>
+            <div class="ph ph--reveal card__ph">
+              <img srcset="../../assets/photos/portico/p02-archive-800.webp 800w, ../../assets/photos/portico/p02-archive-1200.webp 1200w, ../../assets/photos/portico/p02-archive-1600.webp 1600w" sizes="(min-width: 1180px) 300px, (min-width: 640px) 50vw, 100vw" src="../../assets/photos/portico/p02-archive-800.webp" width="1600" height="900" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="card__plate">
+              <p class="card__verb">Archive · <span lang="ar" dir="rtl">أرشفة</span></p>
+              <h3 class="card__name">Documents</h3>
+              <p class="card__line">Capture, classify, version and retrieve every document, with search down to the page.</p>
+              <ul class="card__caps">
+                <li>Document types with their own fields</li>
+                <li>Version history with restore at any time</li>
+                <li>Search inside files, with results down to the page</li>
+              </ul>
+              <a class="card__more link-arrow" href="#stage-archive">View lifecycle stage<span class="sr-only">: Archive</span><svg class="icon flip" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+            </div>
+          </li>
+
+          <li class="card" id="correspondence" data-reveal>
+            <p class="card__tab"><bdi>CMS</bdi></p>
+            <div class="ph ph--reveal card__ph">
+              <img srcset="../../assets/photos/portico/p03-correspondence-800.webp 800w, ../../assets/photos/portico/p03-correspondence-1200.webp 1200w, ../../assets/photos/portico/p03-correspondence-1600.webp 1600w" sizes="(min-width: 1180px) 300px, (min-width: 640px) 50vw, 100vw" src="../../assets/photos/portico/p03-correspondence-800.webp" width="1600" height="1067" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="card__plate">
+              <p class="card__verb">Correspond · <span lang="ar" dir="rtl">مراسلة</span></p>
+              <h3 class="card__name">Correspondence</h3>
+              <p class="card__line">Register, route, approve and dispatch official correspondence with a complete record of every step.</p>
+              <ul class="card__caps">
+                <li>Serial numbers, parties, priority and due dates</li>
+                <li>Review, then approval or return, before dispatch</li>
+                <li>A visual record of every step taken</li>
+              </ul>
+              <a class="card__more link-arrow" href="#stage-register">View lifecycle stage<span class="sr-only">: Register</span><svg class="icon flip" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+            </div>
+          </li>
+
+          <li class="card" id="processes" data-reveal>
+            <p class="card__tab"><bdi>BPM</bdi></p>
+            <div class="ph ph--reveal card__ph card__ph--corridor">
+              <img srcset="../../assets/photos/portico/p04-corridor-800.webp 800w, ../../assets/photos/portico/p04-corridor-1200.webp 1200w, ../../assets/photos/portico/p04-corridor-1600.webp 1600w" sizes="(min-width: 1180px) 300px, (min-width: 640px) 50vw, 100vw" src="../../assets/photos/portico/p04-corridor-800.webp" width="1600" height="1068" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="card__plate">
+              <p class="card__verb">Automate · <span lang="ar" dir="rtl">أتمتة</span></p>
+              <h3 class="card__name">Processes</h3>
+              <p class="card__line">Design processes in a visual designer, build forms, and run them with deadlines and escalation.</p>
+              <ul class="card__caps">
+                <li>Step-by-step testing before go-live</li>
+                <li>Drag-and-drop form builder</li>
+                <li>Automatic escalation when a deadline is missed</li>
+              </ul>
+              <a class="card__more link-arrow" href="#stage-route">View lifecycle stage<span class="sr-only">: Route</span><svg class="icon flip" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+            </div>
+          </li>
+
+          <li class="card" id="meetings" data-reveal>
+            <p class="card__tab"><bdi>MMS</bdi></p>
+            <div class="ph ph--reveal card__ph card__ph--boardroom">
+              <img srcset="../../assets/photos/portico/p05-boardroom-800.webp 800w, ../../assets/photos/portico/p05-boardroom-1200.webp 1200w, ../../assets/photos/portico/p05-boardroom-1600.webp 1600w" sizes="(min-width: 1180px) 300px, (min-width: 640px) 50vw, 100vw" src="../../assets/photos/portico/p05-boardroom-800.webp" width="1600" height="1067" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="card__plate">
+              <p class="card__verb">Convene · <span lang="ar" dir="rtl">اجتماع</span></p>
+              <h3 class="card__name">Meetings</h3>
+              <p class="card__line">Manage committees from the agenda to signed minutes and tracked action items.</p>
+              <ul class="card__caps">
+                <li>Room booking with clash detection</li>
+                <li>Voting on each agenda item</li>
+                <li>Minutes circulated for signature</li>
+              </ul>
+              <a class="card__more link-arrow" href="#stage-approve">View lifecycle stage<span class="sr-only">: Approve</span><svg class="icon flip" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 3. Lifecycle ============ -->
+    <section class="section lifecycle" id="lifecycle" aria-labelledby="lifecycle-title">
+      <div class="wrap lifecycle__grid">
+        <div class="section-head lifecycle__head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__no">02</span>Lifecycle</p>
+          <h2 id="lifecycle-title">The suite governs each record from capture to retention.</h2>
+          <p class="section-lead">The information lifecycle comprises 6 stages. ECM+ records every action, from the arrival of a file to the application of a retention rule.</p>
+        </div>
+
+        <div class="lifecycle__plate" data-reveal>
+          <div class="ledger">
+            <div class="ledger__track" aria-hidden="true">
+              <div class="ledger__slot"><span class="bookmark"></span></div>
+            </div>
+            <ol class="ledger__rows">
+              <li class="ledger__row" id="stage-capture">
+                <span class="ledger__no" aria-hidden="true">01</span>
+                <div class="ledger__body">
+                  <h3 class="ledger__stage">Capture</h3>
+                  <p class="ledger__entry">Files are captured from devices, scanners, templates, Google Drive or OneDrive, or as voice and video notes.</p>
+                  <ul class="ledger__mods" aria-label="Modules"><li class="chip">DMS</li></ul>
+                </div>
+              </li>
+              <li class="ledger__row" id="stage-register">
+                <span class="ledger__no" aria-hidden="true">02</span>
+                <div class="ledger__body">
+                  <h3 class="ledger__stage">Register</h3>
+                  <p class="ledger__entry">Incoming, outgoing and internal correspondence receives a serial number, parties, priority, sensitivity and a due date.</p>
+                  <ul class="ledger__mods" aria-label="Modules"><li class="chip">CMS</li></ul>
+                </div>
+              </li>
+              <li class="ledger__row" id="stage-route">
+                <span class="ledger__no" aria-hidden="true">03</span>
+                <div class="ledger__body">
+                  <h3 class="ledger__stage">Route</h3>
+                  <p class="ledger__entry">Correspondence is routed to employees, groups, departments or external parties, and overdue process steps escalate automatically.</p>
+                  <ul class="ledger__mods" aria-label="Modules"><li class="chip">CMS</li><li class="chip">BPM</li></ul>
+                </div>
+              </li>
+              <li class="ledger__row" id="stage-approve">
+                <span class="ledger__no" aria-hidden="true">04</span>
+                <div class="ledger__body">
+                  <h3 class="ledger__stage">Approve</h3>
+                  <p class="ledger__entry">Correspondence is reviewed and then approved or returned, and committees circulate their minutes for digital signature.</p>
+                  <ul class="ledger__mods" aria-label="Modules"><li class="chip">CMS</li><li class="chip">MMS</li></ul>
+                </div>
+              </li>
+              <li class="ledger__row" id="stage-archive">
+                <span class="ledger__no" aria-hidden="true">05</span>
+                <div class="ledger__body">
+                  <h3 class="ledger__stage">Archive</h3>
+                  <p class="ledger__entry">Documents are filed with 9 types of access permissions, typed metadata and versions that can be restored.</p>
+                  <ul class="ledger__mods" aria-label="Modules"><li class="chip">DMS</li></ul>
+                </div>
+              </li>
+              <li class="ledger__row" id="stage-retain">
+                <span class="ledger__no" aria-hidden="true">06</span>
+                <div class="ledger__body">
+                  <h3 class="ledger__stage">Retain</h3>
+                  <p class="ledger__entry">Retention rules schedule deletion or notification actions, and the audit trail records every view and download.</p>
+                  <ul class="ledger__mods" aria-label="Modules"><li class="chip">DMS</li><li class="chip">Governance</li></ul>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. Governance & security ============ -->
+    <section class="section governance" id="security" aria-labelledby="security-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__no">03</span>Governance and security</p>
+          <h2 id="security-title">Every view and download is traceable.</h2>
+          <p class="section-lead">Each protected view or download carries a unique access trace code. Scanning the code on a leaked page identifies the user, the time, the channel, the device and the network address.</p>
+        </div>
+
+        <div class="governance__grid">
+          <div class="governance__media">
+            <div class="ph ph--reveal governance__ph">
+              <img srcset="../../assets/photos/portico/p06-folders-800.webp 800w, ../../assets/photos/portico/p06-folders-1200.webp 1200w, ../../assets/photos/portico/p06-folders-1600.webp 1600w" sizes="(min-width: 1180px) 700px, 100vw" src="../../assets/photos/portico/p06-folders-800.webp" width="1600" height="869" alt="" loading="lazy" decoding="async">
+            </div>
+
+            <figure class="evidence" data-evidence>
+              <div class="evidence__stage" role="img" aria-label="Illustration: a document page carries its access trace code as a forensic watermark. Scanning the code retrieves the access record, showing the user, time, channel, network address and device.">
+                <div class="paper">
+                  <div class="paper__head">
+                    <span class="paper__stamp">Confidential</span>
+                    <span class="paper__ref">Annex B · p. 3 / 7</span>
+                  </div>
+                  <p class="paper__title">Supply contract — Annex B</p>
+                  <div class="paper__lines">
+                    <span style="--w:96%"></span><span style="--w:88%"></span><span style="--w:92%"></span><span style="--w:64%"></span>
+                  </div>
+                  <div class="paper__table">
+                    <span></span><span></span><span></span>
+                    <span></span><span></span><span></span>
+                    <span></span><span></span><span></span>
+                  </div>
+                  <div class="paper__lines">
+                    <span style="--w:90%"></span><span style="--w:52%"></span>
+                  </div>
+                  <div class="paper__mark" data-trace-from>
+                    <svg class="paper__markface" viewBox="0 0 112 76" aria-hidden="true" focusable="false">
+                      <use class="dm-ink" href="#dm" x="42" y="8" width="28" height="28"/>
+                      <text class="dm-ink" x="56" y="52" text-anchor="middle">TR-7F3A-21C9</text>
+                      <path class="brackets" d="M30 10V2h8M74 2h8v8M82 50v8h-8M38 58h-8v-8"/>
+                    </svg>
+                    <span class="paper__scan"></span>
+                  </div>
+                  <div class="paper__foot">
+                    <div class="paper__sign">
+                      <svg class="paper__sigmark" viewBox="0 0 120 36" aria-hidden="true" focusable="false"><path d="M4 26c10-2 14-20 22-20 7 0 0 18 8 18 6 0 8-12 14-12 5 0 4 9 9 9 4 0 7-4 11-7M70 22c6 0 10-6 16-6 4 0 3 6 8 6 4 0 9-3 14-5"/></svg>
+                      <span class="paper__sigline"></span>
+                      <span class="paper__sigcap">Digitally signed</span>
+                    </div>
+                  </div>
+                </div>
+
+                <svg class="trace" aria-hidden="true" focusable="false">
+                  <path class="trace__path" pathLength="1"/>
+                  <circle class="trace__dot trace__dot--a" r="3.5" cx="-10" cy="-10"/>
+                  <circle class="trace__dot trace__dot--b" r="3.5" cx="-10" cy="-10"/>
+                </svg>
+
+                <div class="tracecard" data-trace-to>
+                  <p class="tracecard__eyebrow">Access record · retrieved</p>
+                  <p class="tracecard__id">TR-7F3A-21C9</p>
+                  <dl class="tracecard__rows">
+                    <div><dt>User</dt><dd>user@org</dd></div>
+                    <div><dt>Time</dt><dd>2026-10-18 09:41</dd></div>
+                    <div><dt>Channel</dt><dd>Web viewer</dd></div>
+                    <div><dt>Network address</dt><dd>10.0.4.21</dd></div>
+                    <div><dt>Device</dt><dd>Windows · Chrome</dd></div>
+                  </dl>
+                  <p class="tracecard__foot">Download · 1 of 17 traced access types</p>
+                </div>
+              </div>
+              <figcaption class="evidence__cap">Illustration only. The code shown cannot be scanned.</figcaption>
+            </figure>
+          </div>
+
+          <div class="governance__aside">
+            <ul class="safeguards">
+              <li data-reveal>
+                <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-audit"/></svg>Audit trail</h3>
+                <p>Every addition, view, edit, download, print, share, deletion and lock is recorded.</p>
+              </li>
+              <li data-reveal>
+                <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-lock"/></svg>Two-factor authentication and Nafath</h3>
+                <p>Verification codes are sent by WhatsApp or email. Nafath sign-in uses the Saudi national identity, alone or together with a password.</p>
+              </li>
+              <li data-reveal>
+                <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-sign"/></svg>Digital signatures</h3>
+                <p>Employees sign digitally, and forms and minutes accept drawn or saved signatures.</p>
+              </li>
+              <li data-reveal>
+                <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-backup"/></svg>Backups</h3>
+                <p>Scheduled backups and named snapshots can be restored, and old copies are removed on schedule.</p>
+              </li>
+            </ul>
+            <a class="btn btn--ghost-gold" href="#contact" data-prefill="Please contact us about ECM+ security and governance." data-reveal>Contact our team<svg class="icon flip" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. Deployment & integration ============ -->
+    <section class="section deploy" id="platform" aria-labelledby="platform-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__no">04</span>Deployment and integration</p>
+          <h2 id="platform-title">ECM+ runs in your organization’s data centre.</h2>
+          <p class="section-lead">Your organization’s documents remain under its control at all times. The suite integrates with the systems already in use, and each connection receives only the access your organization grants.</p>
+        </div>
+
+        <div class="deploy__grid">
+          <div class="deploy__plate on-dark" data-reveal>
+            <div class="seal" role="img" aria-label="Illustration: the four functions of the suite, Correspond, Automate, Convene and Archive, exchange signals with ECM+ at the centre.">
+              <svg class="seal-net" viewBox="-200 -150 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+                <defs>
+                  <pattern id="seal-dots" width="14" height="14" x="-7" y="-7" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r=".8"/></pattern>
+                  <radialGradient id="seal-fade" r=".6"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+                  <mask id="seal-mask"><rect x="-200" y="-150" width="400" height="300" fill="url(#seal-fade)"/></mask>
+                  <radialGradient id="seal-halo" r=".5"><stop offset="0" stop-color="currentColor" stop-opacity=".26"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></radialGradient>
+                </defs>
+                <g mask="url(#seal-mask)">
+                  <rect class="seal-net__dots" x="-200" y="-150" width="400" height="300" fill="url(#seal-dots)"/>
+                  <path class="seal-net__mesh" d="M72.1 -29.8L29.8 -72.1M29.8 -72.1L-29.8 -72.1M-29.8 -72.1L-72.1 -29.8M-72.1 -29.8L-72.1 29.8M-72.1 29.8L-29.8 72.1M-29.8 72.1L29.8 72.1M29.8 72.1L72.1 29.8M72.1 29.8L72.1 -29.8M72.1 -29.8L109.1 -63M29.8 -72.1L63 -109.1M-29.8 -72.1L-63 -109.1M-72.1 -29.8L-109.1 -63M-72.1 29.8L-109.1 63M-29.8 72.1L-63 109.1M29.8 72.1L63 109.1M72.1 29.8L109.1 63M126 0L171.9 -46.1M126 0L171.9 46.1M109.1 -63L171.9 -46.1M109.1 -63L125.9 -125.9M63 -109.1L125.9 -125.9M63 -109.1L46.1 -171.9M0 -126L46.1 -171.9M0 -126L-46.1 -171.9M-63 -109.1L-46.1 -171.9M-63 -109.1L-125.9 -125.9M-109.1 -63L-125.9 -125.9M-109.1 -63L-171.9 -46.1M-126 0L-171.9 -46.1M-126 0L-171.9 46.1M-109.1 63L-171.9 46.1M-109.1 63L-125.9 125.9M-63 109.1L-125.9 125.9M-63 109.1L-46.1 171.9M0 126L-46.1 171.9M0 126L46.1 171.9M63 109.1L46.1 171.9M63 109.1L125.9 125.9M109.1 63L125.9 125.9M109.1 63L171.9 46.1"/>
+                  <path class="seal-net__traces" d="M55 55L92 92H200M-55 55L-92 92H-200M55 -55L92 -92H200M-55 -55L-92 -92H-200"/>
+                  <g class="seal-net__nodes"><circle class="n n--live" cx="72.1" cy="-29.8" r="2.6"/><circle class="n" cx="29.8" cy="-72.1" r="2.6"/><circle class="n" cx="-29.8" cy="-72.1" r="2.6"/><circle class="n n--live" cx="-72.1" cy="-29.8" r="2.6"/><circle class="n" cx="-72.1" cy="29.8" r="2.6"/><circle class="n" cx="-29.8" cy="72.1" r="2.6"/><circle class="n n--live" cx="29.8" cy="72.1" r="2.6"/><circle class="n" cx="72.1" cy="29.8" r="2.6"/><circle class="n" cx="126" cy="0" r="2"/><circle class="n n--live" cx="109.1" cy="-63" r="2"/><circle class="n" cx="63" cy="-109.1" r="2"/><circle class="n" cx="0" cy="-126" r="2"/><circle class="n" cx="-63" cy="-109.1" r="2"/><circle class="n n--live" cx="-109.1" cy="-63" r="2"/><circle class="n" cx="-126" cy="0" r="2"/><circle class="n" cx="-109.1" cy="63" r="2"/><circle class="n" cx="-63" cy="109.1" r="2"/><circle class="n n--live" cx="0" cy="126" r="2"/><circle class="n" cx="63" cy="109.1" r="2"/><circle class="n" cx="109.1" cy="63" r="2"/><circle class="pad" cx="150" cy="92" r="3"/><circle class="pad" cx="-150" cy="92" r="3"/><circle class="pad" cx="150" cy="-92" r="3"/><circle class="pad" cx="-150" cy="-92" r="3"/></g>
+                </g>
+                <circle class="seal-net__halo" r="96" fill="url(#seal-halo)"/>
+                <g class="seal-net__orbit"><circle class="ring" r="92"/><circle class="sat" cx="92" cy="0" r="2.8"/><circle class="sat" cx="-65" cy="65" r="2"/></g>
+                <ellipse class="seal-net__ping" rx="70" ry="44"/>
+                <ellipse class="seal-net__plate" rx="64" ry="40"/>
+              </svg>
+              <span class="mark seal__mark" aria-hidden="true">
+                <img src="../../assets/brand/ring-dark.svg" alt="" width="200" height="116" loading="lazy">
+                <span class="mark__word">ECM+</span>
+              </span>
+              <svg class="seal-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path class="seal-links__line" vector-effect="non-scaling-stroke" d="M18 30C18 37 45 33 45 40M50 30V40M82 30C82 37 55 33 55 40M50 72V60"/>
+                <g class="seal-links__pulses">
+                  <path class="in" style="--k:0" vector-effect="non-scaling-stroke" pathLength="100" d="M18 30C18 37 45 33 45 40"/><path class="in" style="--k:1" vector-effect="non-scaling-stroke" pathLength="100" d="M50 30V40"/><path class="in" style="--k:2" vector-effect="non-scaling-stroke" pathLength="100" d="M82 30C82 37 55 33 55 40"/><path class="in" style="--k:3" vector-effect="non-scaling-stroke" pathLength="100" d="M50 72V60"/>
+                  <path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M45 40C45 33 18 37 18 30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M50 40V30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M55 40C55 33 82 37 82 30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M50 60V72"/>
+                </g>
+              </svg>
+              <div class="seal__nodes" aria-hidden="true">
+                <span class="seal__node seal__node--correspond"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span class="seal__label">Correspond</span></span>
+                <span class="seal__node seal__node--automate"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" focusable="false"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.5 6h7M7.3 8.2l3.5 7.5M16.7 8.2l-3.5 7.5"/></svg></span><span class="seal__label">Automate</span></span>
+                <span class="seal__node seal__node--convene"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" focusable="false"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/></svg></span><span class="seal__label">Convene</span></span>
+                <span class="seal__node seal__node--archive"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" focusable="false"><path d="M3 4h18v4H3zM5 8v12h14V8M10 12h4"/></svg></span><span class="seal__label">Archive</span></span>
+              </div>
+            </div>
+
+            <div class="works">
+              <h3 class="works__h" id="works-title">Works with</h3>
+              <!-- Logos are their owners' trademarks, shown unmodified beside each name; services without a logo file take a neutral glyph. -->
+              <ul class="works__list" aria-labelledby="works-title">
+                <li><img class="works__logo" src="../../assets/brands/microsoft-teams.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Microsoft Teams</li>
+                <li><img class="works__logo" src="../../assets/brands/google-meet.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Google Meet</li>
+                <li><img class="works__logo" src="../../assets/brands/zoom.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Zoom</li>
+                <li><svg class="icon works__logo works__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-cam"/></svg>Beem</li>
+                <li class="is-own"><img class="works__logo" src="../../assets/brand/favicon.svg" alt="" width="18" height="18" loading="lazy" decoding="async">ECM+ Meet</li>
+                <li><img class="works__logo" src="../../assets/brands/gmail.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Gmail</li>
+                <li><svg class="icon works__logo works__logo--glyph" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>Outlook</li>
+                <li><img class="works__logo" src="../../assets/brands/google-calendar.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Google Calendar</li>
+                <li><img class="works__logo" src="../../assets/brands/google-drive.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Google Drive</li>
+                <li><img class="works__logo" src="../../assets/brands/onedrive.svg" alt="" width="18" height="18" loading="lazy" decoding="async">OneDrive</li>
+                <li><img class="works__logo" src="../../assets/brands/whatsapp.svg" alt="" width="18" height="18" loading="lazy" decoding="async">WhatsApp</li>
+                <li><svg class="icon works__logo works__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-sms"/></svg>SMS</li>
+                <li><svg class="icon works__logo works__logo--glyph" aria-hidden="true" focusable="false"><use href="#i-id"/></svg>Nafath</li>
+                <li><svg class="icon works__logo works__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-page"/></svg>Microsoft Word</li>
+                <li><svg class="icon works__logo works__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-sheet"/></svg>Excel</li>
+                <li><svg class="icon works__logo works__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-slide"/></svg>PowerPoint</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="deploy__aside">
+            <div class="ph ph--reveal deploy__ph">
+              <img srcset="../../assets/photos/portico/p07-headquarters-800.webp 800w, ../../assets/photos/portico/p07-headquarters-1200.webp 1200w, ../../assets/photos/portico/p07-headquarters-1600.webp 1600w" sizes="(min-width: 1180px) 480px, 100vw" src="../../assets/photos/portico/p07-headquarters-800.webp" width="1600" height="973" alt="" loading="lazy" decoding="async">
+            </div>
+            <dl class="facts">
+              <div id="platform-datacentre" data-reveal><dt>Data under your control</dt><dd>ECM+ runs in your organization’s data centre, so your documents remain under your control.</dd></div>
+              <div id="platform-connect" data-reveal><dt>Access limited to what you grant</dt><dd>Other systems connect securely, and each connection is limited to the document types and folders you specify.</dd></div>
+              <div id="platform-licensing" data-reveal><dt>Separate licensing</dt><dd>Each module is licensed separately; unlicensed modules remain visible but inactive until required.</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. Sectors ============ -->
+    <section class="sectors" id="sectors" aria-labelledby="sectors-title">
+      <div class="band on-photo">
+        <div class="ph ph--bleed band__ph">
+          <img srcset="../../assets/photos/portico/p08-skyline-800.webp 800w, ../../assets/photos/portico/p08-skyline-1200.webp 1200w, ../../assets/photos/portico/p08-skyline-1600.webp 1600w" sizes="100vw" src="../../assets/photos/portico/p08-skyline-1600.webp" width="1600" height="1067" alt="" loading="lazy" decoding="async">
+        </div>
+        <div class="scrim" aria-hidden="true"></div>
+        <div class="wrap band__copy" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__no">05</span>Sectors</p>
+          <h2 id="sectors-title">How the suite applies to each sector.</h2>
+          <p class="section-lead">The following example scenarios illustrate the capabilities of the suite. They are not customer case studies.</p>
+        </div>
+      </div>
+
+      <div class="wrap sectors__wrap">
+        <div class="sectors__scroller" role="region" aria-label="Example scenarios by sector" tabindex="0" data-reveal-group>
+          <ul class="sectors__list">
+            <li class="sector" id="sector-government" data-reveal>
+              <p class="sector__label">Example scenario</p>
+              <h3 class="sector__title">Government and municipalities</h3>
+              <p class="sector__text">Serial-numbered correspondence passes through review before external dispatch. Staff sign in with Nafath, dates appear in the Hijri calendar, and committees conclude with signed minutes.</p>
+            </li>
+            <li class="sector" id="sector-finance" data-reveal>
+              <p class="sector__label">Example scenario</p>
+              <h3 class="sector__title">Banking and finance</h3>
+              <p class="sector__text">Retention rules run on schedule, and the forensic watermark traces each protected view. Approvals follow defined deadlines, and the audit trail is complete.</p>
+            </li>
+            <li class="sector" id="sector-healthcare" data-reveal>
+              <p class="sector__label">Example scenario</p>
+              <h3 class="sector__title">Healthcare</h3>
+              <p class="sector__text">Structured records hold the required fields, and sensitive files remain locked behind a one-time verification code. Every download carries an access trace code.</p>
+            </li>
+            <li class="sector" id="sector-education" data-reveal>
+              <p class="sector__label">Example scenario</p>
+              <h3 class="sector__title">Education</h3>
+              <p class="sector__text">Councils and committees meet, vote and sign their minutes. Their archive retrieves any document down to the page.</p>
+            </li>
+            <li class="sector" id="sector-energy" data-reveal>
+              <p class="sector__label">Example scenario</p>
+              <h3 class="sector__title">Energy, engineering and construction</h3>
+              <p class="sector__text">Tender archives keep every version, and documents are edited in Word, Excel and PowerPoint. Large legacy archives are migrated through structured imports.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. Support (client portal) ============ -->
+    <section class="section support" id="support" aria-labelledby="support-title">
+      <div class="wrap support__grid">
+        <div class="ph ph--reveal support__ph">
+          <img srcset="../../assets/photos/portico/p09-support-800.webp 800w, ../../assets/photos/portico/p09-support-1200.webp 1200w, ../../assets/photos/portico/p09-support-1600.webp 1600w" sizes="(min-width: 960px) 520px, 100vw" src="../../assets/photos/portico/p09-support-800.webp" width="1600" height="1067" alt="" loading="lazy" decoding="async">
+        </div>
+
+        <div class="support__plate" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__no">06</span>Client portal</p>
+          <h2 id="support-title">Support services for ECM+ customers.</h2>
+          <p class="section-lead">Through the ECM+ client portal, your teams submit support tickets to the ECM+ support team and follow them until resolution, in Arabic or English.</p>
+
+          <div class="status-strip">
+            <p class="status-strip__label" id="ticket-status-label">Ticket status</p>
+            <ol class="status" aria-labelledby="ticket-status-label">
+              <li><span class="status__chip status__chip--open"><span class="status__icon" aria-hidden="true"></span>Open</span></li>
+              <li><span class="status__chip status__chip--progress"><span class="status__icon" aria-hidden="true"></span>In progress</span></li>
+              <li><span class="status__chip status__chip--closed"><span class="status__icon" aria-hidden="true"></span>Closed</span></li>
+            </ol>
+          </div>
+
+          <ul class="actions">
+            <li class="action">
+              <svg class="icon action__icon" aria-hidden="true" focusable="false"><use href="#i-ticket"/></svg>
+              <h3><a href="/support/tickets/new">Submit a support ticket</a></h3>
+              <p>Describe the issue, attach files and send it to the ECM+ support team.</p>
+              <svg class="icon action__arrow flip" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>
+            </li>
+            <li class="action">
+              <svg class="icon action__icon" aria-hidden="true" focusable="false"><use href="#i-track"/></svg>
+              <h3><a href="/support/tickets">Track your tickets</a></h3>
+              <p>Every reply is kept in one thread, from submission to closure.</p>
+              <svg class="icon action__arrow flip" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>
+            </li>
+            <li class="action">
+              <svg class="icon action__icon" aria-hidden="true" focusable="false"><use href="#i-idea"/></svg>
+              <h3><a href="/support/suggestions">Submit a suggestion or complaint</a></h3>
+              <p>Suggestions and complaints are recorded and tracked like support tickets.</p>
+              <svg class="icon action__arrow flip" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>
+            </li>
+          </ul>
+
+          <div class="support__ctas">
+            <a class="btn btn--ink btn--lg" href="/support/login">Sign in to the client portal</a>
+            <a class="link-arrow" href="/support">Support centre<svg class="icon flip" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          </div>
+          <p class="support__note">Accounts are created by the ECM+ support team for your organization. If you do not have an account, please contact your ECM+ administrator or your <a href="#contact">account manager</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 8. Closing call to action ============ -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="ph ph--bleed contact__ph">
+        <img srcset="../../assets/photos/portico/p10-staircase-800.webp 800w, ../../assets/photos/portico/p10-staircase-1200.webp 1200w, ../../assets/photos/portico/p10-staircase-1600.webp 1600w" sizes="100vw" src="../../assets/photos/portico/p10-staircase-1600.webp" width="1600" height="1200" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="contact__wash" aria-hidden="true"></div>
+
+      <div class="wrap">
+        <div class="plate contact__plate" data-reveal>
+          <div class="contact__intro">
+            <p class="eyebrow"><span class="eyebrow__no">07</span>Request a demo</p>
+            <h2 id="contact-title">ECM+ is demonstrated on scenarios drawn from your organization’s work.</h2>
+            <p class="section-lead">Please specify the modules of interest, and our team will arrange a demonstration in Arabic or English.</p>
+
+            <div class="faq" id="faq">
+              <h3 class="faq__h">Frequently asked questions</h3>
+              <details>
+                <summary><span>Can ECM+ run in our own data centre?</span></summary>
+                <p>Yes. ECM+ is installed in your organization’s data centre, so your documents remain under your control.</p>
+              </details>
+              <details>
+                <summary><span>Can we start with one module?</span></summary>
+                <p>Yes. Each module is licensed separately, and the other modules remain inactive until required.</p>
+              </details>
+              <details>
+                <summary><span>Can we bring our existing archive?</span></summary>
+                <p>Yes. You can move your existing archive from legacy systems into ECM+ through structured imports. If an import is interrupted, it resumes from where it stopped, and it can be rolled back if needed.</p>
+              </details>
+            </div>
+          </div>
+
+          <form class="demo-form" id="demo-form" action="/contact" method="post" aria-labelledby="demo-form-title" aria-describedby="demo-form-hint">
+            <h3 class="demo-form__h" id="demo-form-title">Request a demo</h3>
+            <p class="demo-form__hint" id="demo-form-hint">Fields marked “required” must be completed.</p>
+
+            <div class="field">
+              <label for="demo-name">Full name <span class="field__req">(required)</span></label>
+              <input id="demo-name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="demo-email">Work email <span class="field__req">(required)</span></label>
+              <input id="demo-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="demo-email-hint">
+              <p class="field__hint" id="demo-email-hint">Please use your organization’s email address.</p>
+            </div>
+            <div class="field field--full">
+              <label for="demo-org">Organization <span class="field__req">(required)</span></label>
+              <input id="demo-org" name="organization" type="text" autocomplete="organization" required>
+            </div>
+
+            <fieldset class="field field--full">
+              <legend>Modules of interest</legend>
+              <div class="checks">
+                <label class="check"><input type="checkbox" name="modules" value="documents"><span>Documents</span></label>
+                <label class="check"><input type="checkbox" name="modules" value="correspondence"><span>Correspondence</span></label>
+                <label class="check"><input type="checkbox" name="modules" value="processes"><span>Processes</span></label>
+                <label class="check"><input type="checkbox" name="modules" value="meetings"><span>Meetings</span></label>
+              </div>
+            </fieldset>
+
+            <div class="field field--full">
+              <label for="demo-message">Message</label>
+              <textarea id="demo-message" name="message" rows="4" autocomplete="off" aria-describedby="demo-message-hint"></textarea>
+              <p class="field__hint" id="demo-message-hint">Optional: current system, team size or expected timeline.</p>
+            </div>
+
+            <div class="demo-form__foot">
+              <button class="btn btn--gold btn--lg" type="submit">Request a demo</button>
+              <p class="demo-form__privacy">For details on how personal data is handled, please see the <a href="/privacy">privacy notice</a>.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="site-footer on-dark">
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="brand ailogo ailogo--lg ailogo--on-dark" href="./" aria-label="ECM+ Business Suite, home page">
+            <span class="ailogo__word" aria-hidden="true">ECM+</span>
+            <span class="ailogo__chip" aria-hidden="true"><svg class="ailogo__icon" viewBox="0 0 24 24" focusable="false"><g class="ailogo__spin"><rect x="7" y="7" width="10" height="10" rx="2"/><circle cx="12" cy="2" r="1.5"/><circle cx="12" cy="22" r="1.5"/><circle cx="2" cy="12" r="1.5"/><circle cx="22" cy="12" r="1.5"/><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.5 6.5 8 8M17.5 6.5 16 8M6.5 17.5 8 16M17.5 17.5 16 16"/></g><text x="12" y="14.4" text-anchor="middle">AI</text></svg></span>
+          </a>
+          <p class="footer__tagline">A unified suite for the governance of documents, correspondence, processes and meetings.</p>
+          <div class="footer__ctc" id="about">
+            <img src="../../assets/brand/ctc-logo.webp" alt="CTC MENA, exclusive agent" width="44" height="44" loading="lazy">
+            <p>ECM Plus is a Canadian company. CTC MENA is its exclusive agent and is responsible for its Arabization.</p>
+          </div>
+        </div>
+
+        <nav class="footer__nav" aria-label="Footer">
+          <div class="footer__col">
+            <h2>Suite</h2>
+            <ul>
+              <li><a href="#documents">Documents</a></li>
+              <li><a href="#correspondence">Correspondence</a></li>
+              <li><a href="#processes">Processes</a></li>
+              <li><a href="#meetings">Meetings</a></li>
+              <li><a href="#security">Governance and security</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2>Solutions</h2>
+            <ul>
+              <li><a href="#sector-government">Government</a></li>
+              <li><a href="#sector-finance">Banking and finance</a></li>
+              <li><a href="#sector-healthcare">Healthcare</a></li>
+              <li><a href="#sector-education">Education</a></li>
+              <li><a href="#sector-energy">Energy and construction</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="#contact" data-prefill="Please send us the ECM+ product overview.">Product overview</a></li>
+              <li><a href="#contact" data-prefill="Please send us the ECM+ integration guide.">Integration guide</a></li>
+              <li><a href="#faq">Frequently asked questions</a></li>
+              <li><a href="#contact">Request a demo</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2>Client portal</h2>
+            <ul>
+              <li><a href="/support">Support centre</a></li>
+              <li><a href="/support/login">Sign in to the client portal</a></li>
+              <li><a href="/support/tickets/new">Submit a support ticket</a></li>
+              <li><a href="/support/tickets">Track your tickets</a></li>
+              <li><a href="/support/suggestions">Submit a suggestion or complaint</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2>Company</h2>
+            <ul>
+              <li><a href="#about">About ECM Plus</a></li>
+              <li><a href="https://ctcmena.com" rel="noopener">CTC MENA, exclusive agent</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="/privacy">Privacy</a></li>
+              <li><a href="/terms">Terms</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <p>© 2026 ECM Plus. All rights reserved.</p>
+        <p class="footer__credit"><a href="https://unsplash.com/license" rel="noopener">Photography: Unsplash</a></p>
+        <ul class="footer__legal">
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

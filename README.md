@@ -12,8 +12,11 @@ is one `index.html` per language, one `styles.css` and one small `main.js`.
 ├── serve.mjs                  local preview server + /support redirect stand-in
 ├── scripts/build-pages.mjs    builds the GitHub Pages version (see "Publishing")
 ├── .github/workflows/pages.yml
-├── assets/brand/              ECM+ logo (png/webp), ring.svg / ring-dark.svg, favicon.svg, CTC logo
-├── assets/brands/             meeting-provider logos (Microsoft Teams, Google Meet, Zoom)
+├── assets/brand/              ai-logo.css (ECM+ AI-powered logo), ECM+ logo (png/webp),
+│                              ring.svg / ring-dark.svg, favicon.svg, CTC logo
+├── assets/brands/             integration logos (Teams, Meet, Zoom, Gmail, Calendar, Drive,
+│                              OneDrive, WhatsApp)
+├── assets/photos/portico/     Portico photographs + CREDITS.md + PROMPTS.md (AI image briefs)
 ├── support/index.html         support redirect preview page (local and Pages preview only)
 └── templates/
     ├── ink-ledger/            01 enterprise: OpenText-style IA, mega-menu, record-journey hero
@@ -22,9 +25,12 @@ is one `index.html` per language, one `styles.css` and one small `main.js`.
     ├── paper-register/        02 editorial: Everteam-style IA, records-register layout
     │   ├── index.html         English
     │   └── ar/index.html      Arabic (rtl)
-    └── majlis-grid/           03 Arabic-first bento
-        ├── index.html         Arabic (rtl), the default
-        └── en/index.html      English
+    ├── majlis-grid/           03 Arabic-first bento
+    │   ├── index.html         Arabic (rtl), the default
+    │   └── en/index.html      English
+    └── portico/               04 photographic: the three templates' motion on institutional photos
+        ├── index.html         English
+        └── ar/index.html      Arabic (rtl)
 ```
 
 | Template | Fonts | Light (default) → dark |
@@ -32,6 +38,7 @@ is one `index.html` per language, one `styles.css` and one small `main.js`.
 | Ink Ledger | Zilla Slab, IBM Plex Sans, IBM Plex Sans Arabic | ledger in daylight → ink navy with gold hairlines |
 | Paper Register | Newsreader, Source Sans 3, Amiri, Noto Naskh Arabic | warm paper with gold rules → night register |
 | Majlis Grid | Alexandria, Vazirmatn | light cards with an ECM content-network pattern and gold accents → deep navy |
+| Portico | Manrope, Readex Pro | limestone with frosted plates over photographs → basalt |
 
 ## Languages and themes
 
@@ -50,12 +57,17 @@ is one `index.html` per language, one `styles.css` and one small `main.js`.
 - All copy follows a formal enterprise register in both languages. Have a native Arabic speaker
   review the Arabic pages before launch.
 
-## Logo lockup
+## Logo
 
-The navigation and footer logo is HTML text ("ECM+", Zilla Slab 700) over `ring.svg`
-(light backgrounds) or `ring-dark.svg` (dark backgrounds, with the graphite lifted to silver
-so it doesn't disappear). The markup and CSS are the same in every template; search for
-`class="brand"`.
+The header and footer logo is the **ECM+ AI-powered logo** from the product's search screen:
+a gold-to-graphite "ECM+" with a matching underline, beside a gold chip holding the AI icon
+(it turns twice on load and again while hovered or focused; never under reduced-motion settings). It is live
+text plus an inline SVG, styled by `assets/brand/ai-logo.css`, which every page loads after its
+own stylesheet. Search for `class="brand ailogo"`. Add `ailogo--lg` for the footer size and
+`ailogo--on-dark` on a surface that stays dark in light mode.
+
+Inside the pages (for example the centre of the Majlis seal or the Ink Ledger journey), the
+mark is the swoosh ring: HTML text over `ring.svg`, or `ring-dark.svg` on dark backgrounds.
 
 ## Run it locally
 
@@ -143,14 +155,21 @@ privacy and terms links show the 404 page, and the demo-request forms cannot be 
 
 - **Domain**: canonical and Open Graph tags use `https://ecmplus.org/`. The Office add-in
   manifests use that domain, but the in-app support dialog uses `ecmpluss.com`. Confirm which is right.
-- **Logo**: the navigation lockups and `favicon.svg` are SVG renditions of the raster logo
-  (`assets/brand/ecmplus-logo.png`). Swap in the official vector when design has one.
+- **Logo**: the AI-powered logo is rebuilt from the product's own components; the ring and
+  `favicon.svg` are SVG renditions of the raster logo (`assets/brand/ecmplus-logo.png`). Swap in
+  official vectors when design has them.
 - **Forms**: the demo-request forms post to `/contact` and need a handler.
-- **Meeting-provider logos** (Majlis Grid): `assets/brands/` holds the Microsoft Teams, Google Meet
-  and Zoom marks from the CC0 "SVG Logos" set, used unmodified to show the integration. They remain
-  their owners' trademarks, so check each brand's guidelines before launch. Beem has no public icon
-  yet and shows a neutral video glyph. To use Beem's official icon, add `assets/brands/beem.svg` and
-  replace the inline `<svg class="prov__logo prov__logo--glyph">` in both Majlis pages with an `<img>`.
+- **Integration logos**: `assets/brands/` holds the Microsoft Teams, Google Meet, Zoom, Gmail,
+  Google Calendar, Google Drive, OneDrive and WhatsApp marks from the CC0 "SVG Logos" set, used
+  unmodified beside each service's name. They remain their owners' trademarks, so check each
+  brand's guidelines before launch. Microsoft Office apps, Outlook, SMS and Nafath appear as text
+  or neutral glyphs. Beem has no public icon yet and shows a neutral video glyph; to use its
+  official icon, add `assets/brands/beem.svg` and replace its inline glyph with an `<img>`:
+  `prov__logo--glyph` in Majlis Grid, `ticker__logo--glyph` in Ink Ledger and
+  `works__logo--glyph` in Portico.
+- **Photographs** (Portico): free Unsplash photos, listed with their photographers in
+  `assets/photos/portico/CREDITS.md`. `PROMPTS.md` holds an image brief per file, so they can be
+  replaced by generated or commissioned images with the same names and proportions.
 - **Claims**: every product claim comes from an internal copy deck that was checked against the
   ECM+ frontend and backend. There are no customer names, logos, testimonials or certifications,
   because none were verifiable. Add real ones only with permission.

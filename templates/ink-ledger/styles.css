@@ -1165,51 +1165,20 @@ html:not(.js) .theme-toggle { display: none; }
 .ticker__toggle[aria-pressed="true"] .ticker__pause { display: none; }
 .ticker__toggle[aria-pressed="true"] .ticker__play { display: inline-block; }
 
+/* Small logo before each name; neutral glyphs take the item colour. */
+.ticker__logo {
+  flex: none;
+  inline-size: 18px;
+  block-size: 18px;
+  margin-inline-end: 8px;
+  object-fit: contain;
+}
+.ticker__logo--glyph { stroke-width: 1.6; }
+
 html:not(.js) .ticker__list--dup { display: none; }
 html:not(.js) .ticker__track { display: block; inline-size: auto; }
 html:not(.js) .ticker__list { flex-wrap: wrap; row-gap: 8px; }
 html:not(.js) .ticker__viewport { -webkit-mask-image: none; mask-image: none; }
-
-/* ==========================================================================
-   3. Facts
-   ========================================================================== */
-.facts { padding-block: 72px; }
-.facts__grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.fact {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding-block-start: 24px;
-  border-block-start: 1px solid var(--line);
-}
-.fact::before {
-  content: "";
-  position: absolute;
-  inset-block-start: -1px;
-  inset-inline-start: 0;
-  inline-size: 40px;
-  border-block-start: 1px solid var(--accent);
-}
-.fact__num {
-  min-inline-size: 2ch;
-  font: 600 var(--fs-56)/1 var(--font-head);
-  font-variant-numeric: tabular-nums lining-nums;
-  color: var(--ink);
-}
-.fact__label { margin-block-start: 14px; max-inline-size: 30ch; color: var(--ink-2); }
-.fact__tag {
-  margin-block-start: auto;
-  padding-block-start: 14px;
-  font: 500 var(--fs-14)/1.2 var(--font-label);
-  color: var(--accent);
-}
 
 /* ==========================================================================
    4. Suite
@@ -1313,35 +1282,37 @@ html:not(.js) .ticker__viewport { -webkit-mask-image: none; mask-image: none; }
   align-items: center;
   gap: 16px 28px;
   margin-block-start: 24px;
-  padding: 12px 24px;
+  padding: 16px 24px;
   border: 1px solid var(--line);
   border-radius: var(--r-card);
 }
+/* The heading is the ECM+ lockup; its text is visually hidden. */
 .platform-row__h {
   flex: none;
+  display: flex;
+  align-items: center;
   margin: 0;
-  padding-inline-end: 24px;
+  padding-inline-end: 28px;
   border-inline-end: 1px solid var(--line-gold);
-  font: 500 var(--fs-14)/1.2 var(--font-label);
-  color: var(--accent);
 }
-.platform-row__list { display: flex; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
-.platform-row__list li { display: flex; align-items: center; }
-.platform-row__list li + li::before {
-  content: "";
-  inline-size: 1px;
-  block-size: 16px;
-  margin-inline: 16px;
-  background: var(--line-strong);
-}
+.brand--sm { --brand-w: 72px; }
+/* Pills with a gap: wrapping never leaves an orphan separator. */
+.platform-row__list { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.platform-row__list li { display: flex; max-inline-size: 100%; }
 .platform-row__list a {
   display: inline-flex;
   align-items: center;
   min-block-size: 40px;
+  padding: 7px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 15px;
+  line-height: 1.35;
   color: var(--ink-2);
   text-decoration: none;
+  transition: border-color .2s ease, background-color .2s ease, color .2s ease;
 }
-.platform-row__list a:hover { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 4px; }
+.platform-row__list a:hover { border-color: var(--accent); background: var(--hover-bg); color: var(--ink); }
 
 /* ==========================================================================
    5. Security — signature moment
@@ -2218,7 +2189,6 @@ h2:lang(ar) { line-height: 1.35; }
 .safeguards p:lang(ar),
 .action p:lang(ar),
 .steps li > span:last-child:lang(ar),
-.fact__label:lang(ar),
 .dropdown__d:lang(ar),
 .support__note:lang(ar),
 .infra__cap:lang(ar),
@@ -2254,7 +2224,6 @@ h2:lang(ar) { line-height: 1.35; }
   .hero__grid { grid-template-columns: minmax(0, 1fr); }
   .hero__copy { max-inline-size: none; }
   .hero__visual { max-inline-size: 640px; }
-  .facts__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 24px; }
   .safeguards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .scenario { grid-template-columns: minmax(0, 1fr); }
   .infra__map { grid-template-columns: minmax(0, 1fr); gap: 48px; }
@@ -2290,10 +2259,9 @@ h2:lang(ar) { line-height: 1.35; }
   .section-head { flex-direction: column; align-items: flex-start; }
   .modules { grid-template-columns: minmax(0, 1fr); }
   .module__headline { font-size: var(--fs-22); }
-  .platform-row { flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px 20px; }
+  .platform-row { flex-direction: column; align-items: flex-start; gap: 14px; padding: 16px 20px; }
   .platform-row__h { padding-inline-end: 0; border-inline-end: 0; }
-  .platform-row__list { flex-direction: column; }
-  .platform-row__list li + li::before { display: none; }
+  .platform-row__list { gap: 8px; }
 
   .evidence__stage { grid-template-columns: minmax(0, 1fr); row-gap: 64px; padding: 20px; }
   .paper { min-block-size: 0; }
@@ -2320,8 +2288,6 @@ h2:lang(ar) { line-height: 1.35; }
 
 @media (max-width: 479.98px) {
   .hero__ctas .btn { flex: 1 1 100%; }
-  .fact__num { font-size: var(--fs-48); }
-  .facts__grid { gap: 32px 16px; }
   .paper { padding: 22px 18px 18px; }
   .ticket-strip { padding-inline: 16px; }
   .ticket-strip__steps { gap: 6px; }

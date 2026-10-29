@@ -41,6 +41,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Zilla+Slab:wght@600;700&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Zilla+Slab:wght@600;700&display=swap"></noscript>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../../assets/brand/ai-logo.css">
   <script>document.documentElement.classList.add("js");</script>
   <script src="main.js" defer></script>
 
@@ -108,6 +109,11 @@
     <symbol id="i-track" viewBox="0 0 24 24"><path d="M9.5 6.5h11M9.5 12h11M9.5 17.5h11"/><path d="M3.5 6.5l1.3 1.3 2.2-2.4M3.5 12l1.3 1.3 2.2-2.4"/><circle cx="5.2" cy="17.5" r="1.3"/></symbol>
     <symbol id="i-idea" viewBox="0 0 24 24"><path d="M4 5.5h16V16H10l-4.5 3.5V16H4z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
     <!-- Illustrative 14×14 trace-code pattern; not an encoded code. -->
+    <symbol id="t-cam" viewBox="0 0 24 24"><rect x="3" y="6.5" width="12.5" height="11" rx="1.5"/><path d="M15.5 10.5l5-3v9l-5-3z"/></symbol>
+    <symbol id="t-sms" viewBox="0 0 24 24"><path d="M12 4.5c4.7 0 8.5 3 8.5 6.7S16.7 18 12 18c-1 0-2-.1-2.9-.4L5 19.5l1-3.5c-1.6-1.2-2.5-2.9-2.5-4.8C3.5 7.5 7.3 4.5 12 4.5z"/><path d="M8.5 11.3h.01M12 11.3h.01M15.5 11.3h.01" stroke-width="2.4"/></symbol>
+    <symbol id="t-page" viewBox="0 0 24 24"><path d="M6 3.5h8.5L18 7v13.5H6z"/><path d="M14.5 3.5V7H18M8.75 11h6.5M8.75 14h6.5M8.75 17h4"/></symbol>
+    <symbol id="t-sheet" viewBox="0 0 24 24"><rect x="4" y="4.5" width="16" height="15" rx="1"/><path d="M4 9.5h16M4 14.5h16M9.5 4.5v15M14.75 9.5v10"/></symbol>
+    <symbol id="t-slide" viewBox="0 0 24 24"><path d="M2.5 4.5h19"/><rect x="4" y="4.5" width="16" height="11" rx=".5"/><path d="M12 15.5v3M8.5 20.5l3.5-2 3.5 2M7.5 12.5l3-3 2 2 4-4"/></symbol>
     <symbol id="dm" viewBox="0 0 16 16">
       <rect x="1" y="1" width="1" height="14"/><rect x="1" y="14" width="14" height="1"/>
       <rect x="3" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="9" y="1" width="1" height="1"/><rect x="11" y="1" width="1" height="1"/><rect x="13" y="1" width="1" height="1"/>
@@ -130,10 +136,9 @@
   <!-- ============ Header ============ -->
   <header class="site-header">
     <div class="wrap header__bar">
-      <a class="brand" href="./" aria-label="ECM+ Business Suite, home page">
-        <img class="brand__ring brand__ring--light" src="../../assets/brand/ring.svg" alt="" width="200" height="116">
-        <img class="brand__ring brand__ring--dark" src="../../assets/brand/ring-dark.svg" alt="" width="200" height="116">
-        <span class="brand__word" aria-hidden="true">ECM<span class="brand__plus">+</span></span>
+      <a class="brand ailogo" href="./" aria-label="ECM+ Business Suite, home page">
+        <span class="ailogo__word" aria-hidden="true">ECM+</span>
+        <span class="ailogo__chip" aria-hidden="true"><svg class="ailogo__icon" viewBox="0 0 24 24" focusable="false"><g class="ailogo__spin"><rect x="7" y="7" width="10" height="10" rx="2"/><circle cx="12" cy="2" r="1.5"/><circle cx="12" cy="22" r="1.5"/><circle cx="2" cy="12" r="1.5"/><circle cx="22" cy="12" r="1.5"/><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.5 6.5 8 8M17.5 6.5 16 8M6.5 17.5 8 16M17.5 17.5 16 16"/></g><text x="12" y="14.4" text-anchor="middle">AI</text></svg></span>
       </a>
 
       <div class="header__quick">
@@ -288,7 +293,7 @@
         <div class="hero__copy">
           <p class="eyebrow" data-reveal><span class="eyebrow__folio"><bdi>ECM+</bdi></span>Enterprise content management</p>
           <h1 id="hero-title" data-reveal>Every record, every route, every decision — governed in one suite.</h1>
-          <p class="hero__lead" data-reveal>ECM Plus brings document archiving, official correspondence, process automation and meetings into one bilingual suite, in Arabic and English with Hijri and Gregorian calendars. It runs in your organization’s data centre, and every view and download is recorded.</p>
+          <p class="hero__lead" data-reveal>One suite for your organization’s documents, correspondence, processes and meetings — in Arabic and English, inside your own data centre.</p>
           <div class="hero__ctas" data-reveal>
             <a class="btn btn--gold btn--lg" href="#contact">Request a demo</a>
             <a class="btn btn--ghost btn--lg" href="#suite">Explore the suite</a>
@@ -378,42 +383,42 @@
         <div class="ticker__viewport">
           <div class="ticker__track">
             <ul class="ticker__list">
-              <li>Microsoft Teams</li>
-              <li>Zoom</li>
-              <li>Google Meet</li>
-              <li>Beem</li>
-              <li>ECM+ Meet</li>
-              <li>Gmail</li>
-              <li>Outlook</li>
-              <li>Google Calendar</li>
-              <li>Google Drive</li>
-              <li>OneDrive</li>
-              <li>WhatsApp</li>
-              <li>SMS</li>
-              <li>Nafath</li>
-              <li>Microsoft Word</li>
-              <li>Excel</li>
-              <li>PowerPoint</li>
-              <li>Outlook add-in</li>
+              <li><img class="ticker__logo" src="../../assets/brands/microsoft-teams.svg" alt="" width="18" height="18" decoding="async">Microsoft Teams</li>
+              <li><img class="ticker__logo" src="../../assets/brands/zoom.svg" alt="" width="18" height="18" decoding="async">Zoom</li>
+              <li><img class="ticker__logo" src="../../assets/brands/google-meet.svg" alt="" width="18" height="18" decoding="async">Google Meet</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-cam"/></svg>Beem</li>
+              <li><img class="ticker__logo" src="../../assets/brand/favicon.svg" alt="" width="18" height="18" decoding="async">ECM+ Meet</li>
+              <li><img class="ticker__logo" src="../../assets/brands/gmail.svg" alt="" width="18" height="18" decoding="async">Gmail</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#i-letter"/></svg>Outlook</li>
+              <li><img class="ticker__logo" src="../../assets/brands/google-calendar.svg" alt="" width="18" height="18" decoding="async">Google Calendar</li>
+              <li><img class="ticker__logo" src="../../assets/brands/google-drive.svg" alt="" width="18" height="18" decoding="async">Google Drive</li>
+              <li><img class="ticker__logo" src="../../assets/brands/onedrive.svg" alt="" width="18" height="18" decoding="async">OneDrive</li>
+              <li><img class="ticker__logo" src="../../assets/brands/whatsapp.svg" alt="" width="18" height="18" decoding="async">WhatsApp</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-sms"/></svg>SMS</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#i-id"/></svg>Nafath</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-page"/></svg>Microsoft Word</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-sheet"/></svg>Excel</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-slide"/></svg>PowerPoint</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#i-letter"/></svg>Outlook add-in</li>
             </ul>
             <ul class="ticker__list ticker__list--dup" aria-hidden="true">
-              <li>Microsoft Teams</li>
-              <li>Zoom</li>
-              <li>Google Meet</li>
-              <li>Beem</li>
-              <li>ECM+ Meet</li>
-              <li>Gmail</li>
-              <li>Outlook</li>
-              <li>Google Calendar</li>
-              <li>Google Drive</li>
-              <li>OneDrive</li>
-              <li>WhatsApp</li>
-              <li>SMS</li>
-              <li>Nafath</li>
-              <li>Microsoft Word</li>
-              <li>Excel</li>
-              <li>PowerPoint</li>
-              <li>Outlook add-in</li>
+              <li><img class="ticker__logo" src="../../assets/brands/microsoft-teams.svg" alt="" width="18" height="18" decoding="async">Microsoft Teams</li>
+              <li><img class="ticker__logo" src="../../assets/brands/zoom.svg" alt="" width="18" height="18" decoding="async">Zoom</li>
+              <li><img class="ticker__logo" src="../../assets/brands/google-meet.svg" alt="" width="18" height="18" decoding="async">Google Meet</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-cam"/></svg>Beem</li>
+              <li><img class="ticker__logo" src="../../assets/brand/favicon.svg" alt="" width="18" height="18" decoding="async">ECM+ Meet</li>
+              <li><img class="ticker__logo" src="../../assets/brands/gmail.svg" alt="" width="18" height="18" decoding="async">Gmail</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#i-letter"/></svg>Outlook</li>
+              <li><img class="ticker__logo" src="../../assets/brands/google-calendar.svg" alt="" width="18" height="18" decoding="async">Google Calendar</li>
+              <li><img class="ticker__logo" src="../../assets/brands/google-drive.svg" alt="" width="18" height="18" decoding="async">Google Drive</li>
+              <li><img class="ticker__logo" src="../../assets/brands/onedrive.svg" alt="" width="18" height="18" decoding="async">OneDrive</li>
+              <li><img class="ticker__logo" src="../../assets/brands/whatsapp.svg" alt="" width="18" height="18" decoding="async">WhatsApp</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-sms"/></svg>SMS</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#i-id"/></svg>Nafath</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-page"/></svg>Microsoft Word</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-sheet"/></svg>Excel</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-slide"/></svg>PowerPoint</li>
+              <li><svg class="icon ticker__logo ticker__logo--glyph" aria-hidden="true" focusable="false"><use href="#i-letter"/></svg>Outlook add-in</li>
             </ul>
           </div>
         </div>
@@ -422,35 +427,6 @@
           <svg class="icon ticker__play" aria-hidden="true" focusable="false"><use href="#i-play"/></svg>
           <span class="sr-only">Pause the scrolling list</span>
         </button>
-      </div>
-    </section>
-
-    <!-- ============ 3. Facts ============ -->
-    <section class="facts" aria-labelledby="facts-title">
-      <div class="wrap">
-        <h2 class="sr-only" id="facts-title">ECM+ in figures</h2>
-        <ul class="facts__grid">
-          <li class="fact" data-reveal>
-            <span class="fact__num" data-count="17" aria-hidden="true">17</span>
-            <span class="fact__label"><span class="sr-only">17 </span>types of access are traced and recorded</span>
-            <span class="fact__tag">Governance</span>
-          </li>
-          <li class="fact" data-reveal>
-            <span class="fact__num" data-count="7" aria-hidden="true">7</span>
-            <span class="fact__label"><span class="sr-only">7 </span>types of automated process steps</span>
-            <span class="fact__tag">Processes</span>
-          </li>
-          <li class="fact" data-reveal>
-            <span class="fact__num" data-count="9" aria-hidden="true">9</span>
-            <span class="fact__label"><span class="sr-only">9 </span>permission types per folder and document</span>
-            <span class="fact__tag">Documents</span>
-          </li>
-          <li class="fact" data-reveal>
-            <span class="fact__num" data-count="5" aria-hidden="true">5</span>
-            <span class="fact__label"><span class="sr-only">5 </span>supported meeting platforms, including ECM+ Meet</span>
-            <span class="fact__tag">Meetings</span>
-          </li>
-        </ul>
       </div>
     </section>
 
@@ -541,7 +517,14 @@
         </div>
 
         <div class="platform-row" data-reveal>
-          <h3 class="platform-row__h">Platform</h3>
+          <h3 class="platform-row__h">
+            <span class="sr-only">ECM+ platform</span>
+            <span class="brand brand--sm" aria-hidden="true">
+              <img class="brand__ring brand__ring--light" src="../../assets/brand/ring.svg" alt="" width="200" height="116">
+              <img class="brand__ring brand__ring--dark" src="../../assets/brand/ring-dark.svg" alt="" width="200" height="116">
+              <span class="brand__word">ECM<span class="brand__plus">+</span></span>
+            </span>
+          </h3>
           <ul class="platform-row__list">
             <li><a href="#security">Access trace codes and audit trail</a></li>
             <li><a href="#platform-datacentre">Deployment in your data centre</a></li>
@@ -956,11 +939,9 @@
     <div class="wrap">
       <div class="footer__top">
         <div class="footer__brand">
-          <a class="brand brand--lg" href="./" aria-label="ECM+ Business Suite, home page">
-            <img class="brand__ring brand__ring--light" src="../../assets/brand/ring.svg" alt="" width="200" height="116" loading="lazy">
-            <img class="brand__ring brand__ring--dark" src="../../assets/brand/ring-dark.svg" alt="" width="200" height="116" loading="lazy">
-            <span class="brand__word" aria-hidden="true">ECM<span class="brand__plus">+</span></span>
-            <span class="brand__suite" aria-hidden="true">Business Suite</span>
+          <a class="brand ailogo brand--lg ailogo--lg" href="./" aria-label="ECM+ Business Suite, home page">
+            <span class="ailogo__word" aria-hidden="true">ECM+</span>
+            <span class="ailogo__chip" aria-hidden="true"><svg class="ailogo__icon" viewBox="0 0 24 24" focusable="false"><g class="ailogo__spin"><rect x="7" y="7" width="10" height="10" rx="2"/><circle cx="12" cy="2" r="1.5"/><circle cx="12" cy="22" r="1.5"/><circle cx="2" cy="12" r="1.5"/><circle cx="22" cy="12" r="1.5"/><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.5 6.5 8 8M17.5 6.5 16 8M6.5 17.5 8 16M17.5 17.5 16 16"/></g><text x="12" y="14.4" text-anchor="middle">AI</text></svg></span>
           </a>
           <p class="footer__tagline">A unified suite for the governance of documents, correspondence, processes and meetings.</p>
           <div class="footer__ctc" id="about">

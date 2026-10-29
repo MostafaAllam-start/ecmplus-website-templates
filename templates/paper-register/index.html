@@ -40,12 +40,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Fonts load without blocking render, so a slow or blocked fonts host never stalls the page -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&family=Source+Sans+3:wght@400;600&family=Amiri:wght@700&family=Noto+Naskh+Arabic:wght@400&display=swap" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@700&text=ECM%2B%20BusinesSuit&display=swap" media="print" onload="this.media='all'">
   <noscript>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&family=Source+Sans+3:wght@400;600&family=Amiri:wght@700&family=Noto+Naskh+Arabic:wght@400&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@700&text=ECM%2B%20BusinesSuit&display=swap">
   </noscript>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../../assets/brand/ai-logo.css">
 
   <script>document.documentElement.classList.add("js");</script>
   <script src="main.js" defer></script>
@@ -90,10 +89,9 @@
   <!-- ============ Header ============ -->
   <header class="site-header">
     <div class="container site-header__inner">
-      <a class="brand" href="./" aria-label="ECM+ Business Suite, home page">
-        <img class="brand__ring brand__ring--light" src="../../assets/brand/ring.svg" alt="" width="200" height="116">
-        <img class="brand__ring brand__ring--dark" src="../../assets/brand/ring-dark.svg" alt="" width="200" height="116">
-        <span class="brand__word" aria-hidden="true">ECM<span class="brand__plus">+</span></span>
+      <a class="brand ailogo" href="./" aria-label="ECM+ Business Suite, home page">
+        <span class="ailogo__word" aria-hidden="true">ECM+</span>
+        <span class="ailogo__chip" aria-hidden="true"><svg class="ailogo__icon" viewBox="0 0 24 24" focusable="false"><g class="ailogo__spin"><rect x="7" y="7" width="10" height="10" rx="2"/><circle cx="12" cy="2" r="1.5"/><circle cx="12" cy="22" r="1.5"/><circle cx="2" cy="12" r="1.5"/><circle cx="22" cy="12" r="1.5"/><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.5 6.5 8 8M17.5 6.5 16 8M6.5 17.5 8 16M17.5 17.5 16 16"/></g><text x="12" y="14.4" text-anchor="middle">AI</text></svg></span>
       </a>
 
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
@@ -638,10 +636,9 @@
     <div class="container">
       <div class="site-footer__grid">
         <div class="site-footer__brand">
-          <a class="brand brand--footer" href="./" aria-label="ECM+ Business Suite, home page">
-            <img class="brand__ring" src="../../assets/brand/ring-dark.svg" alt="" width="200" height="116">
-            <span class="brand__word" aria-hidden="true">ECM<span class="brand__plus">+</span></span>
-            <span class="brand__suite" aria-hidden="true">Business Suite</span>
+          <a class="brand ailogo brand--footer ailogo--lg ailogo--on-dark" href="./" aria-label="ECM+ Business Suite, home page">
+            <span class="ailogo__word" aria-hidden="true">ECM+</span>
+            <span class="ailogo__chip" aria-hidden="true"><svg class="ailogo__icon" viewBox="0 0 24 24" focusable="false"><g class="ailogo__spin"><rect x="7" y="7" width="10" height="10" rx="2"/><circle cx="12" cy="2" r="1.5"/><circle cx="12" cy="22" r="1.5"/><circle cx="2" cy="12" r="1.5"/><circle cx="22" cy="12" r="1.5"/><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.5 6.5 8 8M17.5 6.5 16 8M6.5 17.5 8 16M17.5 17.5 16 16"/></g><text x="12" y="14.4" text-anchor="middle">AI</text></svg></span>
           </a>
           <p class="site-footer__tagline">A unified suite for the governance of documents, correspondence, processes and meetings.</p>
         </div>

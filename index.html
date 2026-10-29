@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ECM Plus Website Templates — ECM+ Business Suite</title>
-  <meta name="description" content="Three HTML/CSS website templates for ECM Plus (ECM+), the Canadian enterprise content management suite, each in English and Arabic with dark and light modes.">
+  <meta name="description" content="Four HTML/CSS website templates for ECM Plus (ECM+), the Canadian enterprise content management suite, each in English and Arabic with dark and light modes.">
   <meta name="robots" content="noindex">
   <meta name="color-scheme" content="light">
   <script>
@@ -118,6 +118,7 @@
     .card p { margin: 0 0 12px; }
     .card ul { margin: 0; padding-inline-start: 18px; }
     table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    td code { overflow-wrap: anywhere; }
     th, td { text-align: start; padding: 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
     th { font-weight: 600; color: var(--ink); }
     td { color: var(--muted); }
@@ -133,7 +134,7 @@
     @media (max-width: 900px) {
       .tpl { grid-template-columns: 1fr; }
       .tpl:nth-child(even) .shot { order: 0; }
-      .grid3 { grid-template-columns: 1fr; }
+      .grid3 { grid-template-columns: minmax(0, 1fr); }
     }
     @media (max-width: 560px) {
       .top nav { display: none; }
@@ -143,16 +144,16 @@
       .btn { transition: background-color .15s, border-color .15s; }
     }
   </style>
+  <link rel="stylesheet" href="assets/brand/ai-logo.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="top">
     <div class="wrap">
-      <a class="brand" href="./" aria-label="ECM+ website templates, home">
-        <img class="brand__ring ring-light" src="assets/brand/ring.svg" alt="" width="200" height="116">
-        <img class="brand__ring ring-dark" src="assets/brand/ring-dark.svg" alt="" width="200" height="116">
-        <span class="brand__word" aria-hidden="true">ECM<span class="brand__plus">+</span></span>
+      <a class="brand ailogo" href="./" aria-label="ECM+ website templates, home">
+        <span class="ailogo__word" aria-hidden="true">ECM+</span>
+        <span class="ailogo__chip" aria-hidden="true"><svg class="ailogo__icon" viewBox="0 0 24 24" focusable="false"><g class="ailogo__spin"><rect x="7" y="7" width="10" height="10" rx="2"/><circle cx="12" cy="2" r="1.5"/><circle cx="12" cy="22" r="1.5"/><circle cx="2" cy="12" r="1.5"/><circle cx="22" cy="12" r="1.5"/><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.5 6.5 8 8M17.5 6.5 16 8M6.5 17.5 8 16M17.5 17.5 16 16"/></g><text x="12" y="14.4" text-anchor="middle">AI</text></svg></span>
       </a>
       <nav aria-label="Gallery">
         <ul>
@@ -171,8 +172,8 @@
   <main id="main">
     <section class="wrap intro" aria-labelledby="intro-title">
       <p class="eyebrow">ECM+ Business Suite · brand website</p>
-      <h1 id="intro-title">Three ways to tell the ECM+ story</h1>
-      <p class="lead">Each template is static HTML and CSS built from the same verified copy deck, the same logo lockup and the same support hand-off. Pick a direction, or mix sections between them.</p>
+      <h1 id="intro-title">Four ways to tell the ECM+ story</h1>
+      <p class="lead">Each template is static HTML and CSS built from the same verified copy deck, the same logo and the same support hand-off. Pick a direction, or mix sections between them.</p>
       <ul class="meta">
         <li>Structure modelled on OpenText and Everteam</li>
         <li>English &amp; Arabic page for every template</li>
@@ -190,8 +191,8 @@
         <div>
           <span class="tpl__num">01 · Enterprise</span>
           <h2 id="t1">Ink Ledger</h2>
-          <p>A registry console, in daylight or ink-navy dark: gold as a hairline, not a glow. A mega-menu, a "My account" menu with support, an integrations ticker and a forensic-watermark showcase that traces a leaked page.</p>
-          <p class="ref"><strong>Reference:</strong> OpenText's structure: product mega-menu, stat band, sector scenarios, support as its own menu.</p>
+          <p>A registry console, in daylight or ink-navy dark: gold as a hairline, not a glow. A mega-menu, a "My account" menu with support, an integrations ticker with service logos and a forensic-watermark showcase that traces a leaked page.</p>
+          <p class="ref"><strong>Reference:</strong> OpenText's structure: product mega-menu, sector scenarios, support as its own menu.</p>
           <ul class="swatches" aria-label="Palette: ink navy, surface navy, gold, silver, paper">
             <li style="--c:#0b1220"></li><li style="--c:#141e31"></li><li style="--c:#d9a21b"></li><li style="--c:#a3adbd"></li><li style="--c:#f6f7f9"></li>
           </ul>
@@ -242,6 +243,26 @@
           </div>
         </div>
       </article>
+
+      <article class="tpl" aria-labelledby="t4">
+        <a class="shot" href="templates/portico/" tabindex="-1" aria-hidden="true" inert>
+          <iframe src="templates/portico/" title="Portico preview" loading="lazy" tabindex="-1"></iframe>
+        </a>
+        <div>
+          <span class="tpl__num">04 · Photographic</span>
+          <h2 id="t4">Portico</h2>
+          <p>Institutional photography (atria, records rooms, boardrooms) with every message on a frosted plate. It brings together the record journey and access-trace watermark from Ink Ledger, the folder tabs and lifecycle bookmark from Paper Register, and the network seal from Majlis Grid, tied by one gold signal line.</p>
+          <p class="ref"><strong>Photos:</strong> free Unsplash placeholders, with an AI image brief for each so they can be replaced one by one.</p>
+          <ul class="swatches" aria-label="Palette: limestone, white, graphite, gold, basalt">
+            <li style="--c:#f4f2ee"></li><li style="--c:#ffffff"></li><li style="--c:#151a22"></li><li style="--c:#d9a21b"></li><li style="--c:#10141b"></li>
+          </ul>
+          <p class="fonts">Manrope · Readex Pro</p>
+          <div class="actions">
+            <a class="btn btn--primary" href="templates/portico/">Open in English</a>
+            <a class="btn" href="templates/portico/ar/" hreflang="ar">Open in Arabic</a>
+          </div>
+        </div>
+      </article>
     </section>
 
     <section class="foundations" id="foundations" aria-labelledby="f-title">
@@ -264,21 +285,19 @@
             </table>
           </div>
           <div class="card">
-            <h3>Logo lockup</h3>
-            <p>An SVG rendition of the ECM+ swoosh ring with live text, plus a silver-lifted ring for dark backgrounds. Swap in the official vector when you have it.</p>
+            <h3>Logo</h3>
+            <p>The ECM+ AI-powered logo from the product's search screen, rebuilt as live text with an inline SVG chip that stays crisp at any size. The swoosh ring remains as the in-page mark, for example at the centre of diagrams.</p>
             <div class="plates">
               <div class="plate plate--light">
-                <span class="brand" style="--brand-w:132px">
-                  <img class="brand__ring" src="assets/brand/ring.svg" alt="" width="200" height="116">
-                  <span class="brand__word" aria-hidden="true">ECM<span class="brand__plus">+</span></span>
-                  <span class="brand__suite" aria-hidden="true" style="font-size:9px">Business Suite</span>
+                <span class="brand ailogo">
+                  <span class="ailogo__word">ECM+</span>
+                  <span class="ailogo__chip" aria-hidden="true"><svg class="ailogo__icon" viewBox="0 0 24 24" focusable="false"><g class="ailogo__spin"><rect x="7" y="7" width="10" height="10" rx="2"/><circle cx="12" cy="2" r="1.5"/><circle cx="12" cy="22" r="1.5"/><circle cx="2" cy="12" r="1.5"/><circle cx="22" cy="12" r="1.5"/><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.5 6.5 8 8M17.5 6.5 16 8M6.5 17.5 8 16M17.5 17.5 16 16"/></g><text x="12" y="14.4" text-anchor="middle">AI</text></svg></span>
                 </span>
               </div>
               <div class="plate plate--dark">
-                <span class="brand" style="--brand-w:132px">
-                  <img class="brand__ring" src="assets/brand/ring-dark.svg" alt="" width="200" height="116">
-                  <span class="brand__word" aria-hidden="true">ECM<span class="brand__plus">+</span></span>
-                  <span class="brand__suite" aria-hidden="true" style="font-size:9px">Business Suite</span>
+                <span class="brand ailogo ailogo--on-dark">
+                  <span class="ailogo__word">ECM+</span>
+                  <span class="ailogo__chip" aria-hidden="true"><svg class="ailogo__icon" viewBox="0 0 24 24" focusable="false"><g class="ailogo__spin"><rect x="7" y="7" width="10" height="10" rx="2"/><circle cx="12" cy="2" r="1.5"/><circle cx="12" cy="22" r="1.5"/><circle cx="2" cy="12" r="1.5"/><circle cx="22" cy="12" r="1.5"/><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.5 6.5 8 8M17.5 6.5 16 8M6.5 17.5 8 16M17.5 17.5 16 16"/></g><text x="12" y="14.4" text-anchor="middle">AI</text></svg></span>
                 </span>
               </div>
             </div>
@@ -289,7 +308,7 @@
             <ul>
               <li>No customer names, logos or testimonials</li>
               <li>No certifications, uptime or customer counts</li>
-              <li>Integrations shown as text, not third-party logos</li>
+              <li>Third-party logos only to name supported services; trademarks stay with their owners</li>
               <li>Canonical domain set to <code>ecmplus.org</code>; still to be confirmed</li>
             </ul>
           </div>
