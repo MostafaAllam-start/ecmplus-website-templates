@@ -13,7 +13,7 @@ be replaced by commissioned or generated imagery with the same names and proport
 | `p01-atrium` | Hero | [Symmetrical building atrium with a glass skylight](https://unsplash.com/photos/7xKmidpErYE) | Intricate Explorer ([@intricateexplorer](https://unsplash.com/@intricateexplorer)) |
 | `p02-archive` | Documents module | [Rows of white archive boxes on wooden shelves](https://unsplash.com/photos/5utYi64hnJ0) | Luke Caunt ([@lukec1778](https://unsplash.com/@lukec1778)) |
 | `p03-correspondence` | Correspondence module | [White envelopes sealed with red wax](https://unsplash.com/photos/3d5VQF2prQ8) | Raymond Petrik ([@raymondpetrik](https://unsplash.com/@raymondpetrik)) |
-| `p04-corridor` | Process automation module | [Hallway between glass-panel doors](https://unsplash.com/photos/yWwob8kwOCk) | Nastuh Abootalebi ([@sunday_digital](https://unsplash.com/@sunday_digital)) |
+| `p04-process` | Process automation module | [Woman drawing a flowchart on a whiteboard](https://unsplash.com/photos/46G4xEr122c) | Beatriz Cattel ([@bicattel](https://unsplash.com/@bicattel)) |
 | `p05-boardroom` | Meetings module | [Modern conference room with long table and chairs](https://unsplash.com/photos/HRsi-QzS3zw) | Aakriti Raina ([@dmvallect](https://unsplash.com/@dmvallect)) |
 | `p06-folders` | Governance and security | [A stack of thick folders on a white surface](https://unsplash.com/photos/XN4T2PVUUgk) | Beatriz Pérez Moya ([@beatriz_perez](https://unsplash.com/@beatriz_perez)) |
 | `p07-headquarters` | Deployment | [A large glass building next to a body of water](https://unsplash.com/photos/n7T8p_a2aNo) | Bank OZK ([@bankozk](https://unsplash.com/@bankozk)) |

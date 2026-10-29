@@ -1068,7 +1068,7 @@ html:not(.js) .theme-toggle { display: none; }
 .card:has(.card__more:hover) .card__tab::before { background: var(--gold-fold); }
 
 .card__ph { aspect-ratio: 4 / 5; border-start-start-radius: 0; }
-.card__ph--corridor img { object-position: 62% 50%; }
+.card__ph--process img { object-position: 32% 50%; }
 .card__ph--boardroom img { object-position: 44% 50%; }
 
 /* The plate overlaps the foot of the photograph; text never sits on the image. */
