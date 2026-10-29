@@ -151,10 +151,26 @@
       <div class="header__panel" id="site-panel">
         <nav class="nav" aria-label="Main navigation">
           <ul class="nav__list">
-            <li class="nav__item"><a class="nav__link" href="../#suite">Suite</a></li>
+            <li class="nav__item" data-menu>
+              <a class="nav__link nojs-only" href="../#suite">Suite</a>
+              <button class="nav__link nav__trigger js-only" type="button" aria-expanded="false" aria-controls="menu-suite">
+                Suite<svg class="icon nav__chev" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg>
+              </button>
+              <div class="menu-panel dropdown dropdown--suite" id="menu-suite">
+                <p class="dropdown__h">Modules</p>
+                <ul class="dropdown__list">
+                  <li><a href="../documents/"><svg class="icon dropdown__icon" aria-hidden="true" focusable="false"><use href="#m-dms"/></svg><span class="dropdown__t">Documents<bdi class="dropdown__code">DMS</bdi></span><span class="dropdown__d">Capture, classify, version and retrieve every document.</span></a></li>
+                  <li><a href="../correspondence/"><svg class="icon dropdown__icon" aria-hidden="true" focusable="false"><use href="#m-cms"/></svg><span class="dropdown__t">Correspondence<bdi class="dropdown__code">CMS</bdi></span><span class="dropdown__d">Register, route, approve and dispatch official correspondence.</span></a></li>
+                  <li><a href="../processes/"><svg class="icon dropdown__icon" aria-hidden="true" focusable="false"><use href="#m-bpm"/></svg><span class="dropdown__t">Processes<bdi class="dropdown__code">BPM</bdi></span><span class="dropdown__d">Design processes, build forms and run them with deadlines.</span></a></li>
+                  <li><a href="./" aria-current="page"><svg class="icon dropdown__icon" aria-hidden="true" focusable="false"><use href="#m-mms"/></svg><span class="dropdown__t">Meetings<bdi class="dropdown__code">MMS</bdi></span><span class="dropdown__d">Run committees from agenda to signed minutes.</span></a></li>
+                </ul>
+                <a class="dropdown__all" href="../#suite">Explore the suite<svg class="icon flip" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+              </div>
+            </li>
             <li class="nav__item"><a class="nav__link" href="../#security">Security</a></li>
             <li class="nav__item"><a class="nav__link" href="../#platform">Deployment</a></li>
             <li class="nav__item"><a class="nav__link" href="../#sectors">Sectors</a></li>
+            <li class="nav__item"><a class="nav__link" href="../about/">About ECM Plus</a></li>
             <li class="nav__item" data-menu>
               <a class="nav__link nojs-only" href="/support">Support</a>
               <button class="nav__link nav__trigger js-only" type="button" aria-expanded="false" aria-controls="menu-support">

@@ -426,6 +426,7 @@ a.u-link:focus-visible,
 .site-nav a {
   display: inline-block;
   padding-block: 12px;
+  white-space: nowrap;
   color: var(--ink);
   font-size: 1rem;
   font-weight: 600;
@@ -441,6 +442,7 @@ a.u-link:focus-visible,
 .site-utility__client {
   display: inline-block;
   padding-block: 12px;
+  white-space: nowrap;
   color: var(--muted);
   font-weight: 600;
   background-position: 0 calc(100% - 10px);
@@ -512,7 +514,15 @@ a.u-link:focus-visible,
 .nav-toggle[aria-expanded="true"] .nav-toggle__bars::before { transform: translateY(6px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] .nav-toggle__bars::after { transform: translateY(-6px) rotate(-45deg); }
 
-@media (max-width: 1023.98px) {
+/* Narrow desktops: the header row tightens before it folds into the menu. */
+@media (min-width: 1180px) and (max-width: 1279.98px) {
+  .site-header__inner { gap: 28px; }
+  .site-menu { gap: 24px; }
+  .site-nav__list { column-gap: 22px; }
+  .site-utility { gap: 18px; }
+}
+
+@media (max-width: 1179.98px) {
   .site-header__inner { flex-wrap: wrap; gap: 8px 24px; }
 
   /* Without JS the menu simply wraps below the brand */

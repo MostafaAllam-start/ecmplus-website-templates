@@ -485,6 +485,12 @@ html:not(.js) .js-only { display: none !important; }
 
 .header__utility { display: flex; align-items: center; gap: 12px; }
 
+/* Narrow desktops: a tighter row keeps every item, About included, on screen. */
+@media (min-width: 1200px) and (max-width: 1299.98px) {
+  .header__bar { gap: 20px; }
+  .nav__link { padding-inline: 8px; }
+}
+
 /* Menu panels: click-toggled, 150ms fade + translate. */
 .menu-panel {
   position: absolute;

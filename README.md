@@ -95,7 +95,8 @@ node scripts/subpages.mjs
   template's colours and fonts, so light and dark modes carry over.
 - On the home pages, links to a module or About anchor point at the new pages. The script updates
   them, and running it again is harmless. The module cards (Portico), "Explore" links (Ink Ledger),
-  folder links (Paper Register) and "Module details" links (Majlis Grid) also open them.
+  folder links (Paper Register) and "Module details" links (Majlis Grid) also open them. Every
+  header links to About ECM Plus, and Portico's Suite menu lists the four module pages.
 
 ## Logo
 

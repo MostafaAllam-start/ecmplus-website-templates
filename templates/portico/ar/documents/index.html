@@ -151,10 +151,26 @@
       <div class="header__panel" id="site-panel">
         <nav class="nav" aria-label="التنقل الرئيسي">
           <ul class="nav__list">
-            <li class="nav__item"><a class="nav__link" href="../#suite">المنظومة</a></li>
+            <li class="nav__item" data-menu>
+              <a class="nav__link nojs-only" href="../#suite">المنظومة</a>
+              <button class="nav__link nav__trigger js-only" type="button" aria-expanded="false" aria-controls="menu-suite">
+                المنظومة<svg class="icon nav__chev" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg>
+              </button>
+              <div class="menu-panel dropdown dropdown--suite" id="menu-suite">
+                <p class="dropdown__h">الأنظمة</p>
+                <ul class="dropdown__list">
+                  <li><a href="./" aria-current="page"><svg class="icon dropdown__icon" aria-hidden="true" focusable="false"><use href="#m-dms"/></svg><span class="dropdown__t">الوثائق<bdi class="dropdown__code">DMS</bdi></span><span class="dropdown__d">التقاط الوثائق وتصنيفها وإدارة إصداراتها واسترجاعها.</span></a></li>
+                  <li><a href="../correspondence/"><svg class="icon dropdown__icon" aria-hidden="true" focusable="false"><use href="#m-cms"/></svg><span class="dropdown__t">المراسلات<bdi class="dropdown__code">CMS</bdi></span><span class="dropdown__d">تسجيل المراسلات الرسمية وإحالتها واعتمادها وإرسالها.</span></a></li>
+                  <li><a href="../processes/"><svg class="icon dropdown__icon" aria-hidden="true" focusable="false"><use href="#m-bpm"/></svg><span class="dropdown__t">الإجراءات<bdi class="dropdown__code">BPM</bdi></span><span class="dropdown__d">تصميم الإجراءات وبناء النماذج وتشغيلها وفق مهل زمنية.</span></a></li>
+                  <li><a href="../meetings/"><svg class="icon dropdown__icon" aria-hidden="true" focusable="false"><use href="#m-mms"/></svg><span class="dropdown__t">الاجتماعات<bdi class="dropdown__code">MMS</bdi></span><span class="dropdown__d">إدارة أعمال اللجان من جدول الأعمال حتى المحضر الموقَّع.</span></a></li>
+                </ul>
+                <a class="dropdown__all" href="../#suite">استكشف المنظومة<svg class="icon flip" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+              </div>
+            </li>
             <li class="nav__item"><a class="nav__link" href="../#security">الأمان</a></li>
             <li class="nav__item"><a class="nav__link" href="../#platform">التشغيل</a></li>
             <li class="nav__item"><a class="nav__link" href="../#sectors">القطاعات</a></li>
+            <li class="nav__item"><a class="nav__link" href="../about/">عن <bdi>ECM Plus</bdi></a></li>
             <li class="nav__item" data-menu>
               <a class="nav__link nojs-only" href="/support?lang=ar">الدعم</a>
               <button class="nav__link nav__trigger js-only" type="button" aria-expanded="false" aria-controls="menu-support">

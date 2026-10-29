@@ -50,7 +50,7 @@
   var menu = document.getElementById("site-menu");
 
   if (header && toggle && menu) {
-    var desktop = window.matchMedia("(min-width: 1024px)");
+    var desktop = window.matchMedia("(min-width: 1180px)");
 
     var isOpen = function () {
       return toggle.getAttribute("aria-expanded") === "true";
