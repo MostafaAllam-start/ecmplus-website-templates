@@ -899,11 +899,11 @@ html:not(.js) .theme-toggle { display: none; }
 .journey__mark {
   position: relative;
   flex: none;
-  inline-size: 40px;
-  aspect-ratio: 200 / 116;
+  inline-size: 48px;
+  aspect-ratio: 545 / 302;
   animation: journey-seal var(--cycle) ease-in-out infinite;
 }
-.journey__mark img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; }
+.journey__mark img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: contain; }
 .journey__label { font: 600 var(--fs-14)/1.2 var(--font-body); color: var(--ink-2); }
 .journey__serial {
   margin-inline-start: auto;

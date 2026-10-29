@@ -89,8 +89,6 @@
   --shadow-sm: 0 10px 24px -14px rgba(21, 26, 34, .25);
   --shadow-md: 0 18px 36px -18px rgba(21, 26, 34, .24);
   --shadow-lg: 0 32px 56px -32px rgba(21, 26, 34, .32);
-  --ring-light: block;
-  --ring-dark: none;
   --icon-sun: none;
   --icon-moon: block;
   --circuit: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%230E1B2B' stroke-opacity='0.18' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M45 38H117M139 38H196M36 51V96L53 113H62M74 113H112L117 118H131M149 118H187L195 126M204 52V121M140 127V158L130 168V189M68 119V150L44 174V187M55 199H120M140 200H186L194 208M0 76H24L30 70H104L110 76H240M172 0V240'/%3E%3Cpath d='M27 29h12l6 6v16H27zM39 29v6h6M31 39h10M31 43h10M31 47h7M117 31v14h22V34h-11l-2-3zM196 36v16h16M74 113a6 6 0 1 1-12 0a6 6 0 1 1 12 0zM72.5 117.5l4 4M140 109l9 9-9 9-9-9zM195 121h22v15h-22zM195 121l11 8 11-8M33 187h22v5H33zM35 192v13h18v-13M41 197h6M120 192h20v17h-20zM120 197h20M125 189v5M135 189v5M196 208c3-6 6-6 7 0s4 6 7 0 4-6 7 0M195 213h24' stroke-width='1.3'/%3E%3Ccircle cx='36' cy='70' r='2.4'/%3E%3Ccircle cx='172' cy='38' r='2.4'/%3E%3Ccircle cx='172' cy='76' r='2.4'/%3E%3Ccircle cx='172' cy='118' r='2.4'/%3E%3Ccircle cx='172' cy='200' r='2.4'/%3E%3Ccircle cx='110' cy='76' r='2.4'/%3E%3Ccircle cx='24' cy='76' r='2.4'/%3E%3C/g%3E%3Cg fill='%230E1B2B' fill-opacity='0.18'%3E%3Ccircle cx='100' cy='150' r='1.4'/%3E%3Ccircle cx='20' cy='130' r='1.4'/%3E%3Ccircle cx='225' cy='170' r='1.4'/%3E%3Ccircle cx='90' cy='226' r='1.4'/%3E%3Ccircle cx='156' cy='14' r='1.4'/%3E%3Ccircle cx='14' cy='14' r='1.4'/%3E%3Ccircle cx='226' cy='92' r='1.4'/%3E%3Ccircle cx='104' cy='172' r='1.4'/%3E%3Crect x='199' y='38' width='2.2' height='2.2'/%3E%3Crect x='203' y='41' width='2.2' height='2.2'/%3E%3Crect x='207' y='37' width='2.2' height='2.2'/%3E%3Crect x='200' y='45' width='2.2' height='2.2'/%3E%3Crect x='206' y='46' width='2.2' height='2.2'/%3E%3Crect x='209' y='42' width='2.2' height='2.2'/%3E%3C/g%3E%3C/svg%3E");
@@ -159,8 +157,6 @@
     --shadow-sm: 0 16px 32px -16px rgba(0, 0, 0, .6);
     --shadow-md: 0 24px 48px -20px rgba(0, 0, 0, .55);
     --shadow-lg: 0 40px 72px -40px rgba(0, 0, 0, .75);
-    --ring-light: none;
-    --ring-dark: block;
     --icon-sun: block;
     --icon-moon: none;
     --circuit: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23D9A21B' stroke-opacity='0.16' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M45 38H117M139 38H196M36 51V96L53 113H62M74 113H112L117 118H131M149 118H187L195 126M204 52V121M140 127V158L130 168V189M68 119V150L44 174V187M55 199H120M140 200H186L194 208M0 76H24L30 70H104L110 76H240M172 0V240'/%3E%3Cpath d='M27 29h12l6 6v16H27zM39 29v6h6M31 39h10M31 43h10M31 47h7M117 31v14h22V34h-11l-2-3zM196 36v16h16M74 113a6 6 0 1 1-12 0a6 6 0 1 1 12 0zM72.5 117.5l4 4M140 109l9 9-9 9-9-9zM195 121h22v15h-22zM195 121l11 8 11-8M33 187h22v5H33zM35 192v13h18v-13M41 197h6M120 192h20v17h-20zM120 197h20M125 189v5M135 189v5M196 208c3-6 6-6 7 0s4 6 7 0 4-6 7 0M195 213h24' stroke-width='1.3'/%3E%3Ccircle cx='36' cy='70' r='2.4'/%3E%3Ccircle cx='172' cy='38' r='2.4'/%3E%3Ccircle cx='172' cy='76' r='2.4'/%3E%3Ccircle cx='172' cy='118' r='2.4'/%3E%3Ccircle cx='172' cy='200' r='2.4'/%3E%3Ccircle cx='110' cy='76' r='2.4'/%3E%3Ccircle cx='24' cy='76' r='2.4'/%3E%3C/g%3E%3Cg fill='%23D9A21B' fill-opacity='0.16'%3E%3Ccircle cx='100' cy='150' r='1.4'/%3E%3Ccircle cx='20' cy='130' r='1.4'/%3E%3Ccircle cx='225' cy='170' r='1.4'/%3E%3Ccircle cx='90' cy='226' r='1.4'/%3E%3Ccircle cx='156' cy='14' r='1.4'/%3E%3Ccircle cx='14' cy='14' r='1.4'/%3E%3Ccircle cx='226' cy='92' r='1.4'/%3E%3Ccircle cx='104' cy='172' r='1.4'/%3E%3Crect x='199' y='38' width='2.2' height='2.2'/%3E%3Crect x='203' y='41' width='2.2' height='2.2'/%3E%3Crect x='207' y='37' width='2.2' height='2.2'/%3E%3Crect x='200' y='45' width='2.2' height='2.2'/%3E%3Crect x='206' y='46' width='2.2' height='2.2'/%3E%3Crect x='209' y='42' width='2.2' height='2.2'/%3E%3C/g%3E%3C/svg%3E");
@@ -297,10 +293,6 @@ html:not(.js) .js-only { display: none !important; }
 
 /* Directional arrows mirror in RTL; logos, codes and photographs never do. */
 [dir="rtl"] .flip { transform: scaleX(-1); }
-
-/* The ring mark inside the page (journey, seal): the theme shows the right rendition. */
-.ring--light { display: var(--ring-light); }
-.ring--dark { display: var(--ring-dark); }
 
 /* ---------- Buttons & links ---------- */
 .btn {
@@ -842,11 +834,11 @@ html:not(.js) .theme-toggle { display: none; }
 .journey__mark {
   position: relative;
   flex: none;
-  inline-size: 40px;
-  aspect-ratio: 200 / 116;
+  inline-size: 48px;
+  aspect-ratio: 545 / 302;
   animation: journey-mark var(--cycle) ease-in-out infinite;
 }
-.journey__mark img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; }
+.journey__mark img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: contain; }
 .journey__label { font: 600 .875rem/1.2 var(--font-body); color: var(--ink-2); }
 .journey__serial {
   margin-inline-start: auto;

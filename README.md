@@ -69,8 +69,9 @@ images and `assets/brand/ecmplus-logo.css` (loaded after each page's own stylesh
 right one for the theme. Search for `class="brand ecmlogo`. Add `ecmlogo--lg` for the footer size
 and `ecmlogo--on-dark` on a surface that stays dark in light mode.
 
-Inside the pages (for example the centre of the Majlis seal or the Ink Ledger journey), the
-mark is the swoosh ring: HTML text over `ring.svg`, or `ring-dark.svg` on dark backgrounds.
+The record card in the Ink Ledger and Portico journeys carries the same logo. The module
+seals (Majlis Grid, Portico) and the Ink Ledger platform row still use the swoosh ring: HTML text
+over `ring.svg`, or `ring-dark.svg` on dark backgrounds.
 
 ## Run it locally
 
