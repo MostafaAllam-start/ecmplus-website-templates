@@ -1,6 +1,6 @@
 # Portico photo credits
 
-The hero and the four module photos (`p01` to `p05`) are AI-generated images supplied for
+The hero, the four module photos (`p01` to `p05`) and the contact photo (`p10`) are AI-generated images supplied for
 this site. Record the generator and confirm its terms allow commercial use before launch. The
 other photographs are free photos from [Unsplash](https://unsplash.com), used under the
 [Unsplash License](https://unsplash.com/license) (free for commercial use; attribution is
@@ -20,4 +20,4 @@ set can be replaced by commissioned or generated imagery with the same names and
 | `p07-headquarters` | Deployment | [A large glass building next to a body of water](https://unsplash.com/photos/n7T8p_a2aNo) | Bank OZK ([@bankozk](https://unsplash.com/@bankozk)) |
 | `p08-skyline` | Sectors band | [A city skyline with a river at sunrise](https://unsplash.com/photos/ySzmc-Hozsw) | Eddie Mark Blair ([@blaireddieau](https://unsplash.com/@blaireddieau)) |
 | `p09-support` | Support | [Headset near a laptop computer](https://unsplash.com/photos/BeVGrXEktIk) | Petr Macháček ([@machec](https://unsplash.com/@machec)) |
-| `p10-staircase` | Closing call to action | [A spiral staircase under a skylight](https://unsplash.com/photos/6uW9mKIF4xY) | Daniil Korbut ([@rtriangle](https://unsplash.com/@rtriangle)) |
+| `p10-contact` | Closing call to action | An executive desk with a laptop, a headset and contact icons on a glass wall | AI-generated image supplied for this site |

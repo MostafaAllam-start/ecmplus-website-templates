@@ -210,8 +210,8 @@ privacy and terms links show the 404 page, and the demo-request forms cannot be 
   Nafath logo used in the ECM+ product, and the Beem icon from beem.sa. All are used unmodified
   beside each service's name, and ECM+ Meet carries the ECM+ logo. They remain their owners'
   trademarks, so check each brand's guidelines before launch. SMS appears as a neutral glyph.
-- **Photographs** (Portico): the hero and the four module photos are AI-generated images; the
-  others are free Unsplash photos. All are listed in `assets/photos/portico/CREDITS.md`. Record
+- **Photographs** (Portico): the hero, the four module photos and the contact photo are
+  AI-generated images; the others are free Unsplash photos. All are listed in `assets/photos/portico/CREDITS.md`. Record
   the image generator there and confirm its terms allow commercial use. `PROMPTS.md` holds an
   image brief per file, so any photo can be replaced with the same name and proportions.
 - **Claims**: every product claim comes from an internal copy deck that was checked against the
