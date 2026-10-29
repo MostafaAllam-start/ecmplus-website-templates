@@ -728,7 +728,7 @@ html:not(.js) .theme-toggle { display: none; }
 }
 
 /* ==========================================================================
-   1. Hero — full-bleed photograph, scrim on the start side, the module seal on a dark plate
+   1. Hero — full-bleed photograph, scrim on the start side, the module seal on the photo
    ========================================================================== */
 .hero {
   position: relative;
@@ -771,9 +771,12 @@ html:not(.js) .theme-toggle { display: none; }
 }
 .hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-block-start: 32px; }
 
-/* The integration seal (section 5 styles) on the deployment section's dark circuit plate. */
-.hero__visual.deploy__plate { padding-block-end: 0; }
-.hero__visual .seal { block-size: clamp(320px, 30vw, 400px); }
+/* The integration seal (section 5 styles) sits straight on the photograph. Its badges and
+   labels keep the plate colour, so they read over any part of the photo. */
+.hero__visual .seal {
+  --plate-bg: var(--deploy-bg);
+  block-size: clamp(320px, 30vw, 400px);
+}
 
 
 /* ==========================================================================
@@ -1891,7 +1894,6 @@ h3:lang(ar),
 
 @media (max-width: 479.98px) {
   .hero__ctas .btn { flex: 1 1 100%; }
-  .hero__visual { padding: 16px; }
   .card__plate { margin-inline: 8px; padding-inline: 16px; }
   .paper { padding: 20px 16px 16px; }
   .status li + li::before { display: none; }
