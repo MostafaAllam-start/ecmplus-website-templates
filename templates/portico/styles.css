@@ -1052,12 +1052,6 @@ html:not(.js) .theme-toggle { display: none; }
 }
 .card__tab::before { inset: 0; background: var(--line-strong); }
 .card__tab::after { inset: 1px 1px 0; background: var(--surface-2); transition: background-color .2s; }
-.card:focus-within .card__tab,
-.card:has(.card__more:hover) .card__tab { translate: 0 -2px; color: var(--on-gold); }
-.card:focus-within .card__tab::after,
-.card:has(.card__more:hover) .card__tab::after { background: var(--gold); }
-.card:focus-within .card__tab::before,
-.card:has(.card__more:hover) .card__tab::before { background: var(--gold-fold); }
 
 .card__ph { aspect-ratio: 4 / 5; border-start-start-radius: 0; }
 .card__ph--process img { object-position: 32% 50%; }
@@ -1071,7 +1065,7 @@ html:not(.js) .theme-toggle { display: none; }
   flex: 1;
   flex-direction: column;
   margin: -44px 12px 0;
-  padding: 20px 20px 10px;
+  padding: 20px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-block-start: 2px solid var(--gold);
@@ -1104,7 +1098,6 @@ html:not(.js) .theme-toggle { display: none; }
   block-size: 6px;
   background: var(--gold);
 }
-.card__more { margin-block-start: auto; padding-block-start: 12px; font-size: .9375rem; }
 
 /* ==========================================================================
    3. Lifecycle — circuit hairlines, a ledger plate and the gold bookmark
