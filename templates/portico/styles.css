@@ -1931,7 +1931,7 @@ h3:lang(ar),
   .hero__grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .hero__copy { display: contents; }
   .hero__copy > * { max-inline-size: 640px; }
-  .hero__visual { max-inline-size: 620px; margin-block-start: 32px; }
+  .hero__visual { justify-self: center; inline-size: 100%; max-inline-size: 620px; margin-block-start: 32px; }
   .hero__ctas { order: 1; }
 
   .lifecycle__grid { grid-template-columns: minmax(0, 1fr); }
