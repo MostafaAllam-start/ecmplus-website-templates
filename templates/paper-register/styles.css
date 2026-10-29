@@ -2193,6 +2193,7 @@ body:lang(ar) { line-height: 1.8; }
 .sp-chip__logo { flex: none; inline-size: 18px; block-size: 18px; object-fit: contain; }
 .sp-chip__logo--wide { inline-size: auto; block-size: 20px; }
 .sp-chip__dot { flex: none; inline-size: 8px; block-size: 8px; border-radius: 50%; background: var(--sp-accent); }
+.sp-chip__glyph { flex: none; inline-size: 18px; block-size: 18px; fill: none; stroke: var(--sp-accent-text); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .sp-related {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));

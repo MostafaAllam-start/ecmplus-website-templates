@@ -166,6 +166,7 @@ ${body}
     let mark = '<span class="sp-chip__dot" aria-hidden="true"></span>';
     if (s.ecm) mark = `<img class="sp-chip__logo sp-chip__logo--wide ecmlogo__img--light" src="${assets}brand/ecmplus-ai-logo-272.webp" alt="" width="545" height="302" loading="lazy" decoding="async"><img class="sp-chip__logo sp-chip__logo--wide ecmlogo__img--dark" src="${assets}brand/ecmplus-ai-logo-dark-272.webp" alt="" width="545" height="302" loading="lazy" decoding="async">`;
     else if (s.logo) mark = `<img class="sp-chip__logo${s.wide ? " sp-chip__logo--wide" : ""}" src="${assets}${s.logo}" alt="" width="${s.wide ? 604 : 18}" height="${s.wide ? 331 : 18}" loading="lazy" decoding="async">`;
+    else if (s.glyph) mark = `<svg class="sp-chip__glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${s.glyph}</svg>`;
     const n = name(s, lang);
     const label = lang === "ar" && /^[\x00-\x7F+]+$/.test(n) ? `<bdi>${n}</bdi>` : n;
     return `          <li class="sp-chip">${mark}${label}</li>`;

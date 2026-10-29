@@ -13,6 +13,7 @@ export const GLYPHS = {
 };
 
 // Services shown on the module pages; logo files are the approved marks in assets/brands/.
+// Services without a logo carry a line icon (glyph) drawn in the template's gold.
 export const SERVICES = {
   teams: { name: "Microsoft Teams", logo: "brands/microsoft-teams.svg" },
   meet: { name: "Google Meet", logo: "brands/google-meet.svg" },
@@ -28,11 +29,11 @@ export const SERVICES = {
   excel: { name: "Excel", logo: "brands/microsoft-excel.svg" },
   powerpoint: { name: "PowerPoint", logo: "brands/microsoft-powerpoint.svg" },
   whatsapp: { name: { en: "WhatsApp", ar: "واتساب" }, logo: "brands/whatsapp.svg" },
-  sms: { name: { en: "SMS", ar: "الرسائل النصية" } },
-  email: { name: { en: "Email", ar: "البريد الإلكتروني" } },
+  sms: { name: { en: "SMS", ar: "الرسائل النصية" }, glyph: '<path d="M12 4.5c4.7 0 8.5 3 8.5 6.7S16.7 18 12 18c-1 0-2-.1-2.9-.4L5 19.5l1-3.5c-1.6-1.2-2.5-2.9-2.5-4.8C3.5 7.5 7.3 4.5 12 4.5z"/><path d="M8.5 11.3h.01M12 11.3h.01M15.5 11.3h.01" stroke-width="2.6"/>' },
+  email: { name: { en: "Email", ar: "البريد الإلكتروني" }, glyph: '<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/>' },
   nafath: { name: { en: "Nafath", ar: "نفاذ" }, logo: "brands/nafath.png", wide: true },
-  systems: { name: { en: "Your business systems", ar: "أنظمة مؤسستكم" } },
-  databases: { name: { en: "Your existing databases", ar: "قواعد بياناتكم القائمة" } },
+  systems: { name: { en: "Your business systems", ar: "أنظمة مؤسستكم" }, glyph: '<rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/><path d="M10.5 6.75h3.75a3 3 0 0 1 3 3v3.75M13.5 17.25H9.75a3 3 0 0 1-3-3V10.5"/>' },
+  databases: { name: { en: "Your existing databases", ar: "قواعد بياناتكم القائمة" }, glyph: '<ellipse cx="12" cy="5.5" rx="7.5" ry="2.5"/><path d="M4.5 5.5v13c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5v-13M4.5 12c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5"/>' },
 };
 
 export const UI = {
