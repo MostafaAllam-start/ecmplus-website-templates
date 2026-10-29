@@ -5,10 +5,7 @@
    `dir`. The logo lockup and the trace code never mirror.
    ========================================================================== */
 
-/* The flip: both prerendered pages opt in, so the language link animates. */
-@view-transition {
-  navigation: auto;
-}
+/* The flip: each page opts in to view transitions in an inline <style> in its <head>. */
 
 :root {
   /* Light is the default ("Majlis by day"). Dark applies only when the visitor picks it. */
@@ -3005,10 +3002,6 @@ h2:lang(ar) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  @view-transition {
-    navigation: none;
-  }
-
   *,
   *::before,
   *::after {

@@ -19,7 +19,7 @@ Processes, Meetings and About), one `styles.css` and one small `main.js`.
 │                              ECM+ logo (png/webp), ring.svg / ring-dark.svg, favicon.svg,
 │                              CTC logo
 ├── assets/brands/             integration logos (Teams, Meet, Zoom, Gmail, Calendar, Drive,
-│                              OneDrive, WhatsApp, Word, Excel, PowerPoint, Outlook, Nafath)
+│                              OneDrive, WhatsApp, Word, Excel, PowerPoint, Outlook, Nafath, Beem)
 ├── assets/photos/portico/     Portico photographs + CREDITS.md + PROMPTS.md (AI image briefs)
 ├── support/index.html         support redirect preview page (local and Pages preview only)
 └── templates/
@@ -60,6 +60,10 @@ for example templates/portico/ar/meetings/index.html.
   places. Ink Ledger and Portico flag the arrival in the `<head>` script (`pagereveal`), so the hero
   does not replay its entrance. Browsers without support just load the other page, and
   reduced-motion settings turn the animation off. View transitions need `http(s)`, not `file://`.
+  Chrome reads the opt-in as soon as `<body>` starts. Ink Ledger, Paper Register and Portico hold
+  the parser at an inline script until their stylesheet has loaded, so the rule can live there.
+  Majlis Grid has no such script, so it declares the opt-in in an inline `<style>` in `<head>`.
+  Without that, the flip is often skipped.
 - **Every page has light and dark modes, and light is the default.** Pages open light,
   whatever the device setting, and switch to dark only when the visitor presses the theme button
   ("Dark mode" / "الوضع الداكن", with an on/off state). The choice is saved in `localStorage` under
@@ -104,9 +108,9 @@ images and `assets/brand/ecmplus-logo.css` (loaded after each page's own stylesh
 right one for the theme. Search for `class="brand ecmlogo`. Add `ecmlogo--lg` for the footer size
 and `ecmlogo--on-dark` on a surface that stays dark in light mode.
 
-The record card in the Ink Ledger and Portico journeys carries the same logo. The module
-seals (Majlis Grid, Portico) and the Ink Ledger platform row still use the swoosh ring: HTML text
-over `ring.svg`, or `ring-dark.svg` on dark backgrounds.
+The record card in the Ink Ledger journey carries the same logo. The module seals (the
+background of Majlis Grid's title card and Portico's hero) and the Ink Ledger platform row still
+use the swoosh ring: HTML text over `ring.svg`, or `ring-dark.svg` on dark backgrounds.
 
 ## Run it locally
 
@@ -202,13 +206,9 @@ privacy and terms links show the 404 page, and the demo-request forms cannot be 
 - **Integration logos**: `assets/brands/` holds the Microsoft Teams, Google Meet, Zoom, Gmail,
   Google Calendar, Google Drive, OneDrive and WhatsApp marks from the CC0 "SVG Logos" set, the
   current Microsoft Word, Excel, PowerPoint and Outlook icons from the MIT "theSVG" set, and the
-  Nafath logo used in the ECM+ product. All are used unmodified beside each service's name, and
-  ECM+ Meet carries the ECM+ logo. They remain their owners' trademarks, so check each brand's
-  guidelines before launch. SMS appears as a neutral glyph. Beem has no public icon yet and
-  shows a neutral video glyph; to use its official icon, add `assets/brands/beem.svg` and
-  replace its inline glyph with an `<img>`:
-  `prov__logo--glyph` in Majlis Grid, `ticker__logo--glyph` in Ink Ledger and
-  `works__logo--glyph` in Portico.
+  Nafath logo used in the ECM+ product, and the Beem icon from beem.sa. All are used unmodified
+  beside each service's name, and ECM+ Meet carries the ECM+ logo. They remain their owners'
+  trademarks, so check each brand's guidelines before launch. SMS appears as a neutral glyph.
 - **Photographs** (Portico): free Unsplash photos, listed with their photographers in
   `assets/photos/portico/CREDITS.md`. `PROMPTS.md` holds an image brief per file, so they can be
   replaced by generated or commissioned images with the same names and proportions.

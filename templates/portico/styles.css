@@ -728,7 +728,7 @@ html:not(.js) .theme-toggle { display: none; }
 }
 
 /* ==========================================================================
-   1. Hero — full-bleed photograph, scrim on the start side, journey on a plate
+   1. Hero — full-bleed photograph, scrim on the start side, the module seal on a dark plate
    ========================================================================== */
 .hero {
   position: relative;
@@ -771,257 +771,10 @@ html:not(.js) .theme-toggle { display: none; }
 }
 .hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-block-start: 32px; }
 
-.hero__visual {
-  container: journey / inline-size;
-  padding: 24px 26px 26px;
-}
+/* The integration seal (section 5 styles) on the deployment section's dark circuit plate. */
+.hero__visual.deploy__plate { padding-block-end: 0; }
+.hero__visual .seal { block-size: clamp(320px, 30vw, 400px); }
 
-/* Record journey (Ink Ledger): one governed record moving through the four modules.
-   The card sits between two bands; four module nodes overlap its corners, and gold
-   hairline routes carry a pulse from each node to the card. One shared 8s cycle;
-   step k owns k×25% … k×25% + 22% of it. Narrow containers stack the nodes 2×2. */
-.journey {
-  --cycle: 8s;
-  --node-h: 84px;
-  --node-overlap: 16px;
-  --band: calc(var(--node-h) - var(--node-overlap));
-  margin: 0;
-}
-.journey__caption {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 14px;
-  font: 600 .8125rem/1.4 var(--font-body);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-}
-.journey__caption::before { content: ""; flex: none; inline-size: 24px; border-block-start: 1px solid var(--gold-text); }
-.journey__stage { position: relative; padding-block: var(--band); }
-
-.journey__routes {
-  position: absolute;
-  z-index: 0;
-  inset-inline: 0;
-  inline-size: 100%;
-  block-size: var(--band);
-  overflow: visible;
-  pointer-events: none;
-}
-.journey__routes--top { inset-block-start: 0; }
-.journey__routes--bottom { inset-block-end: 0; }
-/* The routes are drawn left-to-right; mirror them with the layout. */
-[dir="rtl"] .journey__routes { transform: scaleX(-1); }
-.journey__route,
-.journey__pulse { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
-.journey__route { stroke: var(--route-line); stroke-width: 1.25; }
-.journey__pulse {
-  stroke: var(--route-pulse);
-  stroke-width: 2.5;
-  stroke-dasharray: 18 100;
-  stroke-dashoffset: 18;
-  opacity: 0;
-  animation: journey-pulse var(--cycle) linear infinite both;
-  animation-delay: calc(var(--k, 0) * var(--cycle) / 4);
-}
-
-.journey__card {
-  position: relative;
-  z-index: 1;
-  margin-inline: 9%;
-  padding: 20px 20px 22px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-block-start: 2px solid var(--gold);
-  border-radius: var(--r-card);
-  box-shadow: var(--shadow-md);
-}
-.journey__head { display: flex; align-items: center; gap: 10px; }
-.journey__mark {
-  position: relative;
-  flex: none;
-  inline-size: 48px;
-  aspect-ratio: 545 / 302;
-  animation: journey-mark var(--cycle) ease-in-out infinite;
-}
-.journey__mark img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: contain; }
-.journey__label { font: 600 .875rem/1.2 var(--font-body); color: var(--ink-2); }
-.journey__title { margin: 12px 0 0; font: 700 1.25rem/1.25 var(--font-head); color: var(--ink); }
-.journey__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
-.journey__chips li {
-  padding: 2px 10px;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  font-size: 12.5px;
-  line-height: 1.5;
-  color: var(--ink-2);
-}
-
-/* Lifecycle: Registered › Approved › Committee decision › Archived.
-   Without animation every step reads "done". */
-.journey__steps {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin: 18px 0 0;
-  padding: 0;
-  list-style: none;
-  font-size: 13px;
-  line-height: 1.35;
-}
-.journey__steps li {
-  position: relative;
-  padding-block-start: 20px;
-  padding-inline-end: 6px;
-  color: var(--js-text, var(--ink-2));
-  font-weight: var(--js-weight, 500);
-}
-.journey__steps li::before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  inset-block-start: 2px;
-  inset-inline-start: 0;
-  inline-size: 11px;
-  block-size: 11px;
-  border: 1.5px solid var(--js-dot-line, var(--gold-text));
-  border-radius: 50%;
-  background: var(--js-dot-bg, var(--gold-text));
-  box-shadow: var(--js-dot-ring, 0 0 0 0 transparent);
-}
-.journey__steps li::after {
-  content: "";
-  position: absolute;
-  inset-block-start: 7px;
-  inset-inline: 15px 4px;
-  border-block-start: 1px solid var(--line-strong);
-}
-.journey__steps li:last-child::after { display: none; }
-.journey__steps li:nth-child(1) { animation: journey-state-0 var(--cycle) linear infinite; }
-.journey__steps li:nth-child(2) { animation: journey-state-1 var(--cycle) linear infinite; }
-.journey__steps li:nth-child(3) { animation: journey-state-2 var(--cycle) linear infinite; }
-.journey__steps li:nth-child(4) { animation: journey-state-3 var(--cycle) linear infinite; }
-
-.journey__foot {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-block-start: 16px;
-  padding-block-start: 12px;
-  border-block-start: 1px solid var(--line);
-  font-size: 12.5px;
-  line-height: 1.4;
-  color: var(--muted);
-}
-.journey__dm { flex: none; inline-size: 26px; block-size: 26px; color: var(--ink); }
-.journey__foot bdi { font-family: var(--font-mono); color: var(--ink-2); }
-
-.journey__node {
-  position: absolute;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: 30px minmax(0, 1fr);
-  grid-template-rows: auto auto;
-  align-content: center;
-  column-gap: 8px;
-  row-gap: 2px;
-  inline-size: 44%;
-  block-size: var(--node-h);
-  padding: 10px 11px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r-card);
-  box-shadow: var(--shadow-sm);
-  animation: journey-node var(--cycle) linear infinite both;
-  animation-delay: calc(var(--k, 0) * var(--cycle) / 4);
-}
-.journey__node--ts { inset-block-start: 0; inset-inline-start: 0; }
-.journey__node--te { inset-block-start: 0; inset-inline-end: 0; }
-.journey__node--be { inset-block-end: 0; inset-inline-end: 0; }
-.journey__node--bs { inset-block-end: 0; inset-inline-start: 0; }
-.journey__icon {
-  grid-row: 1 / 3;
-  display: grid;
-  place-items: center;
-  inline-size: 30px;
-  block-size: 30px;
-  border: 1px solid var(--line-gold);
-  border-radius: var(--r-btn);
-  color: var(--gold-text);
-}
-.journey__icon .icon { inline-size: 18px; block-size: 18px; }
-.journey__module {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-  font: 700 .875rem/1.3 var(--font-body);
-  color: var(--ink);
-  white-space: nowrap;
-}
-.journey__event {
-  display: -webkit-box;
-  overflow: hidden;
-  font-size: 12.5px;
-  line-height: 1.35;
-  color: var(--ink-2);
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-}
-
-@keyframes journey-node {
-  0% { border-color: var(--line); box-shadow: var(--shadow-sm); }
-  3%, 19% { border-color: var(--gold); box-shadow: var(--node-glow); }
-  22%, 100% { border-color: var(--line); box-shadow: var(--shadow-sm); }
-}
-@keyframes journey-pulse {
-  0% { stroke-dashoffset: 18; opacity: 0; }
-  2%, 17% { opacity: 1; }
-  20%, 100% { stroke-dashoffset: -100; opacity: 0; }
-}
-@keyframes journey-mark {
-  0%, 93% { filter: drop-shadow(0 0 0 transparent); }
-  97.5% { filter: drop-shadow(0 0 7px var(--mark-glow)); }
-  100% { filter: drop-shadow(0 0 0 transparent); }
-}
-/* States: upcoming → current (its 22% window) → done. Archive is always last. */
-@keyframes journey-state-0 {
-  0%, 21.9% { --js-text: var(--gold-text); --js-weight: 700; --js-dot-bg: var(--surface); --js-dot-line: var(--gold-text); --js-dot-ring: 0 0 0 3px var(--gold-ring); }
-  22%, 100% { --js-text: var(--ink-2); --js-weight: 500; --js-dot-bg: var(--gold-text); --js-dot-line: var(--gold-text); --js-dot-ring: 0 0 0 0 transparent; }
-}
-@keyframes journey-state-1 {
-  0%, 24.9% { --js-text: var(--muted); --js-weight: 500; --js-dot-bg: var(--surface); --js-dot-line: var(--line-strong); --js-dot-ring: 0 0 0 0 transparent; }
-  25%, 46.9% { --js-text: var(--gold-text); --js-weight: 700; --js-dot-bg: var(--surface); --js-dot-line: var(--gold-text); --js-dot-ring: 0 0 0 3px var(--gold-ring); }
-  47%, 100% { --js-text: var(--ink-2); --js-weight: 500; --js-dot-bg: var(--gold-text); --js-dot-line: var(--gold-text); --js-dot-ring: 0 0 0 0 transparent; }
-}
-@keyframes journey-state-2 {
-  0%, 49.9% { --js-text: var(--muted); --js-weight: 500; --js-dot-bg: var(--surface); --js-dot-line: var(--line-strong); --js-dot-ring: 0 0 0 0 transparent; }
-  50%, 71.9% { --js-text: var(--gold-text); --js-weight: 700; --js-dot-bg: var(--surface); --js-dot-line: var(--gold-text); --js-dot-ring: 0 0 0 3px var(--gold-ring); }
-  72%, 100% { --js-text: var(--ink-2); --js-weight: 500; --js-dot-bg: var(--gold-text); --js-dot-line: var(--gold-text); --js-dot-ring: 0 0 0 0 transparent; }
-}
-@keyframes journey-state-3 {
-  0%, 74.9% { --js-text: var(--muted); --js-weight: 500; --js-dot-bg: var(--surface); --js-dot-line: var(--line-strong); --js-dot-ring: 0 0 0 0 transparent; }
-  75%, 96.9% { --js-text: var(--gold-text); --js-weight: 700; --js-dot-bg: var(--surface); --js-dot-line: var(--gold-text); --js-dot-ring: 0 0 0 3px var(--gold-ring); }
-  97%, 100% { --js-text: var(--ink-2); --js-weight: 500; --js-dot-bg: var(--gold-text); --js-dot-line: var(--gold-text); --js-dot-ring: 0 0 0 0 transparent; }
-}
-
-/* Stacked: the card full width, the nodes as a 2×2 grid in lifecycle order, no routes. */
-@container journey (max-width: 519.98px) {
-  .journey__stage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding-block: 0; }
-  .journey__card { grid-column: 1 / -1; margin-inline: 0; padding: 18px 16px 16px; }
-  .journey__node { position: static; inline-size: auto; block-size: auto; min-block-size: 64px; padding: 10px; }
-  .journey__module { flex-wrap: wrap; white-space: normal; }
-  .journey__event { display: block; overflow: visible; -webkit-line-clamp: unset; line-clamp: none; }
-  .journey__routes { display: none; }
-}
-/* Very narrow: the icon sits above the text so module names never clip. */
-@container journey (max-width: 400px) {
-  .journey__node { grid-template-columns: minmax(0, 1fr); row-gap: 4px; align-content: start; }
-  .journey__icon { grid-row: auto; margin-block-end: 4px; }
-  .journey__steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 8px; }
-  .journey__steps li:nth-child(2)::after { display: none; }
-}
 
 /* ==========================================================================
    2. Four modules — photo with a folder tab, plate below
@@ -1474,7 +1227,7 @@ html:not(.js) .theme-toggle { display: none; }
 .governance__aside > .btn { align-self: flex-start; }
 
 /* ==========================================================================
-   5. Deployment & integration — dark plate with the network seal, photo, facts
+   5. Deployment & integration — dark plate with the integrations, photo, facts
    ========================================================================== */
 .deploy__grid {
   display: grid;
@@ -1688,6 +1441,7 @@ html:not(.js) .theme-toggle { display: none; }
 
 /* Works with: logo chips (Majlis Grid .prov__logo pattern). */
 .works { position: relative; padding-inline: 28px; }
+.deploy__plate > .works:first-child { padding-block-start: 28px; }
 .works__h {
   display: flex;
   align-items: center;
@@ -2033,7 +1787,6 @@ html:lang(ar) body { line-height: 1.85; font-synthesis: none; }
 .hero h1:lang(ar) { font-size: clamp(2rem, 1.15rem + 2.6vw, 3.125rem); line-height: 1.4; }
 h2:lang(ar) { line-height: 1.4; }
 h3:lang(ar),
-.journey__title:lang(ar),
 .paper__title:lang(ar) { line-height: 1.5; }
 .hero__lead:lang(ar),
 .section-lead:lang(ar),
@@ -2050,22 +1803,17 @@ h3:lang(ar),
 .dropdown__d:lang(ar),
 .footer__ctc p:lang(ar) { line-height: 1.85; }
 .eyebrow:lang(ar),
-.journey__caption:lang(ar),
 .works__h:lang(ar),
 .status-strip__label:lang(ar),
 .footer__col h2:lang(ar),
 .dropdown__h:lang(ar),
 .tracecard__eyebrow:lang(ar) { letter-spacing: 0; text-transform: none; font-size: .875rem; }
-.journey__steps:lang(ar) { line-height: 1.6; }
-.journey__event:lang(ar),
-.journey__foot:lang(ar) { line-height: 1.55; }
 .tracecard__rows dd:lang(ar) { font-family: var(--font-ar); font-size: .875rem; }
 .tracecard__rows div:lang(ar) { grid-template-columns: 76px minmax(0, 1fr); }
 .paper__ref:lang(ar),
 .paper__sigcap:lang(ar) { font-family: var(--font-ar); }
 .paper__stamp:lang(ar) { letter-spacing: 0; font-size: 12px; }
 /* Codes inside Arabic text keep the monospace family. */
-:lang(ar) .journey__foot bdi,
 :lang(ar) .tracecard__rows bdi,
 :lang(ar) .tracecard__id bdi { font-family: var(--font-mono); }
 :lang(ar) .tracecard__rows bdi { font-size: 13px; }
@@ -2156,8 +1904,7 @@ h3:lang(ar),
 }
 
 /* ==========================================================================
-   Reduced motion: every animation and transition off. The journey reads all four
-   steps done with no pulses, the bookmark rests on row 1, the seal is still with
+   Reduced motion: every animation and transition off. The bookmark rests on row 1, the seal is still with
    no pulses or sweep, photos are fully opaque at scale 1, the trace is pre-drawn.
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
@@ -2172,7 +1919,6 @@ h3:lang(ar),
   .reveal [data-reveal]:not(.in),
   .reveal [data-reveal].in { opacity: 1; transform: none; }
 
-  .journey__pulse,
   .seal-links__pulses,
   .seal-net__ping,
   .paper__scan,
@@ -2207,7 +1953,6 @@ h3:lang(ar),
   .ph--bleed,
   .deploy__plate::before,
   .deploy__plate::after,
-  .journey__pulse,
   .seal-links__pulses,
   .seal-net__ping,
   .paper__scan,

@@ -17,7 +17,7 @@ export const SERVICES = {
   teams: { name: "Microsoft Teams", logo: "brands/microsoft-teams.svg" },
   meet: { name: "Google Meet", logo: "brands/google-meet.svg" },
   zoom: { name: "Zoom", logo: "brands/zoom.svg" },
-  beem: { name: "Beem" },
+  beem: { name: "Beem", logo: "brands/beem.svg" },
   ecmmeet: { name: "ECM+ Meet", ecm: true },
   calendar: { name: "Google Calendar", logo: "brands/google-calendar.svg" },
   drive: { name: "Google Drive", logo: "brands/google-drive.svg" },

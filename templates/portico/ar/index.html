@@ -114,7 +114,6 @@
     <symbol id="m-bpm" viewBox="0 0 24 24"><rect x="8" y="2.5" width="8" height="5" rx="1.2"/><path d="M12 7.5v2M12 9.5l3 3-3 3-3-3z"/><path d="M9 12.5H5.5v4M15 12.5h3.5v4"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.2"/></symbol>
     <symbol id="m-mms" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/></symbol>
     <!-- Neutral glyphs for services without a logo file; no trademark is drawn. -->
-    <symbol id="t-cam" viewBox="0 0 24 24"><rect x="3" y="6.5" width="12.5" height="11" rx="1.5"/><path d="M15.5 10.5l5-3v9l-5-3z"/></symbol>
     <symbol id="t-sms" viewBox="0 0 24 24"><path d="M12 4.5c4.7 0 8.5 3 8.5 6.7S16.7 18 12 18c-1 0-2-.1-2.9-.4L5 19.5l1-3.5c-1.6-1.2-2.5-2.9-2.5-4.8C3.5 7.5 7.3 4.5 12 4.5z"/><path d="M8.5 11.3h.01M12 11.3h.01M15.5 11.3h.01" stroke-width="2.4"/></symbol>
     <!-- Illustrative 14×14 trace-code pattern; not an encoded code. -->
     <symbol id="dm" viewBox="0 0 16 16">
@@ -215,71 +214,45 @@
           </div>
         </div>
 
-        <div class="hero__visual plate" data-reveal>
-          <figure class="journey" role="img" aria-label="رسم توضيحي لدورة معاملة واحدة في منظومة ECM+: يُسجَّل طلب اعتماد عقد توريد بوصفه مراسلة واردة ويُحال، ثم يُعتمد عبر إجراء محدد في نظام إدارة سير الإجراءات، ويُوثَّق قرار اللجنة في محضر الاجتماع، ثم يُؤرشف العقد في الوثائق مع صلاحيات الوصول وقواعد الاحتفاظ، ويُسجَّل كل عرض برمز الوصول.">
-            <figcaption class="journey__caption">دورة معاملة واحدة في منظومة <bdi>ECM+</bdi></figcaption>
-            <div class="journey__stage" aria-hidden="true">
-              <svg class="journey__routes journey__routes--top" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false">
-                <path class="journey__route" d="M44 62 H45 Q46.5 62 46.5 80 V100"/>
-                <path class="journey__route" d="M56 62 H55 Q53.5 62 53.5 80 V100"/>
-                <path class="journey__pulse" style="--k:0" pathLength="100" d="M44 62 H45 Q46.5 62 46.5 80 V100"/>
-                <path class="journey__pulse" style="--k:1" pathLength="100" d="M56 62 H55 Q53.5 62 53.5 80 V100"/>
-              </svg>
-              <svg class="journey__routes journey__routes--bottom" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false">
-                <path class="journey__route" d="M56 38 H55 Q53.5 38 53.5 20 V0"/>
-                <path class="journey__route" d="M44 38 H45 Q46.5 38 46.5 20 V0"/>
-                <path class="journey__pulse" style="--k:2" pathLength="100" d="M56 38 H55 Q53.5 38 53.5 20 V0"/>
-                <path class="journey__pulse" style="--k:3" pathLength="100" d="M44 38 H45 Q46.5 38 46.5 20 V0"/>
-              </svg>
-
-              <div class="journey__card">
-                <div class="journey__head">
-                  <span class="journey__mark">
-                    <img class="ecmlogo__img--light" src="../../../assets/brand/ecmplus-ai-logo-272.webp" alt="" width="545" height="302">
-                    <img class="ecmlogo__img--dark" src="../../../assets/brand/ecmplus-ai-logo-dark-272.webp" alt="" width="545" height="302" loading="lazy">
-                  </span>
-                  <span class="journey__label">سجل المعاملة</span>
-                </div>
-                <p class="journey__title">طلب اعتماد عقد توريد</p>
-                <ul class="journey__chips">
-                  <li>وارد</li>
-                  <li>سري</li>
-                  <li>عقد</li>
-                </ul>
-                <ol class="journey__steps">
-                  <li>التسجيل</li>
-                  <li>الاعتماد</li>
-                  <li>قرار اللجنة</li>
-                  <li>الأرشفة</li>
-                </ol>
-                <div class="journey__foot">
-                  <svg class="dm journey__dm" viewBox="0 0 16 16" focusable="false"><use href="#dm"/></svg>
-                  <span>رمز الوصول <bdi>TR-7F3A-21C9</bdi> · يُسجَّل كل عرض</span>
-                </div>
-              </div>
-
-              <div class="journey__node journey__node--ts" style="--k:0">
-                <span class="journey__icon"><svg class="icon" focusable="false"><use href="#i-mail"/></svg></span>
-                <span class="journey__module">المراسلات</span>
-                <span class="journey__event">تسجيل الطلب الوارد وإحالته</span>
-              </div>
-              <div class="journey__node journey__node--te" style="--k:1">
-                <span class="journey__icon"><svg class="icon" focusable="false"><use href="#i-flow"/></svg></span>
-                <span class="journey__module">الإجراءات</span>
-                <span class="journey__event">اعتماد الطلب عبر الإجراء المحدد</span>
-              </div>
-              <div class="journey__node journey__node--be" style="--k:2">
-                <span class="journey__icon"><svg class="icon" focusable="false"><use href="#i-people"/></svg></span>
-                <span class="journey__module">الاجتماعات</span>
-                <span class="journey__event">توثيق قرار اللجنة في المحضر</span>
-              </div>
-              <div class="journey__node journey__node--bs" style="--k:3">
-                <span class="journey__icon"><svg class="icon" focusable="false"><use href="#i-archive"/></svg></span>
-                <span class="journey__module">الوثائق</span>
-                <span class="journey__event">أرشفة العقد مع صلاحيات الوصول وقواعد الاحتفاظ</span>
-              </div>
+        <div class="hero__visual deploy__plate on-dark" data-reveal>
+          <div class="seal" role="img" aria-label="رسم توضيحي: تتبادل وظائف المنظومة الأربع، وهي المراسلة والأتمتة والاجتماع والأرشفة، الإشارات مع منظومة ECM+ في المركز.">
+            <svg class="seal-net" viewBox="-200 -150 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+              <defs>
+                <pattern id="seal-dots" width="14" height="14" x="-7" y="-7" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r=".8"/></pattern>
+                <radialGradient id="seal-fade" r=".6"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+                <mask id="seal-mask"><rect x="-200" y="-150" width="400" height="300" fill="url(#seal-fade)"/></mask>
+                <radialGradient id="seal-halo" r=".5"><stop offset="0" stop-color="currentColor" stop-opacity=".26"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></radialGradient>
+              </defs>
+              <g mask="url(#seal-mask)">
+                <rect class="seal-net__dots" x="-200" y="-150" width="400" height="300" fill="url(#seal-dots)"/>
+                <path class="seal-net__mesh" d="M72.1 -29.8L29.8 -72.1M29.8 -72.1L-29.8 -72.1M-29.8 -72.1L-72.1 -29.8M-72.1 -29.8L-72.1 29.8M-72.1 29.8L-29.8 72.1M-29.8 72.1L29.8 72.1M29.8 72.1L72.1 29.8M72.1 29.8L72.1 -29.8M72.1 -29.8L109.1 -63M29.8 -72.1L63 -109.1M-29.8 -72.1L-63 -109.1M-72.1 -29.8L-109.1 -63M-72.1 29.8L-109.1 63M-29.8 72.1L-63 109.1M29.8 72.1L63 109.1M72.1 29.8L109.1 63M126 0L171.9 -46.1M126 0L171.9 46.1M109.1 -63L171.9 -46.1M109.1 -63L125.9 -125.9M63 -109.1L125.9 -125.9M63 -109.1L46.1 -171.9M0 -126L46.1 -171.9M0 -126L-46.1 -171.9M-63 -109.1L-46.1 -171.9M-63 -109.1L-125.9 -125.9M-109.1 -63L-125.9 -125.9M-109.1 -63L-171.9 -46.1M-126 0L-171.9 -46.1M-126 0L-171.9 46.1M-109.1 63L-171.9 46.1M-109.1 63L-125.9 125.9M-63 109.1L-125.9 125.9M-63 109.1L-46.1 171.9M0 126L-46.1 171.9M0 126L46.1 171.9M63 109.1L46.1 171.9M63 109.1L125.9 125.9M109.1 63L125.9 125.9M109.1 63L171.9 46.1"/>
+                <path class="seal-net__traces" d="M55 55L92 92H200M-55 55L-92 92H-200M55 -55L92 -92H200M-55 -55L-92 -92H-200"/>
+                <g class="seal-net__nodes"><circle class="n n--live" cx="72.1" cy="-29.8" r="2.6"/><circle class="n" cx="29.8" cy="-72.1" r="2.6"/><circle class="n" cx="-29.8" cy="-72.1" r="2.6"/><circle class="n n--live" cx="-72.1" cy="-29.8" r="2.6"/><circle class="n" cx="-72.1" cy="29.8" r="2.6"/><circle class="n" cx="-29.8" cy="72.1" r="2.6"/><circle class="n n--live" cx="29.8" cy="72.1" r="2.6"/><circle class="n" cx="72.1" cy="29.8" r="2.6"/><circle class="n" cx="126" cy="0" r="2"/><circle class="n n--live" cx="109.1" cy="-63" r="2"/><circle class="n" cx="63" cy="-109.1" r="2"/><circle class="n" cx="0" cy="-126" r="2"/><circle class="n" cx="-63" cy="-109.1" r="2"/><circle class="n n--live" cx="-109.1" cy="-63" r="2"/><circle class="n" cx="-126" cy="0" r="2"/><circle class="n" cx="-109.1" cy="63" r="2"/><circle class="n" cx="-63" cy="109.1" r="2"/><circle class="n n--live" cx="0" cy="126" r="2"/><circle class="n" cx="63" cy="109.1" r="2"/><circle class="n" cx="109.1" cy="63" r="2"/><circle class="pad" cx="150" cy="92" r="3"/><circle class="pad" cx="-150" cy="92" r="3"/><circle class="pad" cx="150" cy="-92" r="3"/><circle class="pad" cx="-150" cy="-92" r="3"/></g>
+              </g>
+              <circle class="seal-net__halo" r="96" fill="url(#seal-halo)"/>
+              <g class="seal-net__orbit"><circle class="ring" r="92"/><circle class="sat" cx="92" cy="0" r="2.8"/><circle class="sat" cx="-65" cy="65" r="2"/></g>
+              <ellipse class="seal-net__ping" rx="70" ry="44"/>
+              <ellipse class="seal-net__plate" rx="64" ry="40"/>
+            </svg>
+            <span class="mark seal__mark" aria-hidden="true">
+              <img src="../../../assets/brand/ring-dark.svg" alt="" width="200" height="116" loading="lazy">
+              <span class="mark__word">ECM+</span>
+            </span>
+            <svg class="seal-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path class="seal-links__line" vector-effect="non-scaling-stroke" d="M18 30C18 37 45 33 45 40M50 30V40M82 30C82 37 55 33 55 40M50 72V60"/>
+              <g class="seal-links__pulses">
+                <path class="in" style="--k:0" vector-effect="non-scaling-stroke" pathLength="100" d="M18 30C18 37 45 33 45 40"/><path class="in" style="--k:1" vector-effect="non-scaling-stroke" pathLength="100" d="M50 30V40"/><path class="in" style="--k:2" vector-effect="non-scaling-stroke" pathLength="100" d="M82 30C82 37 55 33 55 40"/><path class="in" style="--k:3" vector-effect="non-scaling-stroke" pathLength="100" d="M50 72V60"/>
+                <path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M45 40C45 33 18 37 18 30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M50 40V30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M55 40C55 33 82 37 82 30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M50 60V72"/>
+              </g>
+            </svg>
+            <div class="seal__nodes" aria-hidden="true">
+              <span class="seal__node seal__node--correspond"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span class="seal__label">مراسلة</span></span>
+              <span class="seal__node seal__node--automate"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" focusable="false"><rect x="8" y="2.5" width="8" height="5" rx="1.2"/><path d="M12 7.5v2M12 9.5l3 3-3 3-3-3z"/><path d="M9 12.5H5.5v4M15 12.5h3.5v4"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.2"/></svg></span><span class="seal__label">أتمتة</span></span>
+              <span class="seal__node seal__node--convene"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" focusable="false"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/></svg></span><span class="seal__label">اجتماع</span></span>
+              <span class="seal__node seal__node--archive"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" focusable="false"><path d="M3 4h18v4H3zM5 8v12h14V8M10 12h4"/></svg></span><span class="seal__label">أرشفة</span></span>
             </div>
-          </figure>
+          </div>
+
         </div>
       </div>
     </section>
@@ -539,44 +512,6 @@
 
         <div class="deploy__grid">
           <div class="deploy__plate on-dark" data-reveal>
-            <div class="seal" role="img" aria-label="رسم توضيحي: تتبادل وظائف المنظومة الأربع، وهي المراسلة والأتمتة والاجتماع والأرشفة، الإشارات مع منظومة ECM+ في المركز.">
-              <svg class="seal-net" viewBox="-200 -150 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-                <defs>
-                  <pattern id="seal-dots" width="14" height="14" x="-7" y="-7" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r=".8"/></pattern>
-                  <radialGradient id="seal-fade" r=".6"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-                  <mask id="seal-mask"><rect x="-200" y="-150" width="400" height="300" fill="url(#seal-fade)"/></mask>
-                  <radialGradient id="seal-halo" r=".5"><stop offset="0" stop-color="currentColor" stop-opacity=".26"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></radialGradient>
-                </defs>
-                <g mask="url(#seal-mask)">
-                  <rect class="seal-net__dots" x="-200" y="-150" width="400" height="300" fill="url(#seal-dots)"/>
-                  <path class="seal-net__mesh" d="M72.1 -29.8L29.8 -72.1M29.8 -72.1L-29.8 -72.1M-29.8 -72.1L-72.1 -29.8M-72.1 -29.8L-72.1 29.8M-72.1 29.8L-29.8 72.1M-29.8 72.1L29.8 72.1M29.8 72.1L72.1 29.8M72.1 29.8L72.1 -29.8M72.1 -29.8L109.1 -63M29.8 -72.1L63 -109.1M-29.8 -72.1L-63 -109.1M-72.1 -29.8L-109.1 -63M-72.1 29.8L-109.1 63M-29.8 72.1L-63 109.1M29.8 72.1L63 109.1M72.1 29.8L109.1 63M126 0L171.9 -46.1M126 0L171.9 46.1M109.1 -63L171.9 -46.1M109.1 -63L125.9 -125.9M63 -109.1L125.9 -125.9M63 -109.1L46.1 -171.9M0 -126L46.1 -171.9M0 -126L-46.1 -171.9M-63 -109.1L-46.1 -171.9M-63 -109.1L-125.9 -125.9M-109.1 -63L-125.9 -125.9M-109.1 -63L-171.9 -46.1M-126 0L-171.9 -46.1M-126 0L-171.9 46.1M-109.1 63L-171.9 46.1M-109.1 63L-125.9 125.9M-63 109.1L-125.9 125.9M-63 109.1L-46.1 171.9M0 126L-46.1 171.9M0 126L46.1 171.9M63 109.1L46.1 171.9M63 109.1L125.9 125.9M109.1 63L125.9 125.9M109.1 63L171.9 46.1"/>
-                  <path class="seal-net__traces" d="M55 55L92 92H200M-55 55L-92 92H-200M55 -55L92 -92H200M-55 -55L-92 -92H-200"/>
-                  <g class="seal-net__nodes"><circle class="n n--live" cx="72.1" cy="-29.8" r="2.6"/><circle class="n" cx="29.8" cy="-72.1" r="2.6"/><circle class="n" cx="-29.8" cy="-72.1" r="2.6"/><circle class="n n--live" cx="-72.1" cy="-29.8" r="2.6"/><circle class="n" cx="-72.1" cy="29.8" r="2.6"/><circle class="n" cx="-29.8" cy="72.1" r="2.6"/><circle class="n n--live" cx="29.8" cy="72.1" r="2.6"/><circle class="n" cx="72.1" cy="29.8" r="2.6"/><circle class="n" cx="126" cy="0" r="2"/><circle class="n n--live" cx="109.1" cy="-63" r="2"/><circle class="n" cx="63" cy="-109.1" r="2"/><circle class="n" cx="0" cy="-126" r="2"/><circle class="n" cx="-63" cy="-109.1" r="2"/><circle class="n n--live" cx="-109.1" cy="-63" r="2"/><circle class="n" cx="-126" cy="0" r="2"/><circle class="n" cx="-109.1" cy="63" r="2"/><circle class="n" cx="-63" cy="109.1" r="2"/><circle class="n n--live" cx="0" cy="126" r="2"/><circle class="n" cx="63" cy="109.1" r="2"/><circle class="n" cx="109.1" cy="63" r="2"/><circle class="pad" cx="150" cy="92" r="3"/><circle class="pad" cx="-150" cy="92" r="3"/><circle class="pad" cx="150" cy="-92" r="3"/><circle class="pad" cx="-150" cy="-92" r="3"/></g>
-                </g>
-                <circle class="seal-net__halo" r="96" fill="url(#seal-halo)"/>
-                <g class="seal-net__orbit"><circle class="ring" r="92"/><circle class="sat" cx="92" cy="0" r="2.8"/><circle class="sat" cx="-65" cy="65" r="2"/></g>
-                <ellipse class="seal-net__ping" rx="70" ry="44"/>
-                <ellipse class="seal-net__plate" rx="64" ry="40"/>
-              </svg>
-              <span class="mark seal__mark" aria-hidden="true">
-                <img src="../../../assets/brand/ring-dark.svg" alt="" width="200" height="116" loading="lazy">
-                <span class="mark__word">ECM+</span>
-              </span>
-              <svg class="seal-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-                <path class="seal-links__line" vector-effect="non-scaling-stroke" d="M18 30C18 37 45 33 45 40M50 30V40M82 30C82 37 55 33 55 40M50 72V60"/>
-                <g class="seal-links__pulses">
-                  <path class="in" style="--k:0" vector-effect="non-scaling-stroke" pathLength="100" d="M18 30C18 37 45 33 45 40"/><path class="in" style="--k:1" vector-effect="non-scaling-stroke" pathLength="100" d="M50 30V40"/><path class="in" style="--k:2" vector-effect="non-scaling-stroke" pathLength="100" d="M82 30C82 37 55 33 55 40"/><path class="in" style="--k:3" vector-effect="non-scaling-stroke" pathLength="100" d="M50 72V60"/>
-                  <path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M45 40C45 33 18 37 18 30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M50 40V30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M55 40C55 33 82 37 82 30"/><path class="out" vector-effect="non-scaling-stroke" pathLength="100" d="M50 60V72"/>
-                </g>
-              </svg>
-              <div class="seal__nodes" aria-hidden="true">
-                <span class="seal__node seal__node--correspond"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span class="seal__label">مراسلة</span></span>
-                <span class="seal__node seal__node--automate"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" focusable="false"><rect x="8" y="2.5" width="8" height="5" rx="1.2"/><path d="M12 7.5v2M12 9.5l3 3-3 3-3-3z"/><path d="M9 12.5H5.5v4M15 12.5h3.5v4"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.2"/></svg></span><span class="seal__label">أتمتة</span></span>
-                <span class="seal__node seal__node--convene"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" focusable="false"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/></svg></span><span class="seal__label">اجتماع</span></span>
-                <span class="seal__node seal__node--archive"><span class="seal__badge"><svg class="seal__icon" viewBox="0 0 24 24" focusable="false"><path d="M3 4h18v4H3zM5 8v12h14V8M10 12h4"/></svg></span><span class="seal__label">أرشفة</span></span>
-              </div>
-            </div>
-
             <div class="works">
               <h3 class="works__h" id="works-title">تتكامل مع</h3>
               <!-- Logos are their owners' trademarks, shown unmodified beside each name; services without a logo file take a neutral glyph. -->
@@ -584,7 +519,7 @@
                 <li><img class="works__logo" src="../../../assets/brands/microsoft-teams.svg" alt="" width="18" height="18" loading="lazy" decoding="async"><bdi>Microsoft Teams</bdi></li>
                 <li><img class="works__logo" src="../../../assets/brands/google-meet.svg" alt="" width="18" height="18" loading="lazy" decoding="async"><bdi>Google Meet</bdi></li>
                 <li><img class="works__logo" src="../../../assets/brands/zoom.svg" alt="" width="18" height="18" loading="lazy" decoding="async"><bdi>Zoom</bdi></li>
-                <li><svg class="icon works__logo works__logo--glyph" aria-hidden="true" focusable="false"><use href="#t-cam"/></svg><bdi>Beem</bdi></li>
+                <li><img class="works__logo" src="../../../assets/brands/beem.svg" alt="" width="18" height="18" loading="lazy" decoding="async"><bdi>Beem</bdi></li>
                 <li class="is-own"><img class="works__logo works__logo--ecm ecmlogo__img--light" src="../../../assets/brand/ecmplus-ai-logo-272.webp" alt="" width="545" height="302" loading="lazy" decoding="async"><img class="works__logo works__logo--ecm ecmlogo__img--dark" src="../../../assets/brand/ecmplus-ai-logo-dark-272.webp" alt="" width="545" height="302" loading="lazy" decoding="async"><bdi>ECM+ Meet</bdi></li>
                 <li><img class="works__logo" src="../../../assets/brands/gmail.svg" alt="" width="18" height="18" loading="lazy" decoding="async"><bdi>Gmail</bdi></li>
                 <li><img class="works__logo" src="../../../assets/brands/microsoft-outlook.svg" alt="" width="18" height="18" loading="lazy" decoding="async"><bdi>Outlook</bdi></li>

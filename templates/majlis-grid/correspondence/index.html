@@ -41,6 +41,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@600;700&family=Vazirmatn:wght@400;500&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@700&text=ECM%2B%20BusinesSuit&display=swap">
   </noscript>
+  <!-- The language flip opts in here rather than in the stylesheet: Chrome reads the opt-in as soon as
+       <body> starts, which can be before the stylesheet has loaded. -->
+  <style>
+    @view-transition { navigation: auto; }
+    @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+  </style>
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="../../../assets/brand/ecmplus-logo.css">
   <script src="../main.js" defer></script>
