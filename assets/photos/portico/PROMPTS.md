@@ -16,7 +16,7 @@ so the layout does not shift.
 
 | File | Proportion | Brief |
 |---|---|---|
-| `p01-suite` | 16:9 | A signed formal document with a gold wax seal and a fountain pen on a dark marble desk, lit by a warm lamp, brass details in the corners. Dark and low in contrast, because the hero headline sits on one side and the ECM+ seal on the other in both languages. |
+| `p01-suite` | 16:9 | A glowing open folder of documents beside a laptop showing a document workspace, on a dark marble desk, with frosted gold icons (archive, workflow, security, layers, search, settings) in an arc above them and a tall window to one side. Warm gold light on a dark room. The hero shows the whole image uncropped on a near-black backdrop and fades its edges, so keep the outer edges dark; the centred card covers the middle. |
 | `p02-archive` | 16:9 | A long, orderly records room: identical white archive boxes on pale wooden or steel shelving, receding in perspective. Soft overhead light, spotless, a sense of permanence and order. |
 | `p03-correspondence` | 3:2 | Close-up of formal white envelopes closed with deep red wax seals, resting on a dark walnut desk beside a fountain pen. Shallow depth of field, warm side light. No handwriting or addresses. |
 | `p04-process` | 3:2 | A process being mapped on a large whiteboard: a hand-drawn flowchart of boxes, arrows and decision points, with a person seen from behind (out of focus, no face) drawing the next step. Bright, clean office light. The diagram should read as a workflow, but no word on it should be legible. |

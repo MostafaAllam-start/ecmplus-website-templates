@@ -96,10 +96,18 @@ node scripts/subpages.mjs
 - The page body uses each template's own section headings and buttons. The shared `.sp-*`
   components are styled at the end of each `styles.css` through `--sp-*` tokens mapped to that
   template's colours and fonts, so light and dark modes carry over.
+- In Portico, the "Works with" section shows each service as a card that says what it does in
+  that module (`WORKS` in `scripts/subpages-content.mjs`, switched on by `works: "cards"` in
+  the template's settings in `scripts/subpages.mjs`). The other templates keep the logo chips.
 - On the home pages, links to a module or About anchor point at the new pages. The script updates
   them, and running it again is harmless. The module cards (Portico), "Explore" links (Ink Ledger),
   folder links (Paper Register) and "Module details" links (Majlis Grid) also open them. Every
   header links to About ECM Plus, and Portico's Suite menu lists the four module pages.
+- Portico's header is 60 px (56 px below 1100 px) and ends with a "Request a demo" button, which
+  sits at the foot of the mobile menu. A gold line along the header's bottom edge shows how far the
+  page has been read, and the bar takes a soft shadow once the page scrolls (scroll-driven CSS, so
+  browsers without it keep a flat bar). On desktop a gold underline marks the hovered, open or
+  current menu item.
 
 ## Logo
 
@@ -112,9 +120,10 @@ images and `assets/brand/ecmplus-logo.css` (loaded after each page's own stylesh
 right one for the theme. Search for `class="brand ecmlogo`. Add `ecmlogo--lg` for the footer size
 and `ecmlogo--on-dark` on a surface that stays dark in light mode.
 
-The record card in the Ink Ledger journey carries the same logo. The module seals (the
-background of Majlis Grid's title card and Portico's hero) and the Ink Ledger platform row still
-use the swoosh ring: HTML text over `ring.svg`, or `ring-dark.svg` on dark backgrounds.
+The record card in the Ink Ledger journey carries the same logo, and Portico's hero card shows it
+at hero scale (`ecmlogo--on-dark`, so a printout gets the light version). The module seal behind
+Majlis Grid's title card and the Ink Ledger platform row still use the swoosh ring: HTML text over
+`ring.svg`, or `ring-dark.svg` on dark backgrounds.
 
 ## Run it locally
 
