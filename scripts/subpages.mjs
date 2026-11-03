@@ -15,7 +15,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { posix } from "node:path";
 import { fileURLToPath } from "node:url";
-import { GLYPHS, MODULES, PAGES, SERVICES, UI } from "./subpages-content.mjs";
+import { GLYPHS, MODULES, PAGES, SERVICES, UI, WORKS } from "./subpages-content.mjs";
 import { STEP_ART, MIRROR_IN_RTL } from "./steps-art.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url)).replace(/\\/g, "/");
@@ -40,6 +40,7 @@ const TEMPLATES = {
     btn2: "btn btn--ghost-gold btn--lg",
     reveal: true,
     photos: true,
+    works: "cards",
     head: (no, label, id, title) => `<div class="section-head" data-reveal>\n          <p class="eyebrow"><span class="eyebrow__no">${no}</span>${label}</p>\n          <h2 id="${id}">${title}</h2>\n        </div>`,
   },
   "ink-ledger": {
@@ -162,8 +163,8 @@ function buildMain(tName, tpl, lang, slug, ctx) {
   const reveal = (i) => (tpl.reveal ? ` data-reveal style="--i:${i}"` : "");
   const W = tpl.wrap;
 
-  const section = (no, label, id, title, body, alt) => {
-    const cls = `section sp-section${alt ? " sp-section--alt" : ""}`;
+  const section = (no, label, id, title, body, alt, mod) => {
+    const cls = `section sp-section${alt ? " sp-section--alt" : ""}${mod ? ` sp-section--${mod}` : ""}`;
     if (tpl.register) {
       return `    <section class="${cls}" aria-labelledby="${id}">
       <div class="container register">
@@ -199,6 +200,17 @@ ${body}
     const n = name(s, lang);
     const label = lang === "ar" && /^[\x00-\x7F+]+$/.test(n) ? `<bdi>${n}</bdi>` : n;
     return `          <li class="sp-chip">${mark}${label}</li>`;
+  }).join("\n")}\n        </ul>`;
+  // Integration cards: a logo on a white plate, the service name and what it does here.
+  const cards = (keys) => `        <ul class="sp-works">\n${keys.map((k, i) => {
+    const s = SERVICES[k];
+    let mark = "";
+    if (s.ecm) mark = `<img class="sp-work__wide" src="${assets}brand/ecmplus-ai-logo-272.webp" alt="" width="545" height="302" loading="lazy" decoding="async">`;
+    else if (s.logo) mark = `<img${s.wide ? ' class="sp-work__wide"' : ""} src="${assets}${s.logo}" alt="" width="${s.wide ? 604 : 24}" height="${s.wide ? 331 : 24}" loading="lazy" decoding="async">`;
+    else if (s.glyph) mark = `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${s.glyph}</svg>`;
+    const n = name(s, lang);
+    const label = lang === "ar" && /^[\x00-\x7F+]+$/.test(n) ? `<bdi>${n}</bdi>` : n;
+    return `          <li class="sp-work"${reveal(i)}><span class="sp-work__mark" aria-hidden="true">${mark}</span><h3 class="sp-work__name">${label}</h3><p class="sp-work__text">${WORKS[slug][lang][k]}</p></li>`;
   }).join("\n")}\n        </ul>`;
   const related = (keys) => `        <ul class="sp-related">\n${keys.map((k, i) => {
     const m = PAGES[k][lang];
@@ -270,7 +282,9 @@ ${visual}
       section("01", ui.overview, "overview-title", c.overviewTitle, prose(c.overview)),
       section("02", ui.capabilities, "capabilities-title", ui.capabilitiesTitle, grid(c.capabilities), true),
       section("03", ui.how, "how-title", c.howTitle, steps(c.steps)),
-      section("04", ui.worksWith, "works-title", ui.worksWithTitle, chips(page.services), true),
+      tpl.works === "cards"
+        ? section("04", ui.worksWith, "works-title", ui.worksWithTitle, cards(page.services), true, "works")
+        : section("04", ui.worksWith, "works-title", ui.worksWithTitle, chips(page.services), true),
       section("05", ui.related, "related-title", ui.relatedTitle, related(MODULES.filter((m) => m !== slug))),
     ];
   }

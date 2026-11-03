@@ -12,7 +12,7 @@ set can be replaced by commissioned or generated imagery with the same names and
 
 | File | Used for | Photo | Photographer |
 |---|---|---|---|
-| `p01-suite` | Hero | A signed document with a gold wax seal and a fountain pen on a dark marble desk | AI-generated image supplied for this site |
+| `p01-suite` | Hero | A glowing folder of documents beside a laptop, with gold module icons in an arc above them, on a dark marble plinth by a window | AI-generated image supplied for this site |
 | `p02-archive` | Documents module | A bright records room with white archive boxes on steel shelving | AI-generated image supplied for this site |
 | `p03-correspondence` | Correspondence module | An envelope closed with a red wax seal, a fountain pen and an inkwell | AI-generated image supplied for this site |
 | `p04-process` | Process automation module | A process flowchart on an office glass wall above a desk spread with process diagrams | AI-generated image supplied for this site |
