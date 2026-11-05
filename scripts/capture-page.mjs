@@ -158,7 +158,7 @@ export function buildCaptureMain(ctx, h) {
 
   const card = (icon, title, text, extra = "", i = 0) => `          <li class="sp-card cap-card"${reveal(i)}>${icon}<h3 class="sp-card__title">${title}</h3><p>${text}</p>${extra}</li>`;
   const grid = (items, cls = "") => `        <ul class="sp-grid cap-grid${cls}">\n${items.join("\n")}\n        </ul>`;
-  const side = (kind, text) => `<p class="cap-side">${tag(kind)}<span>${text}</span></p>`;
+  const side = (kind, text) => `<p class="cap-side">${kind === "potential" ? "" : tag(kind)}<span>${text}</span></p>`;
 
   // ---- Hero
   const hero = `    <section class="sp-hero" aria-labelledby="page-title">
@@ -185,7 +185,7 @@ export function buildCaptureMain(ctx, h) {
     card(ic(Z.scan), t("Scanning", "المسح الضوئي"), t("The local scanner service scans straight into the archive, page by page or through the auto-feeder.", "تمسح خدمة الماسح الضوئي المحلية الوثائق مباشرة إلى الأرشيف، صفحة صفحة أو عبر وحدة التغذية التلقائية."), "", 0),
     card(ic(Z.upload), t("Digital upload", "الرفع الرقمي"), t("Upload from a device, start from a template or a blank document, or capture from Google Drive and OneDrive.", "رفع الملفات من الجهاز، أو البدء من قالب أو وثيقة فارغة، أو الالتقاط من ‹Google Drive› و‹OneDrive›."), "", 1),
     card(sp("i-mail"), t("Email capture", "الالتقاط من البريد"), t("Gmail, Outlook or a business mailbox connects to the suite; emails are filed into a correspondence or the archive, and the Outlook add-in saves and routes them.", "يُربط ‹Gmail› أو ‹Outlook› أو البريد المؤسسي بالمنظومة، وتُحفظ الرسائل ضمن مراسلة أو في الأرشيف، وتحفظها إضافة ‹Outlook› وتحيلها."), "", 2),
-    card(sp("i-link"), t("External system integration", "التكامل مع الأنظمة الأخرى"), t("A REST API lets other systems file documents into the archive, and existing archives are migrated in.", "تتيح واجهة ‹REST› للأنظمة الأخرى حفظ الوثائق في الأرشيف، وتُنقل الأرشيفات القائمة إليه."), side("potential", t("Scheduled capture from shared folders", "الالتقاط المجدول من المجلدات المشتركة")), 3),
+    card(sp("i-link"), t("External system integration", "التكامل مع الأنظمة الأخرى"), t("A REST API lets other systems file documents into the archive, and existing archives are migrated in.", "تتيح واجهة ‹REST› للأنظمة الأخرى حفظ الوثائق في الأرشيف، وتُنقل الأرشيفات القائمة إليه."), side("potential", t("Possible through an integration: scheduled capture from shared folders", "ممكن عبر تكامل: الالتقاط المجدول من المجلدات المشتركة")), 3),
     card(ic(Z.camera), t("Camera capture", "الالتقاط بالكاميرا"), t("Photographing a document from a phone or tablet and filing it like a scan.", "تصوير الوثيقة بهاتف أو جهاز لوحي وحفظها كما يُحفظ المسح الضوئي."), side("potential", t("Not part of the product today", "ليس جزءًا من المنظومة اليوم")), 4),
   ]);
 
@@ -195,7 +195,7 @@ export function buildCaptureMain(ctx, h) {
     card(sp("i-ocr"), t("Text recognition, Arabic and English", "التعرّف على النصوص بالعربية والإنجليزية"), t("OCR reads scanned and image files, so their content is searchable and opens at the matching page.", "يقرأ التعرّف الضوئي (‹OCR›) الملفات الممسوحة والصور، فيصبح محتواها قابلًا للبحث ويُفتح عند الصفحة المطابقة."), "", 1),
     card(sp("i-tag"), t("Classification", "التصنيف"), t("Suggesting the document type from its content. In ECM+ today, staff choose the type, and its index fields follow.", "اقتراح نوع الوثيقة من محتواها. في ‹ECM+› اليوم يختار الموظف النوع، فتتبعه حقول الفهرسة."), side("demo", t("Shown in the demonstration", "يظهر في العرض التوضيحي")), 2),
     card(sp("i-spark"), t("Metadata extraction", "استخراج البيانات"), t("Auto fill from file reads the document and proposes values for the type’s index fields: text, numbers and dates. Only empty fields are filled, and staff review before saving. An invoice yields its number, date and total; a contract its parties and expiry; an employee file its name, number and hire date.", "تقرأ «التعبئة التلقائية من الملف» الوثيقة وتقترح قيم حقول الفهرسة لنوعها: نصوصًا وأرقامًا وتواريخ. تُعبَّأ الحقول الفارغة فقط، ويراجعها الموظف قبل الحفظ. فتعطي الفاتورة رقمها وتاريخها وإجماليها، والعقد أطرافه وتاريخ انتهائه، وملف الموظف اسمه ورقمه وتاريخ تعيينه."), "", 3),
-    card(ic(Z.barcode), t("Barcode and QR codes", "الباركود ورموز QR"), t("ECM+ generates a code for each document and stamps it on the pages.", "تولّد ‹ECM+› رمزًا لكل وثيقة وتختمه على صفحاتها."), side("potential", t("Reading codes on incoming paper to route or split batches", "قراءة الرموز على الورق الوارد لتوجيه الدفعات أو تقسيمها")), 4),
+    card(ic(Z.barcode), t("Barcode and QR codes", "الباركود ورموز QR"), t("ECM+ generates a code for each document and stamps it on the pages.", "تولّد ‹ECM+› رمزًا لكل وثيقة وتختمه على صفحاتها."), side("potential", t("Possible through an integration: reading codes on incoming paper to route or split batches", "ممكن عبر تكامل: قراءة الرموز على الورق الوارد لتوجيه الدفعات أو تقسيمها")), 4),
     card(sp("i-shield"), t("Validation", "التحقق"), t("Checking proposed values against rules, such as a due date after the invoice date.", "مطابقة القيم المقترحة مع قواعد محددة، كأن يلي تاريخُ الاستحقاق تاريخَ الفاتورة."), side("demo", t("Shown in the demonstration", "يظهر في العرض التوضيحي")), 5),
   ]);
 
