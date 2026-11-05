@@ -1069,6 +1069,7 @@ html:not(.js) .theme-toggle { display: none; }
   text-wrap: balance;
 }
 .hero__ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-block-start: 18px; }
+#why .section-lead a { color: var(--gold-text); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 /* The lifecycle as a gold rail under the buttons: six stages, one hairline. */
 .hero__path {
   display: grid;
@@ -1204,6 +1205,9 @@ html:not(.js) .theme-toggle { display: none; }
 }
 /* Module glyph, as on the lifecycle badges. */
 .card__tab-icon { inline-size: 15px; block-size: 15px; stroke-width: 1.8; color: var(--gold-text); }
+/* The ECM+ app's own BPM icon keeps its colours. */
+.icon--app { fill: none; stroke: none; }
+.icon--app path { stroke: #94A3B8; }
 .card__tab::before,
 .card__tab::after {
   content: "";
