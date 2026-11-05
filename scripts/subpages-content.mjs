@@ -8,7 +8,7 @@ export const MODULES = ["documents", "correspondence", "processes", "meetings"];
 export const GLYPHS = {
   documents: '<path d="M3 4h18v4H3zM5 8v12h14V8M10 12h4"/>',
   correspondence: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
-  processes: '<circle cx="2.8" cy="12" r="1.8"/><path d="M4.6 12L6 12"/><rect x="6" y="9" width="3.6" height="6" rx="1"/><path d="M9.6 12L10.5 12M10.5 12L12.8 9.7L15.1 12L12.8 14.3z"/><path d="M12.8 14.3L12.8 18L14.5 18M12.8 9.7L12.8 6L14.5 6"/><rect x="14.5" y="15" width="3.6" height="6" rx="1"/><rect x="14.5" y="3" width="3.6" height="6" rx="1"/><path d="M18.1 6H20.5v4.2M18.1 18H20.5v-4.2"/><circle cx="20.5" cy="12" r="1.8"/>',
+  processes: '<g stroke="#D9A21B" stroke-width="1.2"><circle cx="2" cy="12" r="1"/><rect x="5.7" y="9.5" width="2.2" height="5" rx="0.8"/><path d="M10.6 12L12.1 10.5L13.6 12L12.1 13.5z"/><rect x="16.3" y="3.5" width="2.2" height="5" rx="0.8"/><rect x="16.3" y="15.5" width="2.2" height="5" rx="0.8"/><circle cx="22" cy="12" r="1"/><path d="M3 12H4.3M7.9 12H9.2M12.1 10.5V6H14.9M12.1 13.5V18H14.9M18.5 6H22V9.5M18.5 18H22V14.5"/><path d="M4.300000000000001 11.15L5.7 12L4.300000000000001 12.85zM9.2 11.15L10.6 12L9.2 12.85zM14.9 5.15L16.3 6L14.9 6.85zM14.9 17.15L16.3 18L14.9 18.85zM21.15 9.6L22 11L22.85 9.6zM21.15 14.4L22 13L22.85 14.4z" fill="#D9A21B" stroke="none"/></g>',
   meetings: '<circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/>',
 };
 
