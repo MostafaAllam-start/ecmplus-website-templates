@@ -166,6 +166,12 @@ ${rows}
 // A page's copy, with the template's own module names where it has them.
 const copyFor = (tpl, slug, lang) => ({ ...PAGES[slug][lang], ...tpl.names?.[lang]?.[slug] });
 
+// Portico only: the documents page points to the Document Capture page.
+const CAPTURE_LINK = {
+  en: `New: <a href="../capture/">Document Capture</a> shows how paper, files and email become indexed, searchable documents.`,
+  ar: `جديد: تعرضُ صفحة <a href="../capture/">التقاط الوثائق</a> كيف تتحول الورقيات والملفات والرسائل إلى وثائق مفهرسة وقابلة للبحث.`,
+};
+
 function buildMain(tName, tpl, lang, slug, ctx) {
   const ui = { ...UI[lang], ...tpl.ui?.[lang] };
   const page = PAGES[slug];
@@ -296,7 +302,7 @@ ${visual}
     ];
   } else {
     sections = [
-      section("01", ui.overview, "overview-title", c.overviewTitle, prose(c.overview)),
+      section("01", ui.overview, "overview-title", c.overviewTitle, prose(slug === "documents" && tpl.extra?.includes("capture") ? [...c.overview, CAPTURE_LINK[lang]] : c.overview)),
       section("02", ui.capabilities, "capabilities-title", ui.capabilitiesTitle, grid(c.capabilities), true),
       section("03", ui.how, "how-title", c.howTitle, steps(c.steps)),
       tpl.works === "cards"

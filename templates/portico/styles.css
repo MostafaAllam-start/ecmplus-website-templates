@@ -3436,3 +3436,6 @@ h3:lang(ar),
 .dropdown__list + .dropdown__h { margin-block-start: 6px; }
 .card__caps a { color: inherit; text-decoration: underline; text-decoration-color: var(--line-gold); text-underline-offset: 3px; }
 .card__caps a:hover { color: var(--gold-text); text-decoration-color: currentColor; }
+
+/* Inline links inside Why pillars. */
+.pillar__text a { color: var(--gold-text); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
