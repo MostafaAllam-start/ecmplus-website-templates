@@ -2456,20 +2456,18 @@ h3:lang(ar),
 
   /* Split head (deployment, suite): eyebrow and title on the start side, the lead beside them.
      The sectors band keeps the stacked head, with the lead under the title. */
-  .deploy .section-head,
-  .suite .section-head {
+  .deploy .section-head {
     max-inline-size: none;
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     column-gap: 48px;
     align-items: end;
   }
-  .deploy .section-head > .eyebrow,
-  .suite .section-head > .eyebrow { grid-column: 1; grid-row: 1; }
-  .deploy .section-head > h2,
-  .suite .section-head > h2 { grid-column: 1; grid-row: 2; }
-  .deploy .section-head > .section-lead,
-  .suite .section-head > .section-lead { grid-column: 2; grid-row: 1 / 3; margin: 0; }
+  .deploy .section-head > .eyebrow { grid-column: 1; grid-row: 1; }
+  .deploy .section-head > h2 { grid-column: 1; grid-row: 2; }
+  .deploy .section-head > .section-lead { grid-column: 2; grid-row: 1 / 3; margin: 0; }
+  .suite .section-head { max-inline-size: none; }
+  .suite .section-head > .section-lead { max-inline-size: none; margin-block-start: 10px; }
 
   /* 1. Hero: the fold less the announcement bar, so bar + header + hero fit at page top. */
   .hero {
@@ -2479,7 +2477,7 @@ h3:lang(ar),
 
   /* 2. Four modules: a 9:4 photo band, a wider plate. */
   .cards { gap: 24px 20px; margin-block-start: 24px; }
-  .card__ph { aspect-ratio: 9 / 4; }
+  .card__ph { aspect-ratio: 14 / 5; }
   .card__plate { margin: -44px 6px 0; padding: 14px; }
   .card__name { font-size: 1.25rem; }
   .card__line { margin-block-start: 8px; font-size: .9375rem; line-height: 1.5; }
