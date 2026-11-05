@@ -236,3 +236,10 @@ html:not(.js) .cap-docs { display: grid; grid-template-columns: repeat(auto-fit,
 @media print {
   .cap-stepper, .cap-stage__foot { display: none; }
 }
+
+/* Cards with a glyph: the icon sits in the title's row, the rest spans below. */
+.sp-card:has(> .cap-ic) { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 12px; }
+.sp-card:has(> .cap-ic) > .cap-ic { margin: 0; }
+.sp-card:has(> .cap-ic) > .sp-card__title { margin: 0; }
+.sp-card:has(> .cap-ic) > :not(.cap-ic):not(.sp-card__title) { grid-column: 1 / -1; }
+.sp-card:has(> .cap-ic) > p:not(.cap-side) { margin-block-start: 10px; }
