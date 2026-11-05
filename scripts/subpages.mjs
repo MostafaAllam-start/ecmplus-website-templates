@@ -129,7 +129,7 @@ function rebaseChunk(html, ctx) {
   });
 }
 
-// Portico draws the BPM module with the ECM+ app's own coloured icon (the m-bpm sprite symbol).
+// Portico draws the BPM module with the ECM+ app's own one-colour BPM icon (the m-bpm sprite symbol).
 function svgGlyph(slug, cls = "sp-glyph", tpl) {
   if (tpl?.appBpm && slug === "processes") return `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#m-bpm"/></svg>`;
   return `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${GLYPHS[slug]}</svg>`;
