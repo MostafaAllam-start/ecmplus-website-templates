@@ -2477,7 +2477,7 @@ h3:lang(ar),
 
   /* 2. Four modules: a 9:4 photo band, a wider plate. */
   .cards { gap: 24px 20px; margin-block-start: 24px; }
-  .card__ph { aspect-ratio: 14 / 5; }
+  .card__ph { aspect-ratio: auto; block-size: clamp(105px, calc(105px + (100vh - 730px) * .75), 230px); }
   .card__plate { margin: -44px 6px 0; padding: 14px; }
   .card__name { font-size: 1.25rem; }
   .card__line { margin-block-start: 8px; font-size: .9375rem; line-height: 1.5; }
