@@ -1111,13 +1111,9 @@ html:not(.js) .theme-toggle { display: none; }
   background: linear-gradient(90deg, rgba(217, 162, 27, .85), rgba(217, 162, 27, .35));
 }
 [dir="rtl"] .hero__path li + li::after { background: linear-gradient(270deg, rgba(217, 162, 27, .85), rgba(217, 162, 27, .35)); }
-/* Phones: all six stages stay on one line. */
+/* Phones: the rail is left out. */
 @media (max-width: 719.98px) {
-  .hero__path { margin-inline: -10px; inline-size: calc(100% + 20px); }
-  .hero__path li { padding-inline: 1px; font-size: .6875rem; letter-spacing: 0; }
-  .hero__path li:lang(ar) { font-size: .6875rem; }
-  .hero__path li::before { inline-size: 10px; block-size: 10px; }
-  .hero__path li + li::after { inset-block-start: 4px; }
+  .hero__path { display: none; }
 }
 
 /* What the visitor's organization gets, one outcome per module, under a gold hairline.
