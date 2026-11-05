@@ -32,6 +32,7 @@ const CTA_FILE = '<svg class="sp-cta__file" viewBox="0 0 24 24" aria-hidden="tru
 
 const TEMPLATES = {
   "portico": {
+    appBpm: true,
     names: PORTICO_NAMES,
     ui: PORTICO_UI,
     homes: { en: "", ar: "ar/" },
@@ -128,7 +129,9 @@ function rebaseChunk(html, ctx) {
   });
 }
 
-function svgGlyph(slug, cls = "sp-glyph") {
+// Portico draws the BPM module with the ECM+ app's own coloured icon (the m-bpm sprite symbol).
+function svgGlyph(slug, cls = "sp-glyph", tpl) {
+  if (tpl?.appBpm && slug === "processes") return `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#m-bpm"/></svg>`;
   return `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${GLYPHS[slug]}</svg>`;
 }
 
@@ -219,7 +222,7 @@ ${body}
   }).join("\n")}\n        </ul>`;
   const related = (keys) => `        <ul class="sp-related">\n${keys.map((k, i) => {
     const m = copyFor(tpl, k, lang);
-    return `          <li${reveal(i)}><a class="sp-related__link" href="${sib(k)}">${svgGlyph(k, "sp-glyph sp-related__icon")}<span class="sp-related__code"><bdi>${PAGES[k].code}</bdi></span><span class="sp-related__name">${m.name}</span><span class="sp-related__line">${m.line}</span></a></li>`;
+    return `          <li${reveal(i)}><a class="sp-related__link" href="${sib(k)}">${svgGlyph(k, "sp-glyph sp-related__icon", tpl)}<span class="sp-related__code"><bdi>${PAGES[k].code}</bdi></span><span class="sp-related__name">${m.name}</span><span class="sp-related__line">${m.line}</span></a></li>`;
   }).join("\n")}\n        </ul>`;
 
   const crumbs = slug === "about"
@@ -227,7 +230,7 @@ ${body}
     : `<li><a href="${home}">${ui.home}</a></li><li><a href="${home}#${tpl.suiteAnchor}">${ui.suite}</a></li><li aria-current="page">${c.short}</li>`;
   const eyebrow = slug === "about"
     ? `<p class="sp-eyebrow"><span>${c.eyebrow}</span></p>`
-    : `<p class="sp-eyebrow">${svgGlyph(slug)}<span><bdi>${page.code}</bdi> · ${c.name}</span></p>`;
+    : `<p class="sp-eyebrow">${svgGlyph(slug, undefined, tpl)}<span><bdi>${page.code}</bdi> · ${c.name}</span></p>`;
 
   let visual;
   if (tpl.photos) {
@@ -238,7 +241,7 @@ ${body}
     visual = `      <div class="sp-hero__visual sp-emblem sp-emblem--logo" aria-hidden="true"><img class="ecmlogo__img--light" src="${assets}brand/ecmplus-ai-logo-545.webp" alt="" width="545" height="302"><img class="ecmlogo__img--dark" src="${assets}brand/ecmplus-ai-logo-dark-545.webp" alt="" width="545" height="302"></div>`;
   } else {
     const alt = copyFor(tpl, slug, other(lang)).name;
-    visual = `      <div class="sp-hero__visual sp-emblem" aria-hidden="true"><span class="sp-emblem__ring">${svgGlyph(slug)}</span><span class="sp-emblem__code">${page.code}</span><span class="sp-emblem__name">${c.name}</span><span class="sp-emblem__alt" lang="${other(lang)}" dir="${other(lang) === "ar" ? "rtl" : "ltr"}">${alt}</span></div>`;
+    visual = `      <div class="sp-hero__visual sp-emblem" aria-hidden="true"><span class="sp-emblem__ring">${svgGlyph(slug, undefined, tpl)}</span><span class="sp-emblem__code">${page.code}</span><span class="sp-emblem__name">${c.name}</span><span class="sp-emblem__alt" lang="${other(lang)}" dir="${other(lang) === "ar" ? "rtl" : "ltr"}">${alt}</span></div>`;
   }
 
   const hero = `    <section class="sp-hero" aria-labelledby="page-title">

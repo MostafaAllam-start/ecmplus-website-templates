@@ -1205,9 +1205,6 @@ html:not(.js) .theme-toggle { display: none; }
 }
 /* Module glyph, as on the lifecycle badges. */
 .card__tab-icon { inline-size: 15px; block-size: 15px; stroke-width: 1.8; color: var(--gold-text); }
-/* The ECM+ app's own BPM icon keeps its colours. */
-.icon--app { fill: none; stroke: none; }
-.icon--app path { stroke: #94A3B8; }
 .card__tab::before,
 .card__tab::after {
   content: "";
