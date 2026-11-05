@@ -8,7 +8,7 @@ export const MODULES = ["documents", "correspondence", "processes", "meetings"];
 export const GLYPHS = {
   documents: '<path d="M3 4h18v4H3zM5 8v12h14V8M10 12h4"/>',
   correspondence: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
-  processes: '<rect x="8" y="2.5" width="8" height="5" rx="1.2"/><path d="M12 7.5v2M12 9.5l3 3-3 3-3-3z"/><path d="M9 12.5H5.5v4M15 12.5h3.5v4"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.2"/>',
+  processes: '<circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M7.5 6H14a3.5 3.5 0 0 1 0 7h-4a3.5 3.5 0 0 0 0 7h6.5"/>',
   meetings: '<circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/>',
 };
 
