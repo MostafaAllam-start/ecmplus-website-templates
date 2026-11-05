@@ -19,7 +19,7 @@ export const CAPTURE_META = {
     name: "التقاط الوثائق",
     short: "التقاط الوثائق",
     metaTitle: "التقاط الوثائق (DMS) — ECM Plus",
-    description: "اجمعوا الورق والملفات والبريد في أرشيف واحد، واقرؤوا نصوصها بالعربية والإنجليزية، ودعوا الذكاء الاصطناعي يقترح حقول الفهرسة ليؤكدها الموظف. يتضمن عرضًا توضيحيًا تفاعليًا.",
+    description: "اجمعوا الورق والملفات والبريد في أرشيف واحد، واقرؤوا نصوصها بالعربية والإنجليزية، ودعوا الذكاء الاصطناعي يقترح حقول الفهرسة ليراجعها فريقكم. يتضمن عرضًا توضيحيًا تفاعليًا.",
   },
 };
 
@@ -167,7 +167,7 @@ export function buildCaptureMain(ctx, h) {
           <nav class="sp-crumbs" aria-label="${ui.crumbsLabel}"><ol><li><a href="${crumbHome}">${ui.home}</a></li><li><a href="${crumbDocs}">${t("Document Management", "إدارة الوثائق")}</a></li><li aria-current="page">${t("Document Capture", "التقاط الوثائق")}</li></ol></nav>
           <p class="sp-eyebrow">${sp("i-ocr")}<span><bdi>DMS</bdi> · ${t("Document Capture", "التقاط الوثائق")}</span></p>
           <h1 id="page-title">${t("Capture Everything. Understand Every Document.", "التقطوا كل شيء. وافهموا كل وثيقة.")}</h1>
-          <p class="sp-lead">${t("ECM+ brings paper, files and emails into one archive, reads their text in Arabic and English, and proposes the index fields for staff to confirm.", "تجمع منظومة ‹ECM+› الورق والملفات ورسائل البريد في أرشيف واحد، وتقرأ نصوصها بالعربية والإنجليزية، وتقترح حقول الفهرسة ليؤكدها الموظف.")}</p>
+          <p class="sp-lead">${t("ECM+ brings paper, files and emails into one archive, reads their text in Arabic and English, and proposes the index fields for staff to confirm.", "تجمع منظومة ‹ECM+› الورق والملفات ورسائل البريد في أرشيف واحد، وتقرأ نصوصها بالعربية والإنجليزية، وتقترح حقول الفهرسة ليراجعها فريقكم.")}</p>
           <div class="sp-actions"><a class="${tpl.btn1}" href="#demo">${t("Explore Document Capture", "استكشف التقاط الوثائق")}</a><a class="${tpl.btn2}" href="${home}#contact">${ui.demo}</a></div>
         </div>
         <div class="sp-hero__visual cap-art" aria-hidden="true">
@@ -322,7 +322,7 @@ export function buildCaptureMain(ctx, h) {
     [t("Auto-feeder scanning", "المسح عبر وحدة التغذية التلقائية")],
     [t("Voice and video notes captured beside documents", "ملاحظات صوتية ومرئية تُلتقط إلى جانب الوثائق")],
     [t("Archive migration from existing systems", "نقل الأرشيفات من الأنظمة القائمة")],
-    [t("REST API for other systems", "واجهة ‹REST› للأنظمة الأخرى")],
+    [t("REST API for other systems", "واجهة ‹REST API› للأنظمة الأخرى")],
     [t("Google Drive and OneDrive capture", "الالتقاط من ‹Google Drive› و‹OneDrive›")],
     [t("Outlook add-in that saves and routes emails", "إضافة ‹Outlook› لحفظ الرسائل وإحالتها")],
     [t("Generated barcode and QR stamps", "أختام باركود و‹QR› مولَّدة")],

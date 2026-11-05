@@ -1508,6 +1508,10 @@ html:not(.js) .theme-toggle { display: none; }
   list-style: none;
 }
 .ai__cap {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 12px;
   padding: 18px 18px 20px;
   background: var(--bg);
   border: 1px solid var(--line);
@@ -1515,8 +1519,9 @@ html:not(.js) .theme-toggle { display: none; }
   border-radius: var(--r-card);
 }
 .ai__cap-icon { display: block; inline-size: 26px; block-size: 26px; color: var(--gold-text); stroke-width: 1.6; }
-.ai__cap h3 { margin: 12px 0 4px; font-size: 1.0625rem; line-height: 1.35; }
-.ai__cap p { margin: 0; font-size: .9375rem; line-height: 1.5; color: var(--muted); }
+.ai__cap p { grid-column: 1 / -1; }
+.ai__cap h3 { margin: 0; font-size: 1.0625rem; line-height: 1.35; }
+.ai__cap p { margin: 8px 0 0; font-size: .9375rem; line-height: 1.5; color: var(--muted); }
 .ai__cap p:lang(ar) { line-height: 1.75; }
 
 /* Motion, only when the visitor allows it: the signal sweeps the field, and the matched
@@ -2340,7 +2345,7 @@ html:not(.js) .theme-toggle { display: none; }
 .footer__ctc img { flex: none; inline-size: 44px; block-size: 44px; border-radius: 50%; background: var(--logo-plate); }
 .footer__ctc p { margin: 0; max-inline-size: 32ch; font-size: .875rem; line-height: 1.5; color: #C9CFD8; }
 
-.footer__nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 32px 24px; }
+.footer__nav { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 32px 24px; }
 .footer__col h2 { margin: 0 0 12px; font: 700 .8125rem/1.3 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--on-photo-gold); }
 .footer__col ul { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
 .footer__col a,
@@ -2477,7 +2482,8 @@ h3:lang(ar),
 
   /* 2. Four modules: a 9:4 photo band, a wider plate. */
   .cards { gap: 24px 20px; margin-block-start: 24px; }
-  .card__ph { aspect-ratio: auto; block-size: clamp(105px, calc(105px + (100vh - 730px) * .75), 230px); }
+  .hero ~ .suite { --section-y: clamp(24px, 4vh, 64px); }
+  .card__ph { aspect-ratio: auto; block-size: clamp(132px, calc(132px + (100vh - 730px) * .75), 260px); }
   .card__plate { margin: -44px 6px 0; padding: 14px; }
   .card__name { font-size: 1.25rem; }
   .card__line { margin-block-start: 8px; font-size: .9375rem; line-height: 1.5; }
@@ -2489,7 +2495,7 @@ h3:lang(ar),
   .ai__grid { gap: 28px 48px; }
   .ai__checks { margin-block-start: 18px; gap: 8px; }
   .ai__cap { padding: 14px 16px 16px; }
-  .ai__cap h3 { margin-block-start: 8px; font-size: 1rem; }
+  .ai__cap h3 { font-size: 1rem; }
   .ai__cap p { font-size: .875rem; line-height: 1.45; }
   .ai__cap p:lang(ar) { line-height: 1.6; }
 
