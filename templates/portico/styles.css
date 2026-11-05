@@ -97,6 +97,11 @@
   --deploy-edge: #131925;
   --footer-bg: #151A22;
   --selection: rgba(217, 162, 27, .3);
+  --notice-bg: #151A22;
+  --notice-ink: #E6E8EC;
+  --notice-link: #E8B84A;
+  --notice-h: 36px;
+  --mark-bg: rgba(217, 162, 27, .3);
   --shadow-sm: 0 10px 24px -14px rgba(21, 26, 34, .25);
   --shadow-md: 0 18px 36px -18px rgba(21, 26, 34, .24);
   --shadow-lg: 0 32px 56px -32px rgba(21, 26, 34, .32);
@@ -171,6 +176,8 @@
     --deploy-edge: #2A313D;
     --footer-bg: #0B0E13;
     --selection: rgba(217, 162, 27, .35);
+    --notice-bg: #1F2630;
+    --mark-bg: rgba(217, 162, 27, .26);
     --shadow-sm: 0 16px 32px -16px rgba(0, 0, 0, .6);
     --shadow-md: 0 24px 48px -20px rgba(0, 0, 0, .55);
     --shadow-lg: 0 40px 72px -40px rgba(0, 0, 0, .75);
@@ -474,6 +481,48 @@ html:not(.js) .js-only { display: none !important; }
 }
 
 /* ==========================================================================
+   Announcement bar — above the header; scrolls away with the page. Inner pages
+   inherit it with the header (scripts/subpages.mjs copies everything before <main>).
+   ========================================================================== */
+.notice { background: var(--notice-bg); color: var(--notice-ink); }
+.notice__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 12px;
+  min-block-size: var(--notice-h);
+  padding-block: 6px;
+  font-size: .875rem;
+  line-height: 1.45;
+}
+.notice__badge {
+  flex: none;
+  padding: 1px 8px;
+  border-radius: 4px;
+  background: var(--gold);
+  color: var(--on-gold);
+  font: 700 .6875rem/1.5 var(--font-body);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.notice__badge:lang(ar) { font-size: .75rem; }
+.notice__text { flex: 1 1 auto; min-inline-size: 0; margin: 0; }
+.notice__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  color: var(--notice-link);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.notice__link:hover { color: #FFFFFF; }
+.notice__link .icon { inline-size: 14px; block-size: 14px; stroke-width: 1.8; }
+.notice :focus-visible { outline-color: var(--focus-on-dark); }
+
+/* ==========================================================================
    Header & navigation
    ========================================================================== */
 .site-header {
@@ -662,7 +711,7 @@ html:not(.js) .menu-panel { display: none; }
 .dropdown__d { font-size: .875rem; line-height: 1.4; color: var(--muted); }
 
 /* Suite menu: one row per module page, an icon tile on the start side. */
-.dropdown--suite { max-inline-size: 420px; }
+.dropdown--suite { max-inline-size: 440px; }
 .dropdown--suite .dropdown__list a {
   grid-template-columns: 40px minmax(0, 1fr);
   column-gap: 12px;
@@ -994,7 +1043,7 @@ html:not(.js) .theme-toggle { display: none; }
 }
 /* No blur: the photograph reads through the card as it is. */
 .hero__plate {
-  background: rgba(14, 20, 32, .66);
+  background: rgba(14, 20, 32, .84);
   border: 1px solid rgba(255, 255, 255, .1);
   border-radius: var(--r-photo);
   box-shadow: 0 32px 56px -32px rgba(0, 0, 0, .6);
@@ -1203,7 +1252,236 @@ html:not(.js) .theme-toggle { display: none; }
 }
 
 /* ==========================================================================
-   3. Lifecycle — circuit hairlines, a ledger plate and the gold bookmark
+   Why ECM+ — the head beside four pillars (two by two on desktop); each pillar
+   closes on a facts line, as the module cards close on their capabilities
+   ========================================================================== */
+.why { background: var(--bg); border-block-start: 1px solid var(--line); }
+.why__grid { display: grid; gap: 32px; align-items: start; }
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pillar {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-block-start: 2px solid var(--gold);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-md);
+}
+.pillar__icon {
+  display: grid;
+  place-items: center;
+  inline-size: 40px;
+  block-size: 40px;
+  border: 1px solid var(--line-gold);
+  border-radius: 10px;
+  background: var(--gold-tint);
+  color: var(--gold-text);
+}
+.pillar__icon .icon { inline-size: 22px; block-size: 22px; stroke-width: 1.7; }
+.pillar__title { margin-block-start: 14px; font-size: 1.125rem; line-height: 1.3; }
+.pillar__text { flex: 1; margin: 8px 0 0; font-size: .9375rem; line-height: 1.55; color: var(--ink-2); text-wrap: pretty; }
+/* The facts line, marked with the gold square of the capability lists. */
+.pillar__fact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding-block-start: 10px;
+  border-block-start: 1px solid var(--line);
+  font: 600 .8125rem/1.4 var(--font-body);
+  color: var(--muted);
+}
+.pillar__fact::before { content: ""; flex: none; inline-size: 6px; block-size: 6px; background: var(--gold); }
+
+/* ==========================================================================
+   3. AI — the head and three checks beside a search panel (a decorative product
+      mock on the evidence stage's grid paper), four capability plates below
+   ========================================================================== */
+.ai { background: var(--surface); border-block-start: 1px solid var(--line); }
+.ai__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+  gap: 40px 56px;
+  align-items: center;
+}
+.ai__checks { display: grid; gap: 10px; margin: 24px 0 0; padding: 0; list-style: none; }
+.ai__checks li { display: flex; align-items: flex-start; gap: 12px; font-size: 1rem; line-height: 1.5; color: var(--ink-2); }
+.ai__checks li:lang(ar) { line-height: 1.75; }
+.ai__check {
+  flex: none;
+  inline-size: 22px;
+  block-size: 22px;
+  margin-block-start: 1px;
+  padding: 4px;
+  border: 1px solid var(--line-gold);
+  border-radius: 50%;
+  color: var(--gold-text);
+  stroke-width: 2;
+}
+.ai__checks li:lang(ar) .ai__check { margin-block-start: 3px; }
+
+/* The search panel: the stage's grid paper, with the field, the hit and the scanned file on surface cards. */
+.aimock {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  gap: 12px;
+  padding: 16px 18px 18px;
+  background-color: var(--stage-bg);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: -1px -1px;
+  border: 1px solid var(--line);
+  border-block-start: 2px solid var(--gold);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-lg);
+  font-size: .9375rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.aimock__bar { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 .75rem/1.3 var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--gold-text); }
+.aimock__bar:lang(ar) { font-size: .875rem; }
+.aimock__bar .icon { inline-size: 16px; block-size: 16px; stroke-width: 1.8; }
+.aimock__query {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-block-size: 46px;
+  padding: 8px 8px 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--field-line);
+  border-radius: var(--r-btn);
+}
+[dir="rtl"] .aimock__query { padding: 8px 12px 8px 8px; }
+.aimock__query > .icon { inline-size: 18px; block-size: 18px; color: var(--muted); }
+.aimock__q { flex: 1 1 auto; min-inline-size: 0; }
+.aimock__go { display: grid; place-items: center; flex: none; inline-size: 30px; block-size: 30px; border-radius: 6px; background: var(--gold); color: var(--on-gold); }
+.aimock__go .icon { inline-size: 14px; block-size: 14px; stroke-width: 2; }
+/* The gold signal runs along the field's lower hairline (the template's one motif). */
+.aimock__query::after {
+  content: "";
+  position: absolute;
+  inset-inline: 8px;
+  inset-block-end: -1px;
+  block-size: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent 38%, var(--gold) 50%, transparent 62%) 100% 0 / 300% 100% no-repeat;
+  opacity: 0;
+}
+.aimock__hit { padding: 12px 14px 13px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); }
+.aimock__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 9px;
+  border: 1px solid var(--line-gold);
+  border-radius: 999px;
+  background: var(--gold-tint);
+  font: 600 .75rem/1.5 var(--font-body);
+  color: var(--gold-text);
+}
+.aimock__tag .icon { inline-size: 12px; block-size: 12px; stroke-width: 2; }
+.aimock__title { margin: 8px 0 2px; font: 600 1rem/1.35 var(--font-head); color: var(--ink); }
+.aimock__title:lang(ar) { line-height: 1.5; }
+.aimock__snip { margin: 0; color: var(--ink-2); }
+.aimock__snip:lang(ar) { line-height: 1.75; }
+.aimock mark {
+  padding: 0 2px;
+  border-radius: 3px;
+  background: linear-gradient(var(--mark-bg) 0 0) 0 0 / 100% 100% no-repeat;
+  color: inherit;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+[dir="rtl"] .aimock mark { background-position: 100% 0; }
+.aimock__page { color: var(--muted); white-space: nowrap; }
+.aimock__ocr {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 2px 12px;
+  align-items: start;
+  padding: 11px 14px 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+}
+.aimock__ocr-icon {
+  grid-row: span 3;
+  inline-size: 36px;
+  block-size: 36px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-2);
+  color: var(--gold-text);
+  stroke-width: 1.7;
+}
+.aimock__ocr-h { margin: 0; font-weight: 600; color: var(--ink); }
+.aimock__ocr-l { margin: 0; font-size: .875rem; color: var(--muted); }
+.aimock__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; }
+.aimock__chips span {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 22px;
+  padding: 1px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--chip-bg);
+  font: 600 .75rem/1.2 var(--font-body);
+  color: var(--ink-2);
+}
+
+/* Capabilities: four plates on the page ground, a gold edge each. */
+.ai__caps {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ai__cap {
+  padding: 18px 18px 20px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-block-start: 2px solid var(--gold);
+  border-radius: var(--r-card);
+}
+.ai__cap-icon { display: block; inline-size: 26px; block-size: 26px; color: var(--gold-text); stroke-width: 1.6; }
+.ai__cap h3 { margin: 12px 0 4px; font-size: 1.0625rem; line-height: 1.35; }
+.ai__cap p { margin: 0; font-size: .9375rem; line-height: 1.5; color: var(--muted); }
+.ai__cap p:lang(ar) { line-height: 1.75; }
+
+/* Motion, only when the visitor allows it: the signal sweeps the field, and the matched
+   phrase inks in once the panel has revealed. */
+@media (prefers-reduced-motion: no-preference) {
+  .aimock__query::after { opacity: 1; animation: ai-signal 3.6s linear infinite; }
+  [dir="rtl"] .aimock__query::after { animation-direction: reverse; }
+  .reveal .aimock.in mark { animation: mark-in .7s var(--ease) .5s both; }
+}
+@keyframes ai-signal {
+  from { background-position: 100% 0; }
+  to { background-position: 0% 0; }
+}
+@keyframes mark-in {
+  from { background-size: 0% 100%; }
+}
+
+/* ==========================================================================
+   4. Lifecycle — circuit hairlines, a ledger plate and the gold bookmark
    ========================================================================== */
 .lifecycle {
   isolation: isolate;
@@ -1363,7 +1641,7 @@ html:not(.js) .theme-toggle { display: none; }
 }
 
 /* ==========================================================================
-   4. Governance & security — photo, evidence plate over its lower corner
+   5. Governance & security — photo, evidence plate over its lower corner
    ========================================================================== */
 .governance { background: var(--surface); }
 .governance__grid {
@@ -1560,7 +1838,7 @@ html:not(.js) .theme-toggle { display: none; }
 .governance__aside > .btn { align-self: flex-start; }
 
 /* ==========================================================================
-   5. Deployment & integration — dark plate with the integrations, beside the facts
+   6. Deployment & integration — dark plate with the integrations, beside the facts
    ========================================================================== */
 .deploy__grid {
   display: grid;
@@ -1656,7 +1934,7 @@ html:not(.js) .theme-toggle { display: none; }
 .facts dd { margin: 4px 0 0; font-size: .96875rem; line-height: 1.55; color: var(--muted); }
 
 /* ==========================================================================
-   6. Sectors — photo band with scrim, five plates (scroll-snap on small screens)
+   7. Sectors — photo band with scrim, five plates (scroll-snap on small screens)
    ========================================================================== */
 .sectors { position: relative; padding-block-end: var(--section-y); background: var(--bg); }
 .band {
@@ -1710,7 +1988,83 @@ html:not(.js) .theme-toggle { display: none; }
 .sector__text { margin: 10px 0 0; font-size: .9375rem; line-height: 1.55; color: var(--ink-2); }
 
 /* ==========================================================================
-   7. Support — photo, plate with the ticket status strip and the portal actions
+   Getting started — five numbered milestones on one hairline, the gold signal
+   travelling along it, and the closing question beside the demo button
+   ========================================================================== */
+.start { background: var(--bg); border-block-start: 1px solid var(--line); }
+.route {
+  --node: 36px;
+  --gap: 20px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--gap);
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+/* The hairline from the first node to the last, and the signal that runs along it. */
+.route::before,
+.route::after {
+  content: "";
+  position: absolute;
+  inset-inline: calc(var(--node) / 2) calc((100% - 4 * var(--gap)) / 5 - var(--node) / 2);
+  inset-block-start: calc(var(--node) / 2);
+  block-size: 1px;
+  pointer-events: none;
+}
+.route::before { background: var(--line-gold); }
+.route::after {
+  margin-block-start: -1px;
+  block-size: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent 46%, var(--gold) 50%, transparent 54%) 100% 0 / 300% 100% no-repeat;
+  opacity: 0;
+}
+.route__step { position: relative; min-inline-size: 0; }
+.route__no {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  inline-size: var(--node);
+  block-size: var(--node);
+  border: 1px solid var(--line-gold);
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 0 0 4px var(--bg);
+  font: 500 .8125rem/1 var(--font-mono);
+  color: var(--gold-text);
+}
+.route__title { margin-block-start: 14px; font-size: 1.0625rem; line-height: 1.35; }
+.route__text { margin: 6px 0 0; font-size: .9375rem; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
+
+/* The closing question on a plate with the gold edge, the button at its end. */
+.route__next {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 32px;
+  align-items: center;
+  margin-block-start: 32px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-inline-start: 3px solid var(--gold);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-sm);
+}
+.route__ask { grid-column: 1; margin: 0; font: 700 1.125rem/1.35 var(--font-head); color: var(--ink); }
+.route__ask:lang(ar) { font-weight: 600; line-height: 1.5; }
+.route__ask-l { grid-column: 1; margin: 0; font-size: .9375rem; line-height: 1.5; color: var(--muted); }
+.route__next .btn { grid-column: 2; grid-row: 1 / 3; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .route::after { opacity: 1; animation: ai-signal 5.4s linear infinite; }
+  [dir="rtl"] .route::after { animation-direction: reverse; }
+}
+
+/* ==========================================================================
+   8. Support — photo, plate with the ticket status strip and the portal actions
    ========================================================================== */
 .support { background: var(--surface); border-block-start: 1px solid var(--line); }
 .support__grid {
@@ -1787,7 +2141,61 @@ html:not(.js) .theme-toggle { display: none; }
 .support__note a { color: var(--gold-text); }
 
 /* ==========================================================================
-   8. Closing call to action — photograph, one frosted plate: intro, FAQ, form
+   9. News — the lead story as a photograph with its plate, two short stories beside it
+   ========================================================================== */
+.news { background: var(--bg); border-block-start: 1px solid var(--line); }
+.news__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 20px 24px;
+  margin-block-start: 32px;
+}
+.story { position: relative; display: flex; flex-direction: column; min-inline-size: 0; }
+.story--lead { grid-row: 1 / 3; }
+.story__ph { aspect-ratio: 2 / 1; }
+.story__ph img { object-position: 50% 38%; }
+/* The plate overlaps the foot of the photograph, as on the module cards. */
+.story__plate {
+  position: relative;
+  z-index: 1;
+  margin: -44px 16px 0;
+  padding: 18px 20px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-block-start: 2px solid var(--gold);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-md);
+}
+.story--short {
+  padding: 18px 20px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-block-start: 2px solid var(--gold);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-md);
+}
+.story__meta { margin: 0 0 6px; font: 600 .8125rem/1.3 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--gold-text); }
+.story__meta:lang(ar) { font-size: .875rem; }
+.story__title { font-size: 1.25rem; line-height: 1.3; }
+.story__detail { margin: 6px 0 0; font-size: .9375rem; line-height: 1.5; color: var(--muted); }
+.story__detail:lang(ar) { line-height: 1.75; }
+/* Service marks on a white tile in both themes, as logos need. */
+.story__marks { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.story__mark {
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--logo-plate);
+}
+.story__mark img { display: block; inline-size: 24px; block-size: 24px; object-fit: contain; }
+.story__mark--wide { inline-size: auto; padding-inline: 10px; }
+.story__mark--wide img { inline-size: auto; block-size: 22px; }
+
+/* ==========================================================================
+   10. Closing call to action — photograph, one frosted plate: intro, FAQ, form
    ========================================================================== */
 .contact {
   position: relative;
@@ -1976,6 +2384,9 @@ h3:lang(ar),
 .faq details p:lang(ar),
 .field__hint:lang(ar),
 .dropdown__d:lang(ar),
+.pillar__text:lang(ar),
+.route__text:lang(ar),
+.route__ask-l:lang(ar),
 .footer__ctc p:lang(ar) { line-height: 1.85; }
 .eyebrow:lang(ar),
 .works__h:lang(ar),
@@ -2006,28 +2417,32 @@ h3:lang(ar),
   .hero ~ section .section-lead { margin-block-start: 12px; font-size: 1.0625rem; }
   .hero ~ section .section-lead:lang(ar) { line-height: 1.7; }
 
-  /* Split head (deployment): eyebrow and title on the start side, the lead beside them. The
-     suite and the sectors band keep the stacked head, with the lead under the title. */
-  .deploy .section-head {
+  /* Split head (deployment, suite): eyebrow and title on the start side, the lead beside them.
+     The sectors band keeps the stacked head, with the lead under the title. */
+  .deploy .section-head,
+  .suite .section-head {
     max-inline-size: none;
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     column-gap: 48px;
     align-items: end;
   }
-  .deploy .section-head > .eyebrow { grid-column: 1; grid-row: 1; }
-  .deploy .section-head > h2 { grid-column: 1; grid-row: 2; }
-  .deploy .section-head > .section-lead { grid-column: 2; grid-row: 1 / 3; margin: 0; }
+  .deploy .section-head > .eyebrow,
+  .suite .section-head > .eyebrow { grid-column: 1; grid-row: 1; }
+  .deploy .section-head > h2,
+  .suite .section-head > h2 { grid-column: 1; grid-row: 2; }
+  .deploy .section-head > .section-lead,
+  .suite .section-head > .section-lead { grid-column: 2; grid-row: 1 / 3; margin: 0; }
 
-  /* 1. Hero: exactly the fold. */
+  /* 1. Hero: the fold less the announcement bar, so bar + header + hero fit at page top. */
   .hero {
-    min-block-size: min(clamp(600px, 52vw, 820px), calc(100vh - var(--header-h) - 1px));
-    padding-block: clamp(40px, 6vh, 104px);
+    min-block-size: min(clamp(600px, 52vw, 820px), calc(100vh - var(--notice-h) - var(--header-h) - 1px));
+    padding-block: clamp(32px, 5vh, 104px);
   }
 
-  /* 2. Four modules: a 2:1 photo band, a wider plate. */
+  /* 2. Four modules: a 9:4 photo band, a wider plate. */
   .cards { gap: 24px 20px; margin-block-start: 24px; }
-  .card__ph { aspect-ratio: 2 / 1; }
+  .card__ph { aspect-ratio: 9 / 4; }
   .card__plate { margin: -44px 6px 0; padding: 14px; }
   .card__name { font-size: 1.25rem; }
   .card__line { margin-block-start: 8px; font-size: .9375rem; line-height: 1.5; }
@@ -2035,7 +2450,24 @@ h3:lang(ar),
   .card__line:lang(ar),
   .card__caps:lang(ar) { line-height: 1.5; }
 
-  /* 3. Lifecycle: narrow head, wide ledger so every entry is at most two lines. */
+  /* 3. AI: head and checks beside the panel, the four capabilities in one row. */
+  .ai__grid { gap: 28px 48px; }
+  .ai__checks { margin-block-start: 18px; gap: 8px; }
+  .ai__cap { padding: 14px 16px 16px; }
+  .ai__cap h3 { margin-block-start: 8px; font-size: 1rem; }
+  .ai__cap p { font-size: .875rem; line-height: 1.45; }
+  .ai__cap p:lang(ar) { line-height: 1.6; }
+
+  /* Why ECM+: the head beside the pillars, two by two. */
+  .why__grid { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 24px 56px; align-items: center; }
+  .pillar { padding: 16px 18px 14px; }
+  .pillar__title { margin-block-start: 12px; font-size: 1.0625rem; }
+  .pillar__text { font-size: .9375rem; line-height: 1.45; }
+  .pillar__text:lang(ar) { line-height: 1.6; }
+  .pillar__fact { margin-block-start: 12px; padding-block-start: 8px; }
+
+
+  /* 4. Lifecycle: narrow head, wide ledger so every entry is at most two lines. */
   .lifecycle__grid { grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 32px 48px; }
   .ledger__row { padding-block: 8px; }
   .ledger__row .chip { min-block-size: 22px; padding-block: 1px; }
@@ -2045,7 +2477,7 @@ h3:lang(ar),
   .ledger__entry { font-size: .9375rem; line-height: 1.45; }
   .ledger__entry:lang(ar) { line-height: 1.5; }
 
-  /* 4. Governance: head and evidence in the start column, safeguards fill the end column. */
+  /* 5. Governance: head and evidence in the start column, safeguards fill the end column. */
   .governance .wrap { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 20px 56px; align-items: start; }
   .governance .section-head { grid-column: 1; grid-row: 1; }
   .governance__grid { display: contents; }
@@ -2060,14 +2492,22 @@ h3:lang(ar),
   .tracecard__rows div { padding-block: 6px; }
   .tracecard__foot { padding-block-start: 8px; }
 
-  /* 6. Sectors: the band follows the viewport height. */
+  /* 7. Sectors: the band follows the viewport height. */
   .band { min-block-size: min(calc(100vw * 9 / 21), 44vh); padding-block: clamp(40px, 7vh, 88px) clamp(120px, 18vh, 168px); }
   .sectors__wrap { margin-block-start: -96px; }
   .sector { padding: 16px 16px 18px; }
   .sector__text { font-size: .9375rem; line-height: 1.5; }
   .sector__text:lang(ar) { line-height: 1.6; }
 
-  /* 7. Support: photo as tall as the plate, portal actions as three tiles. */
+  /* Getting started: the milestones close under the head, the question in one row. */
+  .route { margin-block-start: 28px; }
+  .route__title { margin-block-start: 12px; font-size: 1rem; }
+  .route__text { font-size: .875rem; line-height: 1.45; }
+  .route__text:lang(ar) { line-height: 1.6; }
+  .route__next { margin-block-start: 24px; padding: 16px 22px; }
+  .route__ask-l:lang(ar) { line-height: 1.6; }
+
+  /* 8. Support: photo as tall as the plate, portal actions as three tiles. */
   .support__grid { align-items: stretch; }
   .support__ph { aspect-ratio: auto; margin-block-end: 24px; }
   .support__plate { margin-block-start: 24px; padding: 22px 28px 24px; }
@@ -2083,7 +2523,11 @@ h3:lang(ar),
   .support__ctas { margin-block-start: 18px; }
   .support__note { margin-block-start: 10px; font-size: .875rem; }
 
-  /* 8. Contact: compact form; organization and modules share a row. */
+  /* 9. News: the stories close under the head. */
+  .news__grid { margin-block-start: 24px; }
+  .story__plate { padding: 16px 20px 18px; }
+
+  /* 10. Contact: compact form; organization and modules share a row. */
   .contact__plate { padding: 16px 28px; gap: 32px 40px; }
   .faq { margin-block-start: 20px; }
   .demo-form { padding: 14px 20px; gap: 8px 16px; line-height: 1.5; }
@@ -2179,6 +2623,57 @@ h3:lang(ar),
   .footer__legal { gap: 16px; }
 }
 
+@media (max-width: 1179.98px) {
+  .ai__grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .aimock { max-inline-size: 640px; }
+  .ai__caps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .news__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .story--lead { grid-column: 1 / -1; grid-row: auto; }
+  .story__ph { aspect-ratio: 21 / 9; }
+}
+@media (max-width: 719.98px) {
+  .ai__caps { grid-template-columns: minmax(0, 1fr); }
+  .news__grid { grid-template-columns: minmax(0, 1fr); }
+  .story__ph { aspect-ratio: 3 / 2; }
+}
+@media (max-width: 479.98px) {
+  .aimock { padding: 14px; }
+  .aimock__query { align-items: flex-start; }
+  .aimock__query > .icon { margin-block-start: 3px; }
+  .story__plate { margin-inline: 10px; padding: 16px; }
+}
+/* Why ECM+ and getting started on smaller screens: the milestones stack with a hairline
+   on the start side below 960px, and the pillars take one column on phones. */
+@media (max-width: 959.98px) {
+  .route { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .route::before,
+  .route::after { display: none; }
+  .route__step { display: grid; grid-template-columns: var(--node) minmax(0, 1fr); column-gap: 16px; padding-block-end: 24px; }
+  .route__step:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: calc(var(--node) / 2);
+    inset-block: var(--node) 0;
+    inline-size: 1px;
+    background: var(--line-gold);
+  }
+  .route__step:last-child { padding-block-end: 0; }
+  .route__no { grid-row: 1 / 3; box-shadow: none; }
+  .route__title { grid-column: 2; margin-block-start: 7px; }
+  .route__text { grid-column: 2; }
+  .route__next { grid-template-columns: minmax(0, 1fr); }
+  .route__next .btn { grid-column: 1; grid-row: auto; justify-self: start; margin-block-start: 10px; }
+}
+@media (max-width: 719.98px) {
+  .pillars { grid-template-columns: minmax(0, 1fr); }
+}
+/* Phones: the badge beside the first line of the text, the link under the text. */
+@media (max-width: 719.98px) {
+  .notice__row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; align-items: start; }
+  .notice__badge { margin-block-start: 2px; }
+  .notice__link { grid-column: 2; justify-self: start; }
+}
+
 /* ==========================================================================
    Toasts: the demo form's outcome (main.js), styled like the support portal's
    notifications so the site and the portal read as one product. Pinned to the
@@ -2238,7 +2733,9 @@ h3:lang(ar),
   .reveal [data-reveal].in { opacity: 1; transform: none; }
 
   .paper__scan,
-  .deploy__plate::after { display: none; }
+  .deploy__plate::after,
+  .aimock__query::after,
+  .route::after { display: none; }
   .ph img { opacity: 1; transform: none; }
   .reveal .evidence:not(.in) .trace__path { stroke-dashoffset: 0; }
   .reveal .evidence:not(.in) .trace__dot,
@@ -2262,7 +2759,10 @@ h3:lang(ar),
   body,
   .governance,
   .support,
+  .why,
+  .start,
   .sectors { background: #FFFFFF; color: #000000; }
+  .notice,
   .site-header,
   .skip-link,
   .nav-toggle,
@@ -2292,6 +2792,12 @@ h3:lang(ar),
   .hero__line { color: #4A5565; }
   .hero__badge { color: #894B00; border-color: #B98612; }
   .plate { background: #FFFFFF; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; border-color: #D8D3CB; }
+  .story__plate,
+  .story--short,
+  .ai__cap,
+  .aimock,
+  .pillar,
+  .route__next { box-shadow: none; }
   .reveal [data-reveal],
   .reveal [data-reveal]:not(.in),
   .reveal .evidence:not(.in) .tracecard__rows dd,
@@ -2316,6 +2822,10 @@ h3:lang(ar),
   .sector,
   .ledger__row,
   .action,
+  .story,
+  .ai__cap,
+  .pillar,
+  .route__step,
   .faq details { break-inside: avoid; }
 }
 

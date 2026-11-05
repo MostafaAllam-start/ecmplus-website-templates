@@ -21,3 +21,4 @@ set can be replaced by commissioned or generated imagery with the same names and
 | `p08-skyline` | Sectors band | [A city skyline with a river at sunrise](https://unsplash.com/photos/ySzmc-Hozsw) | Eddie Mark Blair ([@blaireddieau](https://unsplash.com/@blaireddieau)) |
 | `p09-support` | Support | [Headset near a laptop computer](https://unsplash.com/photos/BeVGrXEktIk) | Petr Macháček ([@machec](https://unsplash.com/@machec)) |
 | `p10-contact` | Closing call to action | An executive desk with a laptop, a headset and contact icons on a glass wall | AI-generated image supplied for this site |
+| `p11-itex` | News | The team at the Egyptian pavilion, ITEX Iraq 2026 (800 px, the size supplied) | Event photo supplied for this site |

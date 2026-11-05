@@ -15,7 +15,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { posix } from "node:path";
 import { fileURLToPath } from "node:url";
-import { GLYPHS, MODULES, PAGES, SERVICES, UI, WORKS } from "./subpages-content.mjs";
+import { GLYPHS, MODULES, PAGES, PORTICO_NAMES, PORTICO_UI, SERVICES, UI, WORKS } from "./subpages-content.mjs";
 import { STEP_ART, MIRROR_IN_RTL } from "./steps-art.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url)).replace(/\\/g, "/");
@@ -32,6 +32,8 @@ const CTA_FILE = '<svg class="sp-cta__file" viewBox="0 0 24 24" aria-hidden="tru
 
 const TEMPLATES = {
   "portico": {
+    names: PORTICO_NAMES,
+    ui: PORTICO_UI,
     homes: { en: "", ar: "ar/" },
     anchors: { documents: "documents", correspondence: "correspondence", processes: "processes", meetings: "meetings", about: "about" },
     suiteAnchor: "suite",
@@ -134,7 +136,7 @@ function svgGlyph(slug, cls = "sp-glyph") {
 // active), three stat tiles, three list rows with a status chip, and a progress stepper.
 // Labels come from UI.*.ctaApp; CSS tilts it and mirrors it for RTL.
 function ctaWindow(ui) {
-  const nav = ui.ctaApp.nav.map((n, i) => `<li${i === 0 ? ' class="is-on"' : ""}>${n}</li>`).join("");
+  const nav = (ui.ctaNav ?? ui.ctaApp.nav).map((n, i) => `<li${i === 0 ? ' class="is-on"' : ""}>${n}</li>`).join("");
   const rows = ui.ctaApp.rows.map(([title, status, tone]) => `                <li>${CTA_FILE}<span class="sp-cta__row-title">${title}</span><span class="sp-cta__chip${tone ? ` sp-cta__chip--${tone}` : ""}">${status}</span></li>`).join("\n");
   return `<div class="sp-cta__app" aria-hidden="true">
             <div class="sp-cta__win">
@@ -153,10 +155,13 @@ ${rows}
           </div>`;
 }
 
+// A page's copy, with the template's own module names where it has them.
+const copyFor = (tpl, slug, lang) => ({ ...PAGES[slug][lang], ...tpl.names?.[lang]?.[slug] });
+
 function buildMain(tName, tpl, lang, slug, ctx) {
-  const ui = UI[lang];
+  const ui = { ...UI[lang], ...tpl.ui?.[lang] };
   const page = PAGES[slug];
-  const c = page[lang];
+  const c = copyFor(tpl, slug, lang);
   const home = rel(ctx.pageDir, ctx.homeDir);
   const sib = (s) => rel(ctx.pageDir, `${ctx.homeDir}${s}/`);
   const assets = rel(ctx.pageDir, "assets/");
@@ -213,7 +218,7 @@ ${body}
     return `          <li class="sp-work"${reveal(i)}><span class="sp-work__mark" aria-hidden="true">${mark}</span><h3 class="sp-work__name">${label}</h3><p class="sp-work__text">${WORKS[slug][lang][k]}</p></li>`;
   }).join("\n")}\n        </ul>`;
   const related = (keys) => `        <ul class="sp-related">\n${keys.map((k, i) => {
-    const m = PAGES[k][lang];
+    const m = copyFor(tpl, k, lang);
     return `          <li${reveal(i)}><a class="sp-related__link" href="${sib(k)}">${svgGlyph(k, "sp-glyph sp-related__icon")}<span class="sp-related__code"><bdi>${PAGES[k].code}</bdi></span><span class="sp-related__name">${m.name}</span><span class="sp-related__line">${m.line}</span></a></li>`;
   }).join("\n")}\n        </ul>`;
 
@@ -232,7 +237,7 @@ ${body}
   } else if (slug === "about") {
     visual = `      <div class="sp-hero__visual sp-emblem sp-emblem--logo" aria-hidden="true"><img class="ecmlogo__img--light" src="${assets}brand/ecmplus-ai-logo-545.webp" alt="" width="545" height="302"><img class="ecmlogo__img--dark" src="${assets}brand/ecmplus-ai-logo-dark-545.webp" alt="" width="545" height="302"></div>`;
   } else {
-    const alt = PAGES[slug][other(lang)].name;
+    const alt = copyFor(tpl, slug, other(lang)).name;
     visual = `      <div class="sp-hero__visual sp-emblem" aria-hidden="true"><span class="sp-emblem__ring">${svgGlyph(slug)}</span><span class="sp-emblem__code">${page.code}</span><span class="sp-emblem__name">${c.name}</span><span class="sp-emblem__alt" lang="${other(lang)}" dir="${other(lang) === "ar" ? "rtl" : "ltr"}">${alt}</span></div>`;
   }
 
@@ -293,7 +298,7 @@ ${visual}
 }
 
 function buildHead(head, ctx, lang, slug) {
-  const c = PAGES[slug][lang];
+  const c = copyFor(ctx.tpl, slug, lang);
   const urls = {};
   for (const m of head.matchAll(/<link rel="alternate" hreflang="([\w-]+)" href="([^"]+)">/g)) urls[m[1]] = m[2];
   if (!urls[lang] || !urls[other(lang)]) throw new Error(`${ctx.homeDir}: the home page needs hreflang alternates for both languages`);
