@@ -17,6 +17,10 @@ import { posix } from "node:path";
 import { fileURLToPath } from "node:url";
 import { GLYPHS, MODULES, PAGES, PORTICO_NAMES, PORTICO_UI, SERVICES, UI, WORKS } from "./subpages-content.mjs";
 import { STEP_ART, MIRROR_IN_RTL } from "./steps-art.mjs";
+import { CAPTURE_META, buildCaptureMain } from "./capture-page.mjs";
+
+// The Document Capture page exists for Portico only (see TEMPLATES.portico.extra).
+PAGES.capture = CAPTURE_META;
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url)).replace(/\\/g, "/");
 const SLUGS = [...MODULES, "about"];
@@ -33,6 +37,7 @@ const CTA_FILE = '<svg class="sp-cta__file" viewBox="0 0 24 24" aria-hidden="tru
 const TEMPLATES = {
   "portico": {
     appBpm: true,
+    extra: ["capture"],
     names: PORTICO_NAMES,
     ui: PORTICO_UI,
     homes: { en: "", ar: "ar/" },
@@ -195,6 +200,10 @@ ${body}
     </section>`;
   };
 
+  if (slug === "capture") {
+    return buildCaptureMain(ctx, { lang, ui, tpl, home, section, reveal, W, ctaWindow, crumbHome: home, crumbDocs: sib("documents") });
+  }
+
   const prose = (paras) => `        <div class="sp-prose">\n${paras.map((p) => `          <p>${p}</p>`).join("\n")}\n        </div>`;
   const grid = (items) => `        <ul class="sp-grid">\n${items.map(([h, p], i) => `          <li class="sp-card"${reveal(i)}><h3 class="sp-card__title">${h}</h3><p>${p}</p></li>`).join("\n")}\n        </ul>`;
   const art = (i, last) => `<div class="sp-step__art"><svg class="sp-step__svg${MIRROR_IN_RTL[slug]?.includes(i) ? " sp-step__svg--m" : ""}" viewBox="0 0 120 80" aria-hidden="true" focusable="false">${STEP_ART[slug][i]}</svg>${last ? "" : NEXT}</div>`;
@@ -308,7 +317,9 @@ function buildHead(head, ctx, lang, slug) {
   const pageUrl = (l) => `${urls[l]}${slug}/`;
   const title = strip(c.metaTitle);
   const desc = esc(strip(c.description));
-  const crumbs = slug === "about"
+  const crumbs = slug === "capture"
+    ? [[UI[lang].home, urls[lang]], [strip(copyFor(ctx.tpl, "documents", lang).short), `${urls[lang]}documents/`], [strip(c.short), pageUrl(lang)]]
+    : slug === "about"
     ? [[UI[lang].home, urls[lang]], [strip(c.short), pageUrl(lang)]]
     : [[UI[lang].home, urls[lang]], [UI[lang].suite, `${urls[lang]}#${ctx.tpl.suiteAnchor}`], [strip(c.short), pageUrl(lang)]];
   const ld = JSON.stringify({
@@ -334,6 +345,11 @@ function buildHead(head, ctx, lang, slug) {
     ? `<link rel="preload" as="image" type="image/webp" imagesrcset="${[800, 1200, 1600].map((w) => `${assets}photos/portico/${photo}-${w}.webp ${w}w`).join(", ")}" imagesizes="${HERO_SIZES}" fetchpriority="high">`
     : "";
   h = h.replace(/[ \t]*<!-- The hero photograph[^\n]*-->\n(?=[ \t]*<!--sp-preload-->)/, preload ? "$&" : "").replace(/[ \t]*<!--sp-preload-->\n?/, preload ? `  ${preload}\n` : "");
+  if (slug === "capture") {
+    const css = rel(ctx.pageDir, "templates/portico/capture.css");
+    const js = rel(ctx.pageDir, "templates/portico/capture.js");
+    h = h.replace(/<\/head>/, `  <link rel="stylesheet" href="${css}">\n  <script src="${js}" defer></script>\n</head>`);
+  }
   return h.replace(/<\/head>/, `  <script type="application/ld+json">\n  ${ld}\n  </script>\n</head>`);
 }
 
@@ -359,7 +375,7 @@ for (const [tName, tpl] of Object.entries(TEMPLATES)) {
     const mainStart = src.search(/\n[ \t]*<main\b/);
     const mainEnd = src.indexOf("</main>") + "</main>".length;
     if (headEnd < 7 || mainStart < 0 || mainEnd < 7) throw new Error(`${homeDir}index.html: expected </head>, <main> and </main>`);
-    for (const slug of SLUGS) {
+    for (const slug of [...SLUGS, ...(tpl.extra || [])]) {
       const pageDir = `${homeDir}${slug}/`;
       const ctx = { homeDir, pageDir, homeDirs, lang, slug, tpl };
       const head = buildHead(src.slice(0, headEnd), ctx, lang, slug);

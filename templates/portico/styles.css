@@ -3431,3 +3431,8 @@ h3:lang(ar),
 
 .sp-hero__copy { view-transition-name: pt-copy; }
 .sp-hero__visual { view-transition-name: pt-visual; }
+
+/* Entry points to the Document Capture page. */
+.dropdown__list + .dropdown__h { margin-block-start: 6px; }
+.card__caps a { color: inherit; text-decoration: underline; text-decoration-color: var(--line-gold); text-underline-offset: 3px; }
+.card__caps a:hover { color: var(--gold-text); text-decoration-color: currentColor; }
