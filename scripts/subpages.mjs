@@ -15,8 +15,12 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { posix } from "node:path";
 import { fileURLToPath } from "node:url";
-import { GLYPHS, MODULES, PAGES, SERVICES, UI, WORKS } from "./subpages-content.mjs";
+import { GLYPHS, MODULES, PAGES, PORTICO_NAMES, PORTICO_UI, SERVICES, UI, WORKS } from "./subpages-content.mjs";
 import { STEP_ART, MIRROR_IN_RTL } from "./steps-art.mjs";
+import { CAPTURE_META, buildCaptureMain } from "./capture-page.mjs";
+
+// The Document Capture page exists for Portico only (see TEMPLATES.portico.extra).
+PAGES.capture = CAPTURE_META;
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url)).replace(/\\/g, "/");
 const SLUGS = [...MODULES, "about"];
@@ -32,6 +36,10 @@ const CTA_FILE = '<svg class="sp-cta__file" viewBox="0 0 24 24" aria-hidden="tru
 
 const TEMPLATES = {
   "portico": {
+    appBpm: true,
+    extra: ["capture"],
+    names: PORTICO_NAMES,
+    ui: PORTICO_UI,
     homes: { en: "", ar: "ar/" },
     anchors: { documents: "documents", correspondence: "correspondence", processes: "processes", meetings: "meetings", about: "about" },
     suiteAnchor: "suite",
@@ -126,7 +134,9 @@ function rebaseChunk(html, ctx) {
   });
 }
 
-function svgGlyph(slug, cls = "sp-glyph") {
+// Portico draws the BPM module with the ECM+ app's own one-colour BPM icon (the m-bpm sprite symbol).
+function svgGlyph(slug, cls = "sp-glyph", tpl) {
+  if (tpl?.appBpm && slug === "processes") return `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#m-bpm"/></svg>`;
   return `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${GLYPHS[slug]}</svg>`;
 }
 
@@ -134,7 +144,7 @@ function svgGlyph(slug, cls = "sp-glyph") {
 // active), three stat tiles, three list rows with a status chip, and a progress stepper.
 // Labels come from UI.*.ctaApp; CSS tilts it and mirrors it for RTL.
 function ctaWindow(ui) {
-  const nav = ui.ctaApp.nav.map((n, i) => `<li${i === 0 ? ' class="is-on"' : ""}>${n}</li>`).join("");
+  const nav = (ui.ctaNav ?? ui.ctaApp.nav).map((n, i) => `<li${i === 0 ? ' class="is-on"' : ""}>${n}</li>`).join("");
   const rows = ui.ctaApp.rows.map(([title, status, tone]) => `                <li>${CTA_FILE}<span class="sp-cta__row-title">${title}</span><span class="sp-cta__chip${tone ? ` sp-cta__chip--${tone}` : ""}">${status}</span></li>`).join("\n");
   return `<div class="sp-cta__app" aria-hidden="true">
             <div class="sp-cta__win">
@@ -153,10 +163,19 @@ ${rows}
           </div>`;
 }
 
+// A page's copy, with the template's own module names where it has them.
+const copyFor = (tpl, slug, lang) => ({ ...PAGES[slug][lang], ...tpl.names?.[lang]?.[slug] });
+
+// Portico only: the documents page points to the Document Capture page.
+const CAPTURE_LINK = {
+  en: `New: <a href="../capture/">Document Capture</a> shows how paper, files and email become indexed, searchable documents.`,
+  ar: `جديد: تعرضُ صفحة <a href="../capture/">التقاط الوثائق</a> كيف تتحول الورقيات والملفات والرسائل إلى وثائق مفهرسة وقابلة للبحث.`,
+};
+
 function buildMain(tName, tpl, lang, slug, ctx) {
-  const ui = UI[lang];
+  const ui = { ...UI[lang], ...tpl.ui?.[lang] };
   const page = PAGES[slug];
-  const c = page[lang];
+  const c = copyFor(tpl, slug, lang);
   const home = rel(ctx.pageDir, ctx.homeDir);
   const sib = (s) => rel(ctx.pageDir, `${ctx.homeDir}${s}/`);
   const assets = rel(ctx.pageDir, "assets/");
@@ -187,6 +206,10 @@ ${body}
     </section>`;
   };
 
+  if (slug === "capture") {
+    return buildCaptureMain(ctx, { lang, ui, tpl, home, section, reveal, W, ctaWindow, crumbHome: home, crumbDocs: sib("documents") });
+  }
+
   const prose = (paras) => `        <div class="sp-prose">\n${paras.map((p) => `          <p>${p}</p>`).join("\n")}\n        </div>`;
   const grid = (items) => `        <ul class="sp-grid">\n${items.map(([h, p], i) => `          <li class="sp-card"${reveal(i)}><h3 class="sp-card__title">${h}</h3><p>${p}</p></li>`).join("\n")}\n        </ul>`;
   const art = (i, last) => `<div class="sp-step__art"><svg class="sp-step__svg${MIRROR_IN_RTL[slug]?.includes(i) ? " sp-step__svg--m" : ""}" viewBox="0 0 120 80" aria-hidden="true" focusable="false">${STEP_ART[slug][i]}</svg>${last ? "" : NEXT}</div>`;
@@ -213,8 +236,8 @@ ${body}
     return `          <li class="sp-work"${reveal(i)}><span class="sp-work__mark" aria-hidden="true">${mark}</span><h3 class="sp-work__name">${label}</h3><p class="sp-work__text">${WORKS[slug][lang][k]}</p></li>`;
   }).join("\n")}\n        </ul>`;
   const related = (keys) => `        <ul class="sp-related">\n${keys.map((k, i) => {
-    const m = PAGES[k][lang];
-    return `          <li${reveal(i)}><a class="sp-related__link" href="${sib(k)}">${svgGlyph(k, "sp-glyph sp-related__icon")}<span class="sp-related__code"><bdi>${PAGES[k].code}</bdi></span><span class="sp-related__name">${m.name}</span><span class="sp-related__line">${m.line}</span></a></li>`;
+    const m = copyFor(tpl, k, lang);
+    return `          <li${reveal(i)}><a class="sp-related__link" href="${sib(k)}">${svgGlyph(k, "sp-glyph sp-related__icon", tpl)}<span class="sp-related__code"><bdi>${PAGES[k].code}</bdi></span><span class="sp-related__name">${m.name}</span><span class="sp-related__line">${m.line}</span></a></li>`;
   }).join("\n")}\n        </ul>`;
 
   const crumbs = slug === "about"
@@ -222,7 +245,7 @@ ${body}
     : `<li><a href="${home}">${ui.home}</a></li><li><a href="${home}#${tpl.suiteAnchor}">${ui.suite}</a></li><li aria-current="page">${c.short}</li>`;
   const eyebrow = slug === "about"
     ? `<p class="sp-eyebrow"><span>${c.eyebrow}</span></p>`
-    : `<p class="sp-eyebrow">${svgGlyph(slug)}<span><bdi>${page.code}</bdi> · ${c.name}</span></p>`;
+    : `<p class="sp-eyebrow">${svgGlyph(slug, undefined, tpl)}<span><bdi>${page.code}</bdi> · ${c.name}</span></p>`;
 
   let visual;
   if (tpl.photos) {
@@ -232,8 +255,8 @@ ${body}
   } else if (slug === "about") {
     visual = `      <div class="sp-hero__visual sp-emblem sp-emblem--logo" aria-hidden="true"><img class="ecmlogo__img--light" src="${assets}brand/ecmplus-ai-logo-545.webp" alt="" width="545" height="302"><img class="ecmlogo__img--dark" src="${assets}brand/ecmplus-ai-logo-dark-545.webp" alt="" width="545" height="302"></div>`;
   } else {
-    const alt = PAGES[slug][other(lang)].name;
-    visual = `      <div class="sp-hero__visual sp-emblem" aria-hidden="true"><span class="sp-emblem__ring">${svgGlyph(slug)}</span><span class="sp-emblem__code">${page.code}</span><span class="sp-emblem__name">${c.name}</span><span class="sp-emblem__alt" lang="${other(lang)}" dir="${other(lang) === "ar" ? "rtl" : "ltr"}">${alt}</span></div>`;
+    const alt = copyFor(tpl, slug, other(lang)).name;
+    visual = `      <div class="sp-hero__visual sp-emblem" aria-hidden="true"><span class="sp-emblem__ring">${svgGlyph(slug, undefined, tpl)}</span><span class="sp-emblem__code">${page.code}</span><span class="sp-emblem__name">${c.name}</span><span class="sp-emblem__alt" lang="${other(lang)}" dir="${other(lang) === "ar" ? "rtl" : "ltr"}">${alt}</span></div>`;
   }
 
   const hero = `    <section class="sp-hero" aria-labelledby="page-title">
@@ -279,7 +302,7 @@ ${visual}
     ];
   } else {
     sections = [
-      section("01", ui.overview, "overview-title", c.overviewTitle, prose(c.overview)),
+      section("01", ui.overview, "overview-title", c.overviewTitle, prose(slug === "documents" && tpl.extra?.includes("capture") ? [...c.overview, CAPTURE_LINK[lang]] : c.overview)),
       section("02", ui.capabilities, "capabilities-title", ui.capabilitiesTitle, grid(c.capabilities), true),
       section("03", ui.how, "how-title", c.howTitle, steps(c.steps)),
       tpl.works === "cards"
@@ -293,14 +316,16 @@ ${visual}
 }
 
 function buildHead(head, ctx, lang, slug) {
-  const c = PAGES[slug][lang];
+  const c = copyFor(ctx.tpl, slug, lang);
   const urls = {};
   for (const m of head.matchAll(/<link rel="alternate" hreflang="([\w-]+)" href="([^"]+)">/g)) urls[m[1]] = m[2];
   if (!urls[lang] || !urls[other(lang)]) throw new Error(`${ctx.homeDir}: the home page needs hreflang alternates for both languages`);
   const pageUrl = (l) => `${urls[l]}${slug}/`;
   const title = strip(c.metaTitle);
   const desc = esc(strip(c.description));
-  const crumbs = slug === "about"
+  const crumbs = slug === "capture"
+    ? [[UI[lang].home, urls[lang]], [strip(copyFor(ctx.tpl, "documents", lang).short), `${urls[lang]}documents/`], [strip(c.short), pageUrl(lang)]]
+    : slug === "about"
     ? [[UI[lang].home, urls[lang]], [strip(c.short), pageUrl(lang)]]
     : [[UI[lang].home, urls[lang]], [UI[lang].suite, `${urls[lang]}#${ctx.tpl.suiteAnchor}`], [strip(c.short), pageUrl(lang)]];
   const ld = JSON.stringify({
@@ -326,6 +351,11 @@ function buildHead(head, ctx, lang, slug) {
     ? `<link rel="preload" as="image" type="image/webp" imagesrcset="${[800, 1200, 1600].map((w) => `${assets}photos/portico/${photo}-${w}.webp ${w}w`).join(", ")}" imagesizes="${HERO_SIZES}" fetchpriority="high">`
     : "";
   h = h.replace(/[ \t]*<!-- The hero photograph[^\n]*-->\n(?=[ \t]*<!--sp-preload-->)/, preload ? "$&" : "").replace(/[ \t]*<!--sp-preload-->\n?/, preload ? `  ${preload}\n` : "");
+  if (slug === "capture") {
+    const css = rel(ctx.pageDir, "templates/portico/capture.css");
+    const js = rel(ctx.pageDir, "templates/portico/capture.js");
+    h = h.replace(/<\/head>/, `  <link rel="stylesheet" href="${css}">\n  <script src="${js}" defer></script>\n</head>`);
+  }
   return h.replace(/<\/head>/, `  <script type="application/ld+json">\n  ${ld}\n  </script>\n</head>`);
 }
 
@@ -351,7 +381,7 @@ for (const [tName, tpl] of Object.entries(TEMPLATES)) {
     const mainStart = src.search(/\n[ \t]*<main\b/);
     const mainEnd = src.indexOf("</main>") + "</main>".length;
     if (headEnd < 7 || mainStart < 0 || mainEnd < 7) throw new Error(`${homeDir}index.html: expected </head>, <main> and </main>`);
-    for (const slug of SLUGS) {
+    for (const slug of [...SLUGS, ...(tpl.extra || [])]) {
       const pageDir = `${homeDir}${slug}/`;
       const ctx = { homeDir, pageDir, homeDirs, lang, slug, tpl };
       const head = buildHead(src.slice(0, headEnd), ctx, lang, slug);

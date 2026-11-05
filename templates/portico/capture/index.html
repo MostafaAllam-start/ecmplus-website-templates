@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Document Capture (DMS) — ECM Plus</title>
+  <meta name="description" content="Bring paper, files and email into one archive, read their text in Arabic and English, and have AI propose the index fields for staff to confirm. Includes an interactive demonstration.">
+  <link rel="canonical" href="https://ecmplus.org/capture/">
+  <link rel="alternate" hreflang="en" href="https://ecmplus.org/capture/">
+  <link rel="alternate" hreflang="ar" href="https://ecmplus.org/ar/capture/">
+  <link rel="alternate" hreflang="x-default" href="https://ecmplus.org/capture/">
+
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("ecmplus-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { /* storage blocked: stay light */ }
+      // Arriving through the language flip (a cross-document view transition): show the
+      // hero at once; pagereveal fires before the first frame, ahead of main.js.
+      window.addEventListener("pagereveal", function (e) {
+        if (e.viewTransition) document.documentElement.classList.add("flip-in");
+      });
+    })();
+  </script>
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#F4F2EE">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ECM Plus">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ar_SA">
+  <meta property="og:url" content="https://ecmplus.org/capture/">
+  <meta property="og:title" content="Document Capture (DMS) — ECM Plus">
+  <meta property="og:description" content="Bring paper, files and email into one archive, read their text in Arabic and English, and have AI propose the index fields for staff to confirm. Includes an interactive demonstration.">
+  <meta property="og:image" content="https://ecmplus.org/assets/brand/ecmplus-ai-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Document Capture (DMS) — ECM Plus">
+  <meta name="twitter:description" content="Bring paper, files and email into one archive, read their text in Arabic and English, and have AI propose the index fields for staff to confirm. Includes an interactive demonstration.">
+  <meta name="twitter:image" content="https://ecmplus.org/assets/brand/ecmplus-ai-logo.png">
+
+  <link rel="icon" href="../../../assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Fonts load without blocking first paint; display=swap replaces the fallbacks when they arrive. -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Readex+Pro:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Readex+Pro:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../../../assets/brand/ecmplus-logo.css">
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="../main.js" defer></script>
+
+  <link rel="stylesheet" href="../capture.css">
+  <script src="../capture.js" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://ecmplus.org/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Document Management",
+        "item": "https://ecmplus.org/documents/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Document Capture",
+        "item": "https://ecmplus.org/capture/"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- Icon sprite (decorative) -->
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.6A7.5 7.5 0 0 1 9.4 4.5a7.5 7.5 0 1 0 10.1 10.1z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="1"/><path d="M4 6.5l8 6 8-6"/></symbol>
+    <symbol id="i-flow" viewBox="0 0 24 24"><rect x="8" y="2.5" width="8" height="5" rx="1.2"/><path d="M12 7.5v2M12 9.5l3 3-3 3-3-3z"/><path d="M9 12.5H5.5v4M15 12.5h3.5v4"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.2"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19c.8-3 2.9-4.5 5.5-4.5s4.7 1.5 5.5 4.5"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M15.4 14.6c.4-.1.8-.1 1.1-.1 2.2 0 3.8 1.3 4.5 3.9"/></symbol>
+    <symbol id="i-archive" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="4" rx="1"/><path d="M5 9v9.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M10 12.5h4"/></symbol>
+    <symbol id="i-audit" viewBox="0 0 24 24"><path d="M6 3.5h9l3.5 3.5v13.5H6z"/><path d="M15 3.5V7h3.5M9 11h6M9 14h6M9 17h4"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5M12 14.5V17"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 2.8v5.6c0 4.6-3.1 8.2-7.5 9.6-4.4-1.4-7.5-5-7.5-9.6V5.8z"/><path d="M8.6 12l2.5 2.5 4.4-4.8"/></symbol>
+    <symbol id="i-sign" viewBox="0 0 24 24"><path d="M4 16.5c2.5-.3 3.6-6.5 5.5-6.5 1.6 0 .2 5 2 5 1.4 0 2-3 3.4-3 1 0 1.1 1.6 2.1 1.6.7 0 1.3-.5 3-1.6"/><path d="M4 20h16"/></symbol>
+    <symbol id="i-backup" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="2.5"/><path d="M5 6v12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3.5 7.5a1 1 0 0 1 1-1h15a1 1 0 0 1 1 1V10a2 2 0 0 0 0 4v2.5a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1V14a2 2 0 0 0 0-4z"/><path d="M7.5 10.5h5M7.5 13.5h3.5M15.5 7v10"/></symbol>
+    <symbol id="i-track" viewBox="0 0 24 24"><path d="M9.5 6.5h11M9.5 12h11M9.5 17.5h11"/><path d="M3.5 6.5l1.3 1.3 2.2-2.4M3.5 12l1.3 1.3 2.2-2.4"/><circle cx="5.2" cy="17.5" r="1.3"/></symbol>
+    <symbol id="i-idea" viewBox="0 0 24 24"><path d="M4 5.5h16V16H10l-4.5 3.5V16H4z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+    <symbol id="i-suite" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="1.2"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="1.2"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="1.2"/><rect x="13" y="13" width="7.5" height="7.5" rx="1.2"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M4.5 20.5v-16a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16M14.5 9.5h4a1 1 0 0 1 1 1v10M3 20.5h18"/><path d="M8 7.5h3M8 11h3M8 14.5h3"/></symbol>
+    <symbol id="i-demo" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12.5" rx="1.5"/><path d="M10 8.5v5l4.2-2.5zM8 20.5h8M12 17v3.5"/></symbol>
+    <!-- Module glyphs (as in the module seal) -->
+    <symbol id="m-dms" viewBox="0 0 24 24"><path d="M3 4h18v4H3zM5 8v12h14V8M10 12h4"/></symbol>
+    <symbol id="m-cms" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+    <symbol id="m-bpm" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><g stroke-width="1.3" stroke-linejoin="round"><circle cx="2.3" cy="12" r="1.1" stroke-width="1"/><rect x="5.6" y="8.5" width="3" height="7" rx="1.1"/><path d="M10.2 12L12.4 9.8L14.6 12L12.4 14.2z"/><rect x="15.2" y="2.5" width="3" height="6" rx="1.1"/><rect x="15.2" y="15.5" width="3" height="6" rx="1.1"/><circle cx="21.9" cy="12" r="1.1" stroke-width="1.6"/></g><g stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 12H4.6M4.2 11.36L5 12L4.2 12.64"/><path d="M8.6 12H9.2M8.7 11.36L9.5 12L8.7 12.64"/><path d="M12.4 9.8V5.5H14.2M13.8 4.86L14.6 5.5L13.8 6.14M12.4 14.2V18.5H14.2M13.8 17.86L14.6 18.5L13.8 19.14"/><path d="M18.2 5.5H21.9V9.6M21.26 9.7L21.9 10.5L22.54 9.7M18.2 18.5H21.9V14.4M21.26 14.3L21.9 13.5L22.54 14.3"/></g></g></symbol>
+    <symbol id="m-mms" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/></symbol>
+    <!-- Neutral glyphs for services without a logo file; no trademark is drawn. -->
+    <symbol id="t-sms" viewBox="0 0 24 24"><path d="M12 4.5c4.7 0 8.5 3 8.5 6.7S16.7 18 12 18c-1 0-2-.1-2.9-.4L5 19.5l1-3.5c-1.6-1.2-2.5-2.9-2.5-4.8C3.5 7.5 7.3 4.5 12 4.5z"/><path d="M8.5 11.3h.01M12 11.3h.01M15.5 11.3h.01" stroke-width="2.4"/></symbol>
+    <!-- Illustrative 14×14 trace-code pattern; not an encoded code. -->
+    <symbol id="dm" viewBox="0 0 16 16">
+      <rect x="1" y="1" width="1" height="14"/><rect x="1" y="14" width="14" height="1"/>
+      <rect x="3" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="9" y="1" width="1" height="1"/><rect x="11" y="1" width="1" height="1"/><rect x="13" y="1" width="1" height="1"/>
+      <rect x="14" y="2" width="1" height="1"/><rect x="14" y="4" width="1" height="1"/><rect x="14" y="6" width="1" height="1"/><rect x="14" y="8" width="1" height="1"/><rect x="14" y="10" width="1" height="1"/><rect x="14" y="12" width="1" height="1"/>
+      <rect x="2" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="8" y="2" width="1" height="1"/><rect x="10" y="2" width="1" height="1"/><rect x="13" y="2" width="1" height="1"/>
+      <rect x="2" y="3" width="2" height="1"/><rect x="5" y="3" width="2" height="1"/><rect x="10" y="3" width="3" height="1"/>
+      <rect x="3" y="4" width="2" height="1"/><rect x="7" y="4" width="3" height="1"/><rect x="11" y="4" width="2" height="1"/>
+      <rect x="4" y="5" width="2" height="1"/><rect x="8" y="5" width="3" height="1"/><rect x="13" y="5" width="1" height="1"/>
+      <rect x="2" y="6" width="3" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="10" y="6" width="2" height="1"/>
+      <rect x="3" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="8" y="7" width="2" height="1"/><rect x="11" y="7" width="2" height="1"/>
+      <rect x="2" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="6" y="8" width="2" height="1"/><rect x="11" y="8" width="3" height="1"/>
+      <rect x="2" y="9" width="1" height="1"/><rect x="5" y="9" width="2" height="1"/><rect x="10" y="9" width="1" height="1"/><rect x="12" y="9" width="2" height="1"/>
+      <rect x="2" y="10" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="7" y="10" width="4" height="1"/><rect x="12" y="10" width="1" height="1"/>
+      <rect x="5" y="11" width="1" height="1"/><rect x="7" y="11" width="1" height="1"/><rect x="10" y="11" width="4" height="1"/>
+      <rect x="3" y="12" width="1" height="1"/><rect x="6" y="12" width="3" height="1"/><rect x="11" y="12" width="1" height="1"/><rect x="13" y="12" width="1" height="1"/>
+      <rect x="3" y="13" width="3" height="1"/><rect x="8" y="13" width="2" height="1"/>
+    </symbol>
+    <!-- AI and news (24×24 stroke, as the module glyphs) -->
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M10.5 3.5l1.9 4.9 4.9 1.9-4.9 1.9-1.9 4.9-1.9-4.9-4.9-1.9 4.9-1.9z"/><path d="M18 14.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4l5.1 5.1"/></symbol>
+    <symbol id="i-ocr" viewBox="0 0 24 24"><path d="M3.5 8V5.5a2 2 0 0 1 2-2H8M16 3.5h2.5a2 2 0 0 1 2 2V8M20.5 16v2.5a2 2 0 0 1-2 2H16M8 20.5H5.5a2 2 0 0 1-2-2V16"/><path d="M8 9h8M8 12h8M8 15h5"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3.5 12V5a1.5 1.5 0 0 1 1.5-1.5h7l8.5 8.5-8.5 8.5z"/><circle cx="8" cy="8" r="1.3"/></symbol>
+    <symbol id="i-wave" viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 10v4"/></symbol>
+    <symbol id="i-news" viewBox="0 0 24 24"><path d="M3.5 5h14.5v13a2 2 0 0 0 2 2h-15a1.5 1.5 0 0 1-1.5-1.5z"/><path d="M18 9.5h2.5V18a2 2 0 0 1-2 2"/><rect x="6.5" y="8" width="4.5" height="4.5" rx=".5"/><path d="M14 8.5h1.5M14 12h1.5M6.5 15.5h9"/></symbol>
+    <!-- Why ECM+ and getting started (24×24 stroke, as the module glyphs) -->
+    <symbol id="i-portico" viewBox="0 0 24 24"><path d="M3.5 7.5 12 3.5l8.5 4M4.5 7.5h15M6.2 7.5v12M10.1 7.5v12M13.9 7.5v12M17.8 7.5v12M3.5 19.5h17"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="12" r="4.5"/><path d="M12.5 12h8M17.5 12v3.5M20.5 12v2.5"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="6.5" rx="1.5"/><rect x="3.5" y="13.5" width="17" height="6.5" rx="1.5"/><path d="M7 7.25h.01M7 16.75h.01M10.5 7.25h6M10.5 16.75h6" stroke-width="2"/></symbol>
+    <symbol id="i-trace" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><path d="M13.5 13.5h3v3h-3zM20.5 13.5v3M20.5 20.5h-3M17.5 17.5h.01" stroke-width="2"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.9 2.5 2.9 14.5 0 17M12 3.5c-2.9 2.5-2.9 14.5 0 17"/></symbol>
+    <symbol id="i-path" viewBox="0 0 24 24"><circle cx="5.5" cy="6" r="2.5"/><circle cx="18.5" cy="18" r="2.5"/><path d="M8 6h6a3 3 0 0 1 0 6h-4a3 3 0 0 0 0 6h6"/></symbol>
+  </svg>
+
+  <!-- ============ Announcement ============ -->
+  <div class="notice">
+    <div class="wrap notice__row">
+      <span class="notice__badge">New</span>
+      <p class="notice__text">ECM+ enters the Iraqi market from ITEX Iraq 2026 in Baghdad</p>
+      <a class="notice__link" href="../#news">Details<svg class="icon flip" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+
+  <!-- ============ Header ============ -->
+  <header class="site-header">
+    <div class="wrap header__bar">
+      <a class="brand ecmlogo" href="../" aria-label="ECM+ Business Suite, home page">
+        <img class="ecmlogo__img ecmlogo__img--light" src="../../../assets/brand/ecmplus-ai-logo-272.webp" srcset="../../../assets/brand/ecmplus-ai-logo-272.webp 272w, ../../../assets/brand/ecmplus-ai-logo-545.webp 545w" sizes="(max-width: 420px) 80px, 94px" width="545" height="302" alt="">
+        <img class="ecmlogo__img ecmlogo__img--dark" src="../../../assets/brand/ecmplus-ai-logo-dark-272.webp" srcset="../../../assets/brand/ecmplus-ai-logo-dark-272.webp 272w, ../../../assets/brand/ecmplus-ai-logo-dark-545.webp 545w" sizes="(max-width: 420px) 80px, 94px" width="545" height="302" alt="" loading="lazy">
+      </a>
+
+      <div class="header__quick">
+        <a class="lang-switch" href="../ar/capture/" lang="ar" hreflang="ar">العربية</a>
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Dark mode" title="Dark mode">
+          <svg class="icon theme-toggle__sun" aria-hidden="true" focusable="false"><use href="#i-sun"/></svg>
+          <svg class="icon theme-toggle__moon" aria-hidden="true" focusable="false"><use href="#i-moon"/></svg>
+        </button>
+      </div>
+
+      <button class="nav-toggle js-only" type="button" aria-expanded="false" aria-controls="site-panel">
+        <span class="nav-toggle__bars" aria-hidden="true"><span></span></span>
+        <span>Menu</span>
+      </button>
+
+      <div class="header__panel" id="site-panel">
+        <nav class="nav" aria-label="Main navigation">
+          <ul class="nav__list">
+            <li class="nav__item" data-menu>
+              <a class="nav__link nojs-only" href="../#suite">Suite</a>
+              <button class="nav__link nav__trigger js-only" type="button" aria-expanded="false" aria-controls="menu-suite">
+                Suite<svg class="icon nav__chev" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg>
+              </button>
+              <div class="menu-panel dropdown dropdown--suite" id="menu-suite">
+                <p class="dropdown__h">Modules</p>
+                <ul class="dropdown__list">
+                  <li><a href="../documents/"><svg class="icon dropdown__icon" aria-hidden="true" focusable="false"><use href="#m-dms"/></svg><span class="dropdown__t">Document Management<bdi class="dropdown__code">DMS</bdi></span><span class="dropdown__d">Capture, classify, version and retrieve every document.</span></a></li>
+                  <li><a href="../correspondence/"><svg class="icon dropdown__icon" aria-hidden="true" focusable="false"><use href="#m-cms"/></svg><span class="dropdown__t">Administrative Communications<bdi class="dropdown__code">CMS</bdi></span><span class="dropdown__d">Register, route, approve and dispatch official correspondence.</span></a></li>
+                  <li><a href="../processes/"><svg class="icon dropdown__icon" aria-hidden="true" focusable="false"><use href="#m-bpm"/></svg><span class="dropdown__t">Business Process Automation<bdi class="dropdown__code">BPM</bdi></span><span class="dropdown__d">Design processes, build forms and run them with deadlines.</span></a></li>
+                  <li><a href="../meetings/"><svg class="icon dropdown__icon" aria-hidden="true" focusable="false"><use href="#m-mms"/></svg><span class="dropdown__t">Board and Committee Management<bdi class="dropdown__code">MMS</bdi></span><span class="dropdown__d">Run committees from agenda to signed minutes.</span></a></li>
+                </ul>
+                <a class="dropdown__all" href="../#suite">Explore the suite<svg class="icon flip" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+              </div>
+            </li>
+            <li class="nav__item" data-menu>
+              <a class="nav__link nojs-only" href="./" aria-current="page">Solutions</a>
+              <button class="nav__link nav__trigger js-only" type="button" aria-expanded="false" aria-controls="menu-solutions">
+                Solutions<svg class="icon nav__chev" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg>
+              </button>
+              <div class="menu-panel dropdown dropdown--suite" id="menu-solutions">
+                <ul class="dropdown__list">
+                  <li><a href="./" aria-current="page"><svg class="icon dropdown__icon" aria-hidden="true" focusable="false"><use href="#i-ocr"/></svg><span class="dropdown__t">Document Capture<bdi class="dropdown__code">DMS</bdi></span><span class="dropdown__d">Scan, upload or file from email; OCR and AI-filled index fields.</span></a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav__item"><a class="nav__link" href="../about/">About ECM Plus</a></li>
+            <li class="nav__item"><a class="nav__link" href="/support">Support</a></li>
+          </ul>
+        </nav>
+
+        <div class="header__utility">
+          <a class="lang-switch" href="../ar/capture/" lang="ar" hreflang="ar">العربية</a>
+          <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Dark mode" title="Dark mode">
+            <svg class="icon theme-toggle__sun" aria-hidden="true" focusable="false"><use href="#i-sun"/></svg>
+            <svg class="icon theme-toggle__moon" aria-hidden="true" focusable="false"><use href="#i-moon"/></svg>
+          </button>
+        </div>
+
+        <a class="btn btn--gold header__cta" href="../#contact">Request a demo</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="sp sp--capture">
+    <section class="sp-hero" aria-labelledby="page-title">
+      <div class="wrap sp-hero__grid">
+        <div class="sp-hero__copy">
+          <nav class="sp-crumbs" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li><a href="../documents/">Document Management</a></li><li aria-current="page">Document Capture</li></ol></nav>
+          <p class="sp-eyebrow"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-ocr"/></svg><span><bdi>DMS</bdi> · Document Capture</span></p>
+          <h1 id="page-title">Capture Everything. Understand Every Document.</h1>
+          <p class="sp-lead">ECM+ brings paper, files and emails into one archive, reads their text in Arabic and English, and proposes the index fields for staff to confirm.</p>
+          <div class="sp-actions"><a class="btn btn--gold btn--lg" href="#demo">Explore Document Capture</a><a class="btn btn--ghost-gold btn--lg" href="../#contact">Request a demo</a></div>
+        </div>
+        <div class="sp-hero__visual cap-art" aria-hidden="true">
+          <span class="cap-mini cap-mini--1"><i></i><i></i><i></i><i></i></span>
+          <span class="cap-mini cap-mini--2"><i></i><i></i><i></i><i></i></span>
+          <span class="cap-mini cap-mini--3"><i></i><i></i><i></i><i></i></span>
+          <span class="cap-art__line"></span>
+          <span class="cap-art__chip"><bdi>DOC-2026-00418</bdi> · Archived</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sp-section" aria-labelledby="channels-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__no">01</span>Capture channels</p>
+          <h2 id="channels-title">One Platform. Multiple Ways to Capture</h2>
+        </div>
+        <ul class="sp-grid cap-grid">
+          <li class="sp-card cap-card" data-reveal style="--i:0"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 3.5h9l5 5v12H5z"/><path d="M14 3.5v5h5M2.5 14h19"/></svg><h3 class="sp-card__title">Scanning</h3><p>The local scanner service scans straight into the archive, page by page or through the auto-feeder.</p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:1"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16V4M7 9l5-5 5 5M4.5 16v3.5h15V16"/></svg><h3 class="sp-card__title">Digital upload</h3><p>Upload from a device, start from a template or a blank document, or capture from Google Drive and OneDrive.</p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:2"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><h3 class="sp-card__title">Email capture</h3><p>Gmail, Outlook or a business mailbox connects to the suite; emails are filed into a correspondence or the archive, and the Outlook add-in saves and routes them.</p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:3"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-link"/></svg><h3 class="sp-card__title">External system integration</h3><p>A REST API lets other systems file documents into the archive, and existing archives are migrated in.</p><p class="cap-side"><span>Possible through an integration: scheduled capture from shared folders</span></p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:4"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 8h3.5l1.5-2.5h7L17 8h3.5v11h-17z"/><circle cx="12" cy="13" r="3.5"/></svg><h3 class="sp-card__title">Camera capture</h3><p>Photographing a document from a phone or tablet and filing it like a scan.</p><p class="cap-side"><span>Not part of the product today</span></p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section sp-section sp-section--alt" aria-labelledby="intel-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__no">02</span>Document intelligence</p>
+          <h2 id="intel-title">Beyond Digitization. Into Document Intelligence.</h2>
+        </div>
+        <ul class="sp-grid cap-grid">
+          <li class="sp-card cap-card" data-reveal style="--i:0"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M3.5 16l5-5 4 4 3-3 5 5M15.5 9h.01"/></svg><h3 class="sp-card__title">Image processing</h3><p>Straightening, cropping and cleaning scanned pages before recognition.</p><p class="cap-side"><span class="cap-tag cap-tag--demo" title="Demonstration">Demonstration</span><span>Shown in the demonstration</span></p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:1"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-ocr"/></svg><h3 class="sp-card__title">Text recognition, Arabic and English</h3><p>OCR reads scanned and image files, so their content is searchable and opens at the matching page.</p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:2"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-tag"/></svg><h3 class="sp-card__title">Classification</h3><p>Suggesting the document type from its content. In ECM+ today, staff choose the type, and its index fields follow.</p><p class="cap-side"><span class="cap-tag cap-tag--demo" title="Demonstration">Demonstration</span><span>Shown in the demonstration</span></p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:3"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-spark"/></svg><h3 class="sp-card__title">Metadata extraction</h3><p>Auto fill from file reads the document and proposes values for the type’s index fields: text, numbers and dates. Only empty fields are filled, and staff review before saving. An invoice yields its number, date and total; a contract its parties and expiry; an employee file its name, number and hire date.</p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:4"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5v14M6.5 5v14M10 5v14M12.5 5v14M16 5v14M19 5v14"/></svg><h3 class="sp-card__title">Barcode and QR codes</h3><p>ECM+ generates a code for each document and stamps it on the pages.</p><p class="cap-side"><span>Possible through an integration: reading codes on incoming paper to route or split batches</span></p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:5"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg><h3 class="sp-card__title">Validation</h3><p>Checking proposed values against rules, such as a due date after the invoice date.</p><p class="cap-side"><span class="cap-tag cap-tag--demo" title="Demonstration">Demonstration</span><span>Shown in the demonstration</span></p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="demo" class="section sp-section" aria-labelledby="demo-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__no">03</span>Interactive demonstration, sample documents only</p>
+          <h2 id="demo-title">Experience Intelligent Document Capture</h2>
+        </div>
+        <div class="cap-demo" id="cap-demo" data-step="1" data-sample="">
+          <p class="cap-nojs nojs-only">The interactive demonstration needs JavaScript. These are its seven steps:</p>
+          <ol class="cap-nojs nojs-only"><li>Choose a sample</li><li>Explore the document</li><li>Recognition</li><li>Classification</li><li>Index fields</li><li>Code stamp</li><li>Archive record</li></ol>
+          <ol class="cap-stepper js-only" aria-label="Demonstration steps"><li><button type="button" class="cap-step" data-go="1"><span class="cap-step__n" aria-hidden="true">1</span><span class="cap-step__t">Choose a sample</span></button></li><li><button type="button" class="cap-step" data-go="2"><span class="cap-step__n" aria-hidden="true">2</span><span class="cap-step__t">Explore the document</span></button></li><li><button type="button" class="cap-step" data-go="3"><span class="cap-step__n" aria-hidden="true">3</span><span class="cap-step__t">Recognition</span></button></li><li><button type="button" class="cap-step" data-go="4"><span class="cap-step__n" aria-hidden="true">4</span><span class="cap-step__t">Classification</span></button></li><li><button type="button" class="cap-step" data-go="5"><span class="cap-step__n" aria-hidden="true">5</span><span class="cap-step__t">Index fields</span></button></li><li><button type="button" class="cap-step" data-go="6"><span class="cap-step__n" aria-hidden="true">6</span><span class="cap-step__t">Code stamp</span></button></li><li><button type="button" class="cap-step" data-go="7"><span class="cap-step__n" aria-hidden="true">7</span><span class="cap-step__t">Archive record</span></button></li></ol>
+          <div class="cap-stage">
+            <header class="cap-stage__head">
+              <h3 class="cap-stage__title js-only" tabindex="-1"></h3>
+              <p class="cap-tag cap-tag--demo cap-tag--banner">Interactive demonstration, sample documents only</p>
+              <span class="cap-sr" role="status" aria-live="polite" data-live></span>
+            </header>
+            <div class="cap-stage__grid">
+              <div class="cap-docs">
+          <div class="cap-doc" data-for="invoice" role="group" aria-label="Sample document: supplier invoice">
+            <div class="cap-doc__page" lang="en" dir="ltr">
+              <div class="cap-z cap-doc__head" data-zone="head"><div><b class="cap-doc__org">Al-Rawabi Office Supplies Co.</b><b class="cap-doc__org" lang="ar" dir="rtl">شركة الروابي للتجهيزات المكتبية</b></div><div class="cap-doc__kind">TAX INVOICE<span lang="ar" dir="rtl">فاتورة ضريبية</span></div></div>
+              <div class="cap-z cap-doc__refs" data-zone="ref"><span>Invoice No. <b>INV-2026-0147</b></span><span>Date <b>12 Mar 2026</b></span><span>Due <b>11 Apr 2026</b></span><span>Bill to <b>Northgate Holding</b></span></div>
+              <div class="cap-z" data-zone="body"><table class="cap-doc__tbl"><tr><th>Item</th><th>Qty</th><th>Amount</th></tr><tr><td>Printer paper, A4 (box)</td><td>120</td><td>5,040.00</td></tr><tr><td>Toner cartridges</td><td>18</td><td>6,480.00</td></tr><tr><td>Office chairs</td><td>12</td><td>4,980.00</td></tr></table></div>
+              <div class="cap-z cap-doc__tot" data-zone="total"><span>Subtotal<b>16,500.00</b></span><span>VAT 15%<b>2,475.00</b></span><span class="cap-doc__grand">Total SAR<b>18,975.00</b></span></div>
+              <div class="cap-doc__foot"><div class="cap-z" data-zone="sign"><svg class="cap-sig" viewBox="0 0 64 24" aria-hidden="true" focusable="false"><path d="M3 17c4-.5 5.7-11 8.8-11 2.6 0 .3 8.4 3.2 8.4 2.3 0 3.2-5 5.5-5 1.6 0 1.8 2.7 3.4 2.7 1.1 0 2.1-.8 4.8-2.7M3 21.5h34"/></svg><span class="cap-doc__sigcap">Authorized signature</span></div><div class="cap-z cap-stampbox" data-zone="code"><span class="cap-stamp" aria-hidden="true"><svg class="cap-barcode" viewBox="0 0 55 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 0h2v20h-2zM3 0h1v20h-1zM7 0h1v20h-1zM10 0h2v20h-2zM13 0h3v20h-3zM17 0h1v20h-1zM20 0h1v20h-1zM24 0h2v20h-2zM27 0h1v20h-1zM30 0h3v20h-3zM34 0h2v20h-2zM37 0h1v20h-1zM41 0h2v20h-2zM44 0h2v20h-2zM48 0h1v20h-1zM50 0h3v20h-3z"/></svg><svg class="cap-qr" viewBox="0 0 21 21" aria-hidden="true" focusable="false"><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM10 0h1v1h-1zM14 0h1v1h-1zM15 0h1v1h-1zM16 0h1v1h-1zM17 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM20 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM9 1h1v1h-1zM11 1h1v1h-1zM14 1h1v1h-1zM20 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM11 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM17 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM8 3h1v1h-1zM9 3h1v1h-1zM12 3h1v1h-1zM14 3h1v1h-1zM16 3h1v1h-1zM17 3h1v1h-1zM18 3h1v1h-1zM20 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM11 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM10 5h1v1h-1zM11 5h1v1h-1zM12 5h1v1h-1zM14 5h1v1h-1zM20 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM16 6h1v1h-1zM17 6h1v1h-1zM18 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM1 8h1v1h-1zM2 8h1v1h-1zM9 8h1v1h-1zM14 8h1v1h-1zM17 8h1v1h-1zM19 8h1v1h-1zM20 8h1v1h-1zM0 9h1v1h-1zM1 9h1v1h-1zM2 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM6 9h1v1h-1zM8 9h1v1h-1zM10 9h1v1h-1zM11 9h1v1h-1zM12 9h1v1h-1zM13 9h1v1h-1zM15 9h1v1h-1zM16 9h1v1h-1zM18 9h1v1h-1zM20 9h1v1h-1zM1 10h1v1h-1zM2 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM13 10h1v1h-1zM16 10h1v1h-1zM19 10h1v1h-1zM20 10h1v1h-1zM0 11h1v1h-1zM1 11h1v1h-1zM2 11h1v1h-1zM3 11h1v1h-1zM6 11h1v1h-1zM10 11h1v1h-1zM11 11h1v1h-1zM12 11h1v1h-1zM14 11h1v1h-1zM15 11h1v1h-1zM16 11h1v1h-1zM1 12h1v1h-1zM2 12h1v1h-1zM5 12h1v1h-1zM10 12h1v1h-1zM11 12h1v1h-1zM12 12h1v1h-1zM17 12h1v1h-1zM19 12h1v1h-1zM8 13h1v1h-1zM9 13h1v1h-1zM12 13h1v1h-1zM16 13h1v1h-1zM20 13h1v1h-1zM0 14h1v1h-1zM1 14h1v1h-1zM2 14h1v1h-1zM3 14h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM14 14h1v1h-1zM17 14h1v1h-1zM18 14h1v1h-1zM19 14h1v1h-1zM0 15h1v1h-1zM6 15h1v1h-1zM9 15h1v1h-1zM12 15h1v1h-1zM13 15h1v1h-1zM14 15h1v1h-1zM18 15h1v1h-1zM0 16h1v1h-1zM2 16h1v1h-1zM3 16h1v1h-1zM4 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM10 16h1v1h-1zM13 16h1v1h-1zM14 16h1v1h-1zM0 17h1v1h-1zM2 17h1v1h-1zM3 17h1v1h-1zM4 17h1v1h-1zM6 17h1v1h-1zM9 17h1v1h-1zM12 17h1v1h-1zM13 17h1v1h-1zM14 17h1v1h-1zM20 17h1v1h-1zM0 18h1v1h-1zM2 18h1v1h-1zM3 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM9 18h1v1h-1zM12 18h1v1h-1zM13 18h1v1h-1zM17 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM8 19h1v1h-1zM9 19h1v1h-1zM10 19h1v1h-1zM12 19h1v1h-1zM13 19h1v1h-1zM14 19h1v1h-1zM15 19h1v1h-1zM20 19h1v1h-1zM0 20h1v1h-1zM1 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM11 20h1v1h-1zM14 20h1v1h-1zM16 20h1v1h-1zM17 20h1v1h-1zM18 20h1v1h-1zM19 20h1v1h-1z"/></svg><bdi class="cap-stamp__no">DOC-2026-00418</bdi></span></div></div>
+              <span class="cap-doc__sweep" aria-hidden="true"></span>
+            </div>
+            <p class="cap-doc__cap">Page 1 of 1 · sample document</p>
+          </div>
+          <div class="cap-doc" data-for="contract" role="group" aria-label="Sample document: service contract">
+            <div class="cap-doc__page" lang="en" dir="ltr">
+              <div class="cap-z cap-doc__head" data-zone="head"><div><b class="cap-doc__org">Server Maintenance Agreement</b><span class="cap-doc__sub">Northgate Holding · Meridian Data Services Ltd.</span></div><div class="cap-doc__kind">CONTRACT</div></div>
+              <div class="cap-z cap-doc__refs" data-zone="ref"><span>Reference <b>CT-2026-031</b></span><span>Client <b>Northgate Holding</b></span><span>Provider <b>Meridian Data Services Ltd.</b></span></div>
+              <div class="cap-z cap-doc__clauses" data-zone="body"><p><b>1. Scope.</b> The Provider maintains the Client's production servers, applies security updates and responds to incidents.</p><p><b>2. Service levels.</b> Critical incidents are acknowledged within one hour and resolved within eight hours.</p><p><b>3. Payment.</b> The Client pays quarterly in arrears within thirty days of invoice.</p></div>
+              <div class="cap-z cap-doc__tot" data-zone="total"><span>Effective<b>1 Feb 2026</b></span><span>Expiry<b>31 Jan 2028</b></span><span class="cap-doc__grand">Value SAR<b>420,000.00</b></span></div>
+              <div class="cap-doc__foot"><div class="cap-z" data-zone="sign"><svg class="cap-sig" viewBox="0 0 64 24" aria-hidden="true" focusable="false"><path d="M3 17c4-.5 5.7-11 8.8-11 2.6 0 .3 8.4 3.2 8.4 2.3 0 3.2-5 5.5-5 1.6 0 1.8 2.7 3.4 2.7 1.1 0 2.1-.8 4.8-2.7M3 21.5h34"/></svg><span class="cap-doc__sigcap">Authorized signature</span></div><div class="cap-z cap-stampbox" data-zone="code"><span class="cap-stamp" aria-hidden="true"><svg class="cap-barcode" viewBox="0 0 55 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 0h2v20h-2zM3 0h1v20h-1zM7 0h1v20h-1zM10 0h2v20h-2zM13 0h3v20h-3zM17 0h1v20h-1zM20 0h1v20h-1zM24 0h2v20h-2zM27 0h1v20h-1zM30 0h3v20h-3zM34 0h2v20h-2zM37 0h1v20h-1zM41 0h2v20h-2zM44 0h2v20h-2zM48 0h1v20h-1zM50 0h3v20h-3z"/></svg><svg class="cap-qr" viewBox="0 0 21 21" aria-hidden="true" focusable="false"><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM14 0h1v1h-1zM15 0h1v1h-1zM16 0h1v1h-1zM17 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM20 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM10 1h1v1h-1zM14 1h1v1h-1zM20 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM12 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM17 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM8 3h1v1h-1zM10 3h1v1h-1zM11 3h1v1h-1zM12 3h1v1h-1zM14 3h1v1h-1zM16 3h1v1h-1zM17 3h1v1h-1zM18 3h1v1h-1zM20 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM11 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM9 5h1v1h-1zM10 5h1v1h-1zM12 5h1v1h-1zM14 5h1v1h-1zM20 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM16 6h1v1h-1zM17 6h1v1h-1zM18 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM2 8h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM8 8h1v1h-1zM9 8h1v1h-1zM11 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM15 8h1v1h-1zM16 8h1v1h-1zM19 8h1v1h-1zM0 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM8 9h1v1h-1zM9 9h1v1h-1zM11 9h1v1h-1zM15 9h1v1h-1zM16 9h1v1h-1zM17 9h1v1h-1zM20 9h1v1h-1zM0 10h1v1h-1zM1 10h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM13 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM0 11h1v1h-1zM3 11h1v1h-1zM4 11h1v1h-1zM6 11h1v1h-1zM8 11h1v1h-1zM9 11h1v1h-1zM12 11h1v1h-1zM13 11h1v1h-1zM16 11h1v1h-1zM20 11h1v1h-1zM0 12h1v1h-1zM3 12h1v1h-1zM5 12h1v1h-1zM6 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM13 12h1v1h-1zM15 12h1v1h-1zM19 12h1v1h-1zM8 13h1v1h-1zM10 13h1v1h-1zM12 13h1v1h-1zM13 13h1v1h-1zM14 13h1v1h-1zM16 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM0 14h1v1h-1zM1 14h1v1h-1zM2 14h1v1h-1zM3 14h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM8 14h1v1h-1zM12 14h1v1h-1zM15 14h1v1h-1zM16 14h1v1h-1zM17 14h1v1h-1zM20 14h1v1h-1zM0 15h1v1h-1zM6 15h1v1h-1zM8 15h1v1h-1zM9 15h1v1h-1zM10 15h1v1h-1zM13 15h1v1h-1zM18 15h1v1h-1zM19 15h1v1h-1zM20 15h1v1h-1zM0 16h1v1h-1zM2 16h1v1h-1zM3 16h1v1h-1zM4 16h1v1h-1zM6 16h1v1h-1zM9 16h1v1h-1zM11 16h1v1h-1zM14 16h1v1h-1zM15 16h1v1h-1zM16 16h1v1h-1zM18 16h1v1h-1zM19 16h1v1h-1zM0 17h1v1h-1zM2 17h1v1h-1zM3 17h1v1h-1zM4 17h1v1h-1zM6 17h1v1h-1zM10 17h1v1h-1zM12 17h1v1h-1zM14 17h1v1h-1zM20 17h1v1h-1zM0 18h1v1h-1zM2 18h1v1h-1zM3 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM8 18h1v1h-1zM9 18h1v1h-1zM11 18h1v1h-1zM14 18h1v1h-1zM15 18h1v1h-1zM16 18h1v1h-1zM18 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM9 19h1v1h-1zM12 19h1v1h-1zM14 19h1v1h-1zM16 19h1v1h-1zM18 19h1v1h-1zM19 19h1v1h-1zM0 20h1v1h-1zM1 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM11 20h1v1h-1zM12 20h1v1h-1zM13 20h1v1h-1zM18 20h1v1h-1z"/></svg><bdi class="cap-stamp__no">DOC-2026-00419</bdi></span></div></div>
+              <span class="cap-doc__sweep" aria-hidden="true"></span>
+            </div>
+            <p class="cap-doc__cap">Page 1 of 3 · sample document</p>
+          </div>
+          <div class="cap-doc" data-for="employee" role="group" aria-label="Sample document: employee file">
+            <div class="cap-doc__page" lang="ar" dir="rtl">
+              <div class="cap-z cap-doc__head" data-zone="head"><div><b class="cap-doc__org">ملف موظف — نموذج تعيين</b><span class="cap-doc__sub">الموارد البشرية</span></div><span class="cap-doc__photo" aria-hidden="true"></span></div>
+              <div class="cap-z cap-doc__refs" data-zone="ref"><span>الاسم <b>سارة محمد العتيبي</b></span><span>رقم الموظف <b dir="ltr">EMP-4471</b></span><span>رقم الهوية <b dir="ltr">10•• •••• ••</b></span></div>
+              <div class="cap-z cap-doc__clauses" data-zone="body"><p><b>الإدارة:</b> الموارد البشرية</p><p><b>المسمى الوظيفي:</b> أخصائي توظيف</p><p><b>جهة العمل:</b> المقر الرئيسي، الرياض</p></div>
+              <div class="cap-z cap-doc__tot" data-zone="total"><span>تاريخ التعيين<b dir="ltr">2025-09-01</b></span><span class="cap-doc__grand">نوع العقد<b>دوام كامل</b></span></div>
+              <div class="cap-doc__foot"><div class="cap-z" data-zone="sign"><svg class="cap-sig" viewBox="0 0 64 24" aria-hidden="true" focusable="false"><path d="M3 17c4-.5 5.7-11 8.8-11 2.6 0 .3 8.4 3.2 8.4 2.3 0 3.2-5 5.5-5 1.6 0 1.8 2.7 3.4 2.7 1.1 0 2.1-.8 4.8-2.7M3 21.5h34"/></svg><span class="cap-doc__sigcap">Authorized signature</span></div><div class="cap-z cap-stampbox" data-zone="code"><span class="cap-stamp" aria-hidden="true"><svg class="cap-barcode" viewBox="0 0 55 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 0h2v20h-2zM3 0h1v20h-1zM7 0h1v20h-1zM10 0h2v20h-2zM13 0h3v20h-3zM17 0h1v20h-1zM20 0h1v20h-1zM24 0h2v20h-2zM27 0h1v20h-1zM30 0h3v20h-3zM34 0h2v20h-2zM37 0h1v20h-1zM41 0h2v20h-2zM44 0h2v20h-2zM48 0h1v20h-1zM50 0h3v20h-3z"/></svg><svg class="cap-qr" viewBox="0 0 21 21" aria-hidden="true" focusable="false"><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM8 0h1v1h-1zM10 0h1v1h-1zM14 0h1v1h-1zM15 0h1v1h-1zM16 0h1v1h-1zM17 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM20 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h1v1h-1zM14 1h1v1h-1zM20 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM9 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM17 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM8 3h1v1h-1zM9 3h1v1h-1zM14 3h1v1h-1zM16 3h1v1h-1zM17 3h1v1h-1zM18 3h1v1h-1zM20 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM9 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM10 5h1v1h-1zM12 5h1v1h-1zM14 5h1v1h-1zM20 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM11 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM16 6h1v1h-1zM17 6h1v1h-1zM18 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM1 8h1v1h-1zM2 8h1v1h-1zM3 8h1v1h-1zM10 8h1v1h-1zM11 8h1v1h-1zM17 8h1v1h-1zM20 8h1v1h-1zM1 9h1v1h-1zM2 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM15 9h1v1h-1zM18 9h1v1h-1zM19 9h1v1h-1zM20 9h1v1h-1zM1 10h1v1h-1zM4 10h1v1h-1zM9 10h1v1h-1zM13 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM19 10h1v1h-1zM2 11h1v1h-1zM3 11h1v1h-1zM4 11h1v1h-1zM5 11h1v1h-1zM10 11h1v1h-1zM12 11h1v1h-1zM14 11h1v1h-1zM0 12h1v1h-1zM1 12h1v1h-1zM2 12h1v1h-1zM8 12h1v1h-1zM11 12h1v1h-1zM12 12h1v1h-1zM13 12h1v1h-1zM15 12h1v1h-1zM18 12h1v1h-1zM20 12h1v1h-1zM9 13h1v1h-1zM10 13h1v1h-1zM13 13h1v1h-1zM0 14h1v1h-1zM1 14h1v1h-1zM2 14h1v1h-1zM3 14h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM8 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM11 14h1v1h-1zM13 14h1v1h-1zM16 14h1v1h-1zM19 14h1v1h-1zM20 14h1v1h-1zM0 15h1v1h-1zM6 15h1v1h-1zM8 15h1v1h-1zM11 15h1v1h-1zM13 15h1v1h-1zM19 15h1v1h-1zM0 16h1v1h-1zM2 16h1v1h-1zM3 16h1v1h-1zM4 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM10 16h1v1h-1zM13 16h1v1h-1zM14 16h1v1h-1zM16 16h1v1h-1zM19 16h1v1h-1zM0 17h1v1h-1zM2 17h1v1h-1zM3 17h1v1h-1zM4 17h1v1h-1zM6 17h1v1h-1zM9 17h1v1h-1zM10 17h1v1h-1zM12 17h1v1h-1zM13 17h1v1h-1zM14 17h1v1h-1zM15 17h1v1h-1zM16 17h1v1h-1zM0 18h1v1h-1zM2 18h1v1h-1zM3 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM8 18h1v1h-1zM13 18h1v1h-1zM17 18h1v1h-1zM20 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM12 19h1v1h-1zM16 19h1v1h-1zM19 19h1v1h-1zM20 19h1v1h-1zM0 20h1v1h-1zM1 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM10 20h1v1h-1zM11 20h1v1h-1zM12 20h1v1h-1zM13 20h1v1h-1zM16 20h1v1h-1zM18 20h1v1h-1zM20 20h1v1h-1z"/></svg><bdi class="cap-stamp__no">DOC-2026-00420</bdi></span></div></div>
+              <span class="cap-doc__sweep" aria-hidden="true"></span>
+            </div>
+            <p class="cap-doc__cap">Page 1 of 2 · sample document</p>
+          </div>
+              </div>
+              <div class="cap-panels">
+            <div class="cap-panel" data-panel="1">
+              <p class="cap-hint">Choose a sample document. The samples are fictional and nothing is uploaded.</p>
+              <div class="cap-picks">
+            <button type="button" class="cap-pick" data-pick="invoice" aria-pressed="false"><span class="cap-pick__mini" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="cap-pick__name">Supplier invoice</span><span class="cap-pick__meta">Arabic and English · 1 page</span><span class="cap-pick__via">Captured via: Scanner (auto-feeder)</span></button>
+            <button type="button" class="cap-pick" data-pick="contract" aria-pressed="false"><span class="cap-pick__mini" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="cap-pick__name">Service contract</span><span class="cap-pick__meta">English · 3 pages</span><span class="cap-pick__via">Captured via: Upload from device</span></button>
+            <button type="button" class="cap-pick" data-pick="employee" aria-pressed="false"><span class="cap-pick__mini" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="cap-pick__name">Employee file</span><span class="cap-pick__meta">Arabic · 2 pages</span><span class="cap-pick__via">Captured via: Outlook add-in</span></button>
+              </div>
+            </div>
+            <div class="cap-panel" data-panel="2">
+              <p class="cap-hint">Select a part of the document to see where it sits on the page.</p>
+              <div class="cap-zonebtns"><button type="button" class="cap-zonebtn" data-zonebtn="head" aria-pressed="false">Header</button><button type="button" class="cap-zonebtn" data-zonebtn="ref" aria-pressed="false">Reference details</button><button type="button" class="cap-zonebtn" data-zonebtn="body" aria-pressed="false">Content</button><button type="button" class="cap-zonebtn" data-zonebtn="total" aria-pressed="false">Totals and key terms</button><button type="button" class="cap-zonebtn" data-zonebtn="sign" aria-pressed="false">Signature</button><button type="button" class="cap-zonebtn" data-zonebtn="code" aria-pressed="false">Code area</button></div>
+              <dl class="cap-meta" data-for="invoice"><div><dt>Pages</dt><dd>1</dd></div><div><dt>Language</dt><dd>Arabic and English</dd></div><div><dt>Captured via</dt><dd>Scanner (auto-feeder)</dd></div></dl>
+              <dl class="cap-meta" data-for="contract"><div><dt>Pages</dt><dd>3</dd></div><div><dt>Language</dt><dd>English</dd></div><div><dt>Captured via</dt><dd>Upload from device</dd></div></dl>
+              <dl class="cap-meta" data-for="employee"><div><dt>Pages</dt><dd>2</dd></div><div><dt>Language</dt><dd>Arabic</dd></div><div><dt>Captured via</dt><dd>Outlook add-in</dd></div></dl>
+            </div>
+            <div class="cap-panel" data-panel="3">
+              <p class="cap-recog"><span class="cap-recog__run">Reading the page…</span><span class="cap-recog__done">Text recognized: <strong data-recog-lang></strong></span></p>
+              <p class="cap-hint">An excerpt of the recognized text:</p>
+              <div class="cap-excerpt" data-for="invoice"><p dir="ltr" lang="en">Al-Rawabi Office Supplies Co. — شركة الروابي للتجهيزات المكتبية</p><p dir="ltr" lang="en">Tax invoice INV-2026-0147 · 12 Mar 2026</p><p dir="ltr" lang="en">Total SAR 18,975.00</p></div>
+              <div class="cap-excerpt" data-for="contract"><p dir="ltr" lang="en">Server Maintenance Agreement</p><p dir="ltr" lang="en">Contract CT-2026-031 · Northgate Holding and Meridian Data Services Ltd.</p><p dir="ltr" lang="en">Expiry: 31 January 2028</p></div>
+              <div class="cap-excerpt" data-for="employee"><p dir="rtl" lang="ar">ملف موظف — نموذج تعيين</p><p dir="rtl" lang="ar">سارة محمد العتيبي</p><p dir="rtl" lang="ar">رقم الموظف EMP-4471 · الموارد البشرية</p></div>
+              <p class="cap-note">ECM+ extracts the text of scanned and image files, so their content is searchable.</p>
+            </div>
+            <div class="cap-panel" data-panel="4">
+              <p class="cap-hint"><span class="cap-tag cap-tag--demo" title="Demonstration">Demonstration</span> Suggested type:</p>
+              <fieldset class="cap-types" data-for="invoice"><legend class="cap-sr">Suggested document type</legend><label class="cap-type"><input type="radio" name="type-invoice" value="Supplier invoice" checked><span>Supplier invoice <em>suggested</em></span></label><label class="cap-type"><input type="radio" name="type-invoice" value="Purchase order"><span>Purchase order</span></label><label class="cap-type"><input type="radio" name="type-invoice" value="Delivery note"><span>Delivery note</span></label></fieldset>
+              <fieldset class="cap-types" data-for="contract"><legend class="cap-sr">Suggested document type</legend><label class="cap-type"><input type="radio" name="type-contract" value="Service contract" checked><span>Service contract <em>suggested</em></span></label><label class="cap-type"><input type="radio" name="type-contract" value="Non-disclosure agreement"><span>Non-disclosure agreement</span></label><label class="cap-type"><input type="radio" name="type-contract" value="Purchase order"><span>Purchase order</span></label></fieldset>
+              <fieldset class="cap-types" data-for="employee"><legend class="cap-sr">Suggested document type</legend><label class="cap-type"><input type="radio" name="type-employee" value="Employee file" checked><span>Employee file <em>suggested</em></span></label><label class="cap-type"><input type="radio" name="type-employee" value="Job application"><span>Job application</span></label><label class="cap-type"><input type="radio" name="type-employee" value="Leave request"><span>Leave request</span></label></fieldset>
+              <p class="cap-note">In ECM+ today, staff choose the document type; the AI then fills its index fields.</p>
+            </div>
+            <div class="cap-panel" data-panel="5">
+              <p class="cap-hint">AI proposes the values. Edit any field before saving.</p>
+              <div class="cap-fields" data-for="invoice"><div class="cap-field" data-z="head"><label for="f-invoice-supplier">Supplier</label><input id="f-invoice-supplier" data-key="supplier" type="text" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z="ref"><label for="f-invoice-number">Invoice number</label><input id="f-invoice-number" data-key="number" type="text" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z="ref"><label for="f-invoice-date">Invoice date</label><input id="f-invoice-date" data-key="date" type="date" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z="ref"><label for="f-invoice-due">Due date</label><input id="f-invoice-due" data-key="due" type="date" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z="total"><label for="f-invoice-total">Total amount</label><input id="f-invoice-total" data-key="total" type="text" inputmode="decimal" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z="total"><label for="f-invoice-currency">Currency</label><input id="f-invoice-currency" data-key="currency" type="text" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z=""><label for="f-invoice-cost">Cost centre</label><input id="f-invoice-cost" data-key="cost" type="text" dir="auto" autocomplete="off" placeholder="Left for staff to fill"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div></div>
+              <div class="cap-fields" data-for="contract"><div class="cap-field" data-z="head"><label for="f-contract-title">Title</label><input id="f-contract-title" data-key="title" type="text" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z="ref"><label for="f-contract-party">Counterparty</label><input id="f-contract-party" data-key="party" type="text" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z="ref"><label for="f-contract-ref">Reference</label><input id="f-contract-ref" data-key="ref" type="text" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z="total"><label for="f-contract-from">Effective date</label><input id="f-contract-from" data-key="from" type="date" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z="total"><label for="f-contract-to">Expiry date</label><input id="f-contract-to" data-key="to" type="date" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z="total"><label for="f-contract-value">Value (SAR)</label><input id="f-contract-value" data-key="value" type="text" inputmode="decimal" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z=""><label for="f-contract-owner">Owner department</label><input id="f-contract-owner" data-key="owner" type="text" dir="auto" autocomplete="off" placeholder="Left for staff to fill"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div></div>
+              <div class="cap-fields" data-for="employee"><div class="cap-field" data-z="ref"><label for="f-employee-name">Employee name</label><input id="f-employee-name" data-key="name" type="text" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z="ref"><label for="f-employee-no">Employee number</label><input id="f-employee-no" data-key="no" type="text" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z="body"><label for="f-employee-dept">Department</label><input id="f-employee-dept" data-key="dept" type="text" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z="body"><label for="f-employee-job">Job title</label><input id="f-employee-job" data-key="job" type="text" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z="total"><label for="f-employee-hire">Hire date</label><input id="f-employee-hire" data-key="hire" type="date" dir="auto" autocomplete="off"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div><div class="cap-field" data-z=""><label for="f-employee-end">Contract end date</label><input id="f-employee-end" data-key="end" type="date" dir="auto" autocomplete="off" placeholder="Left for staff to fill"><span class="cap-chip" data-chip></span><button type="button" class="cap-reset" data-reset hidden>Reset</button></div></div>
+              <p class="cap-note">Only empty fields are filled; staff review before saving.</p>
+            </div>
+            <div class="cap-panel" data-panel="6">
+              <div class="cap-stampdemo"><span class="cap-stamp cap-stamp--lg" aria-hidden="true"><svg class="cap-barcode" viewBox="0 0 55 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 0h2v20h-2zM3 0h1v20h-1zM7 0h1v20h-1zM10 0h2v20h-2zM13 0h3v20h-3zM17 0h1v20h-1zM20 0h1v20h-1zM24 0h2v20h-2zM27 0h1v20h-1zM30 0h3v20h-3zM34 0h2v20h-2zM37 0h1v20h-1zM41 0h2v20h-2zM44 0h2v20h-2zM48 0h1v20h-1zM50 0h3v20h-3z"/></svg><svg class="cap-qr" viewBox="0 0 21 21" aria-hidden="true" focusable="false"><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM10 0h1v1h-1zM14 0h1v1h-1zM15 0h1v1h-1zM16 0h1v1h-1zM17 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM20 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM9 1h1v1h-1zM11 1h1v1h-1zM14 1h1v1h-1zM20 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM11 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM17 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM8 3h1v1h-1zM9 3h1v1h-1zM12 3h1v1h-1zM14 3h1v1h-1zM16 3h1v1h-1zM17 3h1v1h-1zM18 3h1v1h-1zM20 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM11 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM10 5h1v1h-1zM11 5h1v1h-1zM12 5h1v1h-1zM14 5h1v1h-1zM20 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM16 6h1v1h-1zM17 6h1v1h-1zM18 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM1 8h1v1h-1zM2 8h1v1h-1zM9 8h1v1h-1zM14 8h1v1h-1zM17 8h1v1h-1zM19 8h1v1h-1zM20 8h1v1h-1zM0 9h1v1h-1zM1 9h1v1h-1zM2 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM6 9h1v1h-1zM8 9h1v1h-1zM10 9h1v1h-1zM11 9h1v1h-1zM12 9h1v1h-1zM13 9h1v1h-1zM15 9h1v1h-1zM16 9h1v1h-1zM18 9h1v1h-1zM20 9h1v1h-1zM1 10h1v1h-1zM2 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM13 10h1v1h-1zM16 10h1v1h-1zM19 10h1v1h-1zM20 10h1v1h-1zM0 11h1v1h-1zM1 11h1v1h-1zM2 11h1v1h-1zM3 11h1v1h-1zM6 11h1v1h-1zM10 11h1v1h-1zM11 11h1v1h-1zM12 11h1v1h-1zM14 11h1v1h-1zM15 11h1v1h-1zM16 11h1v1h-1zM1 12h1v1h-1zM2 12h1v1h-1zM5 12h1v1h-1zM10 12h1v1h-1zM11 12h1v1h-1zM12 12h1v1h-1zM17 12h1v1h-1zM19 12h1v1h-1zM8 13h1v1h-1zM9 13h1v1h-1zM12 13h1v1h-1zM16 13h1v1h-1zM20 13h1v1h-1zM0 14h1v1h-1zM1 14h1v1h-1zM2 14h1v1h-1zM3 14h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM14 14h1v1h-1zM17 14h1v1h-1zM18 14h1v1h-1zM19 14h1v1h-1zM0 15h1v1h-1zM6 15h1v1h-1zM9 15h1v1h-1zM12 15h1v1h-1zM13 15h1v1h-1zM14 15h1v1h-1zM18 15h1v1h-1zM0 16h1v1h-1zM2 16h1v1h-1zM3 16h1v1h-1zM4 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM10 16h1v1h-1zM13 16h1v1h-1zM14 16h1v1h-1zM0 17h1v1h-1zM2 17h1v1h-1zM3 17h1v1h-1zM4 17h1v1h-1zM6 17h1v1h-1zM9 17h1v1h-1zM12 17h1v1h-1zM13 17h1v1h-1zM14 17h1v1h-1zM20 17h1v1h-1zM0 18h1v1h-1zM2 18h1v1h-1zM3 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM9 18h1v1h-1zM12 18h1v1h-1zM13 18h1v1h-1zM17 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM8 19h1v1h-1zM9 19h1v1h-1zM10 19h1v1h-1zM12 19h1v1h-1zM13 19h1v1h-1zM14 19h1v1h-1zM15 19h1v1h-1zM20 19h1v1h-1zM0 20h1v1h-1zM1 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM11 20h1v1h-1zM14 20h1v1h-1zM16 20h1v1h-1zM17 20h1v1h-1zM18 20h1v1h-1zM19 20h1v1h-1z"/></svg><bdi class="cap-stamp__no" data-code></bdi></span></div>
+              <p class="cap-note">ECM+ generates the code and stamps it on the document. The QR shown is a sample pattern.</p>
+              <p class="cap-side cap-side--dim"><span class="cap-tag cap-tag--potential" title="Potential integration">Potential integration</span><span>Reading codes on incoming paper to route or split batches</span></p>
+            </div>
+            <div class="cap-panel" data-panel="7">
+              <dl class="cap-record" data-for="invoice">
+                <div><dt>Document type</dt><dd data-doctype>Supplier invoice</dd></div>
+                <div><dt>Folder</dt><dd>Finance / Supplier invoices 2026</dd></div>
+                <div><dt>Supplier</dt><dd data-rf="supplier"></dd></div><div><dt>Invoice number</dt><dd data-rf="number"></dd></div><div><dt>Invoice date</dt><dd data-rf="date"></dd></div><div><dt>Due date</dt><dd data-rf="due"></dd></div><div><dt>Total amount</dt><dd data-rf="total"></dd></div><div><dt>Currency</dt><dd data-rf="currency"></dd></div><div><dt>Cost centre</dt><dd data-rf="cost"></dd></div>
+                <div><dt>Code</dt><dd><bdi>DOC-2026-00418</bdi></dd></div>
+                <div><dt>Captured via</dt><dd>Scanner (auto-feeder)</dd></div>
+                <div><dt>Text recognition</dt><dd>Done, Arabic and English</dd></div>
+                <div><dt>Permissions</dt><dd>Folder rules apply</dd></div>
+              </dl>
+              <dl class="cap-record" data-for="contract">
+                <div><dt>Document type</dt><dd data-doctype>Service contract</dd></div>
+                <div><dt>Folder</dt><dd>Legal / Contracts</dd></div>
+                <div><dt>Title</dt><dd data-rf="title"></dd></div><div><dt>Counterparty</dt><dd data-rf="party"></dd></div><div><dt>Reference</dt><dd data-rf="ref"></dd></div><div><dt>Effective date</dt><dd data-rf="from"></dd></div><div><dt>Expiry date</dt><dd data-rf="to"></dd></div><div><dt>Value (SAR)</dt><dd data-rf="value"></dd></div><div><dt>Owner department</dt><dd data-rf="owner"></dd></div>
+                <div><dt>Code</dt><dd><bdi>DOC-2026-00419</bdi></dd></div>
+                <div><dt>Captured via</dt><dd>Upload from device</dd></div>
+                <div><dt>Text recognition</dt><dd>Done, English</dd></div>
+                <div><dt>Permissions</dt><dd>Folder rules apply</dd></div>
+              </dl>
+              <dl class="cap-record" data-for="employee">
+                <div><dt>Document type</dt><dd data-doctype>Employee file</dd></div>
+                <div><dt>Folder</dt><dd>HR / Employee files</dd></div>
+                <div><dt>Employee name</dt><dd data-rf="name"></dd></div><div><dt>Employee number</dt><dd data-rf="no"></dd></div><div><dt>Department</dt><dd data-rf="dept"></dd></div><div><dt>Job title</dt><dd data-rf="job"></dd></div><div><dt>Hire date</dt><dd data-rf="hire"></dd></div><div><dt>Contract end date</dt><dd data-rf="end"></dd></div>
+                <div><dt>Code</dt><dd><bdi>DOC-2026-00420</bdi></dd></div>
+                <div><dt>Captured via</dt><dd>Outlook add-in</dd></div>
+                <div><dt>Text recognition</dt><dd>Done, Arabic</dd></div>
+                <div><dt>Permissions</dt><dd>Folder rules apply</dd></div>
+              </dl>
+              <p class="cap-done" role="status">Your document is now ready to become part of your enterprise knowledge repository.</p>
+              <p class="cap-note">Folder permissions, versions and the audit trail apply once the record is saved.</p>
+            </div>
+              </div>
+            </div>
+            <div class="cap-stage__foot js-only">
+              <button type="button" class="btn btn--ghost-gold" data-back>Back</button>
+              <button type="button" class="btn btn--gold" data-next>Next</button>
+            </div>
+          </div>
+          <script type="application/json" id="capture-data">{"ui":{"step":"Step {n} of 7: {t}","titles":["Choose a sample","Explore the document","Recognition","Classification","Index fields","Code stamp","Archive record"],"proposed":"Proposed by AI","edited":"Edited by you","empty":"Left for staff to fill","none":"—","next":"Next","back":"Back","save":"Save to archive","saved":"Saved to the archive (demonstration)","again":"Try another sample"},"samples":{"invoice":{"code":"DOC-2026-00418","lang":"Arabic and English","fields":[{"key":"supplier","v":"Al-Rawabi Office Supplies Co."},{"key":"number","v":"INV-2026-0147"},{"key":"date","v":"2026-03-12"},{"key":"due","v":"2026-04-11"},{"key":"total","v":"18975.00"},{"key":"currency","v":"SAR"},{"key":"cost","v":""}]},"contract":{"code":"DOC-2026-00419","lang":"English","fields":[{"key":"title","v":"Server Maintenance Agreement"},{"key":"party","v":"Meridian Data Services Ltd."},{"key":"ref","v":"CT-2026-031"},{"key":"from","v":"2026-02-01"},{"key":"to","v":"2028-01-31"},{"key":"value","v":"420000.00"},{"key":"owner","v":""}]},"employee":{"code":"DOC-2026-00420","lang":"Arabic","fields":[{"key":"name","v":"سارة محمد العتيبي"},{"key":"no","v":"EMP-4471"},{"key":"dept","v":"الموارد البشرية"},{"key":"job","v":"أخصائي توظيف"},{"key":"hire","v":"2025-09-01"},{"key":"end","v":""}]}}}</script>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sp-section sp-section--alt" aria-labelledby="benefits-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__no">04</span>Benefits</p>
+          <h2 id="benefits-title">Turn Document Processing into Business Efficiency</h2>
+        </div>
+        <ul class="sp-grid cap-grid">
+          <li class="sp-card cap-card" data-reveal style="--i:0"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-spark"/></svg><h3 class="sp-card__title">Less manual entry</h3><p>Index fields are proposed from the file, so staff confirm rather than type.</p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:1"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-search"/></svg><h3 class="sp-card__title">Searchable from day one</h3><p>Recognized text and index fields make every captured document findable by meaning and by field.</p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:2"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-archive"/></svg><h3 class="sp-card__title">One archive for every channel</h3><p>Paper, files, cloud drives and email land in the same document types and folders.</p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:3"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-lock"/></svg><h3 class="sp-card__title">Governed from capture</h3><p>Folder permissions, versions and the audit trail apply the moment a document is saved.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section sp-section" aria-labelledby="adv-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__no">05</span>Advanced capabilities</p>
+          <h2 id="adv-title">Built for high-volume, bilingual archives</h2>
+        </div>
+        <ul class="cap-list">
+          <li data-reveal style="--i:0"><svg class="cap-list__mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Auto-feeder scanning</span></li>
+          <li data-reveal style="--i:1"><svg class="cap-list__mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Voice and video notes captured beside documents</span></li>
+          <li data-reveal style="--i:2"><svg class="cap-list__mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Archive migration from existing systems</span></li>
+          <li data-reveal style="--i:3"><svg class="cap-list__mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>REST API for other systems</span></li>
+          <li data-reveal style="--i:4"><svg class="cap-list__mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Google Drive and OneDrive capture</span></li>
+          <li data-reveal style="--i:5"><svg class="cap-list__mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Outlook add-in that saves and routes emails</span></li>
+          <li data-reveal style="--i:6"><svg class="cap-list__mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Generated barcode and QR stamps</span></li>
+          <li data-reveal style="--i:7"><svg class="cap-list__mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Batch splitting by barcode</span><span class="cap-tag cap-tag--potential" title="Potential integration">Potential integration</span></li>
+          <li data-reveal style="--i:8"><svg class="cap-list__mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Rule-based validation</span><span class="cap-tag cap-tag--demo" title="Demonstration">Demonstration</span></li>
+          <li data-reveal style="--i:9"><svg class="cap-list__mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Scheduled folder capture</span><span class="cap-tag cap-tag--potential" title="Potential integration">Potential integration</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section sp-section sp-section--alt" aria-labelledby="dept-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__no">06</span>By department</p>
+          <h2 id="dept-title">The same capture, in every department</h2>
+        </div>
+        <ul class="sp-grid cap-grid">
+          <li class="sp-card cap-card" data-reveal style="--i:0"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-building"/></svg><h3 class="sp-card__title">Finance</h3><p>Supplier invoices scanned in batches; invoice number, date and total proposed for review.</p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:1"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-people"/></svg><h3 class="sp-card__title">Human Resources</h3><p>Employee files captured in Arabic, with name, number and hire date proposed, under HR-only folder permissions.</p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:2"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-ticket"/></svg><h3 class="sp-card__title">Procurement</h3><p>Quotations and purchase orders arriving by email are filed from the inbox or the Outlook add-in.</p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:3"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-sign"/></svg><h3 class="sp-card__title">Legal</h3><p>Contracts uploaded with parties, reference and expiry date proposed; retention rules can send scheduled notifications.</p></li>
+          <li class="sp-card cap-card" data-reveal style="--i:4"><svg class="sp-glyph cap-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><h3 class="sp-card__title">Administration</h3><p>Incoming letters scanned and filed into correspondence, with their serial number and due date.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sp-cta" aria-labelledby="cta-title">
+      <div class="wrap">
+        <div class="sp-cta__inner">
+          <div class="sp-cta__copy">
+            <p class="sp-cta__eyebrow"><span class="sp-cta__mark" aria-hidden="true"></span><span>Next step</span></p>
+            <h2 id="cta-title">Make Every Document Work for Your Business.</h2>
+            <p class="sp-cta__text">See capture on your own document types, in Arabic or English.</p>
+            <div class="sp-actions sp-cta__actions"><a class="btn btn--gold btn--lg" href="../#contact">Request a Demo</a><a class="btn btn--ghost-gold btn--lg sp-cta__ghost" href="../#contact" data-prefill="We would like to discuss document capture with your team.">Contact Our Team</a></div>
+          </div>
+          <div class="sp-cta__app" aria-hidden="true">
+            <div class="sp-cta__win">
+              <div class="sp-cta__bar"><span class="sp-cta__dots"><span></span><span></span><span></span></span><bdi class="sp-cta__brand">ECM+</bdi></div>
+              <div class="sp-cta__body">
+                <ul class="sp-cta__nav"><li class="is-on">Correspondence</li><li>Documents</li><li>Boards</li><li>Processes</li></ul>
+                <div class="sp-cta__main">
+                  <div class="sp-cta__tiles"><span></span><span></span><span></span></div>
+                  <ul class="sp-cta__rows">
+                <li><svg class="sp-cta__file" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5"/></svg><span class="sp-cta__row-title">Incoming correspondence</span><span class="sp-cta__chip sp-cta__chip--gold">Awaiting signature</span></li>
+                <li><svg class="sp-cta__file" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5"/></svg><span class="sp-cta__row-title">Meeting minutes</span><span class="sp-cta__chip">Under review</span></li>
+                <li><svg class="sp-cta__file" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5"/></svg><span class="sp-cta__row-title">Approval request</span><span class="sp-cta__chip sp-cta__chip--ok">Approved</span></li>
+                  </ul>
+                  <div class="sp-cta__stepper"><span class="is-done"></span><span class="is-done"></span><span class="is-now"></span><span></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="site-footer on-dark">
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="brand ecmlogo ecmlogo--lg ecmlogo--on-dark" href="../" aria-label="ECM+ Business Suite, home page">
+            <img class="ecmlogo__img ecmlogo__img--light" src="../../../assets/brand/ecmplus-ai-logo-272.webp" srcset="../../../assets/brand/ecmplus-ai-logo-272.webp 272w, ../../../assets/brand/ecmplus-ai-logo-545.webp 545w" sizes="(max-width: 420px) 145px, 174px" width="545" height="302" alt="" loading="lazy">
+            <img class="ecmlogo__img ecmlogo__img--dark" src="../../../assets/brand/ecmplus-ai-logo-dark-272.webp" srcset="../../../assets/brand/ecmplus-ai-logo-dark-272.webp 272w, ../../../assets/brand/ecmplus-ai-logo-dark-545.webp 545w" sizes="(max-width: 420px) 145px, 174px" width="545" height="302" alt="" loading="lazy">
+          </a>
+          <p class="footer__tagline">A unified suite for the management of documents, correspondence, processes and meetings.</p>
+          <div class="footer__ctc" id="about">
+            <img src="../../../assets/brand/ctc-logo.webp" alt="CTC MENA, exclusive agent" width="44" height="44" loading="lazy">
+            <p>ECM Plus is a Canadian company. CTC MENA is its exclusive agent.</p>
+          </div>
+        </div>
+
+        <nav class="footer__nav" aria-label="Footer">
+          <div class="footer__col">
+            <h2>Suite</h2>
+            <ul>
+              <li><a href="../documents/">Document Management</a></li>
+              <li><a href="../correspondence/">Administrative Communications</a></li>
+              <li><a href="../processes/">Business Process Automation</a></li>
+              <li><a href="../meetings/">Board and Committee Management</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2>Solutions</h2>
+            <ul>
+              <li><a href="./" aria-current="page">Document Capture</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2>Sectors</h2>
+            <ul>
+              <li><a href="../#sector-government">Government</a></li>
+              <li><a href="../#sector-finance">Banking and finance</a></li>
+              <li><a href="../#sector-healthcare">Healthcare</a></li>
+              <li><a href="../#sector-education">Education</a></li>
+              <li><a href="../#sector-energy">Energy and construction</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="../#contact" data-prefill="Please send us the ECM+ product overview.">Product overview</a></li>
+              <li><a href="../#why">Why ECM+</a></li>
+              <li><a href="../#security">Security</a></li>
+              <li><a href="../#ai">AI in ECM+</a></li>
+              <li><a href="../#contact" data-prefill="Please send us the ECM+ integration guide.">Integration guide</a></li>
+              <li><a href="../#start">Getting started</a></li>
+              <li><a href="../#faq">Frequently asked questions</a></li>
+              <li><a href="../#contact">Request a demo</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2>Client portal</h2>
+            <ul>
+              <li><a href="/support">Support centre</a></li>
+              <li><a href="/support/login">Sign in to the client portal</a></li>
+              <li><a href="/support/tickets/new">Submit a support ticket</a></li>
+              <li><a href="/support/tickets">Track your tickets</a></li>
+              <li><a href="/support/suggestions">Submit a suggestion or complaint</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2>Company</h2>
+            <ul>
+              <li><a href="../about/">About ECM Plus</a></li>
+              <li><a href="../#news">News</a></li>
+              <li><a href="https://ctcmena.com" rel="noopener">CTC MENA, exclusive agent</a></li>
+              <li><a href="../#contact">Contact</a></li>
+              <li><a href="/privacy">Privacy</a></li>
+              <li><a href="/terms">Terms</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <p>© 2026 ECM Plus. All rights reserved.</p>
+        <ul class="footer__legal">
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

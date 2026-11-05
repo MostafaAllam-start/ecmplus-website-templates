@@ -533,3 +533,24 @@ export const WORKS = {
     },
   },
 };
+
+// Portico's own module names; the other templates keep the names in PAGES.
+export const PORTICO_NAMES = {
+  en: {
+    documents: { name: "Document Management and E-Archiving", short: "Document Management", metaTitle: "Document Management and E-Archiving (DMS) — ECM Plus" },
+    correspondence: { name: "Administrative Communications: Incoming and Outgoing", short: "Administrative Communications", metaTitle: "Administrative Communications: Incoming and Outgoing (CMS) — ECM Plus" },
+    processes: { name: "Business Process Automation and Workflow", short: "Business Process Automation", metaTitle: "Business Process Automation and Workflow (BPM) — ECM Plus" },
+    meetings: { name: "Board and Committee Management", short: "Board and Committee Management", metaTitle: "Board and Committee Management (MMS) — ECM Plus" },
+  },
+  ar: {
+    documents: { name: "إدارة الوثائق والأرشفة الإلكترونية", short: "إدارة الوثائق", metaTitle: "إدارة الوثائق والأرشفة الإلكترونية (DMS) — ECM Plus" },
+    correspondence: { name: "الاتصالات الإدارية: الصادر والوارد", short: "الاتصالات الإدارية", metaTitle: "الاتصالات الإدارية: الصادر والوارد (CMS) — ECM Plus" },
+    processes: { name: "أتمتة الإجراءات وسير العمل", short: "أتمتة الإجراءات", metaTitle: "أتمتة الإجراءات وسير العمل (BPM) — ECM Plus" },
+    meetings: { name: "إدارة المجالس واللجان", short: "إدارة المجالس واللجان", metaTitle: "إدارة المجالس واللجان (MMS) — ECM Plus" },
+  },
+};
+// The app window in Portico's closing panel keeps short labels, as in the design demo.
+export const PORTICO_UI = {
+  en: { ctaNav: ["Correspondence", "Documents", "Boards", "Processes"] },
+  ar: { ctaNav: ["المراسلات", "الوثائق", "المجالس", "الإجراءات"] },
+};

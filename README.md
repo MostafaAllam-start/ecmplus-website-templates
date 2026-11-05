@@ -88,6 +88,7 @@ node scripts/subpages.mjs
 - Each "How it works" step has a colour illustration from `scripts/steps-art.mjs` (inline SVG;
   one hue per kind of object, with light and dark values, plus the template's gold) and an arrow to the next step: across the row on desktop,
   pointing down when the steps stack on tablets and phones, mirrored in Arabic.
+- Portico has its own module names (`PORTICO_NAMES` in `subpages-content.mjs`, and on its two home pages); the other templates keep the names in `PAGES`.
 - Each page reuses its template's own home page. The script copies the `<head>`, header and footer,
   re-resolves relative links for the deeper folder, points in-page anchors back at the home page,
   and sends the language switch to the same page in the other language. Canonical, `hreflang` and
@@ -250,6 +251,7 @@ privacy and terms links show the 404 page, and the demo-request forms cannot be 
   AI-generated images; the others are free Unsplash photos. All are listed in `assets/photos/portico/CREDITS.md`. Record
   the image generator there and confirm its terms allow commercial use. `PROMPTS.md` holds an
   image brief per file, so any photo can be replaced with the same name and proportions.
+- **News** (Portico): the announcement bar (`.notice`, before the header) and the news section (`#news`) are plain markup in both home pages, so a new item means editing those. Run `node scripts/subpages.mjs` afterwards, since the inner pages copy the bar. If the bar is removed, also remove `--notice-h` from the hero rule in the desktop block.
 - **Claims**: every product claim comes from an internal copy deck that was checked against the
   ECM+ frontend and backend. There are no customer names, logos, testimonials or certifications,
   because none were verifiable. Add real ones only with permission.
