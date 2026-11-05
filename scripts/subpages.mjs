@@ -15,7 +15,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { posix } from "node:path";
 import { fileURLToPath } from "node:url";
-import { GLYPHS, MODULES, PAGES, SERVICES, UI, WORKS } from "./subpages-content.mjs";
+import { GLYPHS, GLYPHS_LARGE, MODULES, PAGES, SERVICES, UI, WORKS } from "./subpages-content.mjs";
 import { STEP_ART, MIRROR_IN_RTL } from "./steps-art.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url)).replace(/\\/g, "/");
@@ -126,8 +126,8 @@ function rebaseChunk(html, ctx) {
   });
 }
 
-function svgGlyph(slug, cls = "sp-glyph") {
-  return `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${GLYPHS[slug]}</svg>`;
+function svgGlyph(slug, cls = "sp-glyph", large = false) {
+  return `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${(large && GLYPHS_LARGE[slug]) || GLYPHS[slug]}</svg>`;
 }
 
 // Decorative ECM+ window beside the closing panel's copy: module sidebar (first item
@@ -233,7 +233,7 @@ ${body}
     visual = `      <div class="sp-hero__visual sp-emblem sp-emblem--logo" aria-hidden="true"><img class="ecmlogo__img--light" src="${assets}brand/ecmplus-ai-logo-545.webp" alt="" width="545" height="302"><img class="ecmlogo__img--dark" src="${assets}brand/ecmplus-ai-logo-dark-545.webp" alt="" width="545" height="302"></div>`;
   } else {
     const alt = PAGES[slug][other(lang)].name;
-    visual = `      <div class="sp-hero__visual sp-emblem" aria-hidden="true"><span class="sp-emblem__ring">${svgGlyph(slug)}</span><span class="sp-emblem__code">${page.code}</span><span class="sp-emblem__name">${c.name}</span><span class="sp-emblem__alt" lang="${other(lang)}" dir="${other(lang) === "ar" ? "rtl" : "ltr"}">${alt}</span></div>`;
+    visual = `      <div class="sp-hero__visual sp-emblem" aria-hidden="true"><span class="sp-emblem__ring">${svgGlyph(slug, "sp-glyph", true)}</span><span class="sp-emblem__code">${page.code}</span><span class="sp-emblem__name">${c.name}</span><span class="sp-emblem__alt" lang="${other(lang)}" dir="${other(lang) === "ar" ? "rtl" : "ltr"}">${alt}</span></div>`;
   }
 
   const hero = `    <section class="sp-hero" aria-labelledby="page-title">
