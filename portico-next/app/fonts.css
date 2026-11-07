@@ -1,0 +1,6 @@
+/* next/font exposes the loaded families as --nf-manrope / --nf-readex on <html>;
+   point the template's own tokens at them (styles.css keeps its class names untouched). */
+:root {
+  --font-latin: var(--nf-manrope), "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-ar: var(--nf-readex), "Readex Pro", var(--nf-manrope), "Manrope", "Segoe UI", Tahoma, Arial, sans-serif;
+}
