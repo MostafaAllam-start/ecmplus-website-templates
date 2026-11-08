@@ -97,6 +97,11 @@ export default function CaptureFactory({ lang, copy }: { lang: Lang; copy: Facto
     try { v = sessionStorage.getItem("cf-cap-open"); } catch { /* ignore */ }
     setCapOpen(v === null ? !window.matchMedia("(max-width: 600px)").matches : v === "1");
   }, []);
+  const [navOpen, setNavOpen] = useState(true);
+  useEffect(() => {
+    try { if (sessionStorage.getItem("cf-nav-open") === "0") setNavOpen(false); } catch { /* ignore */ }
+  }, []);
+  const toggleNav = () => setNavOpen((v) => { const n = !v; try { sessionStorage.setItem("cf-nav-open", n ? "1" : "0"); } catch {} return n; });
   const fullRef = useRef(false);
   const scrollY = useRef(0);
   const [live, setLive] = useState("");
@@ -683,7 +688,7 @@ export default function CaptureFactory({ lang, copy }: { lang: Lang; copy: Facto
   const toggleCap = () => setCapOpen((v) => { const n = !v; try { sessionStorage.setItem("cf-cap-open", n ? "1" : "0"); } catch {} return n; });
   const cur = copy.stages[active] ?? copy.stages[0];
   return (
-    <div className="cf" ref={frameRef} data-state={status}>
+    <div className="cf" ref={frameRef} data-state={status} data-nav={navOpen ? "open" : "closed"}>
       <div
         className="cf__stage" ref={stageRef} role="img"
         aria-label={copy.label} aria-describedby={capOpen ? "cf-caption" : undefined}
@@ -692,8 +697,8 @@ export default function CaptureFactory({ lang, copy }: { lang: Lang; copy: Facto
         <p className="cf__loading" aria-hidden="true">{copy.loading}</p>
         <div className="cf__labels" ref={labelsRef} aria-hidden="true"></div>
         <div className="cf__counter" aria-hidden="true">
-          <span ref={archivedRef} hidden></span>
-          <span ref={paperRef} hidden></span>
+          <span ref={archivedRef} className="cf__dig" hidden></span>
+          <span ref={paperRef} className="cf__pap" hidden></span>
           <span ref={flaggedRef} className="cf__flag" hidden>{copy.flagged}</span>
         </div>
         <p className="cf__hint" aria-hidden="true">{copy.hints?.[active] ?? copy.binHint}</p>
@@ -724,7 +729,10 @@ export default function CaptureFactory({ lang, copy }: { lang: Lang; copy: Facto
           </button>
         </div>
       </div>
-      <ol className="cf__nav" ref={navRef} aria-label={copy.navLabel} onKeyDown={onNavKey}>
+      <button type="button" className="cf__navtoggle" aria-expanded={navOpen} aria-controls="cf-nav" aria-label={navOpen ? copy.collapse : copy.expand} title={navOpen ? copy.collapse : copy.expand} onClick={toggleNav}>
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3l5 5-5 5" /></svg>
+      </button>
+      <ol className="cf__nav" id="cf-nav" ref={navRef} aria-label={copy.navLabel} onKeyDown={onNavKey}>
         {copy.stages.map((s, i) => (
           <li key={i}>
             <button
