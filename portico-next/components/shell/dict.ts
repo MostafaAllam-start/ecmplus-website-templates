@@ -193,7 +193,7 @@ export const SHELL: Record<Lang, ShellDict> = {
           links: [
             { href: "#contact", label: "نظرة عامة على المنتج", prefill: "نرجو إرسال النظرة العامة على منظومة ECM+‎." },
             { href: "#why", label: "لماذا <bdi>ECM+</bdi>" },
-            { href: "#security", label: "الأمان" },
+            { href: "#security", label: "الأمان والحوكمة" },
             { href: "#ai", label: "الذكاء الاصطناعي" },
             { href: "#contact", label: "دليل التكامل", prefill: "نرجو إرسال دليل التكامل لمنظومة ECM+‎." },
             { href: "#start", label: "خطوات البدء" },

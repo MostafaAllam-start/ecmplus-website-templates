@@ -3451,3 +3451,49 @@ h3:lang(ar),
 .sector__mods { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; padding: 0; list-style: none; }
 .sector__mods a { display: inline-block; padding: 3px 8px; border: 1px solid var(--line); border-radius: 4px; font: 600 .6875rem/1 var(--font-latin); letter-spacing: .06em; color: var(--muted); text-decoration: none; transition: color .15s, border-color .15s; }
 .sector__mods a:hover, .sector__mods a:focus-visible { color: var(--gold-text); border-color: var(--gold); }
+
+/* The rail line passes behind the nodes, never over the icons. */
+.hero__path li + li::after { z-index: 0; }
+.hero__path a { z-index: 1; }
+
+/* Why cards: the icon and the title share the first row. */
+.pillar { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto 1fr auto; column-gap: 12px; align-items: center; }
+.pillar__title { margin-block-start: 0; }
+.pillar__text, .pillar__fact { grid-column: 1 / -1; }
+.pillar__text { align-self: start; margin-block-start: 12px; }
+.pillar__fact { align-self: end; }
+
+/* The capture links inside the Why cards read as plain text, like the other card titles. */
+.pillar__title a, .pillar__text a { color: inherit; font-weight: inherit; text-decoration: none; }
+.pillar__title a:hover, .pillar__text a:hover { color: inherit; }
+.pillar__title a:focus-visible, .pillar__text a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 3px; }
+
+/* Contact: a warmer, less white panel and form card (inputs keep their own fill for contrast). */
+#contact .plate { background: color-mix(in srgb, var(--surface-2) 72%, transparent); }
+#contact .demo-form { background: color-mix(in srgb, var(--surface-2) 62%, var(--surface)); }
+#contact .field input:not([type="checkbox"]), #contact .field textarea { background: color-mix(in srgb, var(--surface-2) 38%, var(--surface)); }
+#contact .field input:not([type="checkbox"]):focus-visible, #contact .field textarea:focus-visible { background: var(--surface); }
+
+/* Sector cards: the module badges carry their icon and sit at the bottom of the card. */
+.sector { display: flex; flex-direction: column; }
+.sector__mods { margin-block-start: auto; padding-block-start: 14px; }
+.sector__mods a { display: inline-flex; align-items: center; gap: 6px; padding: 4px 9px; }
+.sector__ic { flex: none; inline-size: 14px; block-size: 14px; stroke-width: 1.8; color: var(--gold-text); }
+
+/* Sector cards: an icon tile shares the row with the title. */
+.sector__head { display: flex; align-items: center; gap: 12px; }
+.sector__icon { flex: none; display: grid; place-items: center; inline-size: 40px; block-size: 40px; border: 1px solid var(--line-gold); border-radius: 10px; background: var(--gold-tint); color: var(--gold-text); }
+.sector__icon .icon { inline-size: 22px; block-size: 22px; stroke-width: 1.7; }
+
+/* Sector cards: an icon tile shares the row with the title. */
+.sector__head { display: flex; align-items: center; gap: 12px; }
+.sector__icon { flex: none; display: grid; place-items: center; inline-size: 40px; block-size: 40px; border: 1px solid var(--line-gold); border-radius: 10px; background: var(--gold-tint); color: var(--gold-text); }
+.sector__icon .icon { inline-size: 22px; block-size: 22px; stroke-width: 1.7; }
+
+/* Module badge: the reusable code pill (DMS, CMS, BPM, MMS) with its icon. */
+.mod-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; border: 1px solid var(--line); border-radius: 4px; font: 600 .6875rem/1 var(--font-latin); letter-spacing: .06em; color: var(--muted); white-space: nowrap; transition: color .15s, border-color .15s; }
+.mod-badge__ic { flex: none; inline-size: 13px; block-size: 13px; stroke-width: 1.8; color: var(--gold-text); }
+.sector__mods a { display: inline-flex; padding: 0; border: 0; border-radius: 0; }
+.sector__mods a:hover .mod-badge, .sector__mods a:focus-visible .mod-badge { color: var(--gold-text); border-color: var(--gold); }
+.sector__mods a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+.mod-badge { direction: ltr; unicode-bidi: isolate; }

@@ -1,5 +1,6 @@
 import "../../capture.css";
 import "../../capture-factory.css";
+import "../../capture-tools.css";
 import CapturePage from "@/components/capture/CapturePage";
 import { captureMetadata } from "@/lib/metadata";
 

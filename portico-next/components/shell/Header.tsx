@@ -1,4 +1,5 @@
 import { rich } from "@/lib/rich";
+import ModuleBadge from "../ModuleBadge";
 import { srcSetWithBase, withBase, homePath, type Lang } from "@/lib/site";
 import { MODULES, PAGES, PORTICO_NAMES } from "@/data/content";
 import NavMenus from "../client/NavMenus";
@@ -100,7 +101,7 @@ export default function Header({ lang, current, links }: { lang: Lang; current: 
                           <Icon id={MODULE_GLYPH[slug]} cls="icon dropdown__icon" />
                           <span className="dropdown__t">
                             {rich(PORTICO_NAMES[lang][slug].short as string)}
-                            <bdi className="dropdown__code">{PAGES[slug].code}</bdi>
+                            <ModuleBadge code={PAGES[slug].code as string} className="dropdown__code" />
                           </span>
                           <span className="dropdown__d">{rich(PAGES[slug][lang].line as string)}</span>
                         </a>
@@ -122,7 +123,7 @@ export default function Header({ lang, current, links }: { lang: Lang; current: 
                     <li>
                       <a href={links.href("capture/")} aria-current={links.ariaCurrent("capture/")}>
                         <Icon id="i-ocr" cls="icon dropdown__icon" />
-                        <span className="dropdown__t">{h.capture.title}<bdi className="dropdown__code">DMS</bdi></span>
+                        <span className="dropdown__t">{h.capture.title}<ModuleBadge code="DMS" className="dropdown__code" /></span>
                         <span className="dropdown__d">{h.capture.desc}</span>
                       </a>
                     </li>

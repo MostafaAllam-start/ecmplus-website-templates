@@ -19,7 +19,7 @@ export const plain = (s: Bi, lang: Lang): string => (lang === "ar" ? s.ar.replac
 export type ZoneKey = "head" | "ref" | "body" | "total" | "sign" | "code";
 export const ZONE_KEYS: ZoneKey[] = ["head", "ref", "body", "total", "sign", "code"];
 export const ZONE_NAMES: Record<ZoneKey, Bi> = {
-  head: b("Header", "الترويسة"),
+  head: b("Header", "الرؤوس"),
   ref: b("Reference details", "بيانات المرجع"),
   body: b("Content", "المحتوى"),
   total: b("Totals and key terms", "الإجماليات والبنود الأساسية"),
@@ -56,7 +56,7 @@ export interface SampleDef {
 // means staff enter the value.
 export const SAMPLES: Record<SampleKey, SampleDef> = {
   invoice: {
-    code: "DOC-2026-00418", seed: 418, pages: 1, color: "#D9A21B",
+    code: "DOC-2026-00418", seed: 418, pages: 1, color: "#A87B0E",
     langs: b("Arabic and English", "العربية والإنجليزية"),
     name: b("Supplier invoice", "فاتورة مورد"),
     via: b("Scanner (auto-feeder)", "الماسح الضوئي (التغذية التلقائية)"),
@@ -75,7 +75,7 @@ export const SAMPLES: Record<SampleKey, SampleDef> = {
     excerpt: [["Al-Rawabi Office Supplies Co. — شركة الروابي للتجهيزات المكتبية", "ltr"], ["Tax invoice INV-2026-0147 · 12 Mar 2026", "ltr"], ["Total SAR 18,975.00", "ltr"]],
   },
   contract: {
-    code: "DOC-2026-00419", seed: 419, pages: 3, color: "#4C7FC1",
+    code: "DOC-2026-00419", seed: 419, pages: 3, color: "#1F3A5F",
     langs: b("English", "الإنجليزية"),
     name: b("Service contract", "عقد خدمات"),
     via: b("Upload from device", "الرفع من الجهاز"),
@@ -93,7 +93,7 @@ export const SAMPLES: Record<SampleKey, SampleDef> = {
     excerpt: [["Server Maintenance Agreement", "ltr"], ["Contract CT-2026-031 · Northgate Holding and Meridian Data Services Ltd.", "ltr"], ["Expiry: 31 January 2028", "ltr"]],
   },
   application: {
-    code: "DOC-2026-00420", seed: 420, pages: 2, color: "#3E9B73",
+    code: "DOC-2026-00420", seed: 420, pages: 2, color: "#B5522E",
     langs: b("Arabic", "العربية"),
     name: b("Job application", "طلب توظيف"),
     via: b("Outlook add-in", "إضافة Outlook"),
@@ -110,7 +110,7 @@ export const SAMPLES: Record<SampleKey, SampleDef> = {
     excerpt: [["طلب توظيف — إدارة المالية", "rtl"], ["ريم خالد الحربي", "rtl"], ["الوظيفة: محاسب أول · رقم الطلب APP-2026-0233", "rtl"]],
   },
   identity: {
-    code: "DOC-2026-00421", seed: 421, pages: 1, color: "#9A6BC4",
+    code: "DOC-2026-00421", seed: 421, pages: 1, color: "#22736E",
     langs: b("English and Arabic", "الإنجليزية والعربية"),
     name: b("Identity document", "وثيقة هوية"),
     via: b("Scanner (flatbed)", "الماسح الضوئي (المسطّح)"),
@@ -127,7 +127,7 @@ export const SAMPLES: Record<SampleKey, SampleDef> = {
     excerpt: [["SAMPLE · NOT A VALID DOCUMENT", "ltr"], ["Omar Saleh Al-Mansour · Civil Registry (sample)", "ltr"], ["ID 1•••••••42 · Expiry 2032-01-09", "ltr"]],
   },
   correspondence: {
-    code: "DOC-2026-00422", seed: 422, pages: 1, color: "#D26A4B",
+    code: "DOC-2026-00422", seed: 422, pages: 1, color: "#6E6351",
     langs: b("Arabic", "العربية"),
     name: b("Official correspondence", "مراسلة رسمية"),
     via: b("Email capture", "الالتقاط من البريد"),
@@ -159,7 +159,7 @@ export const DEMO = {
   ],
   modalTitles: [
     b("Preview", "معاينة"), b("Scan", "المسح"), b("Extraction", "الاستخراج"),
-    b("Metadata", "البيانات الوصفية"), b("Barcode", "الباركود"), b("Archive record", "سجل الأرشفة"),
+    b("Metadata", "البيانات الوصفية"), b("Barcode or QR", "الباركود أو QR"), b("Archive record", "سجل الأرشفة"),
   ],
   step: b("Step {n} of {N}: {t}", "الخطوة {n} من {N}: {t}"),
   proposed: b("Proposed by AI", "مقترح من الذكاء الاصطناعي"),
@@ -168,7 +168,7 @@ export const DEMO = {
   next: b("Next", "التالي"), back: b("Back", "السابق"), save: b("Save to archive", "حفظ في الأرشيف"),
   saved: b("Saved to the archive (demonstration)", "تم الحفظ في الأرشيف (عرض توضيحي)"),
   again: b("Try another sample", "جرّبوا وثيقة أخرى"),
-  factory: b("Back to the factory", "العودة إلى المصنع"),
+  factory: b("Back to the workflow", "العودة إلى المسار"),
   replay: b("Replay", "إعادة التشغيل"),
   close: b("Close", "إغلاق"),
   source: b("Source: {z}", "المصدر: {z}"),
@@ -179,7 +179,7 @@ export const DEMO = {
   catGroup: b("Document categories", "فئات الوثائق"),
   suggested: b("suggested", "مقترح"),
   pages: (n: number) => (n === 1 ? b("1 page", "صفحة واحدة") : b(`${n} pages`, `${n} صفحات`)),
-  pageOf: (n: number) => b(`Page 1 of ${n} · sample document`, `الصفحة 1 من ${n} · وثيقة نموذجية`),
+  pageOf: (n: number) => b(`Page 1 of ${n}`, `الصفحة 1 من ${n}`),
   docLabel: (name: Bi) => b(`Sample document: ${name.en.toLowerCase()}`, `وثيقة نموذجية: ${name.ar}`),
   signature: b("Authorized signature", "التوقيع المعتمد"),
   capturedVia: b("Captured via", "طريقة الالتقاط"),
@@ -199,7 +199,12 @@ export const DEMO = {
   extractNote: b("The values are proposals. Staff review them in the next step before anything is saved.", "هذه القيم مقترحات يراجعها الموظف في الخطوة التالية قبل حفظ أي شيء."),
   fieldsHint: b("AI proposes the values. Edit any field before saving.", "يقترح الذكاء الاصطناعي القيم. عدّلوا أي حقل قبل الحفظ."),
   fieldsNote: b("Only empty fields are filled; staff review before saving.", "تُعبَّأ الحقول الفارغة فقط، ويراجعها الموظف قبل الحفظ."),
-  stampNote: b("ECM+ generates the code and stamps it on the document. The QR shown is a sample pattern.", "تولّد ‹ECM+› الرمز وتختمه على الوثيقة. رمز ‹QR› المعروض نمط توضيحي."),
+  stampNote: b("ECM+ generates the code and stamps it on the physical (paper) document. The digital file only carries the code as metadata. The code shown is a sample pattern and carries the ECM+ logo.", "تولّد ‹ECM+› الرمز وتختمه على الوثيقة الورقية الفعلية، أما الملف الرقمي فيحمل الرمز كبيانات وصفية فقط. الرمز المعروض نمط توضيحي ويحمل شعار ‹ECM+›."),
+  codeChoice: b("Code to stamp on the paper", "الرمز المراد ختمه على الورق"),
+  codeBarcode: b("Barcode", "الباركود"), codeQr: b("QR code", "رمز QR"),
+  codeType: b("Code type", "نوع الرمز"),
+  paper: b("Original paper", "الأوراق الأصلية"),
+  paperFiled: b("Stamped with the code and filed in the {c} category box. The digital file keeps the code as metadata only.", "تُختم بالرمز وتُحفظ في صندوق فئة {c}. ويحتفظ الملف الرقمي بالرمز كبيانات وصفية فقط."),
   stampPotential: b("Reading codes on incoming paper to route or split batches", "قراءة الرموز على الورق الوارد لتوجيه الدفعات أو تقسيمها"),
   docType: b("Document type", "نوع الوثيقة"), folder: b("Folder", "المجلد"), code: b("Code", "الرمز"),
   recognition: b("Text recognition", "التعرّف على النص"), done: b("Done, ", "تم، "),
@@ -305,39 +310,54 @@ const STAGES: { t: Bi; d: Bi; demo?: boolean }[] = [
   { t: b("Classification", "التصنيف"), d: b("Documents are sorted into five categories. In ECM+ today, staff choose the document type.", "تُفرز الوثائق في خمس فئات. في ‹ECM+› اليوم يختار الموظف نوع الوثيقة."), demo: true },
   { t: b("Scanning", "المسح الضوئي"), d: b("Pages are scanned in batches and uploaded to ECM+. A poor scan is flagged instead of passing through.", "تُمسح الصفحات على دفعات وتُرفع إلى ‹ECM+›. ويُعلَّم المسح الرديء بدل تمريره.") },
   { t: b("Rescan and quality control", "إعادة المسح ومراقبة الجودة"), d: b("A flagged page goes to a separate line, is scanned again and rejoins the flow.", "تنتقل الصفحة المعلَّمة إلى مسار منفصل وتُمسح من جديد ثم تعود إلى التدفق."), demo: true },
-  { t: b("Extraction", "الاستخراج"), d: b("Text is recognized and values are read from the header, title, references, dates, body, table and footer.", "يُتعرَّف على النص وتُقرأ القيم من الترويسة والعنوان والمراجع والتواريخ والمحتوى والجدول والتذييل."), demo: true },
+  { t: b("Extraction", "الاستخراج"), d: b("Text is recognized and values are read from the header, title, references, dates, body, table and footer.", "يُتعرَّف على النص وتُقرأ القيم من الرؤوس والعنوان والمراجع والتواريخ والمحتوى والجدول ونهاية الصفحة."), demo: true },
   { t: b("Metadata", "البيانات الوصفية"), d: b("AI proposes the index fields and staff review them. Only empty fields are filled.", "يقترح الذكاء الاصطناعي حقول الفهرسة ويراجعها الموظف، وتُعبَّأ الحقول الفارغة فقط.") },
-  { t: b("Barcode and archive", "الباركود والأرشفة"), d: b("ECM+ generates a barcode, stamps it on the document and the record is filed.", "تولّد ‹ECM+› الباركود وتختمه على الوثيقة ثم يُحفظ السجل في الأرشيف.") },
+  { t: b("Barcode and archive", "الباركود والأرشفة"), d: b("The digital documents move from the scanning screen to the ECM+ archive, and the record keeps its code as metadata. The barcode or QR code is printed and stamped only on the original paper, which is stored by category in the paper archive.", "تنتقل الوثائق الرقمية من شاشة المسح إلى أرشيف ‹ECM+› ويحتفظ السجل برمزه كبيانات وصفية. أما الباركود أو رمز ‹QR› فيُطبع ويُختم على الأوراق الأصلية فقط، وتُخزَّن حسب الفئة في الأرشيف الورقي.") },
 ];
 const CAT_NAMES: Bi[] = [
   b("Invoices", "الفواتير"), b("Contracts", "العقود"), b("Applications", "الطلبات"),
   b("Identification Documents", "وثائق الهوية"), b("Official Correspondence", "المراسلات الرسمية"),
 ];
 export const FACTORY = {
-  label: b("Animated overview of a document factory, sample documents only", "عرض متحرك لمصنع الوثائق بوثائق نموذجية فقط"),
-  loading: b("Loading the factory…", "جارٍ تحميل المصنع…"),
+  label: b("Animated overview of the document capture workflow, sample documents only", "عرض متحرك لمسار التقاط الوثائق بوثائق نموذجية فقط"),
+  loading: b("Loading the animation…", "جارٍ تحميل العرض المتحرك…"),
   play: b("Play", "تشغيل"), pause: b("Pause", "إيقاف مؤقت"), restart: b("Restart", "إعادة من البداية"),
   overview: b("Overview", "نظرة عامة"),
-  navLabel: b("Factory stages", "مراحل المصنع"),
+  fullscreen: b("Full screen", "ملء الشاشة"), exitFullscreen: b("Exit full screen", "إنهاء ملء الشاشة"),
+  navLabel: b("Workflow stages", "مراحل المسار"),
+  collapse: b("Collapse details", "طيّ التفاصيل"), expand: b("Expand details", "عرض التفاصيل"),
   stageOf: b("Stage {n} of {N}: {t}", "المرحلة {n} من {N}: {t}"),
-  archived: b("Archived {n} of {total}", "تمت أرشفة {n} من {total}"),
+  archived: b("Digital archive {n} of {total}", "الأرشيف الرقمي {n} من {total}"),
+  paperArchived: b("Paper archive {n} of {total}", "الأرشيف الورقي {n} من {total}"),
+  codeLabel: b("Code stamp", "رمز الختم"),
+  codeBarcode: b("Barcode", "الباركود"), codeQr: b("QR code", "رمز QR"),
   flagged: b("Poor scan flagged", "مسح رديء معلَّم"),
   opened: b("Opened {c}", "تم فتح {c}"),
-  back: b("Back at the factory", "العودة إلى المصنع"),
+  back: b("Back at the workflow", "العودة إلى المسار"),
   binHint: b("Select a category bin to open it", "اختاروا حاوية فئة لفتحها"),
+  hints: [
+    b("Select a sheet to see its condition and what the worker does", "اختاروا ورقة لتروا حالتها وما سيفعله الموظف بها"),
+    b("Select a category bin to open its workflow", "اختاروا حاوية فئة لفتح مسارها"),
+    b("Select the scanning screen to review the scanned documents", "اختاروا شاشة المسح لمراجعة الوثائق الممسوحة"),
+    b("Select the flagged sheet or the screen to follow the rescan", "اختاروا الورقة المعلَّمة أو الشاشة لمتابعة إعادة المسح"),
+    b("Select the document to see the extracted fields", "اختاروا الوثيقة لرؤية الحقول المستخرجة"),
+    b("Select the form to see how fields are filled from the document", "اختاروا النموذج لرؤية تعبئة الحقول من الوثيقة"),
+    b("Select the archive screen or a box to open the archived document", "اختاروا شاشة الأرشيف أو صندوقًا لفتح الوثيقة المؤرشفة"),
+  ] as Bi[],
   labels: {
-    header: b("Header", "الترويسة"), title: b("Title", "العنوان"), refs: b("References", "المراجع"), dates: b("Dates", "التواريخ"),
-    body: b("Body", "المحتوى"), table: b("Table", "الجدول"), footer: b("Footer", "التذييل"),
-    manual: b("Manual preparation", "التحضير اليدوي"), rescan: b("Rescan line", "مسار إعادة المسح"), digital: b("Digital stacks", "المجموعات الرقمية"),
-    originals: b("Original paper", "الأوراق الأصلية"), archive: b("Archive", "الأرشيف"),
+    header: b("Header", "الرؤوس"), title: b("Title", "العنوان"), refs: b("References", "المراجع"), dates: b("Dates", "التواريخ"),
+    body: b("Body", "المحتوى"), table: b("Table", "الجدول"), footer: b("Footer", "نهاية الصفحة"),
+    manual: b("Manual preparation", "التحضير اليدوي"), rescan: b("Rescan line", "مسار إعادة المسح"), digital: b("Scanning screen: digital documents", "شاشة المسح: الوثائق الرقمية"),
+    originals: b("Original paper", "الأوراق الأصلية"), archive: b("ECM+ Documents archive", "أرشيف وثائق ECM+‎"),
+    paperArchive: b("Original paper: code stamped, archived by category", "الأوراق الأصلية: مختومة بالرمز ومؤرشفة حسب الفئة"),
   } as Record<string, Bi>,
   stages: STAGES,
   cats: CAT_NAMES,
 };
 
 export interface FactoryCopy {
-  label: string; loading: string; play: string; pause: string; restart: string; overview: string; navLabel: string;
-  stageOf: string; archived: string; flagged: string; opened: string; back: string; binHint: string; tagDemo: string;
+  label: string; loading: string; play: string; pause: string; restart: string; overview: string; fullscreen: string; exitFullscreen: string; navLabel: string; collapse: string; expand: string;
+  stageOf: string; archived: string; paperArchived: string; codeLabel: string; codeBarcode: string; codeQr: string; flagged: string; opened: string; back: string; binHint: string; hints: string[]; tagDemo: string;
   labels: Record<string, string>;
   stages: { t: string; d: string; tag: string }[];
   cats: string[];
@@ -351,10 +371,14 @@ export const factoryCopy = (lang: Lang): FactoryCopy => {
   labels.flagged = p(FACTORY.flagged);
   return {
     label: p(FACTORY.label), loading: p(FACTORY.loading), play: p(FACTORY.play), pause: p(FACTORY.pause), restart: p(FACTORY.restart),
-    overview: p(FACTORY.overview), navLabel: p(FACTORY.navLabel), stageOf: p(FACTORY.stageOf), archived: p(FACTORY.archived),
-    flagged: p(FACTORY.flagged), opened: p(FACTORY.opened), back: p(FACTORY.back), binHint: p(FACTORY.binHint), tagDemo: p(DEMO.tagDemo),
+    overview: p(FACTORY.overview), fullscreen: p(FACTORY.fullscreen), exitFullscreen: p(FACTORY.exitFullscreen), navLabel: p(FACTORY.navLabel), collapse: p(FACTORY.collapse), expand: p(FACTORY.expand), stageOf: p(FACTORY.stageOf), archived: p(FACTORY.archived),
+    paperArchived: p(FACTORY.paperArchived), codeLabel: p(FACTORY.codeLabel), codeBarcode: p(FACTORY.codeBarcode), codeQr: p(FACTORY.codeQr),
+    flagged: p(FACTORY.flagged), opened: p(FACTORY.opened), back: p(FACTORY.back), binHint: p(FACTORY.binHint), hints: FACTORY.hints.map(p), tagDemo: p(DEMO.tagDemo),
     labels,
     stages: FACTORY.stages.map((s) => ({ t: p(s.t), d: p(s.d), tag: s.demo ? p(DEMO.tagDemo) : "" })),
     cats: FACTORY.cats.map(p),
   };
 };
+
+/** Plain names of the five factory categories (bins, boxes, archive folders). */
+export const factoryNames = (lang: Lang): string[] => FACTORY.cats.map((c) => plain(c, lang));

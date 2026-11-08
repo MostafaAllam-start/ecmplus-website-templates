@@ -18,7 +18,11 @@ export interface FactoryScene {
   pick(raycaster: THREE_NS.Raycaster): number;
   hover(cat: number): void;
   anchors(): { id: string; pos: THREE_NS.Vector3 }[];
-  counter(T: number): { archived: number; total: number; flagged: boolean };
+  counter(T: number): { archived: number; total: number; flagged: boolean; paper?: number };
+  /** Raycast every clickable document / container; nearest hit as { cat, kind } (kind: bin, paper, card, label, screen, form, dms, box; sheet = factory sheet index for paper and cards). */
+  pickDoc?(raycaster: THREE_NS.Raycaster, T: number): { cat: number; kind: string; sheet?: number } | null;
+  /** Which code the label printer stamps in stage 7 (barcode atlas or QR texture). */
+  setCodeMode?(mode: 'barcode' | 'qr'): void;
   dispose(): void;
 }
 export interface FactoryOpts {
@@ -27,6 +31,8 @@ export interface FactoryOpts {
   coarse: boolean;
   /** Test/SSR hook: canvas factory used for procedural textures. Falls back to document.createElement. */
   makeCanvas?: (w: number, h: number) => HTMLCanvasElement;
+  /** URL of the ECM+ logo mark drawn on the barcode / QR textures (loaded once; a drawn ring is used until then). */
+  logoSrc?: string;
 }
 
 type TH = typeof THREE_NS;
@@ -94,12 +100,23 @@ const SA = { x: 0.9, z: 1.5 }; // scanner A bed
 const SB = { x: 3.0, z: 4.6 }; // scanner B
 const C3Z = 4.6;
 const LANE_Z = 5.5;
-const platX = (k: number) => 4.6 + 0.8 * k;
+const SCR = { x: 6.2, y: 1.95, z: 0.9 }; // digital archive screen (centre of the face)
+const SCR_W = 3.4;
+const SCR_H = 1.9;
+const scrX = (k: number) => SCR.x + (k - 2) * 0.66;
+const PA = { x: 15.1, z: 4.9 }; // paper archive rack (five labelled category boxes)
+const paX = (k: number) => PA.x + (k - 2) * 1.1;
+const CART0 = { x: -0.4, z: 3.4 }; // paper cart parked beside the originals tray
+const CART_TOP = 0.52;
+const CART_LOAD = 47;
+const CART_WAY = [{ t: 48.2, x: CART0.x, z: CART0.z }, { t: 48.8, x: CART0.x, z: 6.0 }, { t: 53.8, x: PA.x, z: 6.0 }];
 const LB = { x: 10.4, y: 1.75, z: -1.3 }; // lightbox centre
 const FORM = { x: 13.4, y: 2.5, z: -2.2 };
 const PAD = { x: 12.6, z: 3.4 };
 const CAB = { x: 15.8, z: 1.2 };
-const drawerY = (k: number) => 0.35 + 0.44 * k;
+const DMS = { x: 15.8, y: 1.95, z: 1.2 }; // ECM+ Documents archive monitor
+const DMS_W = 2.6;
+const DMS_H = 1.6;
 const archT = (i: number) => 10.5 + 0.85 * i;
 const placeT = (i: number) => archT(i) - 1.5;
 const tbT = (i: number) => archT(i) + (binX(i % 5) - XARCH) / V;
@@ -107,6 +124,7 @@ const tkT = (k: number) => 20 + 2.2 * k;
 const WS5 = [38, 41.1, 42.3, 43.5, 44.7];
 const WS6 = (k: number) => 46 + 1.4 * k;
 const PS = (k: number) => 53 + 1.8 * k;
+const HOP = (k: number) => PS(k) + 1.0; // original paper of category k is filed into its box
 const FLAG_ON = tkT(3) + 1.9;
 const FLAG_OFF = 35.3;
 const BAD = 3; // sheet that scans badly (identity)
@@ -115,9 +133,9 @@ const FOLD_SWAP = 9.0;
 const TRAY_ORDER = [0, 5, 1, 6, 2, 7, 8, 4, 9, 3];
 
 const DEFAULTS: FactoryColors = {
-  floor: '#e8e4da', belt: '#6b6f78', machine: '#c9ced6', accent: '#c8962e', navy: '#1d2a44',
+  floor: '#e8e4da', belt: '#6b6f78', machine: '#c9ced6', accent: '#d9a21b', navy: '#1f3a5f',
   graphite: '#3a3f4a', ok: '#2f9e63', warn: '#e0a021', bad: '#d1453b',
-  cat0: '#3b82c4', cat1: '#8e5bc4', cat2: '#e07a2f', cat3: '#2fa39a', cat4: '#c4467a', bg: '#f5f3ee',
+  cat0: '#a87b0e', cat1: '#1f3a5f', cat2: '#b5522e', cat3: '#22736e', cat4: '#6e6351', bg: '#f4f2ee',
 };
 
 // Overlay zones on the lightbox card, as fractions of the card (centre origin, v up).
@@ -132,6 +150,7 @@ const OV = [
 ];
 const CARD_SCALE = 2.4;
 const SHEET_K = 1.3; // visual scale of loose sheets so they read at stage zoom
+const QR_N = 21;
 const BARS = [2, 1, 1, 3, 1, 2, 2, 1, 3, 1, 1, 2, 1, 3, 2, 1, 1, 2, 3, 1, 2, 1, 1, 3, 2, 1, 2, 2, 1, 1, 3, 2];
 
 /* ------------------------------------------------------------------ factory */
@@ -168,6 +187,32 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
     draw(ctx, w, h);
     const t = own(new THREE.CanvasTexture(cv));
     t.colorSpace = THREE.SRGBColorSpace;
+    return t;
+  }
+  // ECM+ logo mark: loaded once (browser only), the textures that carry it redraw when it arrives
+  let logoImg: HTMLImageElement | null = null;
+  const logoRedraws: (() => void)[] = [];
+  if (opts.logoSrc && typeof Image !== 'undefined') {
+    try {
+      const im = new Image();
+      im.onload = () => { logoImg = im; logoRedraws.forEach((fn) => fn()); };
+      im.src = opts.logoSrc;
+    } catch { /* keep the drawn ring */ }
+  }
+  function drawLogo(c: CanvasRenderingContext2D, x: number, y: number, size: number) {
+    if (logoImg) { c.drawImage(logoImg, x, y, size, size); return; }
+    c.fillStyle = '#ffffff'; c.fillRect(x, y, size, size);
+    c.strokeStyle = '#d9a21b'; c.lineWidth = size * 0.14;
+    c.beginPath(); c.ellipse(x + size / 2, y + size / 2, size * 0.38, size * 0.26, -0.15, 0, 6.283); c.stroke();
+    c.fillStyle = '#3a3f4a'; c.fillRect(x + size * 0.3, y + size * 0.45, size * 0.4, size * 0.1);
+  }
+  function logoTex(w: number, h: number, draw: (c: CanvasRenderingContext2D, w: number, h: number) => void) {
+    const cv = mkCanvas(w, h);
+    const ctx = cv.getContext('2d') as CanvasRenderingContext2D;
+    draw(ctx, w, h);
+    const t = own(new THREE.CanvasTexture(cv));
+    t.colorSpace = THREE.SRGBColorSpace;
+    logoRedraws.push(() => { draw(ctx, w, h); t.needsUpdate = true; });
     return t;
   }
   const GREY = '#8b9099';
@@ -225,14 +270,115 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
     lines(c, 6, 28, w - 12, 5, 9);
     c.fillStyle = '#c3c8d0'; c.fillRect(6, 62, w - 12, 18);
   });
-  const barcodeTex = tex(128, 32, (c, w, h) => {
+  const barcodeTex = logoTex(256, 96, (c, w, h) => {
     c.fillStyle = '#ffffff'; c.fillRect(0, 0, w, h);
     const total = BARS.reduce((a, b) => a + b, 0);
-    const k = (w - 8) / total;
-    let x = 4;
+    const k = (w - 20) / total;
+    let x = 10;
     c.fillStyle = '#111111';
-    BARS.forEach((n, i) => { if (i % 2 === 0) c.fillRect(x, 3, Math.max(1, n * k), h - 6); x += n * k; });
+    BARS.forEach((n, i) => { if (i % 2 === 0) c.fillRect(x, 6, Math.max(1, n * k), 50); x += n * k; });
+    drawLogo(c, (w - 32) / 2, 59, 32); // ECM+ mark centred under the bars
   });
+  const qrTex = logoTex(128, 128, (c, w, h) => {
+    c.fillStyle = '#ffffff'; c.fillRect(0, 0, w, h);
+    const m = 6; const cell = (w - 2 * m) / QR_N;
+    let sd = 418;
+    const rnd = () => { sd = (sd * 1103515245 + 12345) & 0x7fffffff; return sd % 100 < 48; };
+    const finder = (r: number, q: number): boolean | null => (r < 7 && q < 7 ? (r === 0 || r === 6 || q === 0 || q === 6 || (r >= 2 && r <= 4 && q >= 2 && q <= 4)) : null);
+    c.fillStyle = '#111111';
+    for (let r = 0; r < QR_N; r++) for (let q = 0; q < QR_N; q++) {
+      let on: boolean;
+      const f = finder(r, q) ?? finder(r, QR_N - 1 - q) ?? finder(QR_N - 1 - r, q);
+      if (f !== null) on = f;
+      else {
+        const quiet = (r === 7 || q === 7 || r === QR_N - 8 || q === QR_N - 8) && (r < 8 || q < 8 || (r >= QR_N - 8 && q < 8) || (q >= QR_N - 8 && r < 8));
+        on = quiet ? false : rnd();
+      }
+      if (on) c.fillRect(m + q * cell, m + r * cell, cell + 0.5, cell + 0.5);
+    }
+    // ECM+ mark on a white quiet-zone square: 7.4 of 21 modules per side (12% of the area, within error correction)
+    const side = cell * 7.4; const lx = (w - side) / 2;
+    c.fillStyle = '#ffffff'; c.fillRect(lx, lx, side, side);
+    drawLogo(c, lx + cell * 0.4, lx + cell * 0.4, side - cell * 0.8);
+  });
+  // digital archive screen: five category columns, redrawn only when a column's state changes
+  const scrCv = mkCanvas(512, 288);
+  const scrCtx = scrCv.getContext('2d') as CanvasRenderingContext2D;
+  const scrTex = own(new THREE.CanvasTexture(scrCv));
+  scrTex.colorSpace = THREE.SRGBColorSpace;
+  let scrKey = '';
+  let scrSt: number[] = [0, 0, 0, 0, 0];
+  function drawScreen(c: CanvasRenderingContext2D, w: number, h: number, st: number[]) {
+    c.fillStyle = '#151a22'; c.fillRect(0, 0, w, h);
+    c.fillStyle = '#1f3a5f'; c.fillRect(0, 0, w, 36);
+    drawLogo(c, 8, 5, 26);
+    c.fillStyle = '#8fa0bd'; c.fillRect(44, 15, 84, 6); c.fillRect(w - 70, 15, 56, 6);
+    const pxm = w / SCR_W;
+    for (let k = 0; k < 5; k++) {
+      const col = colors['cat' + k] ?? DEFAULTS['cat' + k];
+      const cx = w / 2 + FX * (k - 2) * 0.66 * pxm;
+      c.fillStyle = col; c.fillRect(cx - 0.31 * pxm, 46, 0.62 * pxm, 10);
+      for (let r = 0; r < 2; r++) {
+        const cy = h / 2 - (0.22 - r * 0.6) * pxm;
+        c.globalAlpha = st[k] === 1 ? 0.12 : 0.45; c.strokeStyle = col; c.lineWidth = 2;
+        c.strokeRect(cx - 0.17 * pxm, cy - 0.23 * pxm, 0.34 * pxm, 0.46 * pxm);
+        c.globalAlpha = 1;
+      }
+      c.fillStyle = '#2d4c77'; c.fillRect(cx - 0.31 * pxm, h - 24, 0.62 * pxm, 9);
+      if (st[k] > 0) { c.fillStyle = st[k] === 2 ? (colors.ok ?? DEFAULTS.ok) : col; c.fillRect(cx - 0.31 * pxm, h - 24, 0.62 * pxm, 9); }
+    }
+  }
+  function refreshScreen(st: number[], force = false) {
+    const key = st.join('');
+    if (!force && key === scrKey) return;
+    scrKey = key; scrSt = st.slice();
+    drawScreen(scrCtx, 512, 288, st);
+    scrTex.needsUpdate = true;
+  }
+  logoRedraws.push(() => refreshScreen(scrSt, true));
+  // ECM+ Documents explorer on the archive monitor: folder tree with counts, and a file list that fills as documents are filed
+  const dmsCv = mkCanvas(520, 320);
+  const dmsCtx = dmsCv.getContext('2d') as CanvasRenderingContext2D;
+  const dmsTex = own(new THREE.CanvasTexture(dmsCv));
+  dmsTex.colorSpace = THREE.SRGBColorSpace;
+  let dmsKey = '';
+  let dmsSt: number[] = [0, 0, 0, 0, 0];
+  function drawDms(c: CanvasRenderingContext2D, w: number, h: number, st: number[]) {
+    const X = (x: number, ww: number) => (FX < 0 ? w - x - ww : x);
+    c.fillStyle = '#f6f4ef'; c.fillRect(0, 0, w, h);
+    c.fillStyle = '#1f3a5f'; c.fillRect(0, 0, w, 34);
+    drawLogo(c, X(8, 24), 5, 24);
+    c.fillStyle = '#c9d3e6'; c.fillRect(X(40, 70), 14, 70, 6);
+    c.fillStyle = '#e9e5dc'; c.fillRect(X(0, 150), 34, 150, h - 34);
+    let last = -1;
+    st.forEach((v, k) => { if (v > 0) last = k; });
+    for (let k = 0; k < 5; k++) {
+      const y = 50 + k * 40;
+      if (k === last) { c.fillStyle = '#fbeec4'; c.fillRect(X(4, 142), y - 8, 142, 32); }
+      c.fillStyle = colors['cat' + k] ?? DEFAULTS['cat' + k]; c.fillRect(X(14, 22), y, 22, 16);
+      c.fillStyle = '#8b9099'; c.fillRect(X(44, 66), y + 5, 66, 6);
+      c.fillStyle = '#1f3a5f'; c.font = '600 14px sans-serif'; c.textAlign = FX < 0 ? 'left' : 'right';
+      c.fillText(String(st[k] * 1), FX < 0 ? X(118, 20) + 0 : 138, y + 13);
+    }
+    c.fillStyle = '#d7d2c6'; c.fillRect(X(170, 340), 46, 340, 22);
+    let row = 0;
+    for (let k = 0; k < 5; k++) for (let j = 0; j < st[k]; j++) {
+      const y = 76 + row * 26; row++;
+      c.fillStyle = row % 2 ? '#ffffff' : '#efece4'; c.fillRect(X(170, 340), y, 340, 24);
+      c.fillStyle = colors['cat' + k] ?? DEFAULTS['cat' + k]; c.fillRect(X(176, 12), y + 6, 12, 12);
+      c.fillStyle = '#8b9099'; c.fillRect(X(196, 120), y + 9, 120, 6);
+      c.fillStyle = '#111111'; c.fillRect(X(330, 28), y + 5, 28, 14);
+      c.fillStyle = colors.ok ?? DEFAULTS.ok; c.fillRect(X(470, 34), y + 6, 34, 12);
+    }
+  }
+  function refreshDms(st: number[], force = false) {
+    const key = st.join('');
+    if (!force && key === dmsKey) return;
+    dmsKey = key; dmsSt = st.slice();
+    drawDms(dmsCtx, 520, 320, st);
+    dmsTex.needsUpdate = true;
+  }
+  logoRedraws.push(() => refreshDms(dmsSt, true));
   function beltTex(len: number) {
     const t = tex(64, 8, (c, w, h) => {
       c.fillStyle = '#ffffff'; c.fillRect(0, 0, w, h);
@@ -364,8 +510,17 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
   sbox('navy', 0.08, 0.8, 0.08, PAD.x - 0.55, 1.2, PAD.z - 0.35);
   sbox('navy', 0.08, 0.8, 0.08, PAD.x + 0.55, 1.2, PAD.z - 0.35);
   sbox('navy', 1.2, 0.1, 0.14, PAD.x, 1.62, PAD.z - 0.35);
-  sbox('machine', 1.5, 2.5, 1.1, CAB.x, 1.25, CAB.z);
-  for (let k = 0; k < 5; k++) sbox('graphite', 1.34, 0.04, 0.04, CAB.x, drawerY(k) - 0.21, CAB.z + 0.58);
+  sbox('navy', DMS_W + 0.3, DMS_H + 0.3, 0.1, DMS.x, DMS.y, DMS.z);
+  sbox('graphite', 0.2, 0.8, 0.12, DMS.x, 0.65, DMS.z - 0.05);
+  sbox('graphite', 1.2, 0.08, 0.7, DMS.x, 0.04, DMS.z);
+
+  // digital archive screen (bezel, neck, base) and the paper archive rack
+  sbox('navy', SCR_W + 0.3, SCR_H + 0.3, 0.1, SCR.x, SCR.y, SCR.z);
+  sbox('graphite', 0.2, 0.7, 0.12, SCR.x, 0.6, SCR.z - 0.05);
+  sbox('graphite', 1.2, 0.08, 0.7, SCR.x, 0.04, SCR.z);
+  sbox('machine', 5.7, 0.08, 1.0, PA.x, 0.46, PA.z);
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) sbox('graphite', 0.1, 0.42, 0.1, PA.x + sx * 2.75, 0.21, PA.z + sz * 0.42);
+  sbox('navy', 5.7, 0.5, 0.05, PA.x, 0.75, PA.z - 0.48);
 
   const staticMeshes: THREE_NS.Mesh[] = [];
   for (const tok of Object.keys(groups)) {
@@ -432,11 +587,29 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
   instColorFns.push(applyHover);
 
   /* ---------- digital platforms, drawers ---------- */
-  const platforms = inst(own(new THREE.BoxGeometry(0.65, 0.5, 0.6).translate(0, 0.25, 0)), lambert('machine', { color: 0xffffff }), 5);
-  for (let k = 0; k < 5; k++) setM(platforms, k, platX(k), 0, 1.5, 0, 0, 0, 1, 1, 1);
-  instColorFns.push(() => { for (let k = 0; k < 5; k++) platforms.setColorAt(k, catCols[k]); if (platforms.instanceColor) platforms.instanceColor.needsUpdate = true; });
-  const drawers = inst(own(new THREE.BoxGeometry(1.3, 0.36, 1.0)), lambert('machine', { color: 0xffffff }), 5);
-  instColorFns.push(() => { for (let k = 0; k < 5; k++) drawers.setColorAt(k, catCols[k]); if (drawers.instanceColor) drawers.instanceColor.needsUpdate = true; });
+  const screenMesh = new THREE.Mesh(own(new THREE.PlaneGeometry(SCR_W, SCR_H)), basic(null, { map: scrTex }));
+  screenMesh.position.set(FX * SCR.x, SCR.y, SCR.z + 0.055);
+  scene.add(screenMesh);
+  const formHit = new THREE.Mesh(own(new THREE.PlaneGeometry(2.4, 2.3)), basic(null, { visible: false, side: THREE.DoubleSide }));
+  formHit.position.set(FX * FORM.x, FORM.y, FORM.z + 0.09);
+  scene.add(formHit);
+  // paper archive boxes, colour-coded like the bins, with a label on the front (same code as the stamped stack)
+  const paBoxGeo = (() => {
+    const gs: THREE_NS.BufferGeometry[] = [];
+    const add = (w: number, h: number, d: number, x: number, y: number, z: number) => { const g = new THREE.BoxGeometry(w, h, d); g.translate(x, y, z); gs.push(g); };
+    add(0.9, 0.04, 0.8, 0, 0.02, 0);
+    add(0.9, 0.26, 0.04, 0, 0.13, 0.38); add(0.9, 0.4, 0.04, 0, 0.2, -0.38);
+    add(0.04, 0.3, 0.8, 0.43, 0.15, 0); add(0.04, 0.3, 0.8, -0.43, 0.15, 0);
+    return mergeGeos(gs);
+  })();
+  const paBoxes = inst(paBoxGeo, lambert('floor', { color: 0xffffff }), 5);
+  for (let k = 0; k < 5; k++) setM(paBoxes, k, paX(k), 0.5, PA.z, 0, 0, 0, 1, 1, 1);
+  instColorFns.push(() => { for (let k = 0; k < 5; k++) paBoxes.setColorAt(k, catCols[k]); if (paBoxes.instanceColor) paBoxes.instanceColor.needsUpdate = true; });
+  const boxLabelMat = basic(null, { map: barcodeTex });
+  const boxLabels = inst(own(new THREE.PlaneGeometry(1, 1)), boxLabelMat, 5);
+  const dmsMesh = new THREE.Mesh(own(new THREE.PlaneGeometry(DMS_W, DMS_H)), basic(null, { map: dmsTex }));
+  dmsMesh.position.set(FX * DMS.x, DMS.y, DMS.z + 0.055);
+  scene.add(dmsMesh);
 
   /* ---------- paper: 5 categories x 2 sheets, folded-sheet halves ---------- */
   const sheetGeo = flat(SW, SD);
@@ -462,7 +635,10 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
   });
 
   // barcode labels
-  const labels = inst(flat(0.3, 0.075), basic(null, { map: barcodeTex, side: THREE.DoubleSide }), 5);
+  const labelMat = basic(null, { map: barcodeTex, side: THREE.DoubleSide });
+  const labels = inst(flat(0.3, 0.1125), labelMat, 5);
+  let codeMode: 'barcode' | 'qr' = 'barcode';
+  let lastT = 0;
 
   // staples (3) + clip (1)
   const staples = inst(own(new THREE.BoxGeometry(0.1, 0.02, 0.035)), basic('graphite'), 4);
@@ -506,6 +682,20 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
     new THREE.BoxGeometry(0.5, 0.05, 0.4).translate(0, -0.42, 0),
   ]), lambert('accent'));
   scene.add(carriage);
+
+  const cart = new THREE.Mesh(mergeGeos([
+    new THREE.BoxGeometry(1.5, 0.06, 0.85).translate(0, 0.49, 0),
+    new THREE.BoxGeometry(1.5, 0.16, 0.04).translate(0, 0.6, -0.4),
+    new THREE.BoxGeometry(0.05, 0.5, 0.05).translate(-0.7, 0.75, -0.4),
+    new THREE.BoxGeometry(0.05, 0.5, 0.05).translate(0.7, 0.75, -0.4),
+    new THREE.BoxGeometry(1.45, 0.05, 0.05).translate(0, 1.0, -0.4),
+    new THREE.BoxGeometry(0.14, 0.14, 0.08).translate(-0.62, 0.1, 0.3),
+    new THREE.BoxGeometry(0.14, 0.14, 0.08).translate(0.62, 0.1, 0.3),
+    new THREE.BoxGeometry(0.14, 0.14, 0.08).translate(-0.62, 0.1, -0.3),
+    new THREE.BoxGeometry(0.14, 0.14, 0.08).translate(0.62, 0.1, -0.3),
+    new THREE.BoxGeometry(0.1, 0.36, 0.1).translate(0, 0.29, 0),
+  ]), lambert('navy'));
+  scene.add(cart);
 
   const paddleGeo = own(new THREE.BoxGeometry(0.9, 0.24, 0.05).translate(FX * 0.45, 0, 0));
   const paddles = inst(paddleGeo, lambert('accent'), 5);
@@ -551,6 +741,7 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
     { x: -5.4, z: -1.6, ry: 0, tok: 'graphite', skin: '#f1c27d', win: [[10.3, 21, 2]], look: 0.7 },
     { x: 6.0, z: 4.9, ry: Math.PI, tok: 'navy', skin: '#8d5524', win: [[33.8, 35.6, 4]], look: 0.2 },
     { x: 13.4, z: 0.7, ry: Math.PI, tok: 'accent', skin: '#e0ac86', win: [[46, 52.8, 9]], look: 0.2 },
+    { x: PA.x, z: 3.7, ry: 0, tok: 'navy', skin: '#c68642', win: [[53.4, 62, 5]], look: 0.2 },
   ];
   type Rig = { root: THREE_NS.Object3D; torso: THREE_NS.Object3D; head: THREE_NS.Object3D; armL: THREE_NS.Object3D; armR: THREE_NS.Object3D; legL: THREE_NS.Object3D; legR: THREE_NS.Object3D };
   const rigs: Rig[] = WORKERS.map(() => {
@@ -569,12 +760,12 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
     leg: own(new THREE.BoxGeometry(0.16, 0.8, 0.16).translate(0, -0.4, 0)),
   };
   const wMat = lambert('graphite', { color: 0xffffff });
-  const wTorso = inst(wGeo.torso, wMat, 5);
-  const wHead = inst(wGeo.head, wMat, 5);
-  const wArmL = inst(wGeo.arm, wMat, 5);
-  const wArmR = inst(wGeo.arm, wMat, 5);
-  const wLegL = inst(wGeo.leg, wMat, 5);
-  const wLegR = inst(wGeo.leg, wMat, 5);
+  const wTorso = inst(wGeo.torso, wMat, WORKERS.length);
+  const wHead = inst(wGeo.head, wMat, WORKERS.length);
+  const wArmL = inst(wGeo.arm, wMat, WORKERS.length);
+  const wArmR = inst(wGeo.arm, wMat, WORKERS.length);
+  const wLegL = inst(wGeo.leg, wMat, WORKERS.length);
+  const wLegR = inst(wGeo.leg, wMat, WORKERS.length);
   instColorFns.push(() => {
     WORKERS.forEach((w, i) => {
       tmpC.copy(tokColor(w.tok));
@@ -596,7 +787,7 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
     [-15.2, -1.6, 1.8], [PAD.x, PAD.z, 1.5], [CAB.x, CAB.z, 1.9], [LB.x, LB.z - 0.4, 2.2], [0.9, 3.2, 0.9],
     ...[0, 1, 2, 3, 4].map((k) => [binX(k), BIN_Z, 1.05] as [number, number, number]),
   ];
-  const NB = STATIC_BLOBS.length + 5 + 10;
+  const NB = STATIC_BLOBS.length + WORKERS.length + 10;
   const blobs = inst(own(new THREE.CircleGeometry(0.5, 14).rotateX(-Math.PI / 2)), basic(null, { color: 0x000000, transparent: true, opacity: 0.16, depthWrite: false }), NB);
   STATIC_BLOBS.forEach(([x, z, s], i) => setM(blobs, i, x, 0.012, z, 0, 0, 0, s, 1, s));
 
@@ -606,7 +797,8 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
   const binSlot = (i: number) => pz(binX(i % 5) + ((i % 3) - 1) * 0.03, 0.17 + (i >= 5 ? 0.016 : 0), BIN_Z + (i % 2 ? 0.03 : -0.03), ((i % 4) - 1.5) * 0.08);
   const tableSlot = (i: number) => pz(-12.7 + ((i % 3) - 1) * 0.04, 0.91 + 0.012 * i, -1.8 + (i % 2 ? 0.03 : -0.03), ((i % 4) - 1.5) * 0.05);
   const folderSlot = (i: number) => pz(-15.2, 0.4 + 0.012 * (9 - i), -1.6, ((i % 3) - 1) * 0.03);
-  const platSlot = (k: number, c: number, s = 1) => pz(platX(k), 0.53 + 0.028 * c, 1.5, 0, 0, s);
+  const platSlot = (k: number, c: number, s = 0.85) => pz(scrX(k), SCR.y + 0.22 - c * 0.6, SCR.z + 0.085, 0, Math.PI / 2, s); // tile slot on the screen face
+  const paSlot = (i: number) => pz(paX(i % 5) + (i >= 5 ? 0.03 : -0.03), 0.57 + 0.02 * (i >= 5 ? 1 : 0), PA.z - 0.12 + (i >= 5 ? 0.02 : -0.02), (i >= 5 ? 0.06 : -0.05));
   const lbPoint = (u: number, v: number, n: number) => ({
     x: LB.x + u,
     y: LB.y + v * Math.sin(PHI) + n * Math.cos(PHI),
@@ -639,8 +831,17 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
     } else {
       t.to(tk + 2.4, traySlot(i), { arc: 0.5 });
     }
+    // after the scan the originals are filed: onto the cart, to the rack, into the category box
+    const ox = (k - 2) * 0.2; const oz = c ? 0.05 : -0.05;
+    const ls = CART_LOAD + 0.05 * i;
+    t.hold(ls).to(ls + 0.5, pz(CART0.x + ox, CART_TOP + 0.014 * c + 0.003 * k, CART0.z + oz), { arc: 0.6 });
+    for (const w of CART_WAY) t.to(w.t, { x: w.x + ox, z: w.z + oz });
+    t.hold(HOP(k)).to(HOP(k) + 0.5, paSlot(i), { arc: 0.7 });
     sheetTracks.push(t);
   }
+  const cartTrack = new Track(pz(CART0.x, 0, CART0.z));
+  cartTrack.hold(CART_WAY[0].t);
+  for (const w of CART_WAY) cartTrack.to(w.t, { x: w.x, z: w.z });
 
   // folded contract halves: hinge point itinerary + fold angle
   const MAN = pz(-9.6, 0.93, -2.9);
@@ -656,14 +857,11 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
   }
   carriageTrack.to(31.0, pz(binX(0), 2.0, BIN_Z));
 
-  // stack S7 path shared by cards and labels
-  function s7(t: Track, k: number, dy: number, dz: number, label: boolean) {
-    const ps = PS(k); const yk = drawerY(k);
-    t.hold(ps).to(ps + 0.45, pz(PAD.x, 0.9 + dy, PAD.z + dz, 0, 0, label ? 0 : 1), { arc: 0.9 });
-    if (label) t.hold(ps + 0.7).to(ps + 0.78, { s: 1 });
-    t.hold(ps + 0.95).to(ps + 1.3, pz(CAB.x, yk + 0.75 + dy, 3.0 + dz), { arc: 0.5 })
-      .to(ps + 1.5, pz(CAB.x, yk + 0.22 + dy, 1.95 + dz)).hold(ps + 1.55)
-      .to(ps + 1.8, pz(CAB.x, yk + 0.22 + dy, 1.45 + dz, 0, 0, 0));
+  // stage 7: the digital tile lifts off the scanning screen and arcs across to the ECM+ Documents monitor (no stamping)
+  function s7(t: Track, k: number, dy: number) {
+    const ps = PS(k);
+    t.hold(ps).to(ps + 1.05, pz(DMS.x - 0.9 + 0.45 * k, DMS.y - 0.1 + dy, DMS.z + 0.09, 0, Math.PI / 2, 0.5), { arc: 1.3 })
+      .to(ps + 1.3, { s: 0 });
   }
   const cardTracks: Track[] = [];
   for (let i = 0; i < 10; i++) {
@@ -680,11 +878,21 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
       t.hold(w6 - 0.2).to(w6 + 0.4, onLb, { arc: 0.8 })
         .hold(w6 + 1.05).to(w6 + 1.45, platSlot(k, 0), { arc: 0.6 });
     }
-    s7(t, k, 0.03 * c, 0, false);
+    s7(t, k, 0.03 * c);
     cardTracks.push(t);
   }
   const labelTracks: Track[] = [];
-  for (let k = 0; k < 5; k++) { const t = new Track(pz(PAD.x, 0.9, PAD.z, 0, 0, 0)); s7(t, k, 0.075, 0.1, true); labelTracks.push(t); }
+  // the label printer prints the code label, then it is stamped onto the ORIGINAL paper (top sheet of the category) and rides with it into the box
+  for (let k = 0; k < 5; k++) {
+    const ps = PS(k); const paper = sheetTracks[k + 5]; const pp = pz(0, 0, 0);
+    const t = new Track(pz(PAD.x, 0.9, PAD.z, 0, 0, 0));
+    t.hold(ps - 0.3).to(ps - 0.2, { s: 1 }).hold(ps + 0.3);
+    const a = paper.at(ps + 0.85, pp);
+    t.to(ps + 0.85, pz(a.x, a.y + 0.02, a.z, 0, 0, 1), { arc: 0.9 });
+    for (let u = ps + 0.95; u <= HOP(k) + 0.5; u += 0.1) { const q = paper.at(u, pp); t.to(u, pz(q.x, q.y + 0.02, q.z, 0, 0, 1)); }
+    t.to(HOP(k) + 0.65, { s: 0 });
+    labelTracks.push(t);
+  }
 
   /* ---------- per-frame scratch ---------- */
   const pose: Pose = pz(0, 0, 0);
@@ -706,12 +914,13 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
 
   function update(Tin: number) {
     const T = Math.min(DUR, Math.max(0, Number.isFinite(Tin) ? Tin : 0));
+    lastT = T;
 
     // belts
     belts.forEach((b) => { b.tex.offset.x = -FX * b.sign * ((T * V) / 0.4); });
 
     // sheets
-    let bi = STATIC_BLOBS.length + 5;
+    let bi = STATIC_BLOBS.length + WORKERS.length;
     for (let i = 0; i < 10; i++) {
       const p = sheetTracks[i].at(T, sheetPoses[i]);
       const vis = i === FOLDED ? T >= FOLD_SWAP : true;
@@ -761,9 +970,16 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
     if (cards.instanceColor) cards.instanceColor.needsUpdate = true;
     for (let k = 0; k < 5; k++) {
       const p = labelTracks[k].at(T, pose);
-      setM(labels, k, p.x, p.y, p.z, 0, 0, 0, p.s, p.s, p.s);
+      const qr = codeMode === 'qr';
+      setM(labels, k, p.x, p.y, p.z, 0, 0, 0, p.s * (qr ? 0.5 : 1), p.s, p.s * (qr ? 1.334 : 1));
+      // the same label on the front of the category box once its paper is filed
+      const lu = smooth((T - (HOP(k) + 0.4)) / 0.3);
+      setM(boxLabels, k, paX(k), 0.63, PA.z + 0.42, 0, 0, 0, lu * (qr ? 0.22 : 0.52), lu * (qr ? 0.22 : 0.195), lu);
     }
     labels.instanceMatrix.needsUpdate = true;
+    boxLabels.instanceMatrix.needsUpdate = true;
+    { const p = cartTrack.at(T, pose); cart.position.set(FX * p.x, 0, p.z); }
+    refreshScreen([0, 1, 2, 3, 4].map((k) => (T >= PS(k) + 0.3 ? 2 : T >= tkT(k) + 2.5 ? 1 : 0)));
 
     // lid
     lid.rotation.x = -1.9 * smooth((T - 0.2) / 1.0);
@@ -877,17 +1093,12 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
       approve.visible = ap > 0.001;
     }
 
-    // printer head, drawers
+    // printer head
     {
       let d = 0;
-      for (let k = 0; k < 5; k++) { const ps = PS(k); const u = (T - (ps + 0.45)) / 0.4; if (u >= 0 && u <= 1) d = Math.max(d, 1 - Math.abs(u * 2 - 1)); }
+      for (let k = 0; k < 5; k++) { const ps = PS(k); const u = (T - (ps - 0.3)) / 0.5; if (u >= 0 && u <= 1) d = Math.max(d, 1 - Math.abs(u * 2 - 1)); }
       printHead.position.set(FX * PAD.x, 1.55 - 0.45 * d, PAD.z - 0.1);
-      for (let k = 0; k < 5; k++) {
-        const ps = PS(k);
-        const o = smooth((T - (ps + 0.7)) / 0.3) - smooth((T - (ps + 1.55)) / 0.25);
-        setM(drawers, k, CAB.x, drawerY(k), CAB.z + 0.15 + 0.6 * o, 0, 0, 0, 1, 1, 1);
-      }
-      drawers.instanceMatrix.needsUpdate = true;
+      refreshDms([0, 1, 2, 3, 4].map((k) => (T >= PS(k) + 1.1 ? 2 : 0)));
     }
 
     // workers
@@ -942,11 +1153,11 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
   const STAGE_BOXES: [number, number, THREE_NS.Box3][] = [
     [0, 10, bx3(-16.2, -8.4, 0, 2.2, -4.8, 0.8)],
     [10, 20, bx3(-8.6, -0.2, 0, 2.4, -2.0, 2.4)],
-    [20, 31.3, bx3(-1.3, 8.2, 0, 2.6, 0.2, 4.0)],
+    [20, 31.3, bx3(-1.3, 8.2, 0, 3.1, 0.2, 4.0)],
     [31.3, 38, bx3(0.6, 7.2, 0, 2.2, 2.2, 6.2)],
-    [38, 46, bx3(8.6, 12.2, 0.2, 3.0, -2.4, -0.2)],
-    [46, 53, bx3(11.4, 15.8, 0, 4.0, -3.2, 1.6)],
-    [53, 62, bx3(11.0, 17.2, 0, 3.8, -2.2, 4.2)],
+    [38, 46, bx3(5.4, 12.2, 0, 3.1, -2.4, 1.4)],
+    [46, 53, bx3(6.6, 15.8, 0, 4.0, -3.2, 1.6)],
+    [53, 62, bx3(11.0, 18.0, 0, 3.8, -2.2, 6.4)],
   ];
   const stages = STAGE_BOXES.map(([t0, t1, aabb]) => ({ t0, t1, aabb }));
   const overviewAabb = bx3(-18, 18, 0, 3.8, -6, 6);
@@ -955,9 +1166,10 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
   const addA = (id: string, x: number, y: number, z: number) => anchorList.push({ id, pos: new THREE.Vector3(FX * x, y, z) });
   addA('manual', -9.6, 1.6, -2.9);
   addA('rescan', SB.x, 1.9, C3Z);
-  addA('digital', platX(2), 1.0, 1.5);
+  addA('digital', SCR.x, SCR.y + 1.25, SCR.z);
   addA('originals', 0.9, 1.0, 3.2);
-  addA('archive', CAB.x, 2.8, CAB.z);
+  addA('archive', DMS.x, DMS.y + 1.25, DMS.z);
+  addA('paperArchive', PA.x, 1.55, PA.z);
   for (let k = 0; k < 5; k++) addA('cat' + k, binX(k), 0.9, BIN_Z);
   // overlay-zone labels fan out to the left/right of the card so they never cover it
   const FAN: Record<string, [number, number]> = {
@@ -973,6 +1185,7 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
   });
 
   /* ---------- API ---------- */
+  for (const m of [...paperMesh, cards, labels, paBoxes]) m.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 1e5);
   applyHover();
   update(0);
 
@@ -990,8 +1203,46 @@ export function createFactoryScene(THREE: TH, opts: FactoryOpts): FactoryScene {
     anchors() { return anchorList.map((a) => ({ id: a.id, pos: a.pos.clone() })); },
     counter(Tin: number) {
       let n = 0;
-      for (let k = 0; k < 5; k++) if (Tin >= PS(k) + 1.5) n += 2;
-      return { archived: n, total: 10, flagged: Tin >= FLAG_ON && Tin < FLAG_OFF };
+      for (let k = 0; k < 5; k++) if (Tin >= PS(k) + 1.1) n += 2;
+      let p = 0;
+      for (let k = 0; k < 5; k++) if (Tin >= HOP(k) + 0.5) p += 2;
+      return { archived: n, total: 10, flagged: Tin >= FLAG_ON && Tin < FLAG_OFF, paper: p };
+    },
+    setCodeMode(mode: 'barcode' | 'qr') {
+      codeMode = mode === 'qr' ? 'qr' : 'barcode';
+      const m = codeMode === 'qr' ? qrTex : barcodeTex;
+      labelMat.map = m; boxLabelMat.map = m;
+      labelMat.needsUpdate = true; boxLabelMat.needsUpdate = true;
+      update(lastT);
+    },
+    pickDoc(raycaster: THREE_NS.Raycaster, Tin: number) {
+      const T = Math.min(DUR, Math.max(0, Number.isFinite(Tin) ? Tin : 0));
+      scene.updateMatrixWorld();
+      let best: { d: number; cat: number; kind: string; sheet?: number } | null = null;
+      const consider = (obj: THREE_NS.Object3D, kind: string, catOf: (id: number | undefined) => number, sheetOf?: (id: number | undefined) => number) => {
+        const hs = raycaster.intersectObject(obj, false);
+        if (hs.length && (!best || hs[0].distance < best.d)) best = { d: hs[0].distance, cat: catOf(hs[0].instanceId), kind, sheet: sheetOf ? sheetOf(hs[0].instanceId) : undefined };
+      };
+      const curCat = () => {
+        let k = 0;
+        if (T >= 46) { for (let q = 0; q < 5; q++) if (T >= WS6(q)) k = q; }
+        else if (T >= 38) { for (let q = 0; q < 5; q++) if (T >= WS5[q]) k = q; }
+        else { for (let q = 0; q < 5; q++) if (T >= tkT(q) + 2.5) k = q; }
+        return k;
+      };
+      const id = (i: number | undefined) => (i ?? 0) % 5;
+      consider(bins, 'bin', id);
+      paperMesh.forEach((m, c) => consider(m, 'paper', () => c, (i) => (i ?? 0) * 5 + c));
+      consider(cards, 'card', id, (i) => i ?? 0);
+      consider(labels, 'label', id);
+      consider(paBoxes, 'box', id);
+      consider(halfL, 'paper', () => 1, () => FOLDED);
+      consider(halfR, 'paper', () => 1, () => FOLDED);
+      consider(dmsMesh, 'dms', () => { let k = 0; for (let q = 0; q < 5; q++) if (T >= PS(q) + 1.1) k = q; return k; });
+      consider(screenMesh, 'screen', curCat);
+      consider(formHit, 'form', curCat);
+      const b = best as { cat: number; kind: string; sheet?: number } | null;
+      return b ? { cat: b.cat, kind: b.kind, sheet: b.sheet } : null;
     },
     dispose() {
       scene.traverse((o) => {

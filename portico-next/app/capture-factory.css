@@ -3,8 +3,8 @@
    Portico tokens. #cap-lab[data-factory] is loading | on | off; without JS the frame never shows. */
 .cf {
   --cf-floor: #E6E1D8; --cf-belt: #8C94A1; --cf-machine: #C9CFD8; --cf-accent: #D9A21B; --cf-navy: #1F3A5F;
-  --cf-graphite: #3A4150; --cf-ok: #3E9B73; --cf-warn: #C98A0B; --cf-bad: #C8453B; --cf-bg: #F4F2EE;
-  --cf-cat0: #D9A21B; --cf-cat1: #4C7FC1; --cf-cat2: #3E9B73; --cf-cat3: #9A6BC4; --cf-cat4: #D26A4B;
+  --cf-graphite: #333A46; --cf-ok: #3E9B73; --cf-warn: #C98A0B; --cf-bad: #C8453B; --cf-bg: #F4F2EE;
+  --cf-cat0: var(--cap-cat0); --cf-cat1: var(--cap-cat1); --cf-cat2: var(--cap-cat2); --cf-cat3: var(--cap-cat3); --cf-cat4: var(--cap-cat4);
   --cf-aspect: 16 / 9;
   display: none;
   margin-block-end: 24px;
@@ -15,8 +15,7 @@
 }
 :root[data-theme="dark"] .cf {
   --cf-floor: #232A36; --cf-belt: #5A6577; --cf-machine: #3C4658; --cf-accent: #E8B84A; --cf-navy: #A9C1E3;
-  --cf-graphite: #CBD2DC; --cf-ok: #4FB88A; --cf-warn: #E8B84A; --cf-bad: #E5675D; --cf-bg: #10141B;
-  --cf-cat0: #E8B84A; --cf-cat1: #6E9BD6; --cf-cat2: #4FB88A; --cf-cat3: #B38AD9; --cf-cat4: #E98568;
+  --cf-graphite: #C9CFD8; --cf-ok: #4FB88A; --cf-warn: #E8B84A; --cf-bad: #E5675D; --cf-bg: #10141B;
 }
 #cap-lab[data-factory="loading"] .cf, #cap-lab[data-factory="on"] .cf { display: block; }
 #cap-lab[data-factory="on"] > .cap-demo { display: none; }
@@ -26,7 +25,7 @@
 .cf__canvas { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; display: block; }
 .cf__loading { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; color: var(--sp-muted); font: 600 .9375rem/1.4 var(--sp-body); }
 #cap-lab[data-factory="on"] .cf__loading { display: none; }
-#cap-lab[data-factory="loading"] .cf__stage { background-image: linear-gradient(100deg, transparent 30%, rgba(127, 127, 127, .12) 50%, transparent 70%); background-size: 200% 100%; animation: cf-shimmer 1.6s linear infinite; }
+#cap-lab[data-factory="loading"] .cf__stage { background-image: linear-gradient(100deg, transparent 30%, var(--gold-tint) 50%, transparent 70%); background-size: 200% 100%; animation: cf-shimmer 1.6s linear infinite; }
 @keyframes cf-shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
 
 .cf__labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
@@ -41,21 +40,27 @@
 }
 .cf__counter span { padding: 4px 10px; border-radius: 999px; background: var(--sp-surface); color: var(--sp-ink); border: 1px solid var(--sp-line-strong); font: 600 .8125rem/1.3 var(--sp-body); }
 .cf__counter span[hidden] { display: none; }
-.cf__counter .cf__flag { border-color: var(--cf-bad); color: var(--cf-bad); }
-.cf__hint { position: absolute; inset-block-end: 8px; inset-inline-start: 10px; margin: 0; padding: 2px 8px; border-radius: 999px; background: var(--sp-surface); color: var(--sp-muted); font: 500 .75rem/1.3 var(--sp-body); pointer-events: none; }
+.cf__counter .cf__flag { border-color: var(--cap-bad); color: var(--cap-bad); background: color-mix(in srgb, var(--cap-bad) 10%, var(--sp-surface)); }
+.cf__hint { position: absolute; inset-block-end: 12px; inset-inline-start: 10px; margin: 0; padding: 2px 8px; border-radius: 999px; background: var(--sp-surface); color: var(--sp-muted); font: 500 .75rem/1.3 var(--sp-body); pointer-events: none; }
 
-.cf__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 14px; border-block-start: 1px solid var(--sp-line); }
-.cf__btn {
-  display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--sp-line-strong); border-radius: 999px;
-  background: var(--sp-surface); color: var(--sp-ink); font: 600 .875rem/1.2 var(--sp-body); cursor: pointer;
+.cf__bar {
+  position: absolute; inset-block-end: 12px; inset-inline: 0; z-index: 3; inline-size: max-content; max-inline-size: calc(100% - 20px); margin-inline: auto;
+  display: flex; align-items: center; gap: 6px; padding: 5px; border: 1px solid var(--sp-line-strong); border-radius: 999px;
+  background: color-mix(in srgb, var(--sp-surface) 82%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: var(--shadow-md);
 }
+.cf__btn {
+  display: inline-grid; place-items: center; flex: none; inline-size: 36px; block-size: 36px; padding: 0; border: 1px solid transparent; border-radius: 50%;
+  background: transparent; color: var(--sp-ink); cursor: pointer; transition: background-color .15s, border-color .15s, box-shadow .15s;
+}
+@media (pointer: coarse) { .cf__btn { inline-size: 44px; block-size: 44px; } }
+.cf__btn:disabled { opacity: .45; cursor: not-allowed; }
 .cf__btn:hover { border-color: var(--sp-accent); background: var(--gold-tint); }
-.cf__btn[aria-pressed="true"] { border-color: var(--sp-accent); background: var(--gold-tint); }
-.cf__btn:focus-visible, .cf__step:focus-visible { outline: 2px solid var(--sp-accent-text); outline-offset: 2px; }
-.cf__btn svg { inline-size: 14px; block-size: 14px; fill: currentColor; flex: none; }
+.cf__btn[aria-pressed="true"] { border-color: var(--sp-accent); background: var(--gold-tint); box-shadow: 0 0 0 3px var(--gold-ring); }
+.cf__btn:focus-visible, .cf__step:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; box-shadow: 0 0 0 5px var(--gold-ring); }
+.cf__btn svg { inline-size: 16px; block-size: 16px; fill: currentColor; flex: none; }
 [dir="rtl"] .cf__btn [data-ic="play"] { transform: scaleX(-1); }
 
-.cf__nav { display: flex; gap: 6px; margin: 0; padding: 0 14px 10px; list-style: none; overflow-x: auto; scrollbar-width: thin; }
+.cf__nav { display: flex; gap: 6px; margin: 0; padding: 10px 14px; list-style: none; overflow-x: auto; scrollbar-width: thin; border-block-start: 1px solid var(--sp-line); }
 .cf__nav li { flex: none; }
 .cf__step {
   display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border: 1px solid var(--sp-line); border-radius: 999px;
@@ -64,20 +69,30 @@
 [dir="rtl"] .cf__step { padding: 6px 6px 6px 12px; }
 .cf__step:hover { border-color: var(--sp-accent); }
 .cf__step-n { display: grid; place-items: center; inline-size: 24px; block-size: 24px; border: 1px solid var(--sp-line-strong); border-radius: 50%; font-size: .75rem; }
-.cf__step.is-done .cf__step-n { border-color: var(--sp-accent-text); color: var(--sp-accent-text); }
-.cf__step[aria-current="step"] { border-color: var(--sp-accent); background: var(--sp-alt); color: var(--sp-ink); }
-.cf__step[aria-current="step"] .cf__step-n { border-color: var(--sp-accent); background: var(--sp-accent); color: #151A22; }
+.cf__step.is-done .cf__step-n { border-color: var(--cap-ok); color: var(--cap-ok); background: color-mix(in srgb, var(--cap-ok) 12%, var(--sp-surface)); }
+.cf__step.is-done .cf__step-n { font-size: 0; }
+.cf__step.is-done .cf__step-n::after { content: "\2713"; font-size: .75rem; font-weight: 700; }
+.cf__step[aria-current="step"] { border-color: var(--sp-accent); background: var(--gold-tint); color: var(--sp-ink); box-shadow: 0 0 0 3px var(--gold-ring); }
+.cf__step[aria-current="step"] .cf__step-n { border-color: var(--sp-accent); background: var(--sp-accent); color: var(--on-gold); }
 
-.cf__caption { display: grid; gap: 4px; padding: 12px 14px 16px; border-block-start: 1px solid var(--sp-line); min-block-size: 6.5rem; }
-.cf__caption-t { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 0; font: 700 1rem/1.3 var(--sp-head); color: var(--sp-ink); }
-.cf__caption-d { margin: 0; max-inline-size: 70ch; font: 400 .9375rem/1.55 var(--sp-body); color: var(--sp-ink-2); }
+.cf__caption {
+  position: absolute; inset-block-start: 10px; inset-inline-start: 10px; z-index: 2; display: grid; gap: 4px; max-inline-size: min(360px, 60%); padding: 10px 12px;
+  border: 1px solid var(--sp-line-strong); border-inline-start: 3px solid var(--sp-accent); border-radius: 10px; background: color-mix(in srgb, var(--sp-surface) 62%, transparent); box-shadow: var(--shadow-sm);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); pointer-events: none;
+}
+.cf__caption a { pointer-events: auto; }
+.cf__caption-t { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin: 0; font: 700 .9375rem/1.3 var(--sp-head); color: var(--sp-ink); }
+.cf__caption-d { margin: 0; font: 400 .8125rem/1.45 var(--sp-body); color: var(--sp-ink-2); }
 
 @media (max-width: 767.98px) {
   .cf__stage { aspect-ratio: auto; block-size: min(52svh, 350px); }
-  .cf__bar { padding-inline: 10px; }
+  .cf__bar { inset-block-end: 8px; }
   .cf__nav { padding-inline: 10px; scroll-snap-type: x proximity; }
   .cf__step { scroll-snap-align: center; }
   .cf__hint { display: none; }
+  .cf__caption { inset-block-start: 6px; inset-inline-start: 6px; padding: 6px 8px; max-inline-size: min(300px, 72%); }
+  .cf__caption-t { font-size: .8125rem; }
+  .cf__caption-d { font-size: .75rem; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) {
   #cap-lab[data-factory="loading"] .cf__stage { animation: none; }
@@ -85,4 +100,43 @@
 }
 @media print {
   .cf { display: none !important; }
+}
+
+
+/* ---- Desktop: the stage steps stand beside the canvas (inline-end), matching its height ---- */
+@media (min-width: 1024px) {
+  #cap-lab[data-factory="loading"] .cf, #cap-lab[data-factory="on"] .cf { display: grid; grid-template-columns: minmax(0, 1fr) 17rem; grid-template-rows: minmax(0, auto); }
+  .cf__stage { grid-column: 1; grid-row: 1; }
+  .cf__nav {
+    grid-column: 2; grid-row: 1; contain: size; flex-direction: column; gap: 6px; padding: 12px; overflow-x: hidden; overflow-y: auto;
+    border-block-start: 0; border-inline-start: 1px solid var(--sp-line); background: var(--sp-alt);
+  }
+  .cf__nav li { flex: none; }
+  .cf__step { inline-size: 100%; border-radius: 10px; padding: 8px 10px; white-space: normal; text-align: start; }
+  [dir="rtl"] .cf__step { padding: 8px 10px; }
+  .cf__step[aria-current="step"] { box-shadow: inset 3px 0 0 var(--sp-accent), 0 0 0 3px var(--gold-ring); }
+  [dir="rtl"] .cf__step[aria-current="step"] { box-shadow: inset -3px 0 0 var(--sp-accent), 0 0 0 3px var(--gold-ring); }
+  #cap-lab.is-fs .cf { display: grid; grid-template-rows: minmax(0, 1fr); }
+  #cap-lab.is-fs .cf__stage { min-block-size: 0; }
+}
+
+/* ---- Collapsible caption card ---- */
+.cf__caption-t { padding-inline-end: 34px; position: relative; min-block-size: 28px; align-items: center; }
+.cf__caption-x { position: absolute; inset-block-start: -4px; inset-inline-end: -6px; display: grid; place-items: center; inline-size: 28px; block-size: 28px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--sp-ink-2); cursor: pointer; pointer-events: auto; }
+.cf__caption-x:hover { background: var(--gold-tint); color: var(--sp-ink); }
+.cf__caption-x:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; box-shadow: 0 0 0 4px var(--gold-ring); }
+.cf__caption-x svg { inline-size: 14px; block-size: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: rotate .2s; }
+.cf__caption[data-open="false"] .cf__caption-x svg { rotate: 180deg; }
+@media (pointer: coarse) { .cf__caption-x { inline-size: 44px; block-size: 44px; inset-block-start: -10px; inset-inline-end: -12px; } }
+.cf__caption-body { display: grid; grid-template-rows: 1fr; gap: 4px; transition: grid-template-rows .25s var(--ease), opacity .2s; }
+.cf__caption-body > div { overflow: hidden; display: grid; gap: 4px; min-block-size: 0; }
+.cf__caption[data-open="false"] .cf__caption-body { grid-template-rows: 0fr; opacity: 0; visibility: hidden; inline-size: 0; transition: grid-template-rows .25s var(--ease), opacity .2s, visibility 0s .25s, inline-size 0s .25s; }
+.cf__caption { inline-size: fit-content; }
+.cf__caption[data-open="false"] .cf__caption-t .cap-tag { display: none; }
+@media (prefers-reduced-motion: reduce) { .cf__caption-body, .cf__caption-x svg { transition: none; } }
+
+/* The "Open a category" row is not shown beside the factory: the bins and documents open the same views.
+   It stays in the tab order for keyboard users and appears only while it has focus. */
+#cap-lab[data-factory="on"] .cap-cats:not(:focus-within) {
+  position: absolute; inline-size: 1px; block-size: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
 }

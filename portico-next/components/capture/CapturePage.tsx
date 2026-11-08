@@ -36,7 +36,7 @@ function Grid({ items, lang }: { items: CardDef[]; lang: Lang }) {
           <h3 className="sp-card__title">{rich(fmt(c.title, lang))}</h3>
           <p>{rich(fmt(c.text, lang))}</p>
           {c.side ? (
-            <p className="cap-side">{c.side.kind === "potential" ? null : <Tag kind={c.side.kind} lang={lang} />}<span>{rich(fmt(c.side.text, lang))}</span></p>
+            <p className="cap-side"><span>{rich(fmt(c.side.text, lang))}</span></p>
           ) : null}
         </li>
       ))}
@@ -44,7 +44,7 @@ function Grid({ items, lang }: { items: CardDef[]; lang: Lang }) {
   );
 }
 
-/** The Document Capture page (Portico). Section 03 is the interactive <CaptureLab>. */
+/** The Document Capture page (Portico). Section 01 is the interactive <CaptureLab>. */
 export default function CapturePage({ lang }: { lang: Lang }) {
   const ui = uiFor(lang);
   const home = withBase(homePath(lang));
@@ -82,16 +82,16 @@ export default function CapturePage({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        <Section no="01" label={fmt(SECTION_COPY.channels.label, lang)} id="channels-title" title={fmt(SECTION_COPY.channels.title, lang)}>
-          <Grid items={CHANNELS} lang={lang} />
-        </Section>
-        <Section no="02" label={fmt(SECTION_COPY.intel.label, lang)} id="intel-title" title={fmt(SECTION_COPY.intel.title, lang)} alt>
-          <Grid items={INTEL} lang={lang} />
-        </Section>
-        <Section no="03" label={fmt(DEMO.label, lang)} id="demo-title" title={fmt(DEMO.sectionTitle, lang)} sid="demo">
+        <Section no="01" label={fmt(DEMO.label, lang)} id="demo-title" title={fmt(DEMO.sectionTitle, lang)} sid="demo">
           <CaptureLab lang={lang}>
             <CaptureFactory lang={lang} copy={factoryCopy(lang)} />
           </CaptureLab>
+        </Section>
+        <Section no="02" label={fmt(SECTION_COPY.channels.label, lang)} id="channels-title" title={fmt(SECTION_COPY.channels.title, lang)} alt>
+          <Grid items={CHANNELS} lang={lang} />
+        </Section>
+        <Section no="03" label={fmt(SECTION_COPY.intel.label, lang)} id="intel-title" title={fmt(SECTION_COPY.intel.title, lang)}>
+          <Grid items={INTEL} lang={lang} />
         </Section>
         <Section no="04" label={fmt(SECTION_COPY.benefits.label, lang)} id="benefits-title" title={fmt(SECTION_COPY.benefits.title, lang)} alt>
           <Grid items={BENEFITS} lang={lang} />
@@ -102,8 +102,7 @@ export default function CapturePage({ lang }: { lang: Lang }) {
               <li key={i} {...reveal(i)}>
                 <svg className="cap-list__mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#i-check" /></svg>
                 <span>{f(c.text)}</span>
-                {c.tag ? <Tag kind={c.tag} lang={lang} /> : null}
-              </li>
+                              </li>
             ))}
           </ul>
         </Section>

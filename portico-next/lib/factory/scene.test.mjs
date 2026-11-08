@@ -65,19 +65,37 @@ for (const rtl of [false, true]) {
   check(tris <= 50000, 'triangles');
   // API
   const ids = f.anchors().map((x) => x.id);
-  for (const id of ['manual', 'rescan', 'digital', 'originals', 'archive', 'cat0', 'cat4', 'header', 'footer', 'stage1', 'stage7']) check(ids.includes(id), 'anchor ' + id);
+  for (const id of ['manual', 'rescan', 'digital', 'originals', 'archive', 'cat0', 'cat4', 'header', 'footer', 'stage1', 'stage7', 'paperArchive']) check(ids.includes(id), 'anchor ' + id);
   check(f.stages.length === 7, 'stages');
   // stage windows tile the timeline: contiguous, ordered, and stage 3 (scanning, last card shelved at 31.3) ends before stage 4 starts
   check(f.stages[0].t0 === 0 && f.stages.every((s, i) => s.t1 > s.t0 && (i === 0 || s.t0 === f.stages[i - 1].t1)), 'stage windows contiguous');
   check(Math.abs(f.stages[2].t1 - 31.3) < 1e-9 && f.stages[3].t0 === f.stages[2].t1, 'stage 3/4 boundary');
   check(f.stages[6].t1 <= f.duration, 'last stage within duration');
   check(f.counter(63).archived === 10 && f.counter(0).archived === 0 && f.counter(30).flagged && !f.counter(40).flagged, 'counter');
+  check(f.counter(53.9).archived === 0 && f.counter(54.2).archived === 2, 'digital tiles reach the archive screen after their move');
   // pick: ray straight down onto bin 2
   const bin2 = f.anchors().find((x) => x.id === 'cat2').pos;
   const rc = new THREE.Raycaster(new THREE.Vector3(bin2.x, 5, bin2.z), new THREE.Vector3(0, -1, 0));
   check(f.pick(rc) === 2, 'pick bin2 got ' + f.pick(rc));
   const miss = new THREE.Raycaster(new THREE.Vector3(0, 5, -5), new THREE.Vector3(0, -1, 0));
   check(f.pick(miss) === -1, 'pick miss');
+  // code choice, paper archive counter, document picking
+  f.setCodeMode('qr'); f.update(58); f.setCodeMode('barcode'); f.update(40);
+  check(f.counter(63).paper === 10 && f.counter(0).paper === 0 && f.counter(55).paper < 10, 'paper counter');
+  const scr = f.anchors().find((x) => x.id === 'digital').pos;
+  const rs = new THREE.Raycaster(new THREE.Vector3(scr.x, scr.y - 1.2, 20), new THREE.Vector3(0, 0, -1));
+  f.update(0); const hit = f.pickDoc(rs, 0);
+  check(hit && hit.kind === 'screen', 'pickDoc screen ' + JSON.stringify(hit));
+  check(f.pickDoc(new THREE.Raycaster(new THREE.Vector3(bin2.x, 5, bin2.z), new THREE.Vector3(0, -1, 0)), 0).kind === 'bin', 'pickDoc bin');
+  const ar = f.anchors().find((x) => x.id === 'archive').pos;
+  f.update(0);
+  const dh = f.pickDoc(new THREE.Raycaster(new THREE.Vector3(ar.x, ar.y - 1.2, 20), new THREE.Vector3(0, 0, -1)), 0);
+  check(dh && dh.kind === 'dms', 'pickDoc dms ' + JSON.stringify(dh));
+  // a sheet lying on the prep table at T=8 reports its factory index
+  f.update(8);
+  let sheetHit = null;
+  for (let x = -14; x <= -11 && !sheetHit; x += 0.02) { const h = f.pickDoc(new THREE.Raycaster(new THREE.Vector3((rtl ? -1 : 1) * x, 5, -1.8), new THREE.Vector3(0, -1, 0)), 8); if (h && h.kind === 'paper') sheetHit = h; }
+  check(sheetHit && sheetHit.sheet >= 0 && sheetHit.sheet < 10, 'pickDoc paper sheet ' + JSON.stringify(sheetHit));
   f.hover(2); f.hover(-1); f.setColors({ ...colors, accent: '#ff0000', bg: '#101820' }); f.update(40);
   f.dispose();
 }

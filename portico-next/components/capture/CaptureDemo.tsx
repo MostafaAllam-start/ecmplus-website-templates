@@ -7,7 +7,8 @@ import {
 } from "@/data/capture";
 import { rich } from "@/lib/rich";
 import type { Lang } from "@/lib/site";
-import CaptureDoc, { Stamp } from "./CaptureDocs";
+import CaptureDoc, { Stamp, type CodeMode } from "./CaptureDocs";
+import { TOOL_STR } from "@/data/capture-tools";
 
 /*
  * The Document Capture demonstration engine (a port of templates/portico/capture.js, extended).
@@ -22,7 +23,7 @@ export type DemoMode = "inline" | "modal";
 export interface CaptureDemoHandle {
   /** Inline: pick the sample and go to step 2. Modal: restart the six-step flow on `key`
    *  (or, with `resume`, keep the current progress when it is already on that sample). */
-  start(key: SampleKey, opts?: { resume?: boolean }): void;
+  start(key: SampleKey, opts?: { resume?: boolean; step?: number }): void;
   /** Restart the current sample from its first step (no-op until a sample was started). */
   replay(): void;
   sample(): SampleKey | "";
@@ -32,8 +33,13 @@ interface Props {
   mode: DemoMode;
   /** Prefix for element ids, so two instances can live on one page. */
   idp?: string;
-  /** Modal mode: the last-step "Back to the factory" button. */
+  /** Modal mode: the last-step "Back to the workflow" button. */
   onExit?: () => void;
+  /** The code to stamp (barcode by default), owned by <CaptureLab> so the factory toolbar and the dialog stay in step. */
+  code: CodeMode;
+  onCode(m: CodeMode): void;
+  /** Opens the ECM+ Documents archive dialog on a category (index in SAMPLE_KEYS). */
+  onDms?: (cat: number) => void;
 }
 
 type Vals = Record<string, string>;
@@ -69,7 +75,7 @@ const reduced = () => typeof window !== "undefined" && !!window.matchMedia?.("(p
 const t = (s: Bi, lang: Lang) => fmt(s, lang);
 const label = (f: FieldDef, lang: Lang) => f[lang];
 
-const CaptureDemo = forwardRef<CaptureDemoHandle, Props>(function CaptureDemo({ lang, mode, idp = "", onExit }, ref) {
+const CaptureDemo = forwardRef<CaptureDemoHandle, Props>(function CaptureDemo({ lang, mode, idp = "", onExit, code, onCode, onDms }, ref) {
   const [s, setS] = useState<S>(initial);
   const sRef = useRef(s);
   sRef.current = s;
@@ -192,6 +198,7 @@ const CaptureDemo = forwardRef<CaptureDemoHandle, Props>(function CaptureDemo({ 
 
   const restart = () => {
     clearTimers();
+    onCode("barcode");
     setS((p) => ({ ...initial(), focusTick: p.focusTick + 1, focusTarget: "pick" }));
   };
 
@@ -219,7 +226,7 @@ const CaptureDemo = forwardRef<CaptureDemoHandle, Props>(function CaptureDemo({ 
     go(2, true, { sample: k, unlock: true });
   };
 
-  const start = (k: SampleKey, opts?: { resume?: boolean }) => {
+  const start = (k: SampleKey, opts?: { resume?: boolean; step?: number }) => {
     const cur = sRef.current;
     if (!modal) { choose(k); return; }
     if (opts?.resume && cur.sample === k && seq.includes(cur.step)) {
@@ -227,11 +234,21 @@ const CaptureDemo = forwardRef<CaptureDemoHandle, Props>(function CaptureDemo({ 
       return;
     }
     clearTimers();
-    setS((p) => ({ ...initial(), sample: k, step: 2, max: 2, live: stepMsg(2), focusTick: p.focusTick + 1, focusTarget: "title" }));
+    // Opened from a document in the factory: land on the matching step with the earlier ones done and reachable.
+    const n = opts?.step && seq.includes(opts.step) ? opts.step : 2;
+    const count = SAMPLES[k].fields.filter((f) => f.z).length;
+    setS((p) => ({
+      ...initial(), sample: k, step: n, max: n > 2 ? seq[seq.length - 1] : 2, rec: n >= 3, saved: n === 8,
+      extracted: n >= 6 ? { [k]: count } : {}, live: stepMsg(n) + (n === 8 ? `. ${plain(DEMO.saved, lang)}` : ""),
+      focusTick: p.focusTick + 1, focusTarget: "title",
+    }));
+    if (n === 5) later(() => extract(k), 40);
+    else if (n === 6) later(() => fillFields(k), 40);
+    else if (n >= 7) later(() => fillAll(k), 40);
   };
   useImperativeHandle(ref, () => ({
     start,
-    replay: () => { const k = sRef.current.sample; if (k) start(k); },
+    replay: () => { const k = sRef.current.sample; onCode("barcode"); if (k) start(k); },
     sample: () => sRef.current.sample,
   }));
 
@@ -269,6 +286,28 @@ const CaptureDemo = forwardRef<CaptureDemoHandle, Props>(function CaptureDemo({ 
   if (s.saved) dataProps["data-saved"] = "";
   const id = (x: string) => `${idp}${x}`;
 
+  const stepperEl = (
+    <ol className="cap-stepper js-only" aria-label={plain(DEMO.stepsLabel, lang)}>
+      {seq.map((n, i) => {
+        const off = n > s.max || (!sample && n > 1);
+        return (
+          <li key={n}>
+            <button
+              type="button"
+              className={`cap-step${n < s.step ? " is-done" : ""}`}
+              data-go={n}
+              aria-current={n === s.step ? "step" : undefined}
+              aria-disabled={off ? "true" : undefined}
+              onClick={() => { if (!off) go(n, true); }}
+            >
+              <span className="cap-step__n" aria-hidden="true">{i + 1}</span>
+              <span className="cap-step__t">{rich(t(modal ? DEMO.modalTitles[i] : DEMO.titles[n - 1], lang))}</span>
+            </button>
+          </li>
+        );
+      })}
+    </ol>
+  );
   return (
     <div
       ref={rootRef}
@@ -278,35 +317,15 @@ const CaptureDemo = forwardRef<CaptureDemoHandle, Props>(function CaptureDemo({ 
     >
       <p className="cap-nojs nojs-only">{t(DEMO.nojs, lang)}</p>
       <ol className="cap-nojs nojs-only">{DEMO.titles.map((x, i) => <li key={i}>{rich(t(x, lang))}</li>)}</ol>
-      <ol className="cap-stepper js-only" aria-label={plain(DEMO.stepsLabel, lang)}>
-        {seq.map((n, i) => {
-          const off = n > s.max || (!sample && n > 1);
-          return (
-            <li key={n}>
-              <button
-                type="button"
-                className={`cap-step${n < s.step ? " is-done" : ""}`}
-                data-go={n}
-                aria-current={n === s.step ? "step" : undefined}
-                aria-disabled={off ? "true" : undefined}
-                onClick={() => { if (!off) go(n, true); }}
-              >
-                <span className="cap-step__n" aria-hidden="true">{i + 1}</span>
-                <span className="cap-step__t">{rich(t(modal ? DEMO.modalTitles[i] : DEMO.titles[n - 1], lang))}</span>
-              </button>
-            </li>
-          );
-        })}
-      </ol>
+      {!modal ? stepperEl : null}
       <div className="cap-stage">
         <header className="cap-stage__head">
           <h3 className="cap-stage__title js-only" tabIndex={-1} ref={titleRef}>{rich(titleOf(s.step))}</h3>
-          <p className="cap-tag cap-tag--demo cap-tag--banner">{t(DEMO.label, lang)}</p>
           <span className="cap-sr" role="status" aria-live="polite">{s.live}</span>
         </header>
         <div className="cap-stage__grid">
           <div className="cap-docs" ref={docsRef}>
-            {samples.map((k) => <CaptureDoc key={k} k={k} lang={lang} hit={sample === k ? s.hit : ""} />)}
+            {samples.map((k) => <CaptureDoc key={k} k={k} lang={lang} hit={sample === k ? s.hit : ""} code={code} />)}
           </div>
           <div className="cap-panels">
             {!modal && (
@@ -433,7 +452,14 @@ const CaptureDemo = forwardRef<CaptureDemoHandle, Props>(function CaptureDemo({ 
                           onFocus={() => showZone(f.z, f.key)}
                           onBlur={() => setS((p) => ({ ...p, hit: "", fieldHit: "" }))}
                         />
-                        <span className="cap-chip" data-state={st || undefined}>{st === "proposed" ? t(DEMO.proposed, lang) : st === "edited" ? t(DEMO.edited, lang) : ""}</span>
+                        <span className="cap-chip" data-state={st || undefined}>
+                          {st === "proposed" ? (
+                            <svg className="cap-chip__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z" /></svg>
+                          ) : st === "edited" ? (
+                            <svg className="cap-chip__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4" /></svg>
+                          ) : null}
+                          {st === "proposed" ? t(DEMO.proposed, lang) : st === "edited" ? t(DEMO.edited, lang) : ""}
+                        </span>
                         <button
                           type="button" className="cap-reset" hidden={st !== "edited"}
                           onClick={() => { patchVals(k, f.key, f.v); (document.getElementById(fid) as HTMLInputElement | null)?.focus(); }}
@@ -456,10 +482,27 @@ const CaptureDemo = forwardRef<CaptureDemoHandle, Props>(function CaptureDemo({ 
             </div>
             <div className="cap-panel" data-panel="7">
               <div className="cap-stampdemo">
-                <Stamp lg seed={sample ? SAMPLES[sample].seed : 418} code={sample ? SAMPLES[sample].code : ""} dataCode />
+                <Stamp lg seed={sample ? SAMPLES[sample].seed : 418} code={sample ? SAMPLES[sample].code : ""} dataCode mode={code} />
               </div>
+              <fieldset className="cap-seg">
+                <legend className="cap-seg__legend">{t(DEMO.codeChoice, lang)}</legend>
+                <div className="cap-seg__row">
+                {(["barcode", "qr"] as const).map((m) => (
+                  <label className="cap-seg__opt" key={m}>
+                    <input type="radio" name={`${idp}code`} value={m} checked={code === m} onChange={() => onCode(m)} />
+                    <span>
+                      {m === "qr" ? (
+                        <svg className="cap-seg__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM6 6h1v1H6zM17 6h1v1h-1zM6 17h1v1H6zM14 14h3v3h-3zM19 14h2M14 19h2M18 18h3v3h-3z" /></svg>
+                      ) : (
+                        <svg className="cap-seg__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5v14M7 5v14M10 5v14M14 5v14M17 5v14M20 5v14" /><path d="M7.5 5v14M13 5v14M18.5 5v14" strokeWidth="3" /></svg>
+                      )}
+                      {t(m === "qr" ? DEMO.codeQr : DEMO.codeBarcode, lang)}
+                    </span>
+                  </label>
+                ))}
+                </div>
+              </fieldset>
               <p className="cap-note">{rich(t(DEMO.stampNote, lang))}</p>
-              <p className="cap-side cap-side--dim">{tag("potential")}<span>{t(DEMO.stampPotential, lang)}</span></p>
             </div>
             <div className="cap-panel" data-panel="8">
               {samples.map((k) => {
@@ -470,7 +513,9 @@ const CaptureDemo = forwardRef<CaptureDemoHandle, Props>(function CaptureDemo({ 
                     <div><dt>{t(DEMO.docType, lang)}</dt><dd>{t(sel, lang)}</dd></div>
                     <div><dt>{t(DEMO.folder, lang)}</dt><dd>{t(d.folder, lang)}</dd></div>
                     {d.fields.map((f) => <div key={f.key}><dt>{label(f, lang)}</dt><dd>{s.vals[k]?.[f.key] || DEMO.none}</dd></div>)}
-                    <div><dt>{t(DEMO.code, lang)}</dt><dd><bdi>{d.code}</bdi></dd></div>
+                    <div><dt>{t(DEMO.code, lang)} <small>({lang === "ar" ? "بيانات وصفية" : "metadata"})</small></dt><dd><bdi>{d.code}</bdi><Stamp seed={d.seed} code="" mode={code} /></dd></div>
+                    <div><dt>{t(DEMO.codeType, lang)}</dt><dd>{t(code === "qr" ? DEMO.codeQr : DEMO.codeBarcode, lang)}</dd></div>
+                    <div><dt>{t(DEMO.paper, lang)}</dt><dd>{plain(DEMO.paperFiled, lang).replace("{c}", plain(d.name, lang))}</dd></div>
                     <div><dt>{t(DEMO.capturedVia, lang)}</dt><dd>{t(d.via, lang)}</dd></div>
                     <div><dt>{t(DEMO.recognition, lang)}</dt><dd>{t(DEMO.done, lang)}{t(d.langs, lang)}</dd></div>
                     <div><dt>{t(DEMO.permissions, lang)}</dt><dd>{t(DEMO.folderRules, lang)}</dd></div>
@@ -479,11 +524,15 @@ const CaptureDemo = forwardRef<CaptureDemoHandle, Props>(function CaptureDemo({ 
               })}
               <p className="cap-done" role="status">{t(DEMO.ready, lang)}</p>
               <p className="cap-note">{t(DEMO.recordNote, lang)}</p>
+              {onDms && sample ? (
+                <button type="button" className="btn btn--ghost-gold cap-dmslink" onClick={() => onDms(SAMPLE_KEYS.indexOf(sample))}>{t(TOOL_STR.openDms, lang)}</button>
+              ) : null}
             </div>
           </div>
         </div>
         <div className="cap-stage__foot js-only">
           <button type="button" className="btn btn--ghost-gold" data-back aria-disabled={backDisabled ? "true" : "false"} onClick={() => { if (!backDisabled) retreat(); }}>{t(DEMO.back, lang)}</button>
+          {modal ? stepperEl : null}
           <button type="button" className="btn btn--gold" data-next aria-disabled={nextDisabled ? "true" : "false"} onClick={() => { if (!nextDisabled) advance(); }}>{lastLabel}</button>
         </div>
       </div>

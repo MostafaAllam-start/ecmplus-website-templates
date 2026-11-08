@@ -48,7 +48,6 @@ function build(
   return {
     title: { absolute: t.title },
     description: t.description,
-    icons: { icon: [{ url: withBase("/assets/brand/favicon.svg"), type: "image/svg+xml" }] },
     alternates: {
       canonical: url,
       languages: { en: absUrl("en", slug), ar: absUrl("ar", slug), "x-default": absUrl("en", slug) },
