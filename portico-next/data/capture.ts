@@ -234,14 +234,14 @@ const sprite = (id: string): IconSpec => ({ kind: "sprite", id });
 export const HERO = {
   crumbDocs: b("Document Management", "إدارة الوثائق"),
   eyebrow: b("Document Capture", "التقاط الوثائق"),
-  title: b("Capture Everything. Understand Every Document.", "التقطوا كل شيء. وافهموا كل وثيقة."),
-  lead: b("ECM+ brings paper, files and emails into one archive, reads their text in Arabic and English, and proposes the index fields for staff to confirm.", "تجمع منظومة ‹ECM+› الورق والملفات ورسائل البريد في أرشيف واحد، وتقرأ نصوصها بالعربية والإنجليزية، وتقترح حقول الفهرسة ليراجعها فريقكم."),
+  title: b("Capture Everything. Understand Every Document.", "التقاط كل شيء وفهم كل وثيقة."),
+  lead: b("A paper document is prepared, sorted by category and scanned. Poor scans are rescanned, then ECM+ reads the text in Arabic and English and proposes the index fields for staff to confirm. The digital copy is archived with a barcode or QR code, and the paper original is stored under the same code.", "تُحضَّر الوثيقة الورقية وتُصنَّف حسب فئتها ثم تُمسح ضوئيًا، وتُعاد الصفحات الرديئة إلى المسح من جديد. بعد ذلك تقرأ منظومة ‹ECM+› النص بالعربية والإنجليزية وتقترح حقول الفهرسة ليراجعها الفريق، لتُحفظ النسخة الرقمية في الأرشيف مع باركود أو رمز QR، وتُحفظ الوثيقة الورقية الأصلية بالرمز نفسه."),
   explore: b("Explore Document Capture", "استكشف التقاط الوثائق"),
   archived: b("Archived", "مؤرشف"),
 };
 
 export const SECTION_COPY = {
-  channels: { label: b("Capture channels", "قنوات الالتقاط"), title: b("One Platform. Multiple Ways to Capture", "منصة واحدة. طرق متعددة للالتقاط") },
+  channels: { label: b("Capture channels", "طرق الالتقاط"), title: b("One Platform. Multiple Ways to Capture", "منصة واحدة. طرق متعددة للالتقاط") },
   intel: { label: b("Document intelligence", "ذكاء الوثائق"), title: b("Beyond Digitization. Into Document Intelligence.", "ما بعد الرقمنة: نحو ذكاء الوثائق.") },
   benefits: { label: b("Benefits", "الفوائد"), title: b("Turn Document Processing into Business Efficiency", "حوّلوا معالجة الوثائق إلى كفاءة في العمل") },
   adv: { label: b("Advanced capabilities", "قدرات متقدمة"), title: b("Built for high-volume, bilingual archives", "مصمّمة للأرشيفات ثنائية اللغة عالية الحجم") },
@@ -268,22 +268,20 @@ export const INTEL: CardDef[] = [
 
 export const BENEFITS: CardDef[] = [
   { icon: sprite("i-spark"), title: b("Less manual entry", "إدخال يدوي أقل"), text: b("Index fields are proposed from the file, so staff confirm rather than type.", "تُقترح حقول الفهرسة من الملف، فيكتفي الموظف بالتأكيد بدل الإدخال.") },
-  { icon: sprite("i-search"), title: b("Searchable from day one", "قابلة للبحث منذ اليوم الأول"), text: b("Recognized text and index fields make every captured document findable by meaning and by field.", "يجعل النص المتعرَّف عليه وحقول الفهرسة كل وثيقة ملتقطة قابلة للبحث بالمعنى وبالحقل.") },
+  { icon: sprite("i-search"), title: b("Searchable", "قابلة للبحث"), text: b("Recognized text and index fields make every captured document findable by meaning and by field.", "يجعل النص المتعرَّف عليه وحقول الفهرسة كل وثيقة ملتقطة قابلة للبحث بالمعنى وبالحقل.") },
   { icon: sprite("i-archive"), title: b("One archive for every channel", "أرشيف واحد لكل القنوات"), text: b("Paper, files, cloud drives and email land in the same document types and folders.", "يصل الورق والملفات ومحركات التخزين السحابية والبريد إلى أنواع الوثائق والمجلدات نفسها.") },
   { icon: sprite("i-lock"), title: b("Governed from capture", "محكومة منذ الالتقاط"), text: b("Folder permissions, versions and the audit trail apply the moment a document is saved.", "تسري صلاحيات المجلدات والإصدارات وسجل التدقيق لحظة حفظ الوثيقة.") },
 ];
 
 export const CAPS: { text: Bi; tag?: "demo" | "potential" }[] = [
   { text: b("Auto-feeder scanning", "المسح الضوئي عبر وحدة التغذية التلقائية") },
-  { text: b("Voice and video notes captured beside documents", "ملاحظات صوتية ومرئية تُلتقط إلى جانب الوثائق") },
+  { text: b("Audio and video files", "ملفات الصوت والفيديو") },
   { text: b("Archive migration from existing systems", "نقل الأرشيفات من الأنظمة القائمة") },
   { text: b("REST API for other systems", "واجهة ‹REST API› للأنظمة الأخرى") },
   { text: b("Google Drive and OneDrive capture", "الالتقاط من ‹Google Drive› و‹OneDrive›") },
-  { text: b("Outlook add-in that saves and routes emails", "إضافة ‹Outlook› لحفظ الرسائل وإحالتها") },
+  { text: b("Outlook, Word, Excel and PowerPoint add-ins that save and route emails and files", "‹Add-ins› لتطبيقات ‹Outlook› و‹Word› و‹Excel› و‹PowerPoint› لحفظ الرسائل والملفات وإحالتها") },
   { text: b("Generated barcode and QR stamps", "أختام باركود و‹QR› مولَّدة") },
   { text: b("Batch splitting by barcode", "تقسيم الدفعات بالباركود"), tag: "potential" },
-  { text: b("Rule-based validation", "التحقق وفق القواعد"), tag: "demo" },
-  { text: b("Scheduled folder capture", "الالتقاط المجدول من المجلدات"), tag: "potential" },
 ];
 
 export const DEPTS: CardDef[] = [
@@ -295,8 +293,8 @@ export const DEPTS: CardDef[] = [
 ];
 
 export const CTA = {
-  title: b("Make Every Document Work for Your Business.", "اجعلوا كل وثيقة تعمل لصالح أعمالكم."),
-  text: b("See capture on your own document types, in Arabic or English.", "شاهدوا الالتقاط على أنواع وثائقكم، بالعربية أو الإنجليزية."),
+  title: b("Make Every Document Work for Your Business.", "حوّلوا وثائقكم إلى أصل رقمي يخدم أعمالكم."),
+  text: b("See capture on your own document types, in Arabic or English.", "مشاهدة الالتقاط على أنواع الوثائق الخاصة بكم، بالعربية أو الإنجليزية."),
   request: b("Request a Demo", "اطلب عرضًا تجريبيًا"),
   contact: b("Contact Our Team", "تواصلوا مع فريقنا"),
   prefill: b("We would like to discuss document capture with your team.", "نرغب في مناقشة التقاط الوثائق مع فريقكم."),

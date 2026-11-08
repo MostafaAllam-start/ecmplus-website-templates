@@ -35,9 +35,6 @@ function Grid({ items, lang }: { items: CardDef[]; lang: Lang }) {
           <Icon icon={c.icon} />
           <h3 className="sp-card__title">{rich(fmt(c.title, lang))}</h3>
           <p>{rich(fmt(c.text, lang))}</p>
-          {c.side ? (
-            <p className="cap-side"><span>{rich(fmt(c.side.text, lang))}</span></p>
-          ) : null}
         </li>
       ))}
     </ul>

@@ -377,3 +377,11 @@ html.cap-modal-open { overflow: hidden; }
 /* The modal stage always spans the full width (no empty strip beside the form). */
 .cap-demo--modal { align-items: stretch; }
 .cap-demo--modal .cap-stage { align-self: stretch; inline-size: 100%; }
+
+/* Cards: title first, description right below it (no vertical centring when a row stretches) */
+.cap-card { align-content: start; }
+
+/* Capability list: the check mark stays on the first line beside the text, however long it wraps */
+.cap-list li { flex-wrap: nowrap; align-items: flex-start; }
+.cap-list__mark { align-self: flex-start; margin-block-start: 4px; }
+.cap-list li > span { flex: 1 1 auto; min-inline-size: 0; unicode-bidi: plaintext; }
