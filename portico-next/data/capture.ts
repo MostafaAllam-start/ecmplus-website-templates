@@ -158,7 +158,7 @@ export const DEMO = {
     b("Code stamp", "ختم الرمز"), b("Archive record", "سجل الأرشفة"),
   ],
   modalTitles: [
-    b("Preview", "معاينة"), b("Scan", "المسح"), b("Extraction", "الاستخراج"),
+    b("Preview", "معاينة"), b("Scan", "المسح الضوئي"), b("Extraction", "الاستخراج"),
     b("Metadata", "البيانات الوصفية"), b("Barcode or QR", "الباركود أو QR"), b("Archive record", "سجل الأرشفة"),
   ],
   step: b("Step {n} of {N}: {t}", "الخطوة {n} من {N}: {t}"),
@@ -189,7 +189,7 @@ export const DEMO = {
   reading: b("Reading the page…", "جارٍ قراءة الصفحة…"),
   recognized: b("Text recognized: ", "تم التعرّف على النص: "),
   excerptHint: b("An excerpt of the recognized text:", "مقتطف من النص المتعرَّف عليه:"),
-  recogNote: b("ECM+ extracts the text of scanned and image files, so their content is searchable.", "تستخرج ‹ECM+› نص الملفات الممسوحة والصور، فيصبح محتواها قابلًا للبحث."),
+  recogNote: b("ECM+ extracts the text of scanned and image files, so their content is searchable.", "تستخرج ‹ECM+› نص الملفات الممسوحة ضوئيًا والصور، فيصبح محتواها قابلًا للبحث."),
   suggestedType: b("Suggested type", "النوع المقترح"),
   typeLegend: b("Suggested document type", "نوع الوثيقة المقترح"),
   classNote: b("In ECM+ today, staff choose the document type; the AI then fills its index fields.", "في ‹ECM+› اليوم يختار الموظف نوع الوثيقة، ثم يعبّئ الذكاء الاصطناعي حقول الفهرسة."),
@@ -209,7 +209,7 @@ export const DEMO = {
   docType: b("Document type", "نوع الوثيقة"), folder: b("Folder", "المجلد"), code: b("Code", "الرمز"),
   recognition: b("Text recognition", "التعرّف على النص"), done: b("Done, ", "تم، "),
   permissions: b("Permissions", "الصلاحيات"), folderRules: b("Folder rules apply", "تسري قواعد المجلد"),
-  ready: b("Your document is now ready to become part of your enterprise knowledge repository.", "أصبحت وثيقتكم الآن جاهزة لتكون جزءًا من مستودع المعرفة في مؤسستكم."),
+  ready: b("Your document is now ready to become part of your enterprise knowledge repository.", "وثيقتكم الآن جاهزة للانضمام إلى أرشيف مؤسستكم."),
   recordNote: b("Folder permissions, versions and the audit trail apply once the record is saved.", "تسري صلاحيات المجلدات والإصدارات وسجل التدقيق عند حفظ السجل."),
   tagDemo: b("Demonstration", "عرض توضيحي"),
   tagPotential: b("Potential integration", "تكامل محتمل"),
@@ -258,8 +258,8 @@ export const CHANNELS: CardDef[] = [
 
 const SHOWN = b("Shown in the demonstration", "يظهر في العرض التوضيحي");
 export const INTEL: CardDef[] = [
-  { icon: path("image"), title: b("Image processing", "معالجة الصور"), text: b("Straightening, cropping and cleaning scanned pages before recognition.", "تعديل ميل الصفحات الممسوحة وقصّها وتنقيتها قبل التعرّف."), side: { kind: "demo", text: SHOWN } },
-  { icon: sprite("i-ocr"), title: b("Text recognition, Arabic and English", "التعرّف على النصوص بالعربية والإنجليزية"), text: b("OCR reads scanned and image files, so their content is searchable and opens at the matching page.", "يقرأ التعرّف الضوئي (‹OCR›) الملفات الممسوحة والصور، فيصبح محتواها قابلًا للبحث ويُفتح عند الصفحة المطابقة.") },
+  { icon: path("image"), title: b("Image processing", "معالجة الصور"), text: b("Straightening, cropping and cleaning scanned pages before recognition.", "تعديل ميل الصفحات الممسوحة ضوئيًا وقصّها وتنقيتها قبل التعرّف."), side: { kind: "demo", text: SHOWN } },
+  { icon: sprite("i-ocr"), title: b("Text recognition, Arabic and English", "التعرّف على النصوص بالعربية والإنجليزية"), text: b("OCR reads scanned and image files, so their content is searchable and opens at the matching page.", "يقرأ التعرّف الضوئي (‹OCR›) الملفات الممسوحة ضوئيًا والصور، فيصبح محتواها قابلًا للبحث ويُفتح عند الصفحة المطابقة.") },
   { icon: sprite("i-tag"), title: b("Classification", "التصنيف"), text: b("Suggesting the document type from its content. In ECM+ today, staff choose the type, and its index fields follow.", "اقتراح نوع الوثيقة من محتواها. في ‹ECM+› اليوم يختار الموظف النوع، فتتبعه حقول الفهرسة."), side: { kind: "demo", text: SHOWN } },
   { icon: sprite("i-spark"), title: b("Metadata extraction", "استخراج البيانات"), text: b("Auto fill from file reads the document and proposes values for the type’s index fields: text, numbers and dates. Only empty fields are filled, and staff review before saving. An invoice yields its number, date and total; a contract its parties and expiry; an employee file its name, number and hire date.", "تقرأ «التعبئة التلقائية من الملف» الوثيقة وتقترح قيم حقول الفهرسة لنوعها: نصوصًا وأرقامًا وتواريخ. تُعبَّأ الحقول الفارغة فقط، ويراجعها الموظف قبل الحفظ. فتعطي الفاتورة رقمها وتاريخها وإجماليها، والعقد أطرافه وتاريخ انتهائه، وملف الموظف اسمه ورقمه وتاريخ تعيينه.") },
   { icon: path("barcode"), title: b("Barcode and QR codes", "الباركود ورموز QR"), text: b("ECM+ generates a code for each document and stamps it on the pages.", "تولّد ‹ECM+› رمزًا لكل وثيقة وتختمه على صفحاتها."), side: { kind: "potential", text: b("Possible through an integration: reading codes on incoming paper to route or split batches", "ممكن عبر تكامل: قراءة الرموز على الورق الوارد لتوجيه الدفعات أو تقسيمها") } },
@@ -274,7 +274,7 @@ export const BENEFITS: CardDef[] = [
 ];
 
 export const CAPS: { text: Bi; tag?: "demo" | "potential" }[] = [
-  { text: b("Auto-feeder scanning", "المسح عبر وحدة التغذية التلقائية") },
+  { text: b("Auto-feeder scanning", "المسح الضوئي عبر وحدة التغذية التلقائية") },
   { text: b("Voice and video notes captured beside documents", "ملاحظات صوتية ومرئية تُلتقط إلى جانب الوثائق") },
   { text: b("Archive migration from existing systems", "نقل الأرشيفات من الأنظمة القائمة") },
   { text: b("REST API for other systems", "واجهة ‹REST API› للأنظمة الأخرى") },
@@ -308,11 +308,11 @@ export const CTA = {
 const STAGES: { t: Bi; d: Bi; demo?: boolean }[] = [
   { t: b("Preparation", "التحضير"), d: b("Paper files are opened, staples removed and folded sheets flattened before they go to the scanner.", "تُفتح الملفات الورقية وتُزال الدبابيس وتُفرد الأوراق المطوية قبل وصولها إلى الماسح.") },
   { t: b("Classification", "التصنيف"), d: b("Documents are sorted into five categories. In ECM+ today, staff choose the document type.", "تُفرز الوثائق في خمس فئات. في ‹ECM+› اليوم يختار الموظف نوع الوثيقة."), demo: true },
-  { t: b("Scanning", "المسح الضوئي"), d: b("Pages are scanned in batches and uploaded to ECM+. A poor scan is flagged instead of passing through.", "تُمسح الصفحات على دفعات وتُرفع إلى ‹ECM+›. ويُعلَّم المسح الرديء بدل تمريره.") },
-  { t: b("Rescan and quality control", "إعادة المسح ومراقبة الجودة"), d: b("A flagged page goes to a separate line, is scanned again and rejoins the flow.", "تنتقل الصفحة المعلَّمة إلى مسار منفصل وتُمسح من جديد ثم تعود إلى التدفق."), demo: true },
+  { t: b("Scanning", "المسح الضوئي"), d: b("Pages are scanned in batches and uploaded to ECM+. A poor scan is flagged instead of passing through.", "تُمسح الصفحات على دفعات وتُرفع إلى ‹ECM+›. ويُعلَّم المسح الضوئي الرديء بدل تمريره.") },
+  { t: b("Rescan and quality control", "إعادة المسح الضوئي ومراقبة الجودة"), d: b("A flagged page goes to a separate line, is scanned again and rejoins the flow.", "تنتقل الصفحة المعلَّمة إلى مسار منفصل وتُمسح من جديد ثم تعود إلى التدفق."), demo: true },
   { t: b("Extraction", "الاستخراج"), d: b("Text is recognized and values are read from the header, title, references, dates, body, table and footer.", "يُتعرَّف على النص وتُقرأ القيم من الرؤوس والعنوان والمراجع والتواريخ والمحتوى والجدول ونهاية الصفحة."), demo: true },
   { t: b("Metadata", "البيانات الوصفية"), d: b("AI proposes the index fields and staff review them. Only empty fields are filled.", "يقترح الذكاء الاصطناعي حقول الفهرسة ويراجعها الموظف، وتُعبَّأ الحقول الفارغة فقط.") },
-  { t: b("Barcode and archive", "الباركود والأرشفة"), d: b("The digital documents move from the scanning screen to the ECM+ archive, and the record keeps its code as metadata. The barcode or QR code is printed and stamped only on the original paper, which is stored by category in the paper archive.", "تنتقل الوثائق الرقمية من شاشة المسح إلى أرشيف ‹ECM+› ويحتفظ السجل برمزه كبيانات وصفية. أما الباركود أو رمز ‹QR› فيُطبع ويُختم على الأوراق الأصلية فقط، وتُخزَّن حسب الفئة في الأرشيف الورقي.") },
+  { t: b("Barcode and archive", "الباركود والأرشفة"), d: b("The digital documents move from the scanning screen to the ECM+ archive, and the record keeps its code as metadata. The barcode or QR code is printed and stamped only on the original paper, which is stored by category in the paper archive.", "تنتقل الوثائق الرقمية من شاشة المسح الضوئي إلى أرشيف ‹ECM+› ويحتفظ السجل برمزه كبيانات وصفية. أما الباركود أو رمز ‹QR› فيُطبع ويُختم على الأوراق الأصلية فقط، وتُخزَّن حسب الفئة في الأرشيف الورقي.") },
 ];
 const CAT_NAMES: Bi[] = [
   b("Invoices", "الفواتير"), b("Contracts", "العقود"), b("Applications", "الطلبات"),
@@ -338,8 +338,8 @@ export const FACTORY = {
   hints: [
     b("Select a sheet to see its condition and what the worker does", "اختاروا ورقة لتروا حالتها وما سيفعله الموظف بها"),
     b("Select a category bin to open its workflow", "اختاروا حاوية فئة لفتح مسارها"),
-    b("Select the scanning screen to review the scanned documents", "اختاروا شاشة المسح لمراجعة الوثائق الممسوحة"),
-    b("Select the flagged sheet or the screen to follow the rescan", "اختاروا الورقة المعلَّمة أو الشاشة لمتابعة إعادة المسح"),
+    b("Select the scanning screen to review the scanned documents", "اختاروا شاشة المسح الضوئي لمراجعة الوثائق الممسوحة ضوئيًا"),
+    b("Select the flagged sheet or the screen to follow the rescan", "اختاروا الورقة المعلَّمة أو الشاشة لمتابعة إعادة المسح الضوئي"),
     b("Select the document to see the extracted fields", "اختاروا الوثيقة لرؤية الحقول المستخرجة"),
     b("Select the form to see how fields are filled from the document", "اختاروا النموذج لرؤية تعبئة الحقول من الوثيقة"),
     b("Select the archive screen or a box to open the archived document", "اختاروا شاشة الأرشيف أو صندوقًا لفتح الوثيقة المؤرشفة"),
@@ -347,7 +347,7 @@ export const FACTORY = {
   labels: {
     header: b("Header", "الرؤوس"), title: b("Title", "العنوان"), refs: b("References", "المراجع"), dates: b("Dates", "التواريخ"),
     body: b("Body", "المحتوى"), table: b("Table", "الجدول"), footer: b("Footer", "نهاية الصفحة"),
-    manual: b("Manual preparation", "التحضير اليدوي"), rescan: b("Rescan line", "مسار إعادة المسح"), digital: b("Scanning screen: digital documents", "شاشة المسح: الوثائق الرقمية"),
+    manual: b("Manual preparation", "التحضير اليدوي"), rescan: b("Rescan line", "مسار إعادة المسح الضوئي"), digital: b("Scanning screen: digital documents", "شاشة المسح: الوثائق الرقمية"),
     originals: b("Original paper", "الأوراق الأصلية"), archive: b("ECM+ Documents archive", "أرشيف وثائق ECM+‎"),
     paperArchive: b("Original paper: code stamped, archived by category", "الأوراق الأصلية: مختومة بالرمز ومؤرشفة حسب الفئة"),
   } as Record<string, Bi>,

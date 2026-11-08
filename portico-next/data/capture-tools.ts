@@ -36,7 +36,7 @@ export const COND: Record<CondKind, CondDef> = {
   },
   torn: {
     status: "ready", problem: b("Torn corner", "زاوية ممزقة"),
-    explain: b("The damaged corner can mis-feed. The worker supports it with a carrier sheet, and the scanner may still flag the page, which then goes to the rescan line.", "قد تتعثر الزاوية التالفة أثناء التغذية. يدعمها العامل بورقة حاملة، وقد يعلّم الماسح الصفحة فتنتقل إلى مسار إعادة المسح."),
+    explain: b("The damaged corner can mis-feed. The worker supports it with a carrier sheet, and the scanner may still flag the page, which then goes to the rescan line.", "قد تتعثر الزاوية التالفة أثناء التغذية. يدعمها العامل بورقة حاملة، وقد يعلّم الماسح الصفحة فتنتقل إلى مسار إعادة المسح الضوئي."),
     steps: [b("Smooth the torn corner", "تسوية الزاوية الممزقة"), b("Support it with a carrier sheet", "دعمها بورقة حاملة"), b("Place on the ready stack", "وضعها على الأوراق الجاهزة")],
   },
   missing: {
@@ -69,15 +69,15 @@ export const CHECK = {
 
 export type ScanStatus = "ok" | "poor" | "rescanning" | "rescanned";
 export const SCAN = {
-  title: b("Scanning screen", "شاشة المسح"),
-  grid: b("Scanned documents", "الوثائق الممسوحة"),
-  status: { ok: b("Scanned OK", "مسح سليم"), poor: b("Poor scan, sent to rescan", "مسح رديء، أُرسل لإعادة المسح"), rescanning: b("Rescanning…", "جارٍ إعادة المسح…"), rescanned: b("Rescanned OK", "أُعيد مسحه بنجاح") } as Record<ScanStatus, Bi>,
-  quality: b("Scan quality", "جودة المسح"),
-  q: { ok: b("Good: sharp text, straight edges.", "جيدة: نص واضح وحواف مستقيمة."), poor: b("Poor: skewed edge and low contrast near the torn corner.", "رديئة: حافة مائلة وتباين منخفض قرب الزاوية الممزقة."), rescanning: b("Scanning the page again…", "جارٍ مسح الصفحة من جديد…"), rescanned: b("Good after the rescan.", "جيدة بعد إعادة المسح.") } as Record<ScanStatus, Bi>,
+  title: b("Scanning screen", "شاشة المسح الضوئي"),
+  grid: b("Scanned documents", "الوثائق الممسوحة ضوئيًا"),
+  status: { ok: b("Scanned OK", "مسح سليم"), poor: b("Poor scan, sent to rescan", "مسح رديء، أُرسل لإعادة المسح الضوئي"), rescanning: b("Rescanning…", "جارٍ إعادة المسح…"), rescanned: b("Rescanned OK", "أُعيد مسحه بنجاح") } as Record<ScanStatus, Bi>,
+  quality: b("Scan quality", "جودة المسح الضوئي"),
+  q: { ok: b("Good: sharp text, straight edges.", "جيدة: نص واضح وحواف مستقيمة."), poor: b("Poor: skewed edge and low contrast near the torn corner.", "رديئة: حافة مائلة وتباين منخفض قرب الزاوية الممزقة."), rescanning: b("Scanning the page again…", "جارٍ مسح الصفحة من جديد…"), rescanned: b("Good after the rescan.", "جيدة بعد إعادة المسح الضوئي.") } as Record<ScanStatus, Bi>,
   nextSteps: b("Next steps", "الخطوات التالية"),
-  steps: [b("Quality check", "فحص الجودة"), b("Rescan if needed", "إعادة المسح عند الحاجة"), b("Data extraction", "استخراج البيانات"), b("Metadata", "البيانات الوصفية"), b("Barcode / QR code", "الباركود / رمز QR"), b("Archive", "الأرشفة")],
-  rescan: b("Send to rescan", "إرسال لإعادة المسح"),
-  cont: b("Continue processing", "متابعة المعالجة"), openScan: b("Open scan step", "فتح خطوة المسح"),
+  steps: [b("Quality check", "فحص الجودة"), b("Rescan if needed", "إعادة المسح الضوئي عند الحاجة"), b("Data extraction", "استخراج البيانات"), b("Metadata", "البيانات الوصفية"), b("Barcode / QR code", "الباركود / رمز QR"), b("Archive", "الأرشفة")],
+  rescan: b("Send to rescan", "إرسال لإعادة المسح الضوئي"),
+  cont: b("Continue processing", "متابعة المعالجة"), openScan: b("Open scan step", "فتح خطوة المسح الضوئي"),
   pick: b("Select a document", "اختاروا وثيقة"),
 };
 
