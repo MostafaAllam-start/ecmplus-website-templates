@@ -127,6 +127,13 @@ export default function Header({ lang, current, links }: { lang: Lang; current: 
                         <span className="dropdown__d">{h.capture.desc}</span>
                       </a>
                     </li>
+                    <li>
+                      <a href={links.href("chat/")} aria-current={links.ariaCurrent("chat/")}>
+                        <Icon id="i-spark" cls="icon dropdown__icon" />
+                        <span className="dropdown__t">{h.chat.title}<ModuleBadge code="DMS" className="dropdown__code" /></span>
+                        <span className="dropdown__d">{h.chat.desc}</span>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </li>

@@ -27,6 +27,7 @@ export interface ShellDict {
     exploreSuite: string;
     solutions: string;
     capture: { title: string; desc: string };
+    chat: { title: string; desc: string };
     about: string;
     support: { label: string; href: string };
     cta: string;
@@ -65,6 +66,10 @@ export const SHELL: Record<Lang, ShellDict> = {
         title: "Document Capture",
         desc: "Scan, upload or file from email; OCR and AI-filled index fields.",
       },
+      chat: {
+        title: "Chat with Your Documents",
+        desc: "Ask questions across your documents and get answers with sources.",
+      },
       about: "About ECM Plus",
       support: { label: "Support", href: "/support" },
       cta: "Request a demo",
@@ -83,7 +88,7 @@ export const SHELL: Record<Lang, ShellDict> = {
             { href: "meetings/", label: "Board and Committee Management" },
           ],
         },
-        { title: "Solutions", links: [{ href: "capture/", label: "Document Capture" }] },
+        { title: "Solutions", links: [{ href: "capture/", label: "Document Capture" }, { href: "chat/", label: "Chat with Your Documents" }] },
         {
           title: "Sectors",
           links: [
@@ -159,6 +164,10 @@ export const SHELL: Record<Lang, ShellDict> = {
         title: "التقاط الوثائق",
         desc: "مسح ورفع وحفظ من البريد؛ تعرّف على النص وحقول فهرسة يعبّئها الذكاء الاصطناعي.",
       },
+      chat: {
+        title: "الدردشة مع وثائقكم",
+        desc: "اطرحوا أسئلتكم على وثائقكم واحصلوا على إجابات بمصادرها.",
+      },
       about: "عن <bdi>ECM Plus</bdi>",
       support: { label: "الدعم", href: "/support?lang=ar" },
       cta: "اطلب عرضًا تجريبيًا",
@@ -177,7 +186,7 @@ export const SHELL: Record<Lang, ShellDict> = {
             { href: "meetings/", label: "إدارة المجالس واللجان" },
           ],
         },
-        { title: "الحلول", links: [{ href: "capture/", label: "التقاط الوثائق" }] },
+        { title: "الحلول", links: [{ href: "capture/", label: "التقاط الوثائق" }, { href: "chat/", label: "الدردشة مع وثائقكم" }] },
         {
           title: "القطاعات",
           links: [
