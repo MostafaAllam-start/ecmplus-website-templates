@@ -170,3 +170,39 @@
   .ks__label.is-on { transition: none; }
   .ks__q-t::after, .ks__q-s.is-on { animation: none; }
 }
+
+/* ---- Full screen: stage fills the height, stage list and explanation stay beside it ---- */
+.ks:fullscreen, .ks.ks-pfs { background: var(--sp-surface); inline-size: 100vw; block-size: 100vh; block-size: 100dvh; margin: 0; padding: 12px; box-sizing: border-box; overflow: auto; display: flex; flex-direction: column; }
+.ks.ks-pfs { position: fixed; inset: 0; z-index: 1000; }
+.ks:fullscreen::backdrop { background: var(--ks-bg); }
+.ks[data-full="true"] .ks__main { flex: 1 1 auto; min-block-size: 0; grid-template-rows: minmax(0, 1fr); }
+.ks[data-full="true"] .ks__stage { aspect-ratio: auto; block-size: 100%; min-block-size: 0; }
+@media (min-width: 1024px) {
+  .ks[data-full="true"] .ks__main { grid-template-columns: minmax(0, 1fr) 22rem; }
+  .ks[data-full="true"] .ks__side { overflow-y: auto; max-block-size: 100%; }
+}
+@media (max-width: 1023.98px) {
+  .ks[data-full="true"] .ks__main { grid-template-rows: minmax(0, 1fr) auto; }
+  .ks[data-full="true"] .ks__side { max-block-size: 38vh; overflow-y: auto; }
+}
+html.ks-pfs-lock { overflow: hidden; }
+
+/* ---- Collapsible stage card: title always, details on demand ---- */
+.ks__caption { inline-size: fit-content; }
+.ks__caption-t { display: flex; align-items: flex-start; gap: 10px; min-block-size: 28px; }
+.ks__caption-t > span { flex: 1 1 auto; min-inline-size: 0; padding-block-start: 4px; }
+.ks__caption-x { flex: none; display: grid; place-items: center; inline-size: 28px; block-size: 28px; margin-block-start: -2px; margin-inline-end: -6px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--ks-mute); cursor: pointer; pointer-events: auto; }
+.ks__caption-x:hover { background: rgba(232, 184, 74, .18); color: var(--ks-ink); }
+.ks__caption-x:focus-visible { outline: 2px solid var(--ks-gold); outline-offset: 1px; }
+.ks__caption-x svg { inline-size: 14px; block-size: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: rotate .2s; }
+.ks__caption[data-open="false"] .ks__caption-x svg { rotate: 180deg; }
+@media (pointer: coarse) { .ks__caption-x { inline-size: 44px; block-size: 44px; margin-block-start: -8px; margin-inline-end: -12px; } }
+.ks__caption-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .25s var(--ease, ease), opacity .2s; }
+.ks__caption-body > div { overflow: hidden; min-block-size: 0; }
+.ks__caption-d { margin: 4px 0 0; font: 400 .8125rem/1.5 var(--sp-body); color: var(--ks-mute); }
+.ks__caption[data-open="false"] .ks__caption-body { grid-template-rows: 0fr; opacity: 0; visibility: hidden; transition: grid-template-rows .25s var(--ease, ease), opacity .2s, visibility 0s .25s; }
+@media (max-width: 767.98px) {
+  .ks__caption-t > span { white-space: normal; overflow: visible; text-overflow: clip; }
+  .ks__caption-t { font-size: .8125rem; white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) { .ks__caption-body, .ks__caption-x svg { transition: none; } }

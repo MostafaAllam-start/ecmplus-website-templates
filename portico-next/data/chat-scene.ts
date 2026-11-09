@@ -33,7 +33,7 @@ export interface SceneCopy {
   stageOf: string;
   pageWord: string;
   ui: {
-    play: string; pause: string; replay: string; prev: string; next: string;
+    play: string; pause: string; replay: string; fullscreen: string; exitFullscreen: string; collapse: string; expand: string; prev: string; next: string;
     navLabel: string; loading: string; fallback: string; close: string; open: string;
     searching: string; sourceDialog: string; fromDocument: string;
   };
@@ -173,7 +173,7 @@ export function sceneCopy(lang: Lang): SceneCopy {
     stageOf: ui("Stage {n} of {N}: {t}", "المرحلة {n} من {N}: {t}"),
     pageWord: ui("Page", "الصفحة"),
     ui: {
-      play: ui("Play", "تشغيل"), pause: ui("Pause", "إيقاف مؤقت"), replay: ui("Replay from the start", "إعادة العرض من البداية"),
+      play: ui("Play", "تشغيل"), pause: ui("Pause", "إيقاف مؤقت"), replay: ui("Replay from the start", "إعادة العرض من البداية"), fullscreen: ui("Full screen", "ملء الشاشة"), exitFullscreen: ui("Exit full screen", "الخروج من ملء الشاشة"), collapse: ui("Hide details", "إخفاء التفاصيل"), expand: ui("Show details", "إظهار التفاصيل"),
       prev: ui("Previous stage", "المرحلة السابقة"), next: ui("Next stage", "المرحلة التالية"),
       navLabel: ui("Processing stages", "مراحل المعالجة"),
       loading: ui("Loading the animation…", "جارٍ تحميل الرسم المتحرك…"),

@@ -82,7 +82,7 @@ const EN = {
     "k18": "Search by meaning and land on the exact page inside the file.",
     "k19": "Automatic indexing",
     "k20": "Index fields are filled from the document’s content and reviewed before saving.",
-    "k21": "Optical text recognition (OCR)",
+    "k21": "Optical character recognition (OCR)",
     "k22": "Scanned paper archives become searchable text.",
     "k23": "Audio and video transcripts",
     "k24": "Written transcripts of your audio and video files."
@@ -359,7 +359,7 @@ const AR: HomeCopy = {
     "k18": "ابحثوا بالمعنى، وصولًا إلى الصفحة المطلوبة داخل الملف.",
     "k19": "الفهرسة التلقائية",
     "k20": "تعبئة حقول الفهرسة من محتوى الوثيقة، ومراجعتها قبل الحفظ.",
-    "k21": "التعرّف الضوئي على النصوص",
+    "k21": "التعرّف الضوئي على الحروف",
     "k22": "الأرشيف الورقي الممسوح يصبح نصًا قابلًا للبحث.",
     "k23": "تفريغ الصوت والفيديو",
     "k24": "نصوص مكتوبة لملفات الصوت والفيديو."
