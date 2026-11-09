@@ -210,7 +210,7 @@ export function buildCaptureMain(ctx, h) {
   const picks = Object.entries(SAMPLES).map(([k, s]) => `<button type="button" class="cap-pick" data-pick="${k}" aria-pressed="false"><span class="cap-pick__mini" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="cap-pick__name">${s.name[lang]}</span><span class="cap-pick__meta">${s.langs[lang]} · ${t(s.pages === 1 ? "1 page" : `${s.pages} pages`, s.pages === 1 ? "صفحة واحدة" : `${s.pages} صفحات`)}</span><span class="cap-pick__via">${t("Captured via", "طريقة الالتقاط")}: ${s.via[lang]}</span></button>`).join("\n            ");
 
   const zones = [
-    ["head", t("Header", "الترويسة")], ["ref", t("Reference details", "بيانات المرجع")], ["body", t("Content", "المحتوى")],
+    ["head", t("Header", "الرؤوس")], ["ref", t("Reference details", "بيانات المرجع")], ["body", t("Content", "المحتوى")],
     ["total", t("Totals and key terms", "الإجماليات والبنود الأساسية")], ["sign", t("Signature", "التوقيع")], ["code", t("Code area", "منطقة الرمز")],
   ];
   const zoneBtns = zones.map(([k, l]) => `<button type="button" class="cap-zonebtn" data-zonebtn="${k}" aria-pressed="false">${l}</button>`).join("");
