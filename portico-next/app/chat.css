@@ -1,19 +1,15 @@
 /* Chat with Your Documents (Portico). Class prefix ch-; the 3D scene's styles live in chat-scene.css (ks-). */
 
-/* ---- Hero visual ---- */
-.ch-art { position: relative; min-block-size: 320px; overflow: hidden; isolation: isolate; border: 1px solid color-mix(in srgb, var(--sp-accent) 35%, #1b2740); border-radius: var(--sp-radius); background: #070d1c; box-shadow: 0 24px 60px -28px rgba(7, 13, 28, .65); }
-.ch-art__img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: 40% 50%; z-index: -1; }
+/* ---- Hero visual: the picture shows in full, the sample exchange sits below it ---- */
+.ch-art { position: relative; display: grid; min-block-size: 0; overflow: hidden; isolation: isolate; border: 1px solid color-mix(in srgb, var(--sp-accent) 35%, #1b2740); border-radius: var(--sp-radius); background: #070d1c; box-shadow: 0 24px 60px -28px rgba(7, 13, 28, .65); }
+.ch-art__img { display: block; inline-size: 100%; block-size: auto; aspect-ratio: 1408 / 768; object-fit: contain; }
 [dir="rtl"] .ch-art__img { scale: -1 1; }
-.ch-art::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent 38%, rgba(7, 13, 28, .78)); }
-.ch-art__chat {
-  position: absolute; inset-inline: 16px; inset-block-end: 40px; display: grid; gap: 6px; padding: 14px 16px; border-radius: 14px;
-  background: rgba(10, 18, 38, .62); border: 1px solid rgba(255, 255, 255, .16); color: #eaf0ff; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-}
+.ch-art__chat { display: grid; gap: 6px; margin: 0 14px; padding: 14px 16px; border-radius: 14px; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .16); color: #eaf0ff; }
 .ch-art__q { margin: 0; font-size: .8125rem; line-height: 1.45; color: #aebbdc; }
 .ch-art__a { margin: 0; font-size: 1rem; line-height: 1.45; font-weight: 600; color: #fff; }
 .ch-art__s { margin: 0; display: flex; align-items: center; gap: 8px; font-size: .75rem; color: #f1c35d; }
 .ch-art__ic { inline-size: 14px; block-size: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.ch-art__note { position: absolute; inset-inline: 16px; inset-block-end: 12px; margin: 0; font-size: .6875rem; color: #8d9bbd; }
+.ch-art__note { margin: 0; padding: 10px 16px 12px; font-size: .6875rem; color: #8d9bbd; }
 .ch-ic { inline-size: 24px; block-size: 24px; }
 
 .ch-lead { max-inline-size: 62ch; margin: 0 0 28px; }
@@ -172,10 +168,21 @@
   .ch-ba__arrow { rotate: 90deg; justify-self: center; }
   .ch-flow, .ch-gloss { grid-template-columns: minmax(0, 1fr); }
   .ch-flow li::after { display: none !important; }
-  .ch-art { min-block-size: 260px; }
   .ch-chat__win { max-block-size: none; }
   .ch-doc { padding: 16px 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ch-ans, .ch-search i { animation: none !important; }
 }
+
+/* ---- Assistant window header: follows the site theme (soft in light mode, deep in dark mode) ---- */
+.ch-chat__bar { position: relative; background: linear-gradient(180deg, var(--sp-surface), var(--sp-alt)); color: var(--sp-ink); border-block-end: 1px solid var(--sp-line); }
+.ch-chat__bar::after { content: ""; position: absolute; inset-inline: 0; inset-block-end: -1px; block-size: 2px; background: linear-gradient(90deg, var(--sp-accent), transparent 70%); }
+[dir="rtl"] .ch-chat__bar::after { background: linear-gradient(270deg, var(--sp-accent), transparent 70%); }
+.ch-chat__dots i { background: var(--sp-line-strong); }
+.ch-chat__dots i:first-child { background: var(--sp-accent); }
+.ch-chat__name { font-size: 1rem; }
+.ch-chat__name svg { inline-size: 18px; block-size: 18px; padding: 4px; box-sizing: content-box; border-radius: 8px; background: var(--gold-tint); border: 1px solid var(--sp-accent); stroke: var(--sp-accent-text); }
+.ch-chat__reset { border-color: var(--sp-line-strong); color: var(--sp-ink-2); background: var(--sp-surface); }
+.ch-chat__reset:hover:not(:disabled) { border-color: var(--sp-accent); background: var(--gold-tint); color: var(--sp-ink); }
+.ch-chat__reset:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; box-shadow: 0 0 0 4px var(--gold-ring); }
