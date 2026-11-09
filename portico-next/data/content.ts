@@ -1,0 +1,577 @@
+// Copy for the module and About pages, shared by all four templates.
+// Every claim comes from content/copy-deck.md (checked against the ECM+ product).
+// Arabic follows the deck's glossary; Latin names sit inside <bdi>.
+// Ported from scripts/subpages-content.mjs (original untouched).
+
+export const MODULES = ["documents", "correspondence", "processes", "meetings"];
+
+export type Lang = "en" | "ar";
+export type PairList = [string, string][];
+export interface PageCopy {
+  name?: string; short: string; verb?: string; line?: string; metaTitle: string; description: string;
+  h1: string; lead: string;
+  overviewTitle?: string; overview?: string[]; capabilities?: PairList; howTitle?: string; steps?: PairList;
+  // About page
+  eyebrow?: string; whoLabel?: string; whoTitle?: string; who?: string[]; suiteLabel?: string; suiteTitle?: string;
+  valuesLabel?: string; valuesTitle?: string; values?: PairList; partnerLabel?: string; partnerTitle?: string; partner?: string;
+  supportLabel?: string; supportTitle?: string; support?: string; supportLinks?: [string, string][];
+}
+export interface PageDef { code?: string; photo?: string; services?: string[]; en: PageCopy; ar: PageCopy }
+export interface ServiceDef { name: string | { en: string; ar: string }; logo?: string; ecm?: boolean; glyph?: string; wide?: boolean }
+export interface CtaApp { nav: string[]; rows: [string, string, string][] }
+export interface UiStrings {
+  home: string; suite: string; crumbsLabel: string; overview: string; capabilities: string; capabilitiesTitle: string;
+  how: string; worksWith: string; worksWithTitle: string; related: string; relatedTitle: string; demo: string; explore: string;
+  ctaTitle: string; ctaText: string; ctaEyebrow: string; supportCentre: string; ctaApp: CtaApp; details: string; ctaNav?: string[];
+}
+
+
+export const GLYPHS: Record<string, string> = {
+  documents: '<path d="M3 4h18v4H3zM5 8v12h14V8M10 12h4"/>',
+  correspondence: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+  processes: '<rect x="8" y="2.5" width="8" height="5" rx="1.2"/><path d="M12 7.5v2M12 9.5l3 3-3 3-3-3z"/><path d="M9 12.5H5.5v4M15 12.5h3.5v4"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.2"/>',
+  meetings: '<circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M13 14.6a5 5 0 0 1 8.5 5.4"/>',
+};
+
+// Services shown on the module pages; logo files are the approved marks in assets/brands/.
+// Services without a logo carry a line icon (glyph) drawn in the template's gold.
+export const SERVICES: Record<string, ServiceDef> = {
+  teams: { name: "Microsoft Teams", logo: "brands/microsoft-teams.svg" },
+  meet: { name: "Google Meet", logo: "brands/google-meet.svg" },
+  zoom: { name: "Zoom", logo: "brands/zoom.svg" },
+  beem: { name: "Beem", logo: "brands/beem.svg" },
+  ecmmeet: { name: "ECM+ Meet", ecm: true },
+  calendar: { name: "Google Calendar", logo: "brands/google-calendar.svg" },
+  drive: { name: "Google Drive", logo: "brands/google-drive.svg" },
+  onedrive: { name: "OneDrive", logo: "brands/onedrive.svg" },
+  gmail: { name: "Gmail", logo: "brands/gmail.svg" },
+  outlook: { name: "Outlook", logo: "brands/microsoft-outlook.svg" },
+  word: { name: "Microsoft Word", logo: "brands/microsoft-word.svg" },
+  excel: { name: "Excel", logo: "brands/microsoft-excel.svg" },
+  powerpoint: { name: "PowerPoint", logo: "brands/microsoft-powerpoint.svg" },
+  whatsapp: { name: { en: "WhatsApp", ar: "واتساب" }, logo: "brands/whatsapp.svg" },
+  sms: { name: { en: "SMS", ar: "الرسائل النصية" }, glyph: '<path d="M12 4.5c4.7 0 8.5 3 8.5 6.7S16.7 18 12 18c-1 0-2-.1-2.9-.4L5 19.5l1-3.5c-1.6-1.2-2.5-2.9-2.5-4.8C3.5 7.5 7.3 4.5 12 4.5z"/><path d="M8.5 11.3h.01M12 11.3h.01M15.5 11.3h.01" stroke-width="2.6"/>' },
+  email: { name: { en: "Email", ar: "البريد الإلكتروني" }, glyph: '<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/>' },
+  nafath: { name: { en: "Nafath", ar: "نفاذ" }, logo: "brands/nafath.png", wide: true },
+  systems: { name: { en: "Your business systems", ar: "أنظمة مؤسستكم" }, glyph: '<rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/><path d="M10.5 6.75h3.75a3 3 0 0 1 3 3v3.75M13.5 17.25H9.75a3 3 0 0 1-3-3V10.5"/>' },
+  databases: { name: { en: "Your existing databases", ar: "قواعد بياناتكم القائمة" }, glyph: '<ellipse cx="12" cy="5.5" rx="7.5" ry="2.5"/><path d="M4.5 5.5v13c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5v-13M4.5 12c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5"/>' },
+};
+
+export const UI: Record<Lang, UiStrings> = {
+  en: {
+    home: "Home",
+    suite: "Suite",
+    crumbsLabel: "Breadcrumb",
+    overview: "Overview",
+    capabilities: "Capabilities",
+    capabilitiesTitle: "Key capabilities",
+    how: "How it works",
+    worksWith: "Works with",
+    worksWithTitle: "Direct links to the tools your organization relies on every day",
+    related: "The suite",
+    relatedTitle: "The other modules",
+    demo: "Request a demo",
+    explore: "Explore the suite",
+    ctaTitle: "See ECM+ with your organization’s own scenarios.",
+    ctaText: "Our team arranges a demo in Arabic or English, focused on the modules that matter to your organization.",
+    ctaEyebrow: "Next step",
+    supportCentre: "Support centre",
+    ctaApp: {
+      nav: ["Correspondence", "Documents", "Meetings", "Processes"],
+      rows: [
+        ["Incoming correspondence", "Awaiting signature", "gold"],
+        ["Meeting minutes", "Under review", ""],
+        ["Approval request", "Approved", "ok"],
+      ],
+    },
+    details: "Module details",
+  },
+  ar: {
+    home: "الرئيسية",
+    suite: "المنظومة",
+    crumbsLabel: "مسار التنقل",
+    overview: "نظرة عامة",
+    capabilities: "القدرات",
+    capabilitiesTitle: "أبرز القدرات",
+    how: "آلية العمل",
+    worksWith: "يتكامل مع",
+    worksWithTitle: "ربط مباشر بالأدوات التي تعتمد عليها مؤسستكم يوميًا",
+    related: "المنظومة",
+    relatedTitle: "الأنظمة الأخرى",
+    demo: "اطلب عرضًا تجريبيًا",
+    explore: "استكشف المنظومة",
+    ctaTitle: "شاهدوا منظومة <bdi>ECM+</bdi> وفق سيناريوهات المؤسسة الخاصة بكم.",
+    ctaText: "يرتّب فريقنا عرضًا تجريبيًا بالعربية أو الإنجليزية، يركّز على الأنظمة التي تهمّ مؤسستكم.",
+    ctaEyebrow: "الخطوة التالية",
+    supportCentre: "مركز الدعم",
+    ctaApp: {
+      nav: ["المراسلات", "الوثائق", "الاجتماعات", "الإجراءات"],
+      rows: [
+        ["مراسلة واردة", "بانتظار التوقيع", "gold"],
+        ["محضر اجتماع", "قيد المراجعة", ""],
+        ["طلب اعتماد", "معتمد", "ok"],
+      ],
+    },
+    details: "تفاصيل النظام",
+  },
+};
+
+export const PAGES: Record<string, PageDef> = {
+  documents: {
+    code: "DMS",
+    photo: "p02-archive",
+    services: ["drive", "onedrive", "word", "excel", "powerpoint", "outlook", "whatsapp", "sms"],
+    en: {
+      name: "Document Management",
+      short: "Documents",
+      verb: "Archive",
+      line: "Capture, classify, version and retrieve every document.",
+      metaTitle: "Document Management (DMS) — ECM Plus",
+      description: "Archive and find every document with AI search that finds the exact page, index fields filled by AI, access permissions, versions and retention rules.",
+      h1: "An orderly archive, with AI search that finds the exact page you need.",
+      lead: "ECM+ captures and classifies documents, lets you edit their files and restore earlier versions, under set access permissions and retention rules, with every action recorded in the audit trail.",
+      overviewTitle: "One archive for the whole organization",
+      overview: [
+        "Every document is filed under a document type with its own index fields, in folders that carry their own access permissions.",
+        "Staff reach documents through AI search by meaning or through their index fields, open the page they need directly, and edit the file without leaving the suite.",
+      ],
+      capabilities: [
+        ["AI search", "Finds documents by meaning as well as by exact words, and highlights matches on the pages where they appear. Voice search and search history are included."],
+        ["Index fields filled by AI", "As a document is archived, AI extracts its index data from the file, including text, numbers and dates, and fills the fields automatically, ready for staff to review."],
+        ["Document types", "Each document type has its own index fields: text, number, date, dropdown, multi-select and checkbox."],
+        ["Folder access permissions", "9 permission types per folder, from View and Print to “View without watermark”."],
+        ["Version history", "Every file keeps its full version history, and any version can be restored or downloaded."],
+        ["Retention rules", "Delete or notify actions run on schedule, with a log of every execution."],
+        ["Locked documents", "A locked document opens only with a one-time verification code sent by email, SMS or WhatsApp. Its content stays hidden in search."],
+        ["Reports", "The report designer produces complete reports and exports them to PDF, Word or Excel."],
+      ],
+      howTitle: "How a document moves through the archive",
+      steps: [
+        ["Capture", "Files arrive from devices, scanners, templates, Google Drive or OneDrive, or as voice and video notes."],
+        ["Index", "AI fills the document type’s index fields from the file, and staff confirm them before saving."],
+        ["Protect", "Folder permissions and locked documents control who sees each page, and the access trace code records every view and download."],
+        ["Find", "AI search finds documents by meaning and opens the matching page."],
+        ["Retain", "Retention rules delete documents or send notifications on schedule, and every action is logged."],
+      ],
+    },
+    ar: {
+      name: "نظام إدارة الوثائق",
+      short: "الوثائق",
+      verb: "أرشفة",
+      line: "التقاط الوثائق وتصنيفها وإدارة إصداراتها واسترجاعها.",
+      metaTitle: "نظام إدارة الوثائق (DMS) — ECM Plus",
+      description: "أرشفة الوثائق واسترجاعها مع بحث بالذكاء الاصطناعي يصل إلى الصفحة المطلوبة، وتعبئة حقول الفهرسة تلقائيًا، وصلاحيات الوصول، والإصدارات، وقواعد الاحتفاظ.",
+      h1: "أرشيف منظَّم، وبحث بالذكاء الاصطناعي يصل إلى الصفحة المطلوبة.",
+      lead: "تلتقط منظومة <bdi>ECM+</bdi> الوثائق وتصنّفها، وتتيح تحرير ملفاتها واستعادة إصداراتها السابقة، ضمن صلاحيات وصول وقواعد احتفاظ محددة، مع سجل تتبع لكل عملية.",
+      overviewTitle: "أرشيف واحد للمؤسسة بأكملها",
+      overview: [
+        "تُحفظ كل وثيقة ضمن نوع وثيقة له حقول فهرسة خاصة به، وفي مجلدات لكل منها صلاحيات وصول مستقلة.",
+        "ويصل الموظفون إلى الوثائق بالبحث الذكي حسب المعنى أو عبر حقول الفهرسة، فتُفتح الصفحة المطلوبة مباشرةً، ويُحرَّر الملف دون مغادرة المنظومة.",
+      ],
+      capabilities: [
+        ["البحث بالذكاء الاصطناعي", "يعثر على الوثائق بحسب المعنى إلى جانب الكلمات المطابقة، ويُبرز مواضع التطابق داخل صفحات الوثيقة، مع البحث الصوتي وسجل البحث."],
+        ["تعبئة حقول الفهرسة بالذكاء الاصطناعي", "يستخرج الذكاء الاصطناعي بيانات الفهرسة من الملف عند أرشفته، من نصوص وأرقام وتواريخ، ويعبّئ بها الحقول تلقائيًا لتكون جاهزة لمراجعة الموظف."],
+        ["أنواع الوثائق", "لكل نوع وثيقة حقول فهرسة خاصة به: نص ورقم وتاريخ وقائمة منسدلة واختيار متعدد ومربع اختيار."],
+        ["صلاحيات الوصول إلى المجلدات", "9 أنواع من الصلاحيات لكل مجلد، من العرض والطباعة إلى «العرض دون علامة مائية»."],
+        ["سجل الإصدارات", "يحتفظ كل ملف بسجل إصداراته كاملًا، ويمكن استعادة أي إصدار أو تنزيله."],
+        ["قواعد الاحتفاظ", "تُنفَّذ عمليات الحذف أو التنبيه وفق جداول زمنية محددة، مع سجل لكل عملية تنفيذ."],
+        ["الوثائق المقفلة", "لا تُفتح الوثيقة المقفلة إلا برمز تحقق لمرة واحدة يُرسَل عبر البريد الإلكتروني أو الرسائل النصية أو واتساب، ويبقى محتواها محجوبًا في نتائج البحث."],
+        ["التقارير", "يتيح مصمم التقارير إعداد تقارير متكاملة وتصديرها بصيغ <bdi>PDF</bdi> و<bdi>Word</bdi> و<bdi>Excel</bdi>."],
+      ],
+      howTitle: "مسار الوثيقة في الأرشيف",
+      steps: [
+        ["الالتقاط", "تصل الملفات من الأجهزة والماسحات الضوئية والقوالب و<bdi>Google Drive</bdi> و<bdi>OneDrive</bdi>، أو كملاحظات صوتية ومرئية."],
+        ["الفهرسة", "يعبّئ الذكاء الاصطناعي حقول الفهرسة لنوع الوثيقة من الملف، ويؤكدها الموظف قبل الحفظ."],
+        ["الحماية", "تتحكم صلاحيات المجلدات والوثائق المقفلة فيمن يطّلع على كل صفحة، ويوثّق رمز الوصول كل عملية اطّلاع أو تنزيل."],
+        ["البحث", "يعثر البحث بالذكاء الاصطناعي على الوثائق بحسب المعنى، ويفتح الصفحة المطابقة."],
+        ["الاحتفاظ", "تحذف قواعد الاحتفاظ الوثائق أو تنبّه إليها وفق الجدول الزمني، مع توثيق كل خطوة."],
+      ],
+    },
+  },
+
+  correspondence: {
+    code: "CMS",
+    photo: "p03-correspondence",
+    services: ["gmail", "outlook"],
+    en: {
+      name: "Correspondence Management",
+      short: "Correspondence",
+      verb: "Correspond",
+      line: "Register, route, approve and dispatch official correspondence.",
+      metaTitle: "Correspondence Management (CMS) — ECM Plus",
+      description: "Register incoming, outgoing and internal correspondence with serial numbers, then route, approve and dispatch it with a full record of every step.",
+      h1: "Every item of correspondence is registered, routed and approved, with a full record.",
+      lead: "ECM+ registers incoming, outgoing and internal correspondence with serial numbers, routes it to the right people, and records every step until it is closed.",
+      overviewTitle: "Official correspondence at every stage",
+      overview: [
+        "Each correspondence carries a serial number, external references, its sender and recipient, a priority, a sensitivity level, a due date and tags.",
+        "Review and approval take place before anything leaves the organization, and the correspondence graph shows the path of each item.",
+      ],
+      capabilities: [
+        ["3 directions", "Incoming, outgoing and internal correspondence, with serial numbers and external references."],
+        ["Routing to anyone", "Correspondence is routed to employees, groups, departments or external parties, as To, CC or BCC."],
+        ["Instructions in any form", "Instructions are attached as text, a file, a voice note or a video note."],
+        ["Review and approval", "Correspondence is sent for review, then approved or returned before dispatch."],
+        ["External dispatch", "The Outgoing Officer prints, stamps and dispatches approved correspondence."],
+        ["Correspondence graph", "A visual map shows where each correspondence went, with a log of every action."],
+        ["Routing rules", "Rules forward correspondence automatically by trigger, conditions and recipients."],
+        ["Mail inbox", "Gmail, Outlook or a business email account connects to the suite, and emails are filed into a correspondence or the archive."],
+      ],
+      howTitle: "How a correspondence is handled",
+      steps: [
+        ["Register", "The correspondence receives a serial number, its sender and recipient, and its due date."],
+        ["Route", "It is routed to the responsible employees or departments, with instructions."],
+        ["Review", "The outgoing correspondence is reviewed, then approved or returned."],
+        ["Dispatch", "The Outgoing Officer prints, stamps and dispatches the approved correspondence."],
+        ["Archive", "The correspondence is closed and archived with its full record."],
+      ],
+    },
+    ar: {
+      name: "نظام إدارة المراسلات",
+      short: "المراسلات",
+      verb: "مراسلة",
+      line: "تسجيل المراسلات الرسمية وإحالتها واعتمادها وإرسالها.",
+      metaTitle: "نظام إدارة المراسلات (CMS) — ECM Plus",
+      description: "تسجيل المراسلات الواردة والصادرة والداخلية بأرقام تسلسلية، وإحالتها واعتمادها وإرسالها، مع سجل كامل لكل خطوة.",
+      h1: "تُسجَّل كل مراسلة وتُحال وتُعتمد، مع سجل كامل لكل خطوة.",
+      lead: "تسجّل منظومة <bdi>ECM+</bdi> المراسلات الواردة والصادرة والداخلية بأرقام تسلسلية، وتحيلها إلى المختصين، وتوثّق كل خطوة حتى إغلاقها.",
+      overviewTitle: "ضبط المراسلات الرسمية في جميع مراحلها",
+      overview: [
+        "تحمل كل مراسلة رقمًا تسلسليًا ومراجع خارجية، وتُحدَّد فيها الجهة المرسِلة والمرسَل إليها، والأولوية ودرجة السرية وتاريخ الاستحقاق والوسوم.",
+        "وتجري المراجعة والاعتماد قبل خروج أي مراسلة من المؤسسة، ويعرض مخطط المراسلة المسار الذي سلكته.",
+      ],
+      capabilities: [
+        ["3 اتجاهات", "مراسلات واردة وصادرة وداخلية، بأرقام تسلسلية ومراجع خارجية."],
+        ["الإحالة إلى أي جهة", "تُحال المراسلات إلى الموظفين أو المجموعات أو الإدارات أو الجهات الخارجية، بصفة «إلى» أو «نسخة» أو «نسخة مخفية»."],
+        ["تعليمات بأي صيغة", "تُرفق التعليمات نصًّا أو ملفًا أو ملاحظة صوتية أو مرئية."],
+        ["المراجعة والاعتماد", "تُرسَل المراسلة للمراجعة، ثم تُعتمد أو تُعاد قبل إرسالها."],
+        ["الإرسال الخارجي", "يطبع موظف الصادر المراسلة المعتمدة ويختمها ويرسلها."],
+        ["مخطط المراسلة", "يعرض مخطط مرئي المسار الذي سلكته كل مراسلة، مع سجل لكل خطوة."],
+        ["قواعد الإحالة", "تُحيل القواعد المراسلات تلقائيًا وفق المحفّز والشروط والمستلمين."],
+        ["صندوق البريد", "يُربط <bdi>Gmail</bdi> أو <bdi>Outlook</bdi> أو أي بريد مؤسسي بالمنظومة، وتُحفظ الرسائل ضمن مراسلة أو في الأرشيف."],
+      ],
+      howTitle: "مسار المراسلة",
+      steps: [
+        ["التسجيل", "تحصل المراسلة على رقم تسلسلي، وتُحدَّد الجهة المرسِلة والمرسَل إليها وتاريخ الاستحقاق."],
+        ["الإحالة", "تُحال إلى الموظفين أو الإدارات المختصة مع التعليمات."],
+        ["المراجعة", "تُراجَع المراسلة الصادرة، ثم تُعتمد أو تُعاد."],
+        ["الإرسال", "يطبع موظف الصادر المراسلة المعتمدة ويختمها ويرسلها."],
+        ["الأرشفة", "تُغلق المراسلة وتُؤرشف مع سجلها الكامل."],
+      ],
+    },
+  },
+
+  processes: {
+    code: "BPM",
+    photo: "p04-process",
+    services: ["email", "whatsapp", "systems", "databases"],
+    en: {
+      name: "Business Process Management",
+      short: "Processes",
+      verb: "Automate",
+      line: "Design processes, build forms and run them with deadlines.",
+      metaTitle: "Business Process Management (BPM) — ECM Plus",
+      description: "Design processes visually, build forms, and run them with deadlines, automatic escalation and full oversight.",
+      h1: "Processes are designed in BPMN, given their forms, and monitored step by step.",
+      lead: "ECM+ turns your organization’s procedures into processes with forms, assigned tasks and time limits, and shows where every request stands.",
+      overviewTitle: "From a documented procedure to a running process",
+      overview: [
+        "A visual designer defines the steps, decisions, paths and timers of each process.",
+        "Forms collect the data, tasks reach the right people, and each step escalates automatically when its deadline passes.",
+      ],
+      capabilities: [
+        ["Visual process designer", "Steps, decisions, paths and timers follow the BPMN standard. Each process can be tested step by step before it goes live."],
+        ["7 kinds of steps", "Tasks for people, automatic steps, data exchange with other systems, data from existing databases, notifications, archiving and PDF documents."],
+        ["Form designer", "Drag-and-drop, signature and conditional fields, multi-page forms with layouts for mobile, tablet and desktop, and a scripting language for controlling how forms and their fields behave."],
+        ["Data sources and connections", "Forms draw on data sources connected to databases and APIs, with full control over the secret credentials of every connection."],
+        ["Assignment and deadlines", "Tasks go to a person, department, group, manager or someone named in the form, with shared task pools. Each step has a time limit and escalates automatically when it passes."],
+        ["Versioned processes", "Processes are drafted, published, retired and restored, and each one has its own list of who may start it."],
+        ["Oversight", "Administrators find stuck or failed steps, retry them, and pause, resume or stop a process."],
+        ["Starter templates", "Approval, leave request, employee onboarding, order fulfilment and applicant processing."],
+      ],
+      howTitle: "From design to a running process",
+      steps: [
+        ["Design", "The steps, decisions and timers are defined in the visual designer."],
+        ["Build the forms", "The form builder creates the forms that each step needs."],
+        ["Test", "The process runs step by step before it is published."],
+        ["Run", "Requests move through the steps, and tasks reach the assigned people."],
+        ["Monitor", "Tasks escalate automatically when their deadlines pass, and administrators resolve stuck steps."],
+      ],
+    },
+    ar: {
+      name: "نظام إدارة سير الإجراءات",
+      short: "الإجراءات",
+      verb: "أتمتة",
+      line: "تصميم الإجراءات وبناء النماذج وتنفيذها وفق مهل زمنية.",
+      metaTitle: "نظام إدارة سير الإجراءات (BPM) — ECM Plus",
+      description: "تصميم الإجراءات بمصمم مرئي، وبناء النماذج، وتنفيذها وفق مهل زمنية مع التصعيد التلقائي والمتابعة الكاملة.",
+      h1: "تُصمَّم الإجراءات وفق معيار <bdi>BPMN</bdi>، وتُبنى نماذجها، ويُتابَع سير العمل خطوة بخطوة.",
+      lead: "تحوّل منظومة <bdi>ECM+</bdi> إجراءات مؤسستكم إلى إجراءات إلكترونية بنماذج ومهام مسندة ومهل زمنية، وتُظهر موضع كل طلب في أي وقت.",
+      overviewTitle: "من الإجراء الموثَّق إلى التنفيذ الفعلي",
+      overview: [
+        "يحدّد المصمم المرئي خطوات كل إجراء وقراراته ومساراته ومؤقّتاته.",
+        "وتجمع النماذج البيانات، وتصل المهام إلى المختصين، وتُصعَّد كل خطوة تلقائيًا عند تجاوز مهلتها.",
+      ],
+      capabilities: [
+        ["مصمم الإجراءات المرئي", "يلتزم المصمم بمعيار <bdi>BPMN</bdi> في رسم الخطوات والقرارات والمسارات والمؤقّتات، مع اختبار الإجراء خطوة بخطوة قبل نشره."],
+        ["7 أنواع من الخطوات", "مهام للموظفين، وخطوات تلقائية، وتبادل بيانات مع الأنظمة الأخرى، وبيانات من قواعد البيانات القائمة، وإشعارات، وأرشفة، وملفات <bdi>PDF</bdi>."],
+        ["مصمم النماذج", "حقول بالسحب والإفلات، وحقول توقيع وشرطية، ونماذج متعددة الصفحات بتصميم متجاوب يتلاءم مع مختلف أحجام الشاشات، ولغة برمجة نصية للتحكم في سلوك النماذج."],
+        ["مصادر البيانات والاتصالات", "تستمد النماذج بياناتها من مصادر بيانات مرتبطة بقواعد البيانات وواجهات <bdi>API</bdi>، مع تحكم كامل في بيانات الاعتماد السرية لكل اتصال."],
+        ["إسناد المهام والمهل", "تُسند المهام إلى موظف أو إدارة أو مجموعة أو مدير أو شخص يُحدَّد في النموذج، مع مجموعات مهام مشتركة، ولكل خطوة مهلة زمنية وتصعيد تلقائي عند تجاوزها."],
+        ["إصدارات الإجراءات", "تُعدّ الإجراءات وتُنشر وتُوقف وتُستعاد، مع تحديد من يحق له بدء كل إجراء."],
+        ["المتابعة", "يرصد المسؤولون الخطوات المتعثرة أو التي تعذّر تنفيذها ويعيدون محاولتها، ويوقفون الإجراء مؤقتًا أو يستأنفونه أو ينهونه."],
+        ["قوالب جاهزة", "الاعتماد، وطلب الإجازة، وتهيئة الموظفين الجدد، وتنفيذ الطلبات، ومعالجة طلبات التوظيف."],
+      ],
+      howTitle: "من التصميم إلى التنفيذ",
+      steps: [
+        ["التصميم", "تُحدَّد الخطوات والقرارات والمؤقّتات في المصمم المرئي."],
+        ["بناء النماذج", "تُعدّ النماذج اللازمة لكل خطوة في مصمم النماذج."],
+        ["الاختبار", "يُجرَّب الإجراء خطوة بخطوة قبل نشره."],
+        ["التنفيذ", "تنتقل الطلبات بين الخطوات، وتصل المهام إلى المكلَّفين بها."],
+        ["المتابعة", "تُصعَّد المهام تلقائيًا عند تجاوز مهلها الزمنية، ويعالج المسؤولون الخطوات المتعثرة."],
+      ],
+    },
+  },
+
+  meetings: {
+    code: "MMS",
+    photo: "p05-boardroom",
+    services: ["teams", "meet", "zoom", "beem", "ecmmeet", "calendar"],
+    en: {
+      name: "Meeting Management",
+      short: "Meetings",
+      verb: "Convene",
+      line: "Run committees from agenda to signed minutes.",
+      metaTitle: "Meeting Management (MMS) — ECM Plus",
+      description: "Schedule committee meetings in person or online, vote on agenda items, sign the minutes digitally and follow every action item.",
+      h1: "Committee work runs from agenda to signed minutes, with every action tracked.",
+      lead: "ECM+ schedules meetings in person or online, records votes on each agenda item, sends the minutes for digital signature and follows every action item.",
+      overviewTitle: "Every meeting documented from start to finish",
+      overview: [
+        "Meetings are planned on a shared calendar, with rooms, clash detection and invitations in each invitee’s language.",
+        "During the meeting, attendance, notes and votes are recorded, and the minutes are prepared from the meeting itself.",
+      ],
+      capabilities: [
+        ["Planning", "Month, week and day calendars, rooms and buildings with clash detection, and a warning when the organizer is double-booked."],
+        ["In person and online", "Microsoft Teams, Google Meet, Zoom, Beem or ECM+ Meet hosted by your organization, with Google Calendar synchronization."],
+        ["Bilingual invitations", "Invitations are sent in Arabic, English or both, or in each invitee’s language."],
+        ["During the session", "Attendance, agenda notes and chat are recorded during the meeting."],
+        ["Voting", "Single or multiple choice per agenda item. Results stay hidden until a member votes or the vote closes, and a closed vote is final."],
+        ["Minutes and digital signature", "Minutes are prepared from the meeting, presented to members for signature with progress tracking and reminders, then distributed and archived."],
+        ["Action items", "Each action has an assignee, a due date, a priority and reminders, with a daily digest."],
+        ["Follow-up meetings", "Follow-up meetings stay linked to the meeting they continue."],
+      ],
+      howTitle: "How a meeting is run",
+      steps: [
+        ["Plan", "The room is booked, clashes are checked and the invitations are sent."],
+        ["Meet", "The meeting is held in person or online, and attendance is recorded."],
+        ["Decide", "Members vote on each agenda item."],
+        ["Sign", "The minutes are presented to members for digital signature and tracked until every member signs."],
+        ["Follow up", "Action items are assigned and tracked to completion."],
+      ],
+    },
+    ar: {
+      name: "نظام إدارة الاجتماعات",
+      short: "الاجتماعات",
+      verb: "اجتماع",
+      line: "إدارة أعمال اللجان من جدول الأعمال حتى المحضر الموقَّع.",
+      metaTitle: "نظام إدارة الاجتماعات (MMS) — ECM Plus",
+      description: "جدولة اجتماعات اللجان حضوريًا وعن بُعد، والتصويت على بنود جدول الأعمال، وتوقيع المحاضر رقميًا، ومتابعة المهام المترتبة على الاجتماع.",
+      h1: "تمضي أعمال اللجان من جدول الأعمال حتى المحضر الموقَّع، مع متابعة المهام المترتبة عليه.",
+      lead: "تجدول منظومة <bdi>ECM+</bdi> الاجتماعات حضوريًا وعن بُعد، وتوثّق التصويت على كل بند، وتَعرِض المحاضر على الأعضاء للتوقيع الرقمي، وتتابع كل مهمة مترتبة على الاجتماع.",
+      overviewTitle: "توثيق كل اجتماع من بدايته حتى نهايته",
+      overview: [
+        "تُخطَّط الاجتماعات في تقويم مشترك، مع حجز القاعات وكشف التعارض وإرسال الدعوات بلغة كل مدعوّ.",
+        "وفي أثناء الاجتماع يُسجَّل الحضور والملاحظات والتصويت، ويُعدّ المحضر انطلاقًا من وقائع الاجتماع.",
+      ],
+      capabilities: [
+        ["التخطيط", "تقويم شهري وأسبوعي ويومي، وقاعات ومبانٍ مع كشف التعارض، وتنبيه عند تعارض مواعيد المنظِّم."],
+        ["حضوريًا وعن بُعد", "<bdi>Microsoft Teams</bdi> و<bdi>Google Meet</bdi> و<bdi>Zoom</bdi> و<bdi>Beem</bdi> و<bdi>ECM+ Meet</bdi> المستضاف لدى مؤسستكم، إلى جانب المزامنة مع <bdi>Google Calendar</bdi>."],
+        ["دعوات ثنائية اللغة", "تُرسَل الدعوات بالعربية أو الإنجليزية أو باللغتين معًا، أو بلغة كل مدعوّ."],
+        ["في أثناء الجلسة", "يُسجَّل الحضور وملاحظات جدول الأعمال والمحادثة في أثناء الاجتماع."],
+        ["التصويت", "تصويت باختيار واحد أو متعدد على كل بند، وتبقى النتائج محجوبة حتى يصوّت العضو أو يُغلق التصويت، والتصويت المغلق نهائي."],
+        ["المحاضر والتوقيع الرقمي", "يُعدّ المحضر من وقائع الاجتماع، ويُعرض على الأعضاء للتوقيع مع متابعة التقدم والتذكير، ثم يُوزَّع ويُؤرشف."],
+        ["المهام المترتبة على الاجتماع", "لكل مهمة مكلَّف وتاريخ استحقاق وأولوية وتذكيرات، مع ملخص يومي."],
+        ["الاجتماعات اللاحقة", "تبقى الاجتماعات اللاحقة مرتبطة بالاجتماع الذي تستكمله."],
+      ],
+      howTitle: "مسار الاجتماع",
+      steps: [
+        ["التخطيط", "تُحجز القاعة، ويُتحقق من التعارض، وتُرسَل الدعوات."],
+        ["الانعقاد", "يُعقد الاجتماع حضوريًا أو عن بُعد، ويُسجَّل الحضور."],
+        ["القرار", "يصوّت الأعضاء على كل بند من بنود جدول الأعمال."],
+        ["التوقيع", "يُعرض المحضر على الأعضاء للتوقيع الرقمي، ويُتابَع حتى اكتمال التوقيعات."],
+        ["المتابعة", "تُسند المهام المترتبة على الاجتماع وتُتابَع حتى إنجازها."],
+      ],
+    },
+  },
+
+  about: {
+    photo: "p07-headquarters",
+    en: {
+      short: "About ECM Plus",
+      metaTitle: "About ECM Plus — ECM+ Business Suite",
+      description: "ECM Plus is a Canadian company and the owner of the ECM+ Business Suite. CTC MENA is its exclusive agent and is responsible for its Arabization.",
+      eyebrow: "About ECM Plus",
+      h1: "ECM Plus is the Canadian company behind the ECM+ Business Suite.",
+      lead: "ECM Plus owns and publishes the ECM+ Business Suite, a unified suite for the management of documents, correspondence, processes and meetings.",
+      whoLabel: "Who we are",
+      whoTitle: "A Canadian company and the owner of the suite",
+      who: [
+        "ECM Plus is a Canadian company and the owner and publisher of the ECM+ Business Suite.",
+        "The suite brings document management, official correspondence, process automation and meeting management together in one bilingual environment.",
+      ],
+      suiteLabel: "The suite",
+      suiteTitle: "4 integrated modules",
+      valuesLabel: "Approach",
+      valuesTitle: "How the suite serves organizations",
+      values: [
+        ["On your organization’s servers", "ECM+ runs on your organization’s servers, in your own data centre or in the cloud, so your documents remain under your control."],
+        ["Arabic and English", "Complete Arabic and English interfaces with right-to-left layouts, and the Hijri and Gregorian calendars."],
+        ["Security in every module", "An audit trail, access trace codes, two-factor authentication, Nafath sign-in and digital signatures."],
+        ["Modules switched on as needed", "You can start with one module and switch on the others when you need them."],
+        ["Your existing archive", "Structured imports bring legacy archives into ECM+. They resume where they stopped and can be rolled back."],
+        ["Connected to your systems", "Other systems connect securely, and each connection is limited to the document types and folders you grant."],
+      ],
+      partnerLabel: "Exclusive agent",
+      partnerTitle: "CTC MENA",
+      partner: "CTC MENA is the exclusive agent of ECM Plus and is responsible for the Arabization of the suite.",
+      supportLabel: "Support",
+      supportTitle: "Support from the ECM+ team",
+      support: "The ECM+ support team creates client portal accounts for each organization. Teams open support tickets and follow them to resolution, in Arabic or English.",
+      supportLinks: [
+        ["/support/login", "Sign in to the client portal"],
+        ["/support/tickets/new", "Submit a support ticket"],
+        ["/support/tickets", "Track your tickets"],
+        ["/support/suggestions", "Submit a suggestion or complaint"],
+      ],
+    },
+    ar: {
+      short: "عن <bdi>ECM Plus</bdi>",
+      metaTitle: "عن ECM Plus — ECM+ Business Suite",
+      description: "ECM Plus شركة كندية مالكة لمنظومة ECM+ Business Suite، وCTC MENA وكيلها الحصري والمسؤولة عن تعريب المنتج.",
+      eyebrow: "عن <bdi>ECM Plus</bdi>",
+      h1: "<bdi>ECM Plus</bdi> شركة كندية مالكة لمنظومة <bdi>ECM+ Business Suite</bdi>.",
+      lead: "تملك الشركة منظومة <bdi>ECM+ Business Suite</bdi> وتتولى نشرها، وهي منظومة موحّدة لإدارة الوثائق والمراسلات والإجراءات والاجتماعات.",
+      whoLabel: "من نحن",
+      whoTitle: "شركة كندية مالكة للمنظومة",
+      who: [
+        "<bdi>ECM Plus</bdi> شركة كندية، وهي المالكة لمنظومة <bdi>ECM+ Business Suite</bdi> والناشرة لها.",
+        "وتجمع المنظومة إدارة الوثائق والمراسلات الرسمية وأتمتة الإجراءات وإدارة الاجتماعات في بيئة واحدة ثنائية اللغة.",
+      ],
+      suiteLabel: "المنظومة",
+      suiteTitle: "4 أنظمة متكاملة",
+      valuesLabel: "النهج",
+      valuesTitle: "كيف تخدم المنظومة المؤسسات",
+      values: [
+        ["على خوادم مؤسستكم", "تعمل منظومة <bdi>ECM+</bdi> على خوادم مؤسستكم، في مركز البيانات الخاص بها أو على السحابة، فتبقى الوثائق تحت سيطرتكم."],
+        ["العربية والإنجليزية", "واجهتان كاملتان بالعربية والإنجليزية بتخطيط من اليمين إلى اليسار، مع التقويمين الهجري والميلادي."],
+        ["الأمان في كل نظام", "سجل التتبع، ورمز الوصول، والتحقق بخطوتين، والدخول عبر نفاذ، والتوقيع الرقمي."],
+        ["أنظمة تُفعَّل عند الحاجة", "يمكن البدء بنظام واحد، وتُفعَّل الأنظمة الأخرى عند الحاجة إليها."],
+        ["أرشيفكم الحالي", "تُنقل الأرشيفات القديمة إلى منظومة <bdi>ECM+</bdi> عبر عمليات استيراد منظَّمة، تُستأنف من النقطة التي توقفت عندها ويمكن التراجع عنها."],
+        ["الربط مع أنظمتكم", "تتصل الأنظمة الأخرى بالمنظومة بأمان، ويقتصر كل ربط على أنواع الوثائق والمجلدات التي تحدّدونها."],
+      ],
+      partnerLabel: "الوكيل الحصري",
+      partnerTitle: "<bdi>CTC MENA</bdi>",
+      partner: "<bdi>CTC MENA</bdi> الوكيل الحصري لشركة <bdi>ECM Plus</bdi>، والمسؤولة عن تعريب المنظومة.",
+      supportLabel: "الدعم",
+      supportTitle: "الدعم من فريق <bdi>ECM+</bdi>",
+      support: "يُنشئ فريق دعم <bdi>ECM+</bdi> حسابات بوابة العملاء لكل مؤسسة، وتفتح فرقكم تذاكر الدعم وتتابعها حتى حلّها بالعربية أو الإنجليزية.",
+      supportLinks: [
+        ["/support/login?lang=ar", "الدخول إلى بوابة العملاء"],
+        ["/support/tickets/new?lang=ar", "تقديم تذكرة دعم"],
+        ["/support/tickets?lang=ar", "متابعة التذاكر"],
+        ["/support/suggestions?lang=ar", "تقديم اقتراح أو شكوى"],
+      ],
+    },
+  },
+};
+
+// What each connection does in its module, shown on the "Works with" cards of templates
+// that use them (Portico). Keyed by module, language and service.
+export const WORKS: Record<string, Record<Lang, Record<string, string>>> = {
+  documents: {
+    en: {
+      drive: "Capture files from Google Drive straight into the archive.",
+      onedrive: "Capture files from OneDrive straight into the archive.",
+      word: "Edit Word documents without leaving the suite.",
+      excel: "Edit Excel workbooks without leaving the suite.",
+      powerpoint: "Edit PowerPoint presentations without leaving the suite.",
+      outlook: "Save emails to the archive and route them with the Outlook add-in.",
+      whatsapp: "Receive the one-time code that opens a locked document.",
+      sms: "A one-time code by text message to open a locked document.",
+    },
+    ar: {
+      drive: "التقاط الملفات من <bdi>Google Drive</bdi> مباشرة إلى الأرشيف.",
+      onedrive: "التقاط الملفات من <bdi>OneDrive</bdi> مباشرة إلى الأرشيف.",
+      word: "تحرير مستندات <bdi>Word</bdi> دون مغادرة المنظومة.",
+      excel: "تحرير جداول <bdi>Excel</bdi> دون مغادرة المنظومة.",
+      powerpoint: "تحرير عروض <bdi>PowerPoint</bdi> دون مغادرة المنظومة.",
+      outlook: "حفظ رسائل البريد في الأرشيف وإحالتها عبر إضافة <bdi>Outlook</bdi>.",
+      whatsapp: "استلام رمز التحقق لمرة واحدة لفتح الوثائق المقفلة.",
+      sms: "رمز تحقق لمرة واحدة برسالة نصية لفتح الوثائق المقفلة.",
+    },
+  },
+  correspondence: {
+    en: {
+      gmail: "Connect a Gmail inbox and file emails as correspondence or into the archive.",
+      outlook: "Connect an Outlook inbox and file emails as correspondence or into the archive.",
+    },
+    ar: {
+      gmail: "ربط صندوق <bdi>Gmail</bdi>، وتحويل الرسائل إلى مراسلات أو حفظها في الأرشيف.",
+      outlook: "ربط صندوق <bdi>Outlook</bdi>، وتحويل الرسائل إلى مراسلات أو حفظها في الأرشيف.",
+    },
+  },
+  processes: {
+    en: {
+      email: "Email notifications as steps in a process.",
+      whatsapp: "WhatsApp notifications as steps in a process.",
+      systems: "Exchange data with your business systems as the workflow runs.",
+      databases: "Pull data from your existing databases into forms and steps.",
+    },
+    ar: {
+      email: "إشعارات بالبريد الإلكتروني ضمن خطوات الإجراء.",
+      whatsapp: "إشعارات واتساب ضمن خطوات الإجراء.",
+      systems: "تبادل البيانات مع أنظمة مؤسستكم خلال سير العمل.",
+      databases: "جلب البيانات من قواعد بياناتكم القائمة إلى النماذج والخطوات.",
+    },
+  },
+  meetings: {
+    en: {
+      teams: "Hold remote meetings on Microsoft Teams.",
+      meet: "Hold remote meetings on Google Meet.",
+      zoom: "Hold remote meetings on Zoom.",
+      beem: "Hold remote meetings on Beem.",
+      ecmmeet: "ECM+’s own video meeting option, hosted with you.",
+      calendar: "Sync meeting times with Google Calendar.",
+    },
+    ar: {
+      teams: "عقد الاجتماعات عن بُعد عبر <bdi>Microsoft Teams</bdi>.",
+      meet: "عقد الاجتماعات عن بُعد عبر <bdi>Google Meet</bdi>.",
+      zoom: "عقد الاجتماعات عن بُعد عبر <bdi>Zoom</bdi>.",
+      beem: "عقد الاجتماعات عن بُعد عبر منصة بيم للأعمال.",
+      ecmmeet: "خيار الاجتماعات المرئية الخاص بالمنظومة، مستضاف لديكم.",
+      calendar: "مزامنة مواعيد الاجتماعات مع <bdi>Google Calendar</bdi>.",
+    },
+  },
+};
+
+// Portico's own module names; the other templates keep the names in PAGES.
+export const PORTICO_NAMES: Record<Lang, Record<string, Partial<PageCopy>>> = {
+  en: {
+    documents: { name: "Document Management and E-Archiving", short: "Document Management", metaTitle: "Document Management and E-Archiving (DMS) — ECM Plus" },
+    correspondence: { name: "Administrative Communications: Incoming and Outgoing", short: "Administrative Communications", metaTitle: "Administrative Communications: Incoming and Outgoing (CMS) — ECM Plus" },
+    processes: { name: "Business Process Automation and Workflow", short: "Business Process Automation", metaTitle: "Business Process Automation and Workflow (BPM) — ECM Plus" },
+    meetings: { name: "Board and Committee Management", short: "Board and Committee Management", metaTitle: "Board and Committee Management (MMS) — ECM Plus" },
+  },
+  ar: {
+    documents: { name: "إدارة الوثائق والأرشفة الإلكترونية", short: "إدارة الوثائق", metaTitle: "إدارة الوثائق والأرشفة الإلكترونية (DMS) — ECM Plus" },
+    correspondence: { name: "الاتصالات الإدارية: الصادر والوارد", short: "الاتصالات الإدارية", metaTitle: "الاتصالات الإدارية: الصادر والوارد (CMS) — ECM Plus" },
+    processes: { name: "أتمتة الإجراءات وسير العمل", short: "أتمتة الإجراءات", metaTitle: "أتمتة الإجراءات وسير العمل (BPM) — ECM Plus" },
+    meetings: { name: "إدارة المجالس واللجان", short: "إدارة المجالس واللجان", metaTitle: "إدارة المجالس واللجان (MMS) — ECM Plus" },
+  },
+};
+// The app window in Portico's closing panel keeps short labels, as in the design demo.
+export const PORTICO_UI: Record<Lang, { ctaNav: string[] }> = {
+  en: { ctaNav: ["Correspondence", "Documents", "Boards", "Processes"] },
+  ar: { ctaNav: ["المراسلات", "الوثائق", "المجالس", "الإجراءات"] },
+};

@@ -1,0 +1,31 @@
+name: Build Portico (Next.js)
+
+# Manual build of the Next.js port in portico-next/. The live Pages workflow is unchanged.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: portico-next
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: portico-next/package-lock.json
+      - run: npm ci
+      - name: Build static export
+        run: npx next build
+        env:
+          # GitHub Pages serves a project site under /<repo>.
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: portico-next/out
