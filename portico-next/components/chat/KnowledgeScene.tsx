@@ -46,6 +46,8 @@ const I = {
   prev: <path d="M10 2.5 4.5 8l5.5 5.5-1.2 1.2L2.1 8l6.7-6.7z" />,
   next: <path d="M6 2.5 11.5 8 6 13.5l1.2 1.2L13.9 8 7.2 1.3z" />,
   close: <path d="M3 3l10 10M13 3 3 13" />,
+  full: <path d="M1 1h5v1.5H2.5V6H1zm9 0h5v5h-1.5V2.5H10zM1 10h1.5v3.5H6V15H1zm12.5 0H15v5h-5v-1.5h3.5z" />,
+  exit: <path d="M6 1v5H1V4.5h3.5V1zm4 0h1.5v3.5H15V6h-5zM1 10h5v5H4.5v-3.5H1zm9 0h5v1.5h-3.5V15H10z" />,
 };
 
 /**
@@ -80,7 +82,68 @@ export default function KnowledgeScene({ lang }: { lang: Lang }) {
   const [active, setActive] = useState(0);
   const [chip, setChip] = useState<{ x: number; y: number; name: string; fact: string; color: number } | null>(null);
   const [srcOpen, setSrcOpen] = useState<number | null>(null);
+  const [full, setFull] = useState(false);
+  const [capOpen, setCapOpen] = useState(true);
+  useEffect(() => {
+    let v: string | null = null;
+    try { v = sessionStorage.getItem("ks-cap-open"); } catch { /* ignore */ }
+    setCapOpen(v === null ? !window.matchMedia("(max-width: 600px)").matches : v === "1");
+  }, []);
+  const toggleCap = () => setCapOpen((v) => { const n = !v; try { sessionStorage.setItem("ks-cap-open", n ? "1" : "0"); } catch {} return n; });
+  const fullRef = useRef(false);
+  const scrollY = useRef(0);
   const [live, setLive] = useState("");
+
+  /* ---- full screen: the whole section (stage, stage list, explanation); CSS pseudo full screen where the API is missing ---- */
+  useEffect(() => {
+    const el = frameRef.current;
+    const root = document.documentElement;
+    const d = document as Document & { webkitFullscreenElement?: Element | null };
+    const sync = () => {
+      const native = (d.fullscreenElement || d.webkitFullscreenElement) === el;
+      const pseudo = !!el?.classList.contains("ks-pfs");
+      const v = native || pseudo;
+      if (v === fullRef.current) return;
+      fullRef.current = v;
+      setFull(v);
+      if (!v) { root.classList.remove("ks-pfs-lock"); window.scrollTo(0, scrollY.current); }
+    };
+    const onKey = (e: globalThis.KeyboardEvent) => {
+      if (e.key === "Escape" && el?.classList.contains("ks-pfs") && !document.querySelector("dialog[open]")) { el.classList.remove("ks-pfs"); sync(); }
+    };
+    document.addEventListener("fullscreenchange", sync);
+    document.addEventListener("webkitfullscreenchange", sync);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("fullscreenchange", sync);
+      document.removeEventListener("webkitfullscreenchange", sync);
+      document.removeEventListener("keydown", onKey);
+      el?.classList.remove("ks-pfs");
+      root.classList.remove("ks-pfs-lock");
+    };
+  }, []);
+  const toggleFull = async () => {
+    const el = frameRef.current as (HTMLElement & { webkitRequestFullscreen?: () => void }) | null;
+    if (!el) return;
+    const d = document as Document & { webkitExitFullscreen?: () => void };
+    const settle = () => document.dispatchEvent(new Event("fullscreenchange"));
+    if (fullRef.current) {
+      if (el.classList.contains("ks-pfs")) { el.classList.remove("ks-pfs"); settle(); return; }
+      try { if (d.exitFullscreen) await d.exitFullscreen(); else d.webkitExitFullscreen?.(); } catch { /* ignore */ }
+      return;
+    }
+    scrollY.current = window.scrollY;
+    try {
+      if (el.requestFullscreen) await el.requestFullscreen();
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      else throw new Error("no api");
+    } catch {
+      el.classList.add("ks-pfs");
+      document.documentElement.classList.add("ks-pfs-lock");
+      settle();
+    }
+  };
+
   const playingRef = useRef(true);
   const liveN = useRef(0);
   const dialogOpenRef = useRef(false);
@@ -542,7 +605,7 @@ export default function KnowledgeScene({ lang }: { lang: Lang }) {
   const dlgSrc = srcOpen !== null ? copy.sources[srcOpen] : null;
 
   return (
-    <section className="ks" ref={frameRef} data-state={status} aria-label={strip(copy.label)}>
+    <section className="ks" ref={frameRef} data-state={status} data-full={full ? "true" : "false"} aria-label={strip(copy.label)}>
       <div className="ks__main">
         <div className="ks__stage" ref={stageRef} role="group" aria-label={strip(copy.label)}>
           <div className="ks__host" ref={hostRef} aria-hidden="true"></div>
@@ -555,8 +618,14 @@ export default function KnowledgeScene({ lang }: { lang: Lang }) {
           <p className="ks__loading" aria-hidden="true">{copy.ui.loading}</p>
           <div className="ks__labels" ref={labelsRef} aria-hidden="true"></div>
 
-          <div className="ks__caption">
-            <p className="ks__caption-t">{tpl(copy.stageOf, { n: active + 1, N, t: strip(cur.t) })}</p>
+          <div className="ks__caption" data-open={capOpen ? "true" : "false"}>
+            <p className="ks__caption-t">
+              <span>{tpl(copy.stageOf, { n: active + 1, N, t: strip(cur.t) })}</span>
+              <button type="button" className="ks__caption-x" aria-expanded={capOpen} aria-controls="ks-caption" aria-label={capOpen ? copy.ui.collapse : copy.ui.expand} title={capOpen ? copy.ui.collapse : copy.ui.expand} onClick={toggleCap}>
+                <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 10l5-5 5 5" /></svg>
+              </button>
+            </p>
+            <div className="ks__caption-body" id="ks-caption"><div><p className="ks__caption-d">{rich(cur.biz)}</p></div></div>
           </div>
           <p className="ks__hint" aria-hidden="true">{strip(cur.hint)}</p>
 
@@ -604,6 +673,9 @@ export default function KnowledgeScene({ lang }: { lang: Lang }) {
             </button>
             <button type="button" className="ks__btn" onClick={() => goStage(active + 1)} aria-label={copy.ui.next} title={copy.ui.next}>
               <svg className="ks__flip" viewBox="0 0 16 16" aria-hidden="true" focusable="false">{I.next}</svg>
+            </button>
+            <button type="button" className="ks__btn" aria-pressed={full} title={full ? copy.ui.exitFullscreen : copy.ui.fullscreen} aria-label={full ? copy.ui.exitFullscreen : copy.ui.fullscreen} onClick={toggleFull}>
+              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">{full ? I.exit : I.full}</svg>
             </button>
           </div>
         </div>

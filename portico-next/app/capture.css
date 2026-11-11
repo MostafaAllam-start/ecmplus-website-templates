@@ -385,3 +385,8 @@ html.cap-modal-open { overflow: hidden; }
 .cap-list li { flex-wrap: nowrap; align-items: flex-start; }
 .cap-list__mark { align-self: flex-start; margin-block-start: 4px; }
 .cap-list li > span { flex: 1 1 auto; min-inline-size: 0; unicode-bidi: plaintext; }
+
+/* Hero eyebrow: the icon and its label share one vertical centre line */
+.sp-eyebrow { align-items: center; }
+.sp-eyebrow .sp-glyph { margin: 0; align-self: center; }
+.sp-eyebrow > span { line-height: 1.3; }
