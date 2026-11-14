@@ -5,6 +5,8 @@ import { MODULES, PAGES, PORTICO_NAMES } from "@/data/content";
 import NavMenus from "../client/NavMenus";
 import ThemeToggle from "../client/ThemeToggle";
 import { SHELL } from "./dict";
+import { staticPartnerViews } from "@/data/partners";
+import { PartnersMenuList } from "../partners/PartnerLive";
 import LangSwitch from "./LangSwitch";
 import type { Linker } from "./links";
 
@@ -64,7 +66,6 @@ export default function Header({ lang, current, links }: { lang: Lang; current: 
     <a className="nav__link" href={links.href(t)} aria-current={links.ariaCurrent(t)}>{label}</a>
   );
   const aboutLabel = lang === "ar" ? <span>{rich(h.about)}</span> : rich(h.about);
-  const supportLabel = lang === "ar" ? <span>{h.support.label}</span> : h.support.label;
 
   return (
     <header className="site-header">
@@ -87,12 +88,13 @@ export default function Header({ lang, current, links }: { lang: Lang; current: 
         <div className="header__panel" id="site-panel">
           <nav className="nav" aria-label={h.navAria}>
             <ul className="nav__list">
+              <li className="nav__item">{item("about/", aboutLabel)}</li>
               <li className="nav__item" data-menu="">
-                <a className="nav__link nojs-only" href={links.href("#suite")}>{h.suite}</a>
-                <button className="nav__link nav__trigger js-only" type="button" aria-expanded="false" aria-controls="menu-suite">
-                  {h.suite}<Icon id="i-chev" cls="icon nav__chev" />
+                <a className="nav__link nojs-only" href={links.href("#suite")}>{h.products}</a>
+                <button className="nav__link nav__trigger js-only" type="button" aria-expanded="false" aria-controls="menu-products">
+                  {h.products}<Icon id="i-chev" cls="icon nav__chev" />
                 </button>
-                <div className="menu-panel dropdown dropdown--suite" id="menu-suite">
+                <div className="menu-panel dropdown dropdown--suite" id="menu-products">
                   <p className="dropdown__h">{h.modulesHeading}</p>
                   <ul className="dropdown__list">
                     {MODULES.map((slug) => (
@@ -108,17 +110,7 @@ export default function Header({ lang, current, links }: { lang: Lang; current: 
                       </li>
                     ))}
                   </ul>
-                  <a className="dropdown__all" href={links.href("#suite")}>
-                    {h.exploreSuite}<Icon id="i-arrow" cls="icon flip" />
-                  </a>
-                </div>
-              </li>
-              <li className="nav__item" data-menu="">
-                <a className="nav__link nojs-only" href={links.href("capture/")} aria-current={links.ariaCurrent("capture/")}>{h.solutions}</a>
-                <button className="nav__link nav__trigger js-only" type="button" aria-expanded="false" aria-controls="menu-solutions">
-                  {h.solutions}<Icon id="i-chev" cls="icon nav__chev" />
-                </button>
-                <div className="menu-panel dropdown dropdown--suite" id="menu-solutions">
+                  <p className="dropdown__h">{h.productsSolutions}</p>
                   <ul className="dropdown__list">
                     <li>
                       <a href={links.href("capture/")} aria-current={links.ariaCurrent("capture/")}>
@@ -135,10 +127,36 @@ export default function Header({ lang, current, links }: { lang: Lang; current: 
                       </a>
                     </li>
                   </ul>
+                  <a className="dropdown__all" href={links.href("#suite")}>
+                    {h.exploreSuite}<Icon id="i-arrow" cls="icon flip" />
+                  </a>
                 </div>
               </li>
-              <li className="nav__item">{item("about/", aboutLabel)}</li>
-              <li className="nav__item">{item(h.support.href, supportLabel)}</li>
+              <li className="nav__item" data-menu="">
+                <a className="nav__link nojs-only" href={links.href("partners/")} aria-current={links.ariaCurrent("partners/")}>{h.partners}</a>
+                <button className="nav__link nav__trigger js-only" type="button" aria-expanded="false" aria-controls="menu-partners">
+                  {h.partners}<Icon id="i-chev" cls="icon nav__chev" />
+                </button>
+                <div className="menu-panel dropdown dropdown--partners dropdown--logos" id="menu-partners">
+                  <PartnersMenuList fallback={staticPartnerViews(lang, withBase)} hrefBase={links.href("partners/")} />
+                  <a className="dropdown__all" href={links.href("partners/")}>
+                    {h.partnersAll}<Icon id="i-arrow" cls="icon flip" />
+                  </a>
+                </div>
+              </li>
+              <li className="nav__item">{item("#news", h.news)}</li>
+              <li className="nav__item" data-menu="">
+                <a className="nav__link nojs-only" href={h.support.href}>{h.supportPortal}</a>
+                <button className="nav__link nav__trigger js-only" type="button" aria-expanded="false" aria-controls="menu-support">
+                  {h.supportPortal}<Icon id="i-chev" cls="icon nav__chev" />
+                </button>
+                <div className="menu-panel dropdown dropdown--partners" id="menu-support">
+                  <ul className="dropdown__list dropdown__list--plain">
+                    <li><a href={h.partnerPortal.href}><span className="dropdown__t">{h.partnerPortal.label}</span></a></li>
+                    <li><a href={h.customerPortal.href}><span className="dropdown__t">{h.customerPortal.label}</span></a></li>
+                  </ul>
+                </div>
+              </li>
             </ul>
           </nav>
 

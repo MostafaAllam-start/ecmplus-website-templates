@@ -390,3 +390,16 @@ html.cap-modal-open { overflow: hidden; }
 .sp-eyebrow { align-items: center; }
 .sp-eyebrow .sp-glyph { margin: 0; align-self: center; }
 .sp-eyebrow > span { line-height: 1.3; }
+
+/* ---- Partners page ---- */
+.pt-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 0; padding: 0; list-style: none; }
+.pt-card { display: grid; gap: 14px; align-content: start; padding: 22px; border: 1px solid var(--sp-line); border-radius: var(--sp-radius); background: var(--sp-surface); scroll-margin-block-start: 110px; }
+.pt-card:target { border-color: var(--sp-accent); box-shadow: 0 0 0 4px var(--gold-ring); }
+.pt-logo { display: grid; place-items: center; inline-size: 100%; aspect-ratio: 8 / 5; padding: 12px; box-sizing: border-box; border-radius: 12px; background: #fff; border: 1px solid var(--sp-line); overflow: hidden; }
+.pt-logo img { display: block; inline-size: 100%; block-size: 100%; object-fit: contain; }
+.pt-logo--name { background: var(--sp-alt); color: var(--sp-ink); font: 700 1.75rem/1 var(--sp-head); letter-spacing: .02em; }
+.pt-card h3 { margin: 0; font-size: 1.0625rem; }
+.pt-card p { margin: 0; color: var(--sp-ink-2); line-height: 1.5; }
+.pt-card a.pt-link { justify-self: start; font-weight: 600; color: var(--sp-accent-text); }
+@media (max-width: 1023.98px) { .pt-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 599.98px) { .pt-grid { grid-template-columns: minmax(0, 1fr); } }

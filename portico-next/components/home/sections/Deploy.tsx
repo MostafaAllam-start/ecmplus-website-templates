@@ -90,6 +90,14 @@ export default function Deploy({ t, links }: SectionProps<"deploy">) {
                   <img className="works__logo" src={withBase("/assets/brands/microsoft-powerpoint.svg")} alt="" width="18" height="18" loading="lazy" decoding="async" />
                   {R(t.k20)}
                 </li>
+                <li>
+                  <img className="works__logo works__logo--wide" src={withBase("/assets/brands/sap.svg")} alt="" width="412" height="204" loading="lazy" decoding="async" />
+                  <bdi>SAP</bdi>
+                </li>
+                <li>
+                  <img className="works__logo works__logo--wide" src={withBase("/assets/brands/odoo.svg")} alt="" width="600" height="191" loading="lazy" decoding="async" />
+                  <bdi>Odoo</bdi>
+                </li>
               </ul>
             </div>
           </div>

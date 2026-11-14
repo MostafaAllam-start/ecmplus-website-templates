@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { CAPTURE_META } from "@/data/capture-meta";
 import { META as CHAT_META } from "@/data/chat";
+import { PARTNERS_PAGE } from "@/data/partners";
 import { PAGES, PORTICO_NAMES, type Lang } from "@/data/content";
 import { strip } from "./rich";
 import { SITE, absUrl, other, withBase } from "./site";
@@ -81,6 +82,11 @@ export function pageMetadata(lang: Lang, slug: string): Metadata {
   const c = { ...PAGES[slug][lang], ...PORTICO_NAMES[lang]?.[slug] };
   const title = strip(c.metaTitle);
   return build(lang, slug, { title, description: strip(c.description) });
+}
+
+export function partnersMetadata(lang: Lang): Metadata {
+  const c = PARTNERS_PAGE[lang];
+  return build(lang, "partners", { title: c.metaTitle, description: c.description });
 }
 
 export function chatMetadata(lang: Lang): Metadata {
