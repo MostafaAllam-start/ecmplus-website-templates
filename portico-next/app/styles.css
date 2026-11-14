@@ -3497,3 +3497,33 @@ h3:lang(ar),
 .sector__mods a:hover .mod-badge, .sector__mods a:focus-visible .mod-badge { color: var(--gold-text); border-color: var(--gold); }
 .sector__mods a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
 .mod-badge { direction: ltr; unicode-bidi: isolate; }
+
+/* ---- Header: Partners and Support Portal dropdowns; the Products menu scrolls on short screens ---- */
+.dropdown--partners { min-inline-size: 260px; max-inline-size: 340px; }
+@media (min-width: 1100px) {
+  .dropdown--suite { max-block-size: calc(100dvh - var(--header-h, 72px) - 24px); overflow-y: auto; overscroll-behavior: contain; }
+}
+
+/* Partners menu: a logo plate beside each partner */
+.dropdown--logos { min-inline-size: 320px; max-inline-size: 380px; }
+.dropdown--logos .dropdown__list a { grid-template-columns: 64px minmax(0, 1fr); column-gap: 14px; align-items: center; }
+.dropdown__logo { grid-row: 1 / span 2; display: grid; place-items: center; inline-size: 64px; block-size: 42px; padding: 4px; box-sizing: border-box; border: 1px solid var(--line); border-radius: 9px; background: #fff; overflow: hidden; }
+.dropdown__logo img { inline-size: 100%; block-size: 100%; object-fit: contain; display: block; }
+.dropdown__logo b { font: 700 .8125rem/1 var(--font-head, var(--font-body)); color: #151a22; }
+.dropdown--logos .dropdown__list a:hover .dropdown__logo { border-color: var(--gold); }
+@media (max-width: 1099.98px) {
+  .dropdown--logos .dropdown__list a { grid-template-columns: 64px minmax(0, 1fr) auto; }
+}
+@media (max-width: 1099.98px) {
+  .dropdown--partners, .dropdown--logos { inline-size: auto; min-inline-size: 0; max-inline-size: none; }
+}
+
+/* Skeleton placeholders (partners menu and page while the portal answers) */
+.skel { display: block; border-radius: 8px; background: linear-gradient(100deg, var(--surface-2) 30%, color-mix(in srgb, var(--surface-2) 55%, var(--surface)) 50%, var(--surface-2) 70%); background-size: 200% 100%; animation: skel-shimmer 1.4s linear infinite; }
+@keyframes skel-shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+.skel--logo { inline-size: 64px; block-size: 42px; grid-row: 1 / span 2; }
+.skel--line { block-size: 12px; inline-size: 70%; }
+.skel--short { inline-size: 45%; }
+.skel--tile { inline-size: 100%; aspect-ratio: 8 / 5; border-radius: 12px; }
+.dropdown__skel { display: grid; grid-template-columns: 64px minmax(0, 1fr); column-gap: 14px; row-gap: 8px; align-items: center; padding: 10px 12px; }
+@media (prefers-reduced-motion: reduce) { .skel { animation: none; } }

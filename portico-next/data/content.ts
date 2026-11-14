@@ -49,6 +49,8 @@ export const SERVICES: Record<string, ServiceDef> = {
   word: { name: "Microsoft Word", logo: "brands/microsoft-word.svg" },
   excel: { name: "Excel", logo: "brands/microsoft-excel.svg" },
   powerpoint: { name: "PowerPoint", logo: "brands/microsoft-powerpoint.svg" },
+  sap: { name: "SAP", logo: "brands/sap.svg", wide: true },
+  odoo: { name: "Odoo", logo: "brands/odoo.svg", wide: true },
   whatsapp: { name: { en: "WhatsApp", ar: "واتساب" }, logo: "brands/whatsapp.svg" },
   sms: { name: { en: "SMS", ar: "الرسائل النصية" }, glyph: '<path d="M12 4.5c4.7 0 8.5 3 8.5 6.7S16.7 18 12 18c-1 0-2-.1-2.9-.4L5 19.5l1-3.5c-1.6-1.2-2.5-2.9-2.5-4.8C3.5 7.5 7.3 4.5 12 4.5z"/><path d="M8.5 11.3h.01M12 11.3h.01M15.5 11.3h.01" stroke-width="2.6"/>' },
   email: { name: { en: "Email", ar: "البريد الإلكتروني" }, glyph: '<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/>' },
@@ -264,7 +266,7 @@ export const PAGES: Record<string, PageDef> = {
   processes: {
     code: "BPM",
     photo: "p04-process",
-    services: ["email", "whatsapp", "systems", "databases"],
+    services: ["email", "whatsapp", "sap", "odoo", "systems", "databases"],
     en: {
       name: "Business Process Management",
       short: "Processes",
@@ -525,12 +527,16 @@ export const WORKS: Record<string, Record<Lang, Record<string, string>>> = {
     en: {
       email: "Email notifications as steps in a process.",
       whatsapp: "WhatsApp notifications as steps in a process.",
+      sap: "Exchange data with SAP as the workflow runs.",
+      odoo: "Exchange data with Odoo as the workflow runs.",
       systems: "Exchange data with your business systems as the workflow runs.",
       databases: "Pull data from your existing databases into forms and steps.",
     },
     ar: {
       email: "إشعارات بالبريد الإلكتروني ضمن خطوات الإجراء.",
       whatsapp: "إشعارات واتساب ضمن خطوات الإجراء.",
+      sap: "تبادل البيانات مع <bdi>SAP</bdi> خلال سير العمل.",
+      odoo: "تبادل البيانات مع <bdi>Odoo</bdi> خلال سير العمل.",
       systems: "تبادل البيانات مع أنظمة مؤسستكم خلال سير العمل.",
       databases: "جلب البيانات من قواعد بياناتكم القائمة إلى النماذج والخطوات.",
     },

@@ -30,6 +30,14 @@ export interface ShellDict {
     chat: { title: string; desc: string };
     about: string;
     support: { label: string; href: string };
+    products: string;
+    productsSolutions: string;
+    partners: string;
+    partnersAll: string;
+    news: string;
+    supportPortal: string;
+    partnerPortal: { label: string; href: string };
+    customerPortal: { label: string; href: string };
     cta: string;
   };
   footer: {
@@ -41,6 +49,9 @@ export interface ShellDict {
     legal: { href: string; label: string }[];
   };
 }
+
+/** Where the partner portal lives; deployments can point this at their own address. */
+const PARTNER_PORTAL = process.env.NEXT_PUBLIC_PARTNER_PORTAL_URL || "";
 
 export const SHELL: Record<Lang, ShellDict> = {
   en: {
@@ -70,8 +81,16 @@ export const SHELL: Record<Lang, ShellDict> = {
         title: "Chat with Your Documents",
         desc: "Ask questions across your documents and get answers with sources.",
       },
-      about: "About ECM Plus",
+      about: "About us",
       support: { label: "Support", href: "/support" },
+      products: "Products",
+      productsSolutions: "Solutions",
+      partners: "Partners",
+      partnersAll: "All partners",
+      news: "News",
+      supportPortal: "Support Portal",
+      partnerPortal: { label: "Partner Portal", href: PARTNER_PORTAL || "/support/" },
+      customerPortal: { label: "Customer Portal", href: "/support/login" },
       cta: "Request a demo",
     },
     footer: {
@@ -168,8 +187,16 @@ export const SHELL: Record<Lang, ShellDict> = {
         title: "الدردشة مع وثائقكم",
         desc: "اطرحوا أسئلتكم على وثائقكم واحصلوا على إجابات بمصادرها.",
       },
-      about: "عن <bdi>ECM Plus</bdi>",
+      about: "من نحن",
       support: { label: "الدعم", href: "/support?lang=ar" },
+      products: "المنتجات",
+      productsSolutions: "الحلول",
+      partners: "الشركاء",
+      partnersAll: "جميع الشركاء",
+      news: "الأخبار",
+      supportPortal: "بوابة الدعم",
+      partnerPortal: { label: "بوابة الشركاء", href: PARTNER_PORTAL ? `${PARTNER_PORTAL}${PARTNER_PORTAL.includes("?") ? "&" : "?"}lang=ar` : "/ar/support/" },
+      customerPortal: { label: "بوابة العملاء", href: "/support/login?lang=ar" },
       cta: "اطلب عرضًا تجريبيًا",
     },
     footer: {
